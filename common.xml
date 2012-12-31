@@ -1,20 +1,20 @@
 <project xmlns:ivy="antlib:org.apache.ivy.ant" basedir="${ant.file.common}">
 
-	<path id="classes">
-		<fileset dir=".">
-			<include name="bin/**/*.class" />
-		</fileset>
-	</path>
-
 	<path id="libraries">
 		<fileset dir=".">
 			<include name="lib/**/*.jar" />
 		</fileset>
 	</path>
 
+	<path id="all.classes">
+		<fileset dir=".">
+			<include name="bin/**/*.class" />
+		</fileset>
+	</path>
+
     <path id="all.classpath">
-		<path refid="classes" />
 		<path refid="libraries" />
+		<path refid="all.classes" />
     </path>
 
     <macrodef name="compile">
