@@ -1,12 +1,20 @@
 <project xmlns:ivy="antlib:org.apache.ivy.ant" basedir="${ant.file.common}">
 
+	<path id="classes">
+		<fileset dir=".">
+			<include name="bin/**/*.class" />
+		</fileset>
+	</path>
+
+	<path id="libraries">
+		<fileset dir=".">
+			<include name="lib/**/*.jar" />
+		</fileset>
+	</path>
+
     <path id="all.classpath">
-        <fileset dir=".">
-            <include name="lib/**/*.jar" />
-        </fileset>
-        <dirset dir=".">
-            <include name="bin/*" />
-        </dirset>
+		<path refid="classes" />
+		<path refid="libraries" />
     </path>
 
     <macrodef name="compile">
@@ -55,6 +63,7 @@
 	<target name="retrieve">
         <ivy:resolve log="download-only" />
         <ivy:retrieve sync="true" />
+		
     </target>
 
 </project>
