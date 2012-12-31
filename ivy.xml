@@ -1,0 +1,9 @@
+<ivy-module version="2.0">
+	<info organisation="frigo" module="frigo" />
+    <dependencies>
+		<dependency org="com.google.guava" name="guava" rev="latest.integration" />
+		<dependency org="junit" name="junit" rev="latest.integration" />
+		<dependency org="org.hamcrest" name="hamcrest-all" rev="latest.integration" />
+		<dependency org="org.mockito" name="mockito-all" rev="latest.integration" />
+    </dependencies>
+</ivy-module>

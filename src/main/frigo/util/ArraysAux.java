@@ -1,0 +1,91 @@
+
+package frigo.util;
+
+import static frigo.math.MathAux.sqr;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Random;
+import java.util.Vector;
+import frigo.math.Complex;
+
+public class ArraysAux {
+
+    public static int[] append (int[] array, int value) {
+        int[] result = array != null ? Arrays.copyOf(array, array.length + 1) : new int[] {1};
+        result[result.length - 1] = value;
+        return result;
+    }
+
+    @SafeVarargs
+    public static <T> ArrayList<T> asArrayList (T... elements) {
+        ArrayList<T> result = new ArrayList<>();
+        for( T element : elements ){
+            result.add(element);
+        }
+        return result;
+    }
+
+    @SafeVarargs
+    public static <T> Vector<T> asVector (T... elements) {
+        Vector<T> result = new Vector<>();
+        for( T element : elements ){
+            result.add(element);
+        }
+        return result;
+    }
+
+    public static Complex[] getRandomComplexArray (int length) {
+        return getRandomComplexArray(length, new Random());
+    }
+
+    public static Complex[] getRandomComplexArray (int length, Random random) {
+        Complex[] array = new Complex[length];
+        for( int i = 0; i < array.length; i++ ){
+            array[i] = new Complex(random.nextDouble(), random.nextDouble());
+        }
+        return array;
+    }
+
+    public static double[] getRandomDoubleArray (int length) {
+        return getRandomDoubleArray(length, new Random());
+    }
+
+    public static double[] getRandomDoubleArray (int length, Random random) {
+        double[] array = new double[length];
+        for( int i = 0; i < array.length; i++ ){
+            array[i] = random.nextDouble();
+        }
+        return array;
+    }
+
+    public static double squaredEuclideanDistance (Complex[] v, Complex[] w) {
+        if( v.length != w.length ){
+            throw new IllegalArgumentException();
+        }
+        double distance = 0.0;
+        for( int i = 0; i < v.length; i++ ){
+            distance += v[i].sub(w[i]).sqrAbs();
+        }
+        return distance;
+    }
+
+    public static double squaredEuclideanDistance (double[] v, double[] w) {
+        if( v.length != w.length ){
+            throw new IllegalArgumentException();
+        }
+        double distance = 0.0;
+        for( int i = 0; i < v.length; i++ ){
+            distance += sqr(v[i] - w[i]);
+        }
+        return distance;
+    }
+
+    public static List<Integer> toList (int[] array) {
+        List<Integer> list = new ArrayList<>();
+        for( int value : array ){
+            list.add(value);
+        }
+        return list;
+    }
+}

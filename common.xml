@@ -1,0 +1,60 @@
+<project xmlns:ivy="antlib:org.apache.ivy.ant" basedir="${ant.file.common}">
+
+    <path id="all.classpath">
+        <fileset dir=".">
+            <include name="lib/**/*.jar" />
+        </fileset>
+        <dirset dir=".">
+            <include name="bin/*" />
+        </dirset>
+    </path>
+
+    <macrodef name="compile">
+        <attribute name="module" />
+        <attribute name="classpathref" default="all.classpath" />
+        <sequential>
+            <echo message="Starting compilation of @{module}" />
+            <mkdir dir="bin/@{module}" />
+            <javac srcdir="src/@{module}"
+                   destdir="bin/@{module}"
+                   classpathref="@{classpathref}"
+                   includeAntRuntime="no"
+                   encoding="utf8"
+                   debug="yes"
+            />
+            <echo message="Finished compilation of @{module}" />
+        </sequential>
+    </macrodef>
+
+    <macrodef name="test">
+        <attribute name="module" />
+        <attribute name="classpathref" default="all.classpath" />
+        <sequential>
+            <echo message="Starting JUnit on module @{module}" />
+            <mkdir dir="report/@{module}" />
+            <junit printsummary="yes" filtertrace="yes">
+                <batchtest todir="report/@{module}">
+                    <fileset dir="bin/@{module}">
+                        <include name="**/*Test.class" />
+                    </fileset>
+                    <formatter type="xml" />
+                </batchtest>
+                <classpath refid="@{classpathref}" />
+            </junit>
+            <echo message="Finished JUnit on module @{module}" />
+        </sequential>
+    </macrodef>
+
+    <target name="clean">
+        <delete dir="bin" />
+        <delete dir="lib" />
+        <delete dir="report" />
+		<ivy:cleancache />
+    </target>
+
+	<target name="retrieve">
+        <ivy:resolve log="download-only" />
+        <ivy:retrieve sync="true" />
+    </target>
+
+</project>

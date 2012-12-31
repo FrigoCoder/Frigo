@@ -1,0 +1,14 @@
+<project default="test">
+
+    <import file="common.xml" />
+
+    <target name="compile" depends="retrieve">
+        <compile module="main" />
+        <compile module="test" />
+    </target>
+
+    <target name="test" depends="compile">
+        <test module="test" />
+    </target>
+
+</project>
