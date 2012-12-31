@@ -5,7 +5,6 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -17,14 +16,18 @@ public class EdgeTest {
 
     @Before
     public void setUp () {
+        Edge.serials.set(0);
         edge0 = new Edge(0);
         edge1 = new Edge(1);
         edge2 = new Edge(1);
     }
 
-    @After
-    public void tearDown () {
-        Edge.resetSerials();
+    @Test
+    public void testEdge () {
+        checkEdge(edge0, 0, 0);
+        checkEdge(edge1, 1, 1);
+        checkEdge(edge2, 1, 2);
+        assertThat(Edge.serials.get(), is(3L));
     }
 
     @Test
@@ -38,14 +41,6 @@ public class EdgeTest {
         assertThat(edge2.compareTo(edge0), is(1));
         assertThat(edge2.compareTo(edge1), is(1));
         assertThat(edge2.compareTo(edge2), is(0));
-    }
-
-    @Test
-    public void testEdge () {
-        checkEdge(edge0, 0, 0);
-        checkEdge(edge1, 1, 1);
-        checkEdge(edge2, 1, 2);
-        assertThat(Edge.serials.get(), is(3L));
     }
 
     @Test

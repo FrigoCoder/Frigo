@@ -5,14 +5,10 @@ import java.util.concurrent.atomic.AtomicLong;
 
 public class Node implements Comparable<Node> {
 
-    protected static final AtomicLong serials = new AtomicLong();
+    static final AtomicLong serials = new AtomicLong();
 
-    protected static void resetSerials () {
-        serials.set(0);
-    }
-
-    protected int id;
-    protected final long serial;
+    int id;
+    final long serial;
 
     public Node (int id) {
         this.id = id;

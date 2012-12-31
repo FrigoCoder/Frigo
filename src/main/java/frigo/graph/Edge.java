@@ -5,14 +5,10 @@ import java.util.concurrent.atomic.AtomicLong;
 
 public class Edge implements Comparable<Edge> {
 
-    protected static final AtomicLong serials = new AtomicLong();
+    static final AtomicLong serials = new AtomicLong();
 
-    protected static void resetSerials () {
-        serials.set(0);
-    }
-
-    protected int id;
-    protected final long serial;
+    int id;
+    final long serial;
 
     public Edge (int id) {
         this.id = id;

@@ -5,7 +5,6 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -17,14 +16,18 @@ public class NodeTest {
 
     @Before
     public void setUp () {
+        Node.serials.set(0);
         node0 = new Node(0);
         node1 = new Node(1);
         node2 = new Node(1);
     }
 
-    @After
-    public void tearDown () {
-        Node.resetSerials();
+    @Test
+    public void testNode () {
+        checkNode(node0, 0, 0);
+        checkNode(node1, 1, 1);
+        checkNode(node2, 1, 2);
+        assertThat(Node.serials.get(), is(3L));
     }
 
     @Test
@@ -88,14 +91,6 @@ public class NodeTest {
         assertThat(node2.hashCode(), not(equalTo(node0.hashCode())));
         assertThat(node2.hashCode(), not(equalTo(node1.hashCode())));
         assertThat(node2.hashCode(), equalTo(node2.hashCode()));
-    }
-
-    @Test
-    public void testNode () {
-        checkNode(node0, 0, 0);
-        checkNode(node1, 1, 1);
-        checkNode(node2, 1, 2);
-        assertThat(Node.serials.get(), is(3L));
     }
 
     private void checkNode (Node node, int id, long serial) {
