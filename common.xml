@@ -1,20 +1,16 @@
-<project xmlns:ivy="antlib:org.apache.ivy.ant" basedir="${ant.file.common}">
+<project xmlns:ivy="antlib:org.apache.ivy.ant" xmlns:ac="antlib:net.sf.antcontrib" basedir=".">
 
-	<path id="libraries">
-		<fileset dir=".">
-			<include name="lib/**/*.jar" />
-		</fileset>
-	</path>
+	<fileset id="libraries" dir=".">
+		<include name="lib/**/*.jar" />
+	</fileset>
 
-	<path id="all.classes">
-		<fileset dir=".">
-			<include name="bin/**/*.class" />
-		</fileset>
-	</path>
+	<fileset id="all.classes" dir=".">
+		<include name="bin/**/*.class" />
+	</fileset>
 
     <path id="all.classpath">
-		<path refid="libraries" />
-		<path refid="all.classes" />
+		<fileset refid="libraries" />
+		<fileset refid="all.classes" />
     </path>
 
     <macrodef name="compile">
@@ -40,11 +36,12 @@
         <sequential>
             <echo message="Starting JUnit on module @{module}" />
             <mkdir dir="report/@{module}" />
-            <junit printsummary="yes" filtertrace="yes">
+            <junit filtertrace="yes" printsummary="no" showoutput="no">
                 <batchtest todir="report/@{module}">
                     <fileset dir="bin/@{module}">
                         <include name="**/*Test.class" />
                     </fileset>
+					<formatter type="brief" usefile="no" />
                     <formatter type="xml" />
                 </batchtest>
                 <classpath refid="@{classpathref}" />
@@ -63,7 +60,21 @@
 	<target name="retrieve">
         <ivy:resolve log="download-only" />
         <ivy:retrieve sync="true" />
-		
+		<antcall target="toclasspath" />
     </target>
+
+	<property name="xmlheader" value='<?xml version="1.0" encoding="UTF-8"?>' />
+
+	<target name="toclasspath">
+		<delete file=".classpath" />
+		<touch file=".classpath" />
+		<echo file=".classpath" append="yes" message="${xmlheader}" />
+
+
+
+	<!--<classpath>
+		<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>-->
+	</target>
+
 
 </project>
