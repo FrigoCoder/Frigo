@@ -1,5 +1,6 @@
 syntax:glob
-*.class
-bin
-lib
-report
+.gradle
+.settings
+build
+.classpath
+.project
