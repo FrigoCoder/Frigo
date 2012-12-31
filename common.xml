@@ -15,7 +15,7 @@
         <sequential>
             <echo message="Starting compilation of @{module}" />
             <mkdir dir="bin/@{module}" />
-            <javac srcdir="src/@{module}"
+            <javac srcdir="src/@{module}/java"
                    destdir="bin/@{module}"
                    classpathref="@{classpathref}"
                    includeAntRuntime="no"
