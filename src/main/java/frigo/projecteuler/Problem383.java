@@ -49,8 +49,8 @@ public class Problem383 {
     }
 
     public static void main (String[] args) {
-        for( long x = 10; x <= 1_000_000_000; x *= 10 ){
-            log("" + x + ": " + T5(x));
+        for( long n = 5; true; n *= 5 ){
+            log("" + T5(n));
         }
     }
 
