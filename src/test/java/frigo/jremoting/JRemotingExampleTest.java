@@ -17,7 +17,7 @@ import org.codehaus.jremoting.server.streams.ByteStream;
 import org.codehaus.jremoting.server.transports.SocketServer;
 import org.junit.Test;
 
-public class Server {
+public class JRemotingExampleTest {
 
     @Test
     public void adderService_is_published_and_accessible() throws Exception {
