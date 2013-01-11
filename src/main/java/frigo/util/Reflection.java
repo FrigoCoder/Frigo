@@ -42,37 +42,49 @@ public class Reflection {
     }
 
     public static <T> T getField (Object object, String fieldName) throws Exception {
-        Class<?> clazz = object.getClass();
-        Field field = clazz.getDeclaredField(fieldName);
-        field.setAccessible(true);
-        return (T) field.get(object);
+        return getField(object.getClass(), object, fieldName);
     }
 
-    public static <T> void setField (Object object, String fieldName, T value) throws Exception {
-        Class<?> clazz = object.getClass();
-        Field field = clazz.getDeclaredField(fieldName);
-        field.setAccessible(true);
-        field.set(object, value);
+    public static <T> T getStaticField (Class<?> clazz, String fieldName) throws Exception {
+        return getField(clazz, null, fieldName);
     }
 
     public static <T> T getStaticField (String className, String fieldName) throws Exception {
         return getStaticField(Class.forName(className), fieldName);
     }
 
-    public static <T> T getStaticField (Class<?> clazz, String fieldName) throws Exception {
+    private static <T> T getField (Class<?> clazz, Object object, String fieldName) throws Exception {
         Field field = clazz.getDeclaredField(fieldName);
-        field.setAccessible(true);
-        return (T) field.get(null);
+        boolean accessible = field.isAccessible();
+        try{
+            field.setAccessible(true);
+            return (T) field.get(object);
+        }finally{
+            field.setAccessible(accessible);
+        }
+    }
+
+    public static <T> void setField (Object object, String fieldName, T value) throws Exception {
+        setField(object.getClass(), object, fieldName, value);
+    }
+
+    public static <T> void setStaticField (Class<?> clazz, String fieldName, T value) throws Exception {
+        setField(clazz, null, fieldName, value);
     }
 
     public static <T> void setStaticField (String className, String fieldName, T value) throws Exception {
         setStaticField(Class.forName(className), fieldName, value);
     }
 
-    public static <T> void setStaticField (Class<?> clazz, String fieldName, T value) throws Exception {
+    private static <T> void setField (Class<?> clazz, Object object, String fieldName, T value) throws Exception {
         Field field = clazz.getDeclaredField(fieldName);
-        field.setAccessible(true);
-        field.set(null, value);
+        boolean accessible = field.isAccessible();
+        try{
+            field.setAccessible(true);
+            field.set(object, value);
+        }finally{
+            field.setAccessible(accessible);
+        }
     }
 
 }
