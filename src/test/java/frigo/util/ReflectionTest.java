@@ -1,6 +1,12 @@
 
 package frigo.util;
 
+import static frigo.util.Reflection.getEnv;
+import static frigo.util.Reflection.isEnv;
+import static frigo.util.Reflection.removeEnv;
+import static frigo.util.Reflection.setEnv;
+import static frigo.util.Reflection.setField;
+import static frigo.util.Reflection.setStaticField;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 import org.junit.Rule;
@@ -9,10 +15,8 @@ import org.junit.rules.ExpectedException;
 
 public class ReflectionTest {
 
-    public int publicField;
     private int privateField;
 
-    public static int publicStaticField;
     private static int privateStaticField;
 
     @Rule
@@ -20,34 +24,28 @@ public class ReflectionTest {
 
     @Test
     public void isEnv_returns_true_on_existing_environment_variable () throws Exception {
-        Reflection.setEnv("whatever", "who cares");
-        assertThat(Reflection.isEnv("whatever"), is(true));
+        setEnv("whatever", "who cares");
+        assertThat(isEnv("whatever"), is(true));
     }
 
     @Test
     public void isEnv_returns_false_on_missing_environment_variable () throws Exception {
-        Reflection.removeEnv("whatever");
-        assertThat(Reflection.isEnv("whatever"), is(false));
+        removeEnv("whatever");
+        assertThat(isEnv("whatever"), is(false));
     }
 
     @Test
     public void getEnv_returns_existing_environment_variable () throws Exception {
-        Reflection.setEnv("whatever", "who cares");
-        assertThat(Reflection.getEnv("whatever"), is("who cares"));
+        setEnv("whatever", "who cares");
+        assertThat(getEnv("whatever"), is("who cares"));
     }
 
     @Test
     public void getEnv_throws_on_missing_environment_variable () throws Exception {
-        Reflection.setEnv("whatever", "who cares");
-        Reflection.removeEnv("whatever");
+        setEnv("whatever", "who cares");
+        removeEnv("whatever");
         thrown.expect(IllegalArgumentException.class);
-        Reflection.getEnv("whatever");
-    }
-
-    @Test
-    public void getField_returns_value_of_public_field () throws Exception {
-        publicField = 3;
-        assertThat(Reflection.<Integer> getField(this, "publicField"), is(3));
+        getEnv("whatever");
     }
 
     @Test
@@ -57,22 +55,9 @@ public class ReflectionTest {
     }
 
     @Test
-    public void setField_sets_value_of_public_field () throws Exception {
-        Reflection.setField(this, "publicField", 1);
-        assertThat(publicField, is(1));
-    }
-
-    @Test
     public void setField_sets_value_of_private_field () throws Exception {
-        Reflection.setField(this, "privateField", 2);
+        setField(this, "privateField", 2);
         assertThat(privateField, is(2));
-    }
-
-    @Test
-    public void getStaticField_returns_value_of_public_static_field () throws Exception {
-        publicStaticField = 11;
-        assertThat(Reflection.<Integer> getStaticField(getClass().getCanonicalName(), "publicStaticField"), is(11));
-        assertThat(Reflection.<Integer> getStaticField(getClass(), "publicStaticField"), is(11));
     }
 
     @Test
@@ -83,19 +68,11 @@ public class ReflectionTest {
     }
 
     @Test
-    public void setStaticField_sets_value_of_public_static_field () throws Exception {
-        Reflection.setStaticField(getClass().getCanonicalName(), "publicStaticField", 3);
-        assertThat(publicStaticField, is(3));
-        Reflection.setStaticField(getClass(), "publicStaticField", 4);
-        assertThat(publicStaticField, is(4));
-    }
-
-    @Test
     public void setStaticField_sets_value_of_private_static_field () throws Exception {
-        Reflection.setStaticField(getClass().getCanonicalName(), "privateStaticField", 5);
-        assertThat(publicStaticField, is(5));
-        Reflection.setStaticField(getClass(), "privateStaticField", 6);
-        assertThat(publicStaticField, is(6));
+        setStaticField(getClass().getCanonicalName(), "privateStaticField", 5);
+        assertThat(privateStaticField, is(5));
+        setStaticField(getClass(), "privateStaticField", 6);
+        assertThat(privateStaticField, is(6));
     }
 
 }
