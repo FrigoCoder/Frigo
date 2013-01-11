@@ -5,7 +5,6 @@ import static frigo.util.MockitoAux.strictMock;
 import static frigo.util.MockitoAux.verifyImplicit;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
-import static org.junit.Assert.fail;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import org.junit.Test;
@@ -31,31 +30,19 @@ public class MockitoAuxTest {
         doReturn(2).when(mock).getOne();
         int one = mock.getOne();
         assertThat(one, is(2));
-
     }
 
-    @Test
+    @Test(expected = UnstubbedInvocationInvoked.class)
     public void strict_mock_throws_exception_on_unstubbed_invocation () {
         Originale mock = strictMock(Originale.class);
-        try{
-            mock.getOne();
-            fail();
-        }catch( UnstubbedInvocationInvoked e ){
-            System.out.println(e);
-        }
+        mock.getOne();
     }
 
-    @Test
+    @Test(expected = UnstubbedInvocationInvoked.class)
     public void strict_mock_throws_exception_if_stubbed_method_is_called_with_different_parameters () {
         Originale mock = strictMock(Originale.class);
         doReturn(20).when(mock).getSomething(2);
-        try{
-            mock.getSomething(3);
-            fail();
-        }catch( UnstubbedInvocationInvoked e ){
-            System.out.println(e);
-        }
-
+        mock.getSomething(3);
     }
 
     @Test
@@ -66,43 +53,27 @@ public class MockitoAuxTest {
         verifyImplicit(mock);
     }
 
-    @Test
+    @Test(expected = ImplicitVerificationFailed.class)
     public void verifyImplicit_throws_if_stubbed_method_is_not_called () {
         Originale mock = mock(Originale.class);
         doReturn(2).when(mock).getOne();
-        try{
-            verifyImplicit(mock);
-            fail();
-        }catch( ImplicitVerificationFailed e ){
-            System.out.println(e);
-        }
+        verifyImplicit(mock);
     }
 
-    @Test
+    @Test(expected = ImplicitVerificationFailed.class)
     public void verifyImplicit_throws_if_stubbed_method_is_called_with_different_parameters () {
         Originale mock = mock(Originale.class);
         doReturn(20).when(mock).getSomething(2);
         mock.getSomething(3);
-        try{
-            verifyImplicit(mock);
-            fail();
-        }catch( ImplicitVerificationFailed e ){
-            System.out.println(e);
-        }
-
+        verifyImplicit(mock);
     }
 
-    // @Test
-    // public void verifyImplicit_throws_if_stubbed_method_is_called_less_than_expected() {
+    // @Test(expected = ImplicitVerificationFailed.class)
+    // public void verifyImplicit_throws_if_stubbed_method_is_called_less_than_expected () {
     // Originale mock = mock(Originale.class);
     // doReturn(2).doReturn(3).when(mock).getOne();
     // mock.getOne();
-    // try {
     // verifyImplicit(mock);
-    // fail();
-    // } catch (ImplicitVerificationFailed e) {
-    // System.out.println(e);
-    // }
     // }
 
     // @Test
