@@ -9,7 +9,7 @@ import static frigo.util.ArraysAux.getRandomDoubleArray;
 import static frigo.util.ArraysAux.squaredEuclideanDistance;
 import static frigo.util.ArraysAux.toList;
 import static frigo.util.ArraysAux.toObjectArray;
-import static frigo.util.MockitoAux.doReturnValues;
+import static frigo.util.MockitoAux.doReturnElements;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.Matchers.sameInstance;
 import static org.junit.Assert.assertThat;
@@ -77,7 +77,7 @@ public class ArraysAuxTest {
     public void testGetRandomRealArray () {
         double[] expected = {1, 2, 3, 4, 5, 6};
         Random random = mock(Random.class);
-        doReturnValues(expected).when(random).nextDouble();
+        doReturnElements(expected).when(random).nextDouble();
         double[] actual = getRandomDoubleArray(expected.length, random);
         assertThat(actual, is(expected));
     }
