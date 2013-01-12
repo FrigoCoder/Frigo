@@ -4,6 +4,7 @@ package frigo.math;
 import static frigo.math.Complex.complex;
 import static frigo.math.MathAux.ceil;
 import static frigo.math.MathAux.floor;
+import static frigo.math.MathAux.isPowerOfTwo;
 import static frigo.math.MathAux.sinc;
 import static frigo.math.MathAux.sqr;
 import static org.hamcrest.Matchers.is;
@@ -95,6 +96,20 @@ public class MathAuxTest {
         assertThat(floor(0.1), is(0));
         assertThat(floor(0.9), is(0));
         assertThat(floor(1.0), is(1));
+    }
+
+    @Test
+    public void testisPowerOfTwo () {
+        for( int i = 1; i > 0; i *= 2 ){
+            assertThat(i + " should be power of two", isPowerOfTwo(i), is(true));
+        }
+        for( int i = -1; i < 0; i *= 2 ){
+            assertThat(i + " should not be power of two", isPowerOfTwo(i), is(false));
+        }
+        int[] someNotPowerOfTwos = {0, 3, 5, 6, 7, 9, 10, 11, 12, 13, 14, 15, 17, 18, 19, 20};
+        for( int i : someNotPowerOfTwos ){
+            assertThat(i + " should not be power of two", isPowerOfTwo(i), is(false));
+        }
     }
 
 }

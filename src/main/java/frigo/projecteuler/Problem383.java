@@ -3,6 +3,7 @@ package frigo.projecteuler;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import com.google.common.base.Preconditions;
 
 public class Problem383 {
 
@@ -12,9 +13,7 @@ public class Problem383 {
         private long n = 0;
 
         public F5FactorialCalculator (long n) {
-            if( n < 0 ){
-                throw new IllegalArgumentException();
-            }
+            Preconditions.checkArgument(n >= 0);
             while( this.n < n ){
                 increase();
             }

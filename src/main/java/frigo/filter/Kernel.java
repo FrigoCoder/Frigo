@@ -10,9 +10,7 @@ public abstract class Kernel {
     public final double right;
 
     public Kernel (double radius) {
-        if( radius < 0.0 ){
-            throw new IllegalArgumentException("Radius must be positive or zero");
-        }
+        checkArgument(radius >= 0.0, "Radius must be positive or zero");
         this.radius = radius;
         left = -radius;
         right = radius;

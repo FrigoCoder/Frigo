@@ -1,6 +1,8 @@
 
 package frigo.math;
 
+import com.google.common.base.Preconditions;
+
 public class Matrix {
 
     private final int columns;
@@ -33,9 +35,7 @@ public class Matrix {
     }
 
     public Vector mul (Vector vector) {
-        if( vector.size() != m() ){
-            throw new IllegalArgumentException("Incorrect right hand side dimension");
-        }
+        Preconditions.checkArgument(vector.size() == m(), "Incorrect right hand side dimension");
         Vector result = new Vector(n());
         for( int i = 0; i < n(); i++ ){
             double sum = 0.0;

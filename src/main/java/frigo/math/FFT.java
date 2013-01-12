@@ -1,6 +1,9 @@
 
 package frigo.math;
 
+import static com.google.common.base.Preconditions.checkArgument;
+import static frigo.math.MathAux.isPowerOfTwo;
+
 /**
  * Radix-2 Decimation In Frequency Fast Fourier Transform. Implemented based on the ideas of the Fast Hartley Transform.
  */
@@ -32,9 +35,7 @@ public class FFT implements FourierTransform {
     }
 
     private void checkPowerOfTwo (Complex[] v) {
-        if( (v.length & v.length - 1) != 0 ){
-            throw new IllegalArgumentException("Array length is not power of two");
-        }
+        checkArgument(isPowerOfTwo(v.length), "Array length must be power of two");
     }
 
     private void core (Complex[] v, double sign) {
@@ -67,4 +68,5 @@ public class FFT implements FourierTransform {
         v[i] = v[j];
         v[j] = t;
     }
+
 }

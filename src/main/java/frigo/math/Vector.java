@@ -1,6 +1,7 @@
 
 package frigo.math;
 
+import static com.google.common.base.Preconditions.checkArgument;
 import java.util.Arrays;
 
 public class Vector {
@@ -21,9 +22,7 @@ public class Vector {
     }
 
     public Vector add (Vector that) {
-        if( size() != that.size() ){
-            throw new IllegalArgumentException("Tried to add vectors of different sizes");
-        }
+        checkArgument(size() == that.size(), "Vectors must have the same dimension");
         Vector result = new Vector(size());
         for( int i = 0; i < result.size(); i++ ){
             result.set(i, get(i) + that.get(i));
@@ -40,9 +39,7 @@ public class Vector {
     }
 
     public double dot (Vector that) {
-        if( size() != that.size() ){
-            throw new IllegalArgumentException("Tried to calculate dot product of vectors of different sizes");
-        }
+        checkArgument(size() == that.size(), "Vectors must have the same dimension");
         double result = 0.0;
         for( int i = 0; i < size(); i++ ){
             result += get(i) * that.get(i);
@@ -93,9 +90,7 @@ public class Vector {
     }
 
     public Vector sub (Vector that) {
-        if( size() != that.size() ){
-            throw new IllegalArgumentException("Tried to add vectors of different sizes");
-        }
+        checkArgument(size() == that.size(), "Vectors must have the same dimension");
         Vector result = new Vector(size());
         for( int i = 0; i < size(); i++ ){
             result.set(i, get(i) - that.get(i));

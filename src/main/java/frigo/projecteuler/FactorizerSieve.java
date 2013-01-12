@@ -1,11 +1,13 @@
 
 package frigo.projecteuler;
 
+import static com.google.common.base.Preconditions.checkArgument;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
+import com.google.common.base.Preconditions;
 
 public class FactorizerSieve {
 
@@ -16,9 +18,7 @@ public class FactorizerSieve {
 
     public FactorizerSieve (int limit) {
         int maxLimit = Short.MAX_VALUE * Short.MAX_VALUE;
-        if( limit > maxLimit ){
-            throw new IllegalArgumentException("This sieve is only correct for limit <= " + maxLimit);
-        }
+        checkArgument(limit <= maxLimit, "This sieve is only correct for limit <= " + maxLimit);
         table = new short[limit];
         fillTable();
     }
@@ -41,9 +41,7 @@ public class FactorizerSieve {
     }
 
     public int getSmallestFactor (int number) {
-        if( !hasFactors(number) ){
-            throw new IllegalArgumentException("" + number + " does not have any prime factors");
-        }
+        checkArgument(hasFactors(number), number + " does not have any prime factors");
         return isPrime(number) ? number : table[number];
     }
 

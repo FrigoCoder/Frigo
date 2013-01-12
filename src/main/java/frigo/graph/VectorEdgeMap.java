@@ -1,6 +1,7 @@
 
 package frigo.graph;
 
+import static com.google.common.base.Preconditions.checkArgument;
 import java.util.List;
 import java.util.Vector;
 
@@ -32,16 +33,12 @@ public class VectorEdgeMap<T> implements EdgeMap<T> {
     }
 
     protected void addEdge (Edge x) {
-        if( x.id != size() ){
-            throw new IllegalArgumentException("Added edge must have an id of n");
-        }
+        checkArgument(x.id == size());
         v.add(defaultValue);
     }
 
     protected void removeEdge (Edge x) {
-        if( x.id != size() - 1 ){
-            throw new IllegalArgumentException("Removed edge must have an id of n-1");
-        }
+        checkArgument(x.id == size() - 1);
         v.remove(x.id);
     }
 

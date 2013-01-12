@@ -1,6 +1,10 @@
 
 package frigo.math;
 
+import static com.google.common.base.Preconditions.checkArgument;
+import static frigo.math.MathAux.isPowerOfTwo;
+import static java.lang.Integer.numberOfLeadingZeros;
+
 /**
  * Fast Hartley Transform with Decimation In Frequency based on <a
  * href=http://vault.embedded.com/2000/0009/0009feat3.htm>Doing Hartley Smartly</a>
@@ -58,7 +62,7 @@ public class FHT implements HartleyTransform {
     }
 
     private void bitReverse (double[] v, int n) {
-        int p = Integer.numberOfLeadingZeros(n - 1);
+        int p = numberOfLeadingZeros(n - 1);
         for( int i = 0; i < n; i++ ){
             int j = Integer.reverse(i) >>> p;
             if( i < j ){
@@ -105,9 +109,7 @@ public class FHT implements HartleyTransform {
     }
 
     private void checkPowerOfTwo (double[] v) {
-        if( (v.length & v.length - 1) != 0 ){
-            throw new IllegalArgumentException("Array length is not power of two");
-        }
+        checkArgument(isPowerOfTwo(v.length), "Array length must be power of two");
     }
 
     private void core (double[] v) {

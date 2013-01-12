@@ -1,6 +1,7 @@
 
 package frigo.util;
 
+import static com.google.common.base.Preconditions.checkArgument;
 import static frigo.math.MathAux.sqr;
 import java.util.ArrayList;
 import java.util.List;
@@ -53,9 +54,7 @@ public class ArraysAux {
     }
 
     public static double squaredEuclideanDistance (Complex[] v, Complex[] w) {
-        if( v.length != w.length ){
-            throw new IllegalArgumentException();
-        }
+        checkArgument(v.length == w.length);
         double distance = 0.0;
         for( int i = 0; i < v.length; i++ ){
             distance += v[i].sub(w[i]).sqrAbs();
@@ -64,9 +63,7 @@ public class ArraysAux {
     }
 
     public static double squaredEuclideanDistance (double[] v, double[] w) {
-        if( v.length != w.length ){
-            throw new IllegalArgumentException();
-        }
+        checkArgument(v.length == w.length);
         double distance = 0.0;
         for( int i = 0; i < v.length; i++ ){
             distance += sqr(v[i] - w[i]);

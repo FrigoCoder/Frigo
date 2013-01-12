@@ -42,4 +42,8 @@ public class MathAux {
     public static int floor (double x) {
         return (int) Math.round(Math.floor(x));
     }
+
+    public static boolean isPowerOfTwo (int x) {
+        return (x & x - 1) == 0 && x > 0;
+    }
 }

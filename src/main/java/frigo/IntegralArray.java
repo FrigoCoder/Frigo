@@ -1,6 +1,8 @@
 
 package frigo;
 
+import static com.google.common.base.Preconditions.checkArgument;
+
 public class IntegralArray {
 
     protected final double[] integral;
@@ -40,9 +42,9 @@ public class IntegralArray {
     }
 
     protected void checkInterval (Box box) {
-        if( box.left < 0 || box.left > box.right || box.right >= sourceLength ){
-            throw new IllegalArgumentException("Invalid interval");
-        }
+        checkArgument(box.left >= 0);
+        checkArgument(box.right < sourceLength);
+        checkArgument(box.left <= box.right);
     }
 
     protected int getCount (Box box) {
