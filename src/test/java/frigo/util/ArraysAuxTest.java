@@ -3,7 +3,6 @@ package frigo.util;
 
 import static frigo.math.Complex.complex;
 import static frigo.math.MathAux.sqr;
-import static frigo.util.ArraysAux.append;
 import static frigo.util.ArraysAux.asArrayList;
 import static frigo.util.ArraysAux.asVector;
 import static frigo.util.ArraysAux.getRandomDoubleArray;
@@ -21,21 +20,6 @@ import org.mockito.stubbing.Stubber;
 import frigo.math.Complex;
 
 public class ArraysAuxTest {
-
-    @Test
-    public void appendExistingArray () {
-        int[] actual = append(new int[] {1, 2, 3, 4}, 5);
-        int[] expected = {1, 2, 3, 4, 5};
-        assertThat(actual, is(expected));
-    }
-
-    @Test
-    public void appendNullArray () {
-        int[] array = null;
-        int[] actual = append(array, 1);
-        int[] expected = {1};
-        assertThat(actual, is(expected));
-    }
 
     @Test(expected = IllegalArgumentException.class)
     public void arraysOfDifferentDimensionsDoNotHaveComplexSquaredEuclideanDistance () {

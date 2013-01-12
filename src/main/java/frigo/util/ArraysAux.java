@@ -3,19 +3,12 @@ package frigo.util;
 
 import static frigo.math.MathAux.sqr;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 import java.util.Vector;
 import frigo.math.Complex;
 
 public class ArraysAux {
-
-    public static int[] append (int[] array, int value) {
-        int[] result = array != null ? Arrays.copyOf(array, array.length + 1) : new int[] {1};
-        result[result.length - 1] = value;
-        return result;
-    }
 
     @SafeVarargs
     public static <T> ArrayList<T> asArrayList (T... elements) {
