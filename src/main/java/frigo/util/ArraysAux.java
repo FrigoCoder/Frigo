@@ -81,4 +81,73 @@ public class ArraysAux {
         }
         return list;
     }
+
+    public static <T> T[] toObjectArray (T[] array) {
+        return array;
+    }
+
+    public static Byte[] toObjectArray (byte[] array) {
+        Byte[] result = new Byte[array.length];
+        for( int i = 0; i < result.length; i++ ){
+            result[i] = array[i];
+        }
+        return result;
+    }
+
+    public static Short[] toObjectArray (short[] array) {
+        Short[] result = new Short[array.length];
+        for( int i = 0; i < result.length; i++ ){
+            result[i] = array[i];
+        }
+        return result;
+    }
+
+    public static Integer[] toObjectArray (int[] array) {
+        Integer[] result = new Integer[array.length];
+        for( int i = 0; i < result.length; i++ ){
+            result[i] = array[i];
+        }
+        return result;
+    }
+
+    public static Long[] toObjectArray (long[] array) {
+        Long[] result = new Long[array.length];
+        for( int i = 0; i < result.length; i++ ){
+            result[i] = array[i];
+        }
+        return result;
+    }
+
+    public static Float[] toObjectArray (float[] array) {
+        Float[] result = new Float[array.length];
+        for( int i = 0; i < result.length; i++ ){
+            result[i] = array[i];
+        }
+        return result;
+    }
+
+    public static Double[] toObjectArray (double[] array) {
+        Double[] result = new Double[array.length];
+        for( int i = 0; i < result.length; i++ ){
+            result[i] = array[i];
+        }
+        return result;
+    }
+
+    public static Boolean[] toObjectArray (boolean[] array) {
+        Boolean[] result = new Boolean[array.length];
+        for( int i = 0; i < result.length; i++ ){
+            result[i] = array[i];
+        }
+        return result;
+    }
+
+    public static Character[] toObjectArray (char[] array) {
+        Character[] result = new Character[array.length];
+        for( int i = 0; i < result.length; i++ ){
+            result[i] = array[i];
+        }
+        return result;
+    }
+
 }

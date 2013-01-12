@@ -1,7 +1,6 @@
 
 package frigo.util;
 
-import static frigo.util.MockitoAux.doReturnValues;
 import static frigo.util.MockitoAux.strictMock;
 import static frigo.util.MockitoAux.verifyImplicit;
 import static org.hamcrest.Matchers.is;
@@ -15,13 +14,46 @@ public class MockitoAuxTest {
 
     private static class Originale {
 
-        public int getOne () {
-            return 1;
-        }
-
         public int getSomething (int i) {
             return i;
         }
+
+        public Object getObject () {
+            return null;
+        }
+
+        public byte getByte () {
+            return 0;
+        }
+
+        public short getShort () {
+            return 0;
+        }
+
+        public int getInt () {
+            return 0;
+        }
+
+        public long getLong () {
+            return 0;
+        }
+
+        public float getFloat () {
+            return 0;
+        }
+
+        public double getDouble () {
+            return 0;
+        }
+
+        public boolean getBoolean () {
+            return false;
+        }
+
+        public char getChar () {
+            return 0x00;
+        }
+
     }
 
     private Originale mock;
@@ -34,15 +66,15 @@ public class MockitoAuxTest {
     @Test
     public void strick_mock_behaves_like_a_mock_on_stubbed_invocation () {
         mock = strictMock(Originale.class);
-        doReturn(2).when(mock).getOne();
-        int one = mock.getOne();
+        doReturn(2).when(mock).getInt();
+        int one = mock.getInt();
         assertThat(one, is(2));
     }
 
     @Test(expected = UnstubbedInvocationInvoked.class)
     public void strict_mock_throws_exception_on_unstubbed_invocation () {
         mock = strictMock(Originale.class);
-        mock.getOne();
+        mock.getInt();
     }
 
     @Test(expected = UnstubbedInvocationInvoked.class)
@@ -54,14 +86,14 @@ public class MockitoAuxTest {
 
     @Test
     public void verifyImplicit_does_not_throw_if_stubbed_method_is_called () {
-        doReturn(2).when(mock).getOne();
-        mock.getOne();
+        doReturn(2).when(mock).getInt();
+        mock.getInt();
         verifyImplicit(mock);
     }
 
     @Test(expected = ImplicitVerificationFailed.class)
     public void verifyImplicit_throws_if_stubbed_method_is_not_called () {
-        doReturn(2).when(mock).getOne();
+        doReturn(2).when(mock).getInt();
         verifyImplicit(mock);
     }
 
@@ -72,13 +104,6 @@ public class MockitoAuxTest {
         verifyImplicit(mock);
     }
 
-    @Test
-    public void doReturn_for_varargs_behave_like_doReturn_chain () {
-        doReturnValues(1, 2, 3).when(mock).getOne();
-        assertThat(mock.getOne(), is(1));
-        assertThat(mock.getOne(), is(2));
-        assertThat(mock.getOne(), is(3));
-    }
     // @Test(expected = ImplicitVerificationFailed.class)
     // public void verifyImplicit_throws_if_stubbed_method_is_called_less_than_expected () {
     // Originale mock = mock(Originale.class);

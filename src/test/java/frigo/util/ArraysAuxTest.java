@@ -8,8 +8,10 @@ import static frigo.util.ArraysAux.asVector;
 import static frigo.util.ArraysAux.getRandomDoubleArray;
 import static frigo.util.ArraysAux.squaredEuclideanDistance;
 import static frigo.util.ArraysAux.toList;
+import static frigo.util.ArraysAux.toObjectArray;
 import static frigo.util.MockitoAux.doReturnValues;
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.Matchers.sameInstance;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
 import java.util.ArrayList;
@@ -88,6 +90,68 @@ public class ArraysAuxTest {
         expected.add(1);
         expected.add(2);
         assertThat(actual, is(expected));
+    }
+
+    @Test
+    public void toObjectArray_for_object_array () {
+        Integer[] array = {1, 2};
+        assertThat(toObjectArray(array), sameInstance(array));
+    }
+
+    @Test
+    public void toObjectArray_for_byte_array () {
+        byte[] array = {1, 2};
+        Byte[] expected = {1, 2};
+        assertThat(toObjectArray(array), is(expected));
+    }
+
+    @Test
+    public void toObjectArray_for_short_array () {
+        short[] array = {1, 2};
+        Short[] expected = {1, 2};
+        assertThat(toObjectArray(array), is(expected));
+    }
+
+    @Test
+    public void toObjectArray_for_int_array () {
+        int[] array = {1, 2};
+        Integer[] expected = {1, 2};
+        assertThat(toObjectArray(array), is(expected));
+    }
+
+    @Test
+    public void toObjectArray_for_long_array () {
+        long[] array = {1, 2};
+        Long[] expected = {1L, 2L};
+        assertThat(toObjectArray(array), is(expected));
+    }
+
+    @Test
+    public void toObjectArray_for_float_array () {
+        float[] array = {1, 2};
+        Float[] expected = {1F, 2F};
+        assertThat(toObjectArray(array), is(expected));
+    }
+
+    @Test
+    public void toObjectArray_for_double_array () {
+        double[] array = {1, 2};
+        Double[] expected = {1D, 2D};
+        assertThat(toObjectArray(array), is(expected));
+    }
+
+    @Test
+    public void toObjectArray_for_boolean_array () {
+        boolean[] array = {true, false};
+        Boolean[] expected = {true, false};
+        assertThat(toObjectArray(array), is(expected));
+    }
+
+    @Test
+    public void toObjectArray_for_char_array () {
+        char[] array = {'a', 'b'};
+        Character[] expected = {'a', 'b'};
+        assertThat(toObjectArray(array), is(expected));
     }
 
 }
