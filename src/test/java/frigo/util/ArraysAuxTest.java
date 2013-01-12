@@ -8,15 +8,14 @@ import static frigo.util.ArraysAux.asVector;
 import static frigo.util.ArraysAux.getRandomDoubleArray;
 import static frigo.util.ArraysAux.squaredEuclideanDistance;
 import static frigo.util.ArraysAux.toList;
+import static frigo.util.MockitoAux.doReturnValues;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
-import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import org.junit.Test;
-import org.mockito.stubbing.Stubber;
 import frigo.math.Complex;
 
 public class ArraysAuxTest {
@@ -76,7 +75,7 @@ public class ArraysAuxTest {
     public void testGetRandomRealArray () {
         double[] expected = {1, 2, 3, 4, 5, 6};
         Random random = mock(Random.class);
-        doReturnInOrder(expected).when(random).nextDouble();
+        doReturnValues(expected).when(random).nextDouble();
         double[] actual = getRandomDoubleArray(expected.length, random);
         assertThat(actual, is(expected));
     }
@@ -91,11 +90,4 @@ public class ArraysAuxTest {
         assertThat(actual, is(expected));
     }
 
-    private Stubber doReturnInOrder (double[] v) {
-        Stubber stubber = doReturn(v[0]);
-        for( int i = 1; i < v.length; i++ ){
-            stubber = stubber.doReturn(v[i]);
-        }
-        return stubber;
-    }
 }
