@@ -17,6 +17,7 @@ public class UriParser {
     private static final String HOST = "host";
     private static final int PORT = 8080;
     private static final String PATH = "path";
+
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 

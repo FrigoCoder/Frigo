@@ -1,4 +1,6 @@
+
 package frigo.exploratory;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
@@ -29,7 +31,22 @@ public class Java7Test {
 
     @Test
     public void testStringSwitch() {
-        fail("Not yet implemented");
+        String string = "something";
+        switch (string) {
+            case "something else":
+                fail();
+                break;
+            case "something":
+                break;
+            case "another thing":
+            case "something completely different":
+                fail();
+                break;
+            default:
+                fail();
+                return;
+
+        }
     }
 
 }
