@@ -1,15 +1,15 @@
 
 package frigo.dojo;
 
+import com.google.common.annotations.VisibleForTesting;
+
 public class Player {
 
     public static final int INITIAL_HEALTH = 100;
-    Dice dice;
-    private int health = INITIAL_HEALTH;
 
-    public Player () {
-        dice = new Dice();
-    }
+    @VisibleForTesting
+    Dice dice = new Dice();
+    private int health = INITIAL_HEALTH;
 
     public void damage () {
         int amount = dice.roll() + dice.roll();
@@ -30,7 +30,7 @@ public class Player {
         return health;
     }
 
-    void damage (int amount) {
+    private void damage (int amount) {
         health -= amount;
     }
 }
