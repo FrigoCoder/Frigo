@@ -1,5 +1,5 @@
 
-package frigo.exploratory;
+package frigo.exploratory.java;
 
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;

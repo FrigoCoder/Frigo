@@ -1,5 +1,5 @@
 
-package frigo.exploratory;
+package frigo.exploratory.mockito;
 
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
@@ -23,31 +23,31 @@ class PPM {
     }
 }
 
-public class PackagePrivateMock {
+public class MockVisibilityTest {
 
     @Test
-    public void mockitoCanMockPackagePrivateClass() {
+    public void can_mock_package_private_class() {
         PPC obj = mock(PPC.class);
         doReturn(2).when(obj).get();
         assertThat(obj.get(), is(2));
     }
 
     @Test
-    public void mockitoCanMockPackagePrivateMethod() {
+    public void can_mock_package_private_method() {
         PPM obj = mock(PPM.class);
         doReturn(2).when(obj).get();
         assertThat(obj.get(), is(2));
     }
 
     @Test
-    public void mockitoCanSpyPackagePrivateClass() {
+    public void can_spy_package_private_class() {
         PPC obj = spy(new PPC());
         doReturn(2).when(obj).get();
         assertThat(obj.get(), is(2));
     }
 
     @Test
-    public void mockitoCanSpyPackagePrivateMethod() {
+    public void can_spy_package_private_method() {
         PPM obj = spy(new PPM());
         doReturn(2).when(obj).get();
         assertThat(obj.get(), is(2));
