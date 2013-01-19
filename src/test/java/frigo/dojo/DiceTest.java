@@ -16,13 +16,13 @@ public class DiceTest {
 
     @Test
     public void dice_rolls_all_values () {
-        int[] rolls = new int[NUMBER_OF_VALUES];
+        int[] rolls = new int[NUMBER_OF_VALUES + 1];
         for( int i = 0; i < NUMBER_OF_TEST_ROLLS; i++ ){
             int roll = dice.roll();
-            rolls[roll - 1]++;
+            rolls[roll]++;
         }
-        for( int i = 0; i < NUMBER_OF_VALUES; i++ ){
-            assertThat("" + (i + 1) + " was not rolled at least once", rolls[i], greaterThan(0));
+        for( int i = 1; i <= NUMBER_OF_VALUES; i++ ){
+            assertThat(i + " was not rolled at least once", rolls[i], greaterThan(0));
         }
     }
 
