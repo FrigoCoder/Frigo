@@ -23,9 +23,10 @@ dependencies {
 }
 
 jar {
+    baseName = rootProject.name
     version = System.env['BUILD_NUMBER']
     version = version == null ? 0 : version
     manifest{
-        attributes("Implementation-Title": rootProject.name, "Implementation-Version": version)
+        attributes("Implementation-Title": baseName, "Implementation-Version": version)
     }
 }
