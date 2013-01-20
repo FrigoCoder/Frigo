@@ -9,13 +9,13 @@ repositories {
 
 dependencies {
 	compile group: 'com.google.guava', name: 'guava', version: 'latest.release'
-	compile group: 'com.jayway.awaitility', name: 'awaitility', version: 'latest.release'
 	compile group: 'org.apache.commons', name: 'commons-lang3', version: 'latest.release'
 	compile group: 'org.codehaus.jremoting', name: 'jremoting-api', version: 'latest.release'
 	compile group: 'org.codehaus.jremoting', name: 'jremoting-client', version: 'latest.release'
 	compile group: 'org.codehaus.jremoting', name: 'jremoting-server', version: 'latest.release'
 	compile group: 'org.mockito', name: 'mockito-all', version: 'latest.release'
 
+	testCompile group: 'com.jayway.awaitility', name: 'awaitility', version: 'latest.release'
 	testCompile group: 'junit', name: 'junit', version: 'latest.release'
 	testCompile group: 'org.hamcrest', name: 'hamcrest-all', version: 'latest.release'
 }
