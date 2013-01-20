@@ -4,6 +4,8 @@ package frigo.projecteuler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import com.google.common.annotations.VisibleForTesting;
+
 public class Problem357 {
 
     public static void main (String[] args) {
@@ -29,6 +31,7 @@ public class Problem357 {
         log("Elapsed time: " + (getTime() - startTime));
     }
 
+    @VisibleForTesting
     long calculateResult () {
         long sum = 0;
         for( int number = 0; number <= n; number++ ){
@@ -39,6 +42,7 @@ public class Problem357 {
         return sum;
     }
 
+    @VisibleForTesting
     boolean isDesirableNumber (int number) {
         if( number != 1 && isOdd(number) ){
             return false;

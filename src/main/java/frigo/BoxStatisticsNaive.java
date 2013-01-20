@@ -42,7 +42,7 @@ public class BoxStatisticsNaive extends BoxStatistics {
         return variance;
     }
 
-    double getAverage (int left, int right) {
+    private double getAverage (int left, int right) {
         double average = 0.0;
         for( int i = left; i <= right; i++ ){
             average += source[i];
@@ -51,7 +51,7 @@ public class BoxStatisticsNaive extends BoxStatistics {
         return average;
     }
 
-    double getAverageOutside (int left, int right) {
+    private double getAverageOutside (int left, int right) {
         double average = 0.0;
         for( int i = 0; i < left; i++ ){
             average += source[i];
@@ -63,11 +63,11 @@ public class BoxStatisticsNaive extends BoxStatistics {
         return average;
     }
 
-    int getCount (int left, int right) {
+    private int getCount (int left, int right) {
         return right - left + 1;
     }
 
-    int getCountOutside (int left, int right) {
+    private int getCountOutside (int left, int right) {
         return source.length - (right - left + 1);
     }
 }

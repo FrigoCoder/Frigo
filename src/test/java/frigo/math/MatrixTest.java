@@ -9,11 +9,11 @@ import org.junit.Test;
 
 public class MatrixTest {
 
-    int m;
-    Matrix matrix;
-    int n;
-    int x;
-    int y;
+    private int m;
+    private Matrix matrix;
+    private int n;
+    private int x;
+    private int y;
 
     @Test
     public void getAfterConstructor () {

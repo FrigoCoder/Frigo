@@ -1,12 +1,15 @@
 
 package frigo.math;
 
+import com.google.common.annotations.VisibleForTesting;
+
 public final class Complex {
 
     public static final Complex ZERO = new Complex(0.0, 0.0);
     public static final Complex ONE = new Complex(1.0, 0.0);
     public static final Complex I = new Complex(0.0, 1.0);
 
+    @VisibleForTesting
     static double epsilon = 0.00000000000000;
 
     public static Complex add (double x, Complex c) {

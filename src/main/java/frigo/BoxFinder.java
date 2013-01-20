@@ -3,8 +3,8 @@ package frigo;
 
 public class BoxFinder {
 
-    final double[] source;
-    final BoxStatistics stat;
+    private final double[] source;
+    private final BoxStatistics stat;
 
     public BoxFinder (double[] source) {
         this.source = source.clone();

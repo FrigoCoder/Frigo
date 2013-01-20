@@ -5,8 +5,11 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
+import com.google.common.annotations.VisibleForTesting;
+
 public class DirichletKernelPolynomialTest {
 
+    @VisibleForTesting
     static double epsilon = 1.0e-11;
     protected int[] degrees = {1, 2, 3, 4, 5, 10, 15};
     protected double[] points = {-1.5, -1.0, -0.5, 0.0, 0.5, 1.0, 1.5};

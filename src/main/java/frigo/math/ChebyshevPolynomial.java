@@ -8,8 +8,8 @@ import frigo.util.ArraysAux;
 
 public class ChebyshevPolynomial {
 
-    static SoftReference<Vector<Polynomial>> cosines;
-    static SoftReference<Vector<Polynomial>> sines;
+    private static SoftReference<Vector<Polynomial>> cosines;
+    private static SoftReference<Vector<Polynomial>> sines;
 
     /**
      * Generates a Chebyshev polynomial based on <a
