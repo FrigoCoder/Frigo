@@ -4,8 +4,10 @@ package frigo.math;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.Matchers.lessThan;
 import static org.junit.Assert.assertThat;
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import frigo.util.ArraysAux;
 
 public class TransformTestBase {

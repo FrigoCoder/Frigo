@@ -3,8 +3,10 @@ package frigo.projecteuler;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
+
 import java.util.LinkedList;
 import java.util.List;
+
 import org.junit.Test;
 
 public class FactorizerSieveTest {
@@ -55,8 +57,7 @@ public class FactorizerSieveTest {
             assertThat("" + number + " should have factors", sieve.hasFactors(number), is(true));
             int smallestFactor = getFactors(number).get(0);
             assertThat("Smallest factor of " + number + " should be " + smallestFactor,
-                       sieve.getSmallestFactor(number),
-                       is(smallestFactor));
+                sieve.getSmallestFactor(number), is(smallestFactor));
         }
     }
 

@@ -4,6 +4,7 @@ package frigo.math.numbertheory;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
 import frigo.math.MathAux;
 
 public class IncrementalPrimeGeneratorOfFrigo implements IncrementalPrimeGenerator {

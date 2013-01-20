@@ -2,6 +2,7 @@
 package frigo.math;
 
 import static frigo.util.ArraysAux.getRandomDoubleArray;
+
 import java.util.Random;
 
 public class HartleyTransformTestBase extends TransformTestBase {

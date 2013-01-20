@@ -4,7 +4,9 @@ package frigo.exploratory;
 import static com.jayway.awaitility.Awaitility.to;
 import static com.jayway.awaitility.Awaitility.waitAtMost;
 import static org.hamcrest.Matchers.is;
+
 import java.util.concurrent.TimeUnit;
+
 import org.junit.Test;
 
 public class AwaitVisibilityTest {

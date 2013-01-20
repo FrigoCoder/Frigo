@@ -1,11 +1,11 @@
 
 package frigo.math;
 
+import static frigo.math.Complex.I;
 import static frigo.math.Complex.add;
 import static frigo.math.Complex.cis;
 import static frigo.math.Complex.complex;
 import static frigo.math.Complex.div;
-import static frigo.math.Complex.I;
 import static frigo.math.Complex.mul;
 import static frigo.math.Complex.pow;
 import static frigo.math.Complex.sub;
@@ -13,6 +13,7 @@ import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -57,9 +58,9 @@ public class ComplexTest {
         assertEquals(complex(0.0, 0.0).cis(), cis(0.0));
         assertEquals(complex(3.0, 0.0).cis(), cis(3.0));
         assertEquals(complex(1.0, 2.0).cis(),
-                     complex(1.0, 2.0).sin().mul(complex(0.0, 1.0)).add(complex(1.0, 2.0).cos()));
+            complex(1.0, 2.0).sin().mul(complex(0.0, 1.0)).add(complex(1.0, 2.0).cos()));
         assertEquals(complex(2.0, 1.0).cis(),
-                     complex(2.0, 1.0).sin().mul(complex(0.0, 1.0)).add(complex(2.0, 1.0).cos()));
+            complex(2.0, 1.0).sin().mul(complex(0.0, 1.0)).add(complex(2.0, 1.0).cos()));
     }
 
     @Test

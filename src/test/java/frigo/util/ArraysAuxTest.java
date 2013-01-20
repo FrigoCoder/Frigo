@@ -14,10 +14,13 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.Matchers.sameInstance;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+
 import org.junit.Test;
+
 import frigo.math.Complex;
 
 public class ArraysAuxTest {

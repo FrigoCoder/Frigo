@@ -9,13 +9,13 @@ import org.junit.Test;
 public class VarargsTest {
 
     @Test
-    public void empty_varargs_can_be_iterated() {
+    public void empty_varargs_can_be_iterated () {
         assertThat(concat(), is(""));
     }
 
-    private String concat(String... strings) {
+    private String concat (String... strings) {
         String result = "";
-        for (String string : strings) {
+        for( String string : strings ){
             result += string;
         }
         return result;

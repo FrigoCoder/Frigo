@@ -3,6 +3,7 @@ package frigo.projecteuler;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import com.google.common.base.Preconditions;
 
 public class Problem383 {

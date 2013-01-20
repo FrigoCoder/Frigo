@@ -7,6 +7,7 @@ import static frigo.util.Operator.MUL;
 import static frigo.util.Operator.SUB;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
+
 import org.junit.Test;
 
 public class OperatorTest {

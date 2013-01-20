@@ -1,3 +1,4 @@
+
 package frigo.util;
 
 import org.mockito.exceptions.base.MockitoAssertionError;

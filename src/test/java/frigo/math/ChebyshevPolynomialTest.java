@@ -2,7 +2,9 @@
 package frigo.math;
 
 import static org.junit.Assert.assertEquals;
+
 import java.util.Random;
+
 import org.junit.Test;
 
 public class ChebyshevPolynomialTest {
@@ -81,9 +83,8 @@ public class ChebyshevPolynomialTest {
         for( int i = 0; i < numberOfArguments; i++ ){
             final double x = arguments[i];
             for( int n = 0; n <= maxDegreeTested; n++ ){
-                assertEquals(Math.sin(n * x) / Math.sin(x),
-                             ChebyshevPolynomial.secondKind(n).evaluate(Math.cos(x)),
-                             epsilon);
+                assertEquals(Math.sin(n * x) / Math.sin(x), ChebyshevPolynomial.secondKind(n).evaluate(Math.cos(x)),
+                    epsilon);
             }
         }
     }

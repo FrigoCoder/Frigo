@@ -3,6 +3,7 @@ package frigo.exploratory.java;
 
 import java.io.NotSerializableException;
 import java.io.Serializable;
+
 import org.apache.commons.lang3.SerializationException;
 import org.apache.commons.lang3.SerializationUtils;
 import org.hamcrest.Matchers;

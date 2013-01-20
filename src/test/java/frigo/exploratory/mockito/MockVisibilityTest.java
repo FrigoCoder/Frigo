@@ -11,14 +11,14 @@ import org.junit.Test;
 
 class PPC {
 
-    public int get() {
+    public int get () {
         return 1;
     }
 }
 
 class PPM {
 
-    int get() {
+    int get () {
         return 1;
     }
 }
@@ -26,28 +26,28 @@ class PPM {
 public class MockVisibilityTest {
 
     @Test
-    public void can_mock_package_private_class() {
+    public void can_mock_package_private_class () {
         PPC obj = mock(PPC.class);
         doReturn(2).when(obj).get();
         assertThat(obj.get(), is(2));
     }
 
     @Test
-    public void can_mock_package_private_method() {
+    public void can_mock_package_private_method () {
         PPM obj = mock(PPM.class);
         doReturn(2).when(obj).get();
         assertThat(obj.get(), is(2));
     }
 
     @Test
-    public void can_spy_package_private_class() {
+    public void can_spy_package_private_class () {
         PPC obj = spy(new PPC());
         doReturn(2).when(obj).get();
         assertThat(obj.get(), is(2));
     }
 
     @Test
-    public void can_spy_package_private_method() {
+    public void can_spy_package_private_method () {
         PPM obj = spy(new PPM());
         doReturn(2).when(obj).get();
         assertThat(obj.get(), is(2));

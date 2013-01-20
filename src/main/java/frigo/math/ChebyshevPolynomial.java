@@ -3,6 +3,7 @@ package frigo.math;
 
 import java.lang.ref.SoftReference;
 import java.util.Vector;
+
 import frigo.util.ArraysAux;
 
 public class ChebyshevPolynomial {

@@ -8,6 +8,7 @@ import static frigo.projecteuler.Problem383.f5;
 import static frigo.projecteuler.Problem383.f5Factorial;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
+
 import org.junit.Test;
 
 public class Problem383Test {

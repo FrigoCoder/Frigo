@@ -2,6 +2,7 @@
 package frigo.graph;
 
 import static com.google.common.base.Preconditions.checkArgument;
+
 import java.util.List;
 import java.util.Vector;
 

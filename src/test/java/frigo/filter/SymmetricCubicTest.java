@@ -2,6 +2,7 @@
 package frigo.filter;
 
 import static java.lang.Math.abs;
+
 import org.junit.Before;
 import org.junit.Test;
 

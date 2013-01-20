@@ -3,10 +3,12 @@ package frigo.util;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static frigo.math.MathAux.sqr;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.Vector;
+
 import frigo.math.Complex;
 
 public class ArraysAux {

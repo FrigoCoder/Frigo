@@ -3,7 +3,9 @@ package frigo.math.numbertheory;
 
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
+
 import java.util.List;
+
 import org.junit.Test;
 
 public class IncrementalPrimeGeneratorOfFrigoTest {

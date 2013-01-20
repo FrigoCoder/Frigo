@@ -3,7 +3,6 @@ package frigo.math;
 
 /**
  * Trivial implementation of the Discrete Hartley Transform mainly used for testing purposes
- * 
  * @author Frigo
  */
 public class DHT implements HartleyTransform {

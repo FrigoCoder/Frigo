@@ -8,6 +8,7 @@ import static frigo.math.numbertheory.Functions.factorialLong;
 import static frigo.math.numbertheory.Functions.isPrime;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
+
 import org.junit.Test;
 
 public class FunctionsTest {

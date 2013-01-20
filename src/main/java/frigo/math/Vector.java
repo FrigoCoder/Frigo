@@ -2,6 +2,7 @@
 package frigo.math;
 
 import static com.google.common.base.Preconditions.checkArgument;
+
 import java.util.Arrays;
 
 public class Vector {

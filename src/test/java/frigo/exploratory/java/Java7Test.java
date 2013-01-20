@@ -4,6 +4,7 @@ package frigo.exploratory.java;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.fail;
+
 import org.junit.Test;
 
 public class Java7Test {

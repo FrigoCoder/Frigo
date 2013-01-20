@@ -5,7 +5,9 @@ import static org.apache.commons.lang3.SerializationUtils.deserialize;
 import static org.apache.commons.lang3.SerializationUtils.serialize;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
+
 import java.io.Serializable;
+
 import org.junit.Before;
 import org.junit.Test;
 

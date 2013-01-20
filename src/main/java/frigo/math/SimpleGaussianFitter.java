@@ -7,7 +7,6 @@ import static frigo.math.MathAux.sqr;
  * Estimation of the parameters of the normal distribution based on <a
  * href=http://en.wikipedia.org/wiki/Maximum_likelihood#Continuous_distribution.2C_continuous_parameter_space>maximum
  * likelihood</a>.
- * 
  * @author Frigo
  */
 public class SimpleGaussianFitter implements GaussianFitter {

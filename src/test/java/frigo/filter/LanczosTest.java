@@ -2,6 +2,7 @@
 package frigo.filter;
 
 import static frigo.math.MathAux.sinc;
+
 import org.junit.Test;
 
 public class LanczosTest extends KernelTestBase {

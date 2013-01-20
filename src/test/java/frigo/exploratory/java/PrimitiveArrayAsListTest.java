@@ -3,8 +3,10 @@ package frigo.exploratory.java;
 
 import static org.hamcrest.Matchers.instanceOf;
 import static org.junit.Assert.assertThat;
+
 import java.util.Arrays;
 import java.util.List;
+
 import org.junit.Test;
 
 public class PrimitiveArrayAsListTest {

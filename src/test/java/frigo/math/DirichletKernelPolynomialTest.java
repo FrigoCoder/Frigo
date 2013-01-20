@@ -2,6 +2,7 @@
 package frigo.math;
 
 import static org.junit.Assert.assertEquals;
+
 import org.junit.Test;
 
 public class DirichletKernelPolynomialTest {
@@ -35,9 +36,8 @@ public class DirichletKernelPolynomialTest {
         for( int degree : degrees ){
             Polynomial modifiedDirichlet = DirichletKernelPolynomial.modifiedDirichlet(degree);
             for( double point : points ){
-                assertEquals(naiveModifiedDirichlet(point, degree),
-                             modifiedDirichlet.evaluate(Math.cos(point)),
-                             epsilon);
+                assertEquals(naiveModifiedDirichlet(point, degree), modifiedDirichlet.evaluate(Math.cos(point)),
+                    epsilon);
             }
         }
     }

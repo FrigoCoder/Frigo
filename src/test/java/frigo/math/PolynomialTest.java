@@ -4,6 +4,7 @@ package frigo.math;
 import static frigo.math.Polynomial.poly;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
+
 import org.junit.Test;
 
 public class PolynomialTest {

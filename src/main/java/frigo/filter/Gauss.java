@@ -22,7 +22,6 @@ public class Gauss extends Kernel {
      * deviation. This makes sure that the overwhelming majority of the area under the Gauss function remains inside the
      * cutoff interval, and there is insignificant information loss or distortion. Use the other constructor if you want
      * to finetune this behaviour, to tip the scales on the tradeoff between speed and quality.
-     * 
      * @param sigma The standard deviation of the Gauss function, determining the "width" or spread of the function, and
      *            thus indirectly influencing the time resolution of the sampling process.
      */
@@ -37,7 +36,6 @@ public class Gauss extends Kernel {
      * values in terms of the standard deviation. A ratio of cutoff radius per standard deviation of 2.0 gives ~95.49%
      * coverage, and should be enough for real-time tasks. 3.0 with ~99.73% coverage is enough for image processing, 4.0
      * and 5.0 with >99.99% coverage is best suited for audio processing. Defaults to 5.0, anything above is overkill.
-     * 
      * @param sigma The standard deviation of the Gauss function, determining the "width" or spread of the function, and
      *            thus indirectly influencing the time resolution of the sampling process.
      * @param radius The cutoff radius

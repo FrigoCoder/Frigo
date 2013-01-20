@@ -4,7 +4,6 @@ package frigo.math;
 /**
  * Interface for the calculation of the parameters of the normal distribution. The terminology is consistent with
  * statistics.
- * 
  * @author Frigo
  */
 public interface GaussianFitter {
