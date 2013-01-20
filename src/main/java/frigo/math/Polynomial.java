@@ -5,11 +5,11 @@ import java.util.Arrays;
 
 public final class Polynomial {
 
-    public static final Polynomial one = new Polynomial(1.0);
-    public static final Polynomial x = new Polynomial(1.0, 0.0);
-    public static final Polynomial x2 = new Polynomial(1.0, 0.0, 0.0);
-    public static final Polynomial x3 = new Polynomial(1.0, 0.0, 0.0, 0.0);
-    public static final Polynomial zero = new Polynomial(0.0);
+    public static final Polynomial ZERO = new Polynomial(0.0);
+    public static final Polynomial ONE = new Polynomial(1.0);
+    public static final Polynomial X = new Polynomial(1.0, 0.0);
+    public static final Polynomial X2 = new Polynomial(1.0, 0.0, 0.0);
+    public static final Polynomial X3 = new Polynomial(1.0, 0.0, 0.0, 0.0);
 
     /**
      * Shortcut for new Polynomial(...)

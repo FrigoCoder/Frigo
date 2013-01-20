@@ -34,7 +34,7 @@ public class BoxStatisticsByIntegralArray extends BoxStatistics {
         return x.getCountOutside(box) * getVarianceOutside(box);
     }
 
-    double[] getSquareArray () {
+    private double[] getSquareArray () {
         double[] sourceSquare = new double[source.length];
         for( int i = 0; i < sourceSquare.length; i++ ){
             sourceSquare[i] = sqr(source[i]);

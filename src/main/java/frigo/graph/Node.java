@@ -2,12 +2,16 @@
 package frigo.graph;
 
 import java.util.concurrent.atomic.AtomicLong;
+import com.google.common.annotations.VisibleForTesting;
 
 public class Node implements Comparable<Node> {
 
+    @VisibleForTesting
     static final AtomicLong serials = new AtomicLong();
 
     int id;
+
+    @VisibleForTesting
     final long serial;
 
     public Node (int id) {

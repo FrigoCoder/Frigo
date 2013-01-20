@@ -5,7 +5,7 @@ import org.junit.Test;
 
 public class HermiteTest extends KernelTestBase {
 
-    private class HermiteNaive extends ResamplingKernel {
+    private static class HermiteNaive extends ResamplingKernel {
 
         public HermiteNaive () {
             super(1.0);

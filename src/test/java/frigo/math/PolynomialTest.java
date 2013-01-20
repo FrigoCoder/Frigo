@@ -173,10 +173,10 @@ public class PolynomialTest {
         checkInvariant(poly(1.0).sub(poly(1.0)));
         checkInvariant(poly(1.0, 0.0).sub(poly(1.0, 0.0)));
         checkInvariant(poly(1.0, 0.0, 0.0).sub(poly(1.0, 0.0, 0.0)));
-        checkInvariant(Polynomial.one);
-        checkInvariant(Polynomial.x);
-        checkInvariant(Polynomial.x2);
-        checkInvariant(Polynomial.x3);
+        checkInvariant(Polynomial.ONE);
+        checkInvariant(Polynomial.X);
+        checkInvariant(Polynomial.X2);
+        checkInvariant(Polynomial.X3);
     }
 
     @Test
@@ -211,10 +211,10 @@ public class PolynomialTest {
 
     @Test
     public void testStaticVars () {
-        assertThat(Polynomial.one, is(poly(1.0)));
-        assertThat(Polynomial.x, is(poly(1.0, 0.0)));
-        assertThat(Polynomial.x2, is(poly(1.0, 0.0, 0.0)));
-        assertThat(Polynomial.x3, is(poly(1.0, 0.0, 0.0, 0.0)));
+        assertThat(Polynomial.ONE, is(poly(1.0)));
+        assertThat(Polynomial.X, is(poly(1.0, 0.0)));
+        assertThat(Polynomial.X2, is(poly(1.0, 0.0, 0.0)));
+        assertThat(Polynomial.X3, is(poly(1.0, 0.0, 0.0, 0.0)));
     }
 
     @Test

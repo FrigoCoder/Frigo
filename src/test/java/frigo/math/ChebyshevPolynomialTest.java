@@ -37,13 +37,13 @@ public class ChebyshevPolynomialTest {
      */
     @Test
     public void testChebyshevRecurrenceRelation () {
-        assertEquals(Polynomial.one, ChebyshevPolynomial.chebyshev(0));
-        assertEquals(Polynomial.x, ChebyshevPolynomial.chebyshev(1));
+        assertEquals(Polynomial.ONE, ChebyshevPolynomial.chebyshev(0));
+        assertEquals(Polynomial.X, ChebyshevPolynomial.chebyshev(1));
         for( int n = 2; n < maxDegreeTested; n++ ){
             Polynomial pm2 = ChebyshevPolynomial.chebyshev(n - 2);
             Polynomial pm1 = ChebyshevPolynomial.chebyshev(n - 1);
             Polynomial p = ChebyshevPolynomial.chebyshev(n);
-            assertEquals(pm1.mul(2.0).mul(Polynomial.x).sub(pm2), p);
+            assertEquals(pm1.mul(2.0).mul(Polynomial.X).sub(pm2), p);
         }
     }
 
@@ -93,13 +93,13 @@ public class ChebyshevPolynomialTest {
      */
     @Test
     public void testSecondKindRecurrenceRelation () {
-        assertEquals(Polynomial.zero, ChebyshevPolynomial.secondKind(0));
-        assertEquals(Polynomial.one, ChebyshevPolynomial.secondKind(1));
+        assertEquals(Polynomial.ZERO, ChebyshevPolynomial.secondKind(0));
+        assertEquals(Polynomial.ONE, ChebyshevPolynomial.secondKind(1));
         for( int n = 2; n < maxDegreeTested; n++ ){
             final Polynomial pm2 = ChebyshevPolynomial.secondKind(n - 2);
             final Polynomial pm1 = ChebyshevPolynomial.secondKind(n - 1);
             final Polynomial p = ChebyshevPolynomial.secondKind(n);
-            assertEquals(pm1.mul(2.0).mul(Polynomial.x).sub(pm2), p);
+            assertEquals(pm1.mul(2.0).mul(Polynomial.X).sub(pm2), p);
         }
     }
 }

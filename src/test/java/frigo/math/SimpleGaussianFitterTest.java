@@ -6,10 +6,11 @@ import org.junit.Test;
 
 public class SimpleGaussianFitterTest {
 
-    final double epsilon = 1.0e-15;
-    final GaussianFitter fitter = new SimpleGaussianFitter();
-    final double[] v = {1, 2, 3, 4, 5, 6};
-    final double[] w = {1, 2, 3, 4, 5, 6, 7, 8};
+    private static final double epsilon = 1.0e-15;
+    private static final double[] v = {1, 2, 3, 4, 5, 6};
+    private static final double[] w = {1, 2, 3, 4, 5, 6, 7, 8};
+
+    private GaussianFitter fitter = new SimpleGaussianFitter();
 
     @Test
     public void testGetExpectedValue () {

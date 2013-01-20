@@ -7,7 +7,7 @@ import org.junit.Test;
 
 public class KernelTest extends KernelTestBase {
 
-    private class DummyKernel extends Kernel {
+    private static class DummyKernel extends Kernel {
 
         public DummyKernel (double radius) {
             super(radius);

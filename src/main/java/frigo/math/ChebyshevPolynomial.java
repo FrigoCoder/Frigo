@@ -57,7 +57,7 @@ public class ChebyshevPolynomial {
         for( int n = c.size(); n <= degree; n++ ){
             Polynomial Tn_1 = c.get(n - 1);
             Polynomial Tn_2 = c.get(n - 2);
-            Polynomial Tn = Polynomial.x.mul(2).mul(Tn_1).sub(Tn_2);
+            Polynomial Tn = Polynomial.X.mul(2).mul(Tn_1).sub(Tn_2);
             c.add(Tn);
         }
     }
@@ -65,7 +65,7 @@ public class ChebyshevPolynomial {
     protected static Vector<Polynomial> getCosines () {
         Vector<Polynomial> v;
         if( cosines == null || (v = cosines.get()) == null ){
-            v = ArraysAux.asVector(Polynomial.one, Polynomial.x);
+            v = ArraysAux.asVector(Polynomial.ONE, Polynomial.X);
             cosines = new SoftReference<>(v);
         }
         return v;
@@ -74,7 +74,7 @@ public class ChebyshevPolynomial {
     protected static Vector<Polynomial> getSines () {
         Vector<Polynomial> v;
         if( sines == null || (v = sines.get()) == null ){
-            v = ArraysAux.asVector(Polynomial.zero, Polynomial.one);
+            v = ArraysAux.asVector(Polynomial.ZERO, Polynomial.ONE);
             sines = new SoftReference<>(v);
         }
         return v;

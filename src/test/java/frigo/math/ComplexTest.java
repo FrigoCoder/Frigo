@@ -5,7 +5,7 @@ import static frigo.math.Complex.add;
 import static frigo.math.Complex.cis;
 import static frigo.math.Complex.complex;
 import static frigo.math.Complex.div;
-import static frigo.math.Complex.i;
+import static frigo.math.Complex.I;
 import static frigo.math.Complex.mul;
 import static frigo.math.Complex.pow;
 import static frigo.math.Complex.sub;
@@ -80,8 +80,8 @@ public class ComplexTest {
     public void testCos () {
         assertEquals(complex(1.0, 0.0).cos(), complex(Math.cos(1.0), 0.0));
         assertEquals(complex(2.0, 0.0).cos(), complex(Math.cos(2.0), 0.0));
-        assertEquals(complex(1.0, 2.0).cos(), complex(1.0, 2.0).mul(i).cosh());
-        assertEquals(complex(2.0, 1.0).cos(), complex(2.0, 1.0).mul(i).cosh());
+        assertEquals(complex(1.0, 2.0).cos(), complex(1.0, 2.0).mul(I).cosh());
+        assertEquals(complex(2.0, 1.0).cos(), complex(2.0, 1.0).mul(I).cosh());
     }
 
     @Test
@@ -166,7 +166,7 @@ public class ComplexTest {
     public void testPowComplex () {
         assertEquals(complex(2.0, 0.0).pow(complex(4.0, 0.0)), complex(16.0, 0.0));
         assertEquals(complex(2.0, 1.0).pow(complex(2.0, 0.0)), complex(3.0, 4.0));
-        assertEquals(complex(3.0, 4.0).pow(complex(0.0, 1.0)), complex(3.0, 4.0).log().mul(i).exp());
+        assertEquals(complex(3.0, 4.0).pow(complex(0.0, 1.0)), complex(3.0, 4.0).log().mul(I).exp());
     }
 
     @Test
@@ -181,8 +181,8 @@ public class ComplexTest {
     public void testSin () {
         assertEquals(complex(1.0, 0.0).sin(), complex(Math.sin(1.0), 0.0));
         assertEquals(complex(2.0, 0.0).sin(), complex(Math.sin(2.0), 0.0));
-        assertEquals(complex(1.0, 2.0).sin(), complex(1.0, 2.0).mul(i).sinh().div(i));
-        assertEquals(complex(2.0, 1.0).sin(), complex(2.0, 1.0).mul(i).sinh().div(i));
+        assertEquals(complex(1.0, 2.0).sin(), complex(1.0, 2.0).mul(I).sinh().div(I));
+        assertEquals(complex(2.0, 1.0).sin(), complex(2.0, 1.0).mul(I).sinh().div(I));
     }
 
     @Test
@@ -259,12 +259,12 @@ public class ComplexTest {
     public void testSubComplex () {
         assertEquals(complex(1.0, 0.0).sub(complex(0.0, 1.0)), complex(1.0, -1.0));
         assertEquals(complex(1.0, 1.0).sub(complex(0.0, 1.0)), complex(1.0, 0.0));
-        assertEquals(complex(0.0, 1.0).sub(i), complex(0.0));
+        assertEquals(complex(0.0, 1.0).sub(I), complex(0.0));
     }
 
     @Test
     public void testSubDouble () {
-        assertEquals(complex(1.0, 1.0).sub(1.0), i);
+        assertEquals(complex(1.0, 1.0).sub(1.0), I);
         assertEquals(complex(16.0, 1.0).sub(8.5), complex(7.5, 1.0));
     }
 

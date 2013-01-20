@@ -5,7 +5,7 @@ import org.junit.Test;
 
 public class ResamplingKernelTest extends KernelTestBase {
 
-    class ResamplingKernelDummy extends ResamplingKernel {
+    private static class ResamplingKernelDummy extends ResamplingKernel {
 
         public ResamplingKernelDummy (double radius) {
             super(radius);

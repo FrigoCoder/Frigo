@@ -3,17 +3,11 @@ package frigo.util;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
-import org.junit.Before;
 import org.junit.Test;
 
 public class PolishEvaluatorTest {
 
-    private PolishEvaluator polish;
-
-    @Before
-    public void setUp () {
-        polish = new PolishEvaluator();
-    }
+    private PolishEvaluator polish = new PolishEvaluator();
 
     @Test
     public void testEvaluate () {

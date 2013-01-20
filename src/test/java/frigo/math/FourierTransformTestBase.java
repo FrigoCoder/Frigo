@@ -35,7 +35,7 @@ public class FourierTransformTestBase extends TransformTestBase {
         int frequency = rand.nextInt(n);
         Complex[] expected = new Complex[n];
         for( int i = 0; i < n; i++ ){
-            expected[i] = i == frequency ? Complex.one : Complex.zero;
+            expected[i] = i == frequency ? Complex.ONE : Complex.ZERO;
         }
         checkDifference(expected, fourier.transform(getFourierFrequency(frequency)));
     }

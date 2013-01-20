@@ -111,12 +111,6 @@ public class VectorTest {
         }
     }
 
-    @Test(expected = UnsupportedOperationException.class)
-    public void hashCodeThrows () {
-        fillLinear(vector, 1.0);
-        vector.hashCode();
-    }
-
     @Test
     public void mulLinearByTwo () {
         fillLinear(vector, 1.0);

@@ -3,9 +3,10 @@ package frigo.math;
 
 public final class Complex {
 
-    public static final Complex i = new Complex(0.0, 1.0);
-    public static final Complex one = new Complex(1.0, 0.0);
-    public static final Complex zero = new Complex(0.0, 0.0);
+    public static final Complex ZERO = new Complex(0.0, 0.0);
+    public static final Complex ONE = new Complex(1.0, 0.0);
+    public static final Complex I = new Complex(0.0, 1.0);
+
     static double epsilon = 0.00000000000000;
 
     public static Complex add (double x, Complex c) {

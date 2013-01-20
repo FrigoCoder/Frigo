@@ -32,7 +32,7 @@ public class MathAux {
     }
 
     public static long sqr (int x) {
-        return x * x;
+        return (long) x * x;
     }
 
     public static int ceil (double x) {

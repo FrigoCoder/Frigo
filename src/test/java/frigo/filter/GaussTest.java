@@ -5,7 +5,7 @@ import org.junit.Test;
 
 public class GaussTest extends KernelTestBase {
 
-    class GaussNaive extends Gauss {
+    private static class GaussNaive extends Gauss {
 
         private final double a;
         private final double c;
