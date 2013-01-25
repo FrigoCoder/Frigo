@@ -1,16 +1,13 @@
 
 package frigo.math;
 
-import com.google.common.annotations.VisibleForTesting;
+import static java.lang.Double.valueOf;
 
 public final class Complex {
 
     public static final Complex ZERO = new Complex(0.0, 0.0);
     public static final Complex ONE = new Complex(1.0, 0.0);
     public static final Complex I = new Complex(0.0, 1.0);
-
-    @VisibleForTesting
-    static double epsilon = 0.00000000000000;
 
     public static Complex add (double x, Complex c) {
         return new Complex(x + c.re, c.im);
@@ -132,7 +129,7 @@ public final class Complex {
             return false;
         }
         Complex c = (Complex) obj;
-        return Math.abs(re - c.re) <= epsilon && Math.abs(im - c.im) <= epsilon;
+        return re == c.re && im == c.im;
     }
 
     /**
@@ -144,7 +141,7 @@ public final class Complex {
 
     @Override
     public int hashCode () {
-        return new Double(re).hashCode() + new Double(im).hashCode() * 31;
+        return valueOf(re).hashCode() + valueOf(im).hashCode() * 31;
     }
 
     /**

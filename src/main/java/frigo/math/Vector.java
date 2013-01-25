@@ -7,19 +7,18 @@ import java.util.Arrays;
 
 public class Vector {
 
-    private static double epsilon = 1.0e-20;
     private final double[] v;
 
     public Vector () {
         this(1);
     }
 
-    public Vector (double[] array) {
-        v = array.clone();
-    }
-
     public Vector (int n) {
         v = new double[n];
+    }
+
+    public Vector (double[] array) {
+        v = array.clone();
     }
 
     public Vector add (Vector that) {
@@ -50,7 +49,10 @@ public class Vector {
 
     @Override
     public boolean equals (Object obj) {
-        if( !(obj instanceof Vector) ){
+        if( obj == null ){
+            return false;
+        }
+        if( getClass() != obj.getClass() ){
             return false;
         }
         Vector that = (Vector) obj;
@@ -58,7 +60,7 @@ public class Vector {
             return false;
         }
         for( int i = 0; i < size(); i++ ){
-            if( !equals(get(i), that.get(i)) ){
+            if( get(i) != that.get(i) ){
                 return false;
             }
         }
@@ -102,9 +104,5 @@ public class Vector {
     @Override
     public String toString () {
         return Arrays.toString(v);
-    }
-
-    private boolean equals (double x, double y) {
-        return Math.abs(x - y) < epsilon;
     }
 }
