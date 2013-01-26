@@ -8,7 +8,7 @@ public class BoxFinder {
 
     public BoxFinder (double[] source) {
         this.source = source.clone();
-        stat = new BoxStatisticsByIntegralArray(source);
+        stat = new BoxStatistics(source);
     }
 
     public Box getMinimumWeightedVarianceSum () {

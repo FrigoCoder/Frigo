@@ -7,9 +7,14 @@ import static org.hamcrest.Matchers.is;
 
 import java.util.concurrent.TimeUnit;
 
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 public class AwaitVisibilityTest {
+
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
 
     protected boolean protectedMethod () {
         return true;
@@ -33,8 +38,12 @@ public class AwaitVisibilityTest {
         waitAtMost(10, TimeUnit.SECONDS).untilCall(to(this).packagePrivateMethod(), is(true));
     }
 
-    @Test(expected = IllegalStateException.class)
+    @Test
     public void await_can_not_wait_for_private_method () throws Exception {
-        waitAtMost(10, TimeUnit.SECONDS).untilCall(to(this).privateMethod(), is(true));
+        try{
+            waitAtMost(10, TimeUnit.SECONDS).untilCall(to(this).privateMethod(), is(true));
+        }finally{
+            thrown.expect(IllegalStateException.class);
+        }
     }
 }

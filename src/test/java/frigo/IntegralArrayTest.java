@@ -1,93 +1,46 @@
 
 package frigo;
 
-import static org.junit.Assert.assertEquals;
+import static org.hamcrest.Matchers.closeTo;
+import static org.junit.Assert.assertThat;
 
-import org.junit.Before;
 import org.junit.Test;
 
 public class IntegralArrayTest {
 
-    private double epsilon;
-    private IntegralArray integral;
-    private double[] source;
+    private static final double epsilon = 1.0e-20;
 
-    @Before
-    public void setUp () {
-        epsilon = 1.0e-20;
-        source = getTestArray();
-        integral = new IntegralArray(source);
+    private double[] source = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+    private IntegralArray integral = new IntegralArray(source);
+    private Box box1 = new Box(1, 5);
+    private Box box2 = new Box(0, 9);
+
+    @Test
+    public void test_getAverageInside () {
+        assertEquals(integral.getAverageInside(box1), 3.0);
+        assertEquals(integral.getAverageInside(box2), 4.5);
     }
 
     @Test
-    public void testGetAverage () {
-        assertEquals(4.5, integral.getAverage(new Box(0, 9)), epsilon);
-        assertEquals(3.0, integral.getAverage(new Box(1, 5)), epsilon);
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void testGetAverageException1 () {
-        integral.getAverage(new Box(-2, 2));
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void testGetAverageException2 () {
-        integral.getAverage(new Box(-1, -2));
+    public void test_getAverageOutside () {
+        assertEquals(integral.getAverageOutside(box1), 6.0);
+        assertEquals(integral.getAverageOutside(box2), 0.0);
     }
 
     @Test
-    public void testGetAverageOutside () {
-        assertEquals(0.0, integral.getAverageOutside(new Box(0, 9)), epsilon);
-        assertEquals(6.0, integral.getAverageOutside(new Box(1, 5)), epsilon);
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void testGetAverageOutsideException1 () {
-        integral.getAverageOutside(new Box(-2, 2));
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void testGetAverageOutsideException2 () {
-        integral.getAverageOutside(new Box(-1, -2));
+    public void test_getSumInside () {
+        assertEquals(integral.getSumInside(box1), 15.0);
+        assertEquals(integral.getSumInside(box2), 45.0);
     }
 
     @Test
-    public void testGetSum () {
-        assertEquals(45.0, integral.getSum(new Box(0, 9)), epsilon);
-        assertEquals(15.0, integral.getSum(new Box(1, 5)), epsilon);
+    public void test_getSumOutside () {
+        assertEquals(integral.getSumOutside(box1), 30.0);
+        assertEquals(integral.getSumOutside(box2), 0.0);
     }
 
-    @Test(expected = IllegalArgumentException.class)
-    public void testGetSumException1 () {
-        integral.getSum(new Box(-2, 2));
+    private void assertEquals (double actual, double expected) {
+        assertThat(actual, closeTo(expected, epsilon));
     }
 
-    @Test(expected = IllegalArgumentException.class)
-    public void testGetSumException2 () {
-        integral.getSum(new Box(-1, -2));
-    }
-
-    @Test
-    public void testGetSumOutside () {
-        assertEquals(0.0, integral.getSumOutside(new Box(0, 9)), epsilon);
-        assertEquals(30.0, integral.getSumOutside(new Box(1, 5)), epsilon);
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void testGetSumOutsideException1 () {
-        integral.getSumOutside(new Box(-2, 2));
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void testGetSumOutsideException2 () {
-        integral.getSumOutside(new Box(-1, -2));
-    }
-
-    private double[] getTestArray () {
-        double[] result = new double[10];
-        for( int i = 0; i < result.length; i++ ){
-            result[i] = i;
-        }
-        return result;
-    }
 }
