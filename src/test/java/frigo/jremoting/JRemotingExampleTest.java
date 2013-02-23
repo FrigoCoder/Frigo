@@ -18,27 +18,6 @@ import org.junit.Test;
 
 public class JRemotingExampleTest {
 
-    // @Test
-    // public void adderService_is_published_and_accessible() throws Exception {
-    // SocketServer server =
-    // new SocketServer(new ConsoleServerMonitor(), new ByteStream(), new InetSocketAddress(10333));
-    // server.start();
-    // server.publish(new AdderImpl(), "AdderService", Adder.class);
-    //
-    // try {
-    // SocketTransport transport =
-    // new SocketTransport(new ConsoleClientMonitor(),
-    // new org.codehaus.jremoting.client.streams.ByteStream(),
-    // new SocketDetails("localhost", 10333));
-    // ServiceResolver resolver = new ServiceResolver(transport);
-    // Adder remoteAdder = resolver.resolveService("AdderService");
-    // assertThat(remoteAdder.add(2, 3), is(5));
-    //
-    // } finally {
-    // server.stop();
-    // }
-    // }
-
     @Test
     public void adderService_is_published_and_accessible_refactored () throws Exception {
         RmiServer server = createServer(10333);
