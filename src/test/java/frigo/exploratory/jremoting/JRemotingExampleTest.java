@@ -19,13 +19,12 @@ import org.junit.Test;
 public class JRemotingExampleTest {
 
     @Test
-    public void adderService_is_published_and_accessible_refactored () throws Exception {
+    public void adderService_is_published_and_accessible () throws Exception {
         RmiServer server = createServer(10333);
         server.publish(new AdderImpl(), "AdderService", Adder.class);
         try{
             Adder remoteAdder = resolve("localhost", 10333, "AdderService");
             assertThat(remoteAdder.add(2, 3), is(5));
-            assertThat(remoteAdder.getCaller(), is(""));
         }finally{
             server.stop();
         }
