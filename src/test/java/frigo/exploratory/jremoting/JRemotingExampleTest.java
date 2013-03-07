@@ -1,5 +1,5 @@
 
-package frigo.jremoting;
+package frigo.exploratory.jremoting;
 
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
@@ -25,6 +25,7 @@ public class JRemotingExampleTest {
         try{
             Adder remoteAdder = resolve("localhost", 10333, "AdderService");
             assertThat(remoteAdder.add(2, 3), is(5));
+            assertThat(remoteAdder.getCaller(), is(""));
         }finally{
             server.stop();
         }
