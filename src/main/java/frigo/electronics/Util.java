@@ -25,6 +25,14 @@ public class Util {
         return 20 * log10(ratio);
     }
 
+    public static double decibelToPowerRatio (double decibel) {
+        return pow(10, decibel / 10);
+    }
+
+    public static double decibelToAmplitudeRatio (double decibel) {
+        return pow(10, decibel / 20);
+    }
+
     public static double octaveBandwidthToQFactor (double N) {
         double _2_N = pow(2, N);
         return sqrt(_2_N) / (_2_N - 1);

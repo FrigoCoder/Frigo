@@ -21,14 +21,6 @@ public class ParallelRlc {
         this.C = C;
     }
 
-    // public double w0 () {
-    // return 1.0 / sqrt(L * C);
-    // }
-    //
-    // public double f0 () {
-    // return angularToOrdinaryFrequency(w0());
-    // }
-
     public Complex admittance (double w) {
         return complex(1 / R, w * C - 1 / (w * L));
     }
