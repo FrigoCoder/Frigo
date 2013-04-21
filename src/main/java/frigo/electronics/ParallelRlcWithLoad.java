@@ -80,4 +80,5 @@ public class ParallelRlcWithLoad {
     public String toString () {
         return ReflectionToStringBuilder.toString(this, SHORT_PREFIX_STYLE);
     }
+
 }
