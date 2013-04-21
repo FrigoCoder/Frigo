@@ -27,11 +27,12 @@ public class ParallelRlcWithLoadFinder {
     public ParallelRlcWithLoad getFilter () {
         double low = q * q / (R * R) / 2;
         double high = q * q / (R * R) * 2;
+        double target = q;
         double tolerance = 1E-20;
         while( true ){
             double mid = (low + high) / 2;
             ParallelRlcWithLoad rlc = new ParallelRlcWithLoad(R, sqrt(LC / mid), sqrt(LC * mid), load);
-            double difference = q - rlc.q();
+            double difference = target - rlc.q();
             if( abs(difference) < tolerance || high - low < tolerance ){
                 return rlc;
             }

@@ -42,11 +42,11 @@ public class ParallelRlcWithLoad {
         double tolerance = 1E-15;
         while( true ){
             double mid = (low + high) / 2;
-            double actual = response(mid);
-            if( abs(target - actual) < tolerance || high - low < tolerance ){
+            double difference = target - response(mid);
+            if( abs(difference) < tolerance || high - low < tolerance ){
                 return mid;
             }
-            if( target < actual ){
+            if( difference < 0 ){
                 low = mid;
             }else{
                 high = mid;
