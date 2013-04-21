@@ -17,7 +17,7 @@ public class ParallelRlcWithLoadFinderTest {
 
     @Test
     public void testLC () {
-        assertThat(finder.LC, is(0.0));
+        assertThat(finder.LC, is(1.0994052044524501E-9));
     }
 
     @Test
