@@ -17,21 +17,15 @@ import frigo.math.Complex;
 public class ParallelRlcWithLoad {
 
     private ParallelRlc rlc;
-    private double R;
-    private double L;
-    private double C;
     private double load;
 
     public ParallelRlcWithLoad (double R, double L, double C, double load) {
         rlc = new ParallelRlc(R, L, C);
-        this.R = R;
-        this.L = L;
-        this.C = C;
         this.load = load;
     }
 
     public double f0 () {
-        double w0 = 1.0 / sqrt(L * C);
+        double w0 = 1.0 / sqrt(rlc.L * rlc.C);
         return angularToOrdinaryFrequency(w0);
     }
 
@@ -59,7 +53,7 @@ public class ParallelRlcWithLoad {
     }
 
     public double gain () {
-        double ratio = load / (R + load);
+        double ratio = load / (rlc.R + load);
         return amplitudeRatioToDecibel(ratio);
     }
 

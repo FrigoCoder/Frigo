@@ -44,4 +44,18 @@ public class ParallelRlcWithLoadFinder {
         }
     }
 
+    public static void main (String[] args) {
+        findAndDump(4800.0, -10.0, 1.0 / 3.0, 32);
+        findAndDump(4800.0, -10.0, 1.0 / 3.0, 35);
+        findAndDump(4800.0, -10.0, 0.4, 32);
+        findAndDump(4800.0, -10.0, 0.4, 35);
+
+    }
+
+    private static void findAndDump (double f0, double gain, double q, double load) {
+        ParallelRlcWithLoadFinder finder = new ParallelRlcWithLoadFinder(f0, gain, q, load);
+        ParallelRlcWithLoad rlc = finder.getFilter();
+        System.out.println(rlc);
+    }
+
 }

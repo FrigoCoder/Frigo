@@ -11,9 +11,9 @@ import frigo.math.Complex;
 
 public class ParallelRlc {
 
-    private double R;
-    private double L;
-    private double C;
+    public double R;
+    public double L;
+    public double C;
 
     public ParallelRlc (double R, double L, double C) {
         this.R = R;
