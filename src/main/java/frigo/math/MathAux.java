@@ -46,4 +46,8 @@ public class MathAux {
     public static boolean isPowerOfTwo (int x) {
         return (x & x - 1) == 0 && x > 0;
     }
+
+    public static boolean xor (boolean x, boolean y) {
+        return x != y;
+    }
 }

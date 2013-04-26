@@ -7,6 +7,7 @@ import static frigo.math.MathAux.floor;
 import static frigo.math.MathAux.isPowerOfTwo;
 import static frigo.math.MathAux.sinc;
 import static frigo.math.MathAux.sqr;
+import static frigo.math.MathAux.xor;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
@@ -113,4 +114,11 @@ public class MathAuxTest {
         }
     }
 
+    @Test
+    public void test_xor () {
+        assertThat(xor(true, true), is(false));
+        assertThat(xor(true, false), is(true));
+        assertThat(xor(false, true), is(true));
+        assertThat(xor(false, false), is(false));
+    }
 }
