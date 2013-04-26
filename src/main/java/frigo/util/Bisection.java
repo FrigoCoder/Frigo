@@ -2,7 +2,6 @@
 package frigo.util;
 
 import static com.google.common.base.Preconditions.checkArgument;
-import static java.lang.Math.signum;
 
 import com.google.common.base.Function;
 
@@ -12,23 +11,35 @@ public class Bisection {
         return new Bisection(function, left, right).calculateRoot();
     }
 
+    public static double bisectIncreasing (Function<Double, Double> function, double left, double right) {
+        return new Bisection(function, left, right, true).calculateRoot();
+    }
+
+    public static double bisectDecreasing (Function<Double, Double> function, double left, double right) {
+        return new Bisection(function, left, right, false).calculateRoot();
+    }
+
     private Function<Double, Double> function;
+    private boolean increasing;
 
     private double left;
     private double mid;
     private double right;
 
-    private double leftValue;
     private double midValue;
-    private double rightValue;
 
     public Bisection (Function<Double, Double> function, double left, double right) {
-        this.function = function;
-        setLeft(left);
-        setRight(right);
-        updateMid();
+        this(function, left, right, function.apply(left) <= 0);
+        checkArgument(function.apply(left) * function.apply(right) <= 0);
+    }
+
+    public Bisection (Function<Double, Double> function, double left, double right, boolean increasing) {
         checkArgument(left < right);
-        checkArgument(leftValue * rightValue <= 0);
+        this.function = function;
+        this.left = left;
+        this.right = right;
+        updateMid();
+        this.increasing = increasing;
     }
 
     private double calculateRoot () {
@@ -36,28 +47,26 @@ public class Bisection {
             if( midValue == 0 ){
                 return mid;
             }
-            if( signum(leftValue) == signum(midValue) ){
-                setLeft(mid);
+            if( increasing ){
+                if( midValue < 0 ){
+                    this.left = mid;
+                }else{
+                    this.right = mid;
+                }
             }else{
-                setRight(mid);
+                if( midValue < 0 ){
+                    this.right = mid;
+                }else{
+                    this.left = mid;
+                }
             }
             updateMid();
         }
         return mid;
     }
-
+ 
     private boolean precisionStillHolds () {
         return left < mid && mid < right;
-    }
-
-    private void setLeft (double left) {
-        this.left = left;
-        leftValue = function.apply(left);
-    }
-
-    private void setRight (double right) {
-        this.right = right;
-        rightValue = function.apply(right);
     }
 
     private void updateMid () {

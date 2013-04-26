@@ -2,8 +2,15 @@
 package frigo.util;
 
 import static frigo.util.Bisection.bisect;
+import static frigo.util.Bisection.bisectDecreasing;
+import static frigo.util.Bisection.bisectIncreasing;
+import static java.lang.Math.PI;
+import static java.lang.Math.tan;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -101,4 +108,38 @@ public class BisectionTest {
         assertThat(value, is(expectedValue));
     }
 
+    @Test
+    public void bisectIncreasing_finds_root_without_evaluating_boundaries () {
+        Function<Double, Double> f = spy(new Function<Double, Double>() {
+
+            @Override
+            public Double apply (Double x) {
+                return tan(x);
+            }
+
+        });
+        double argument = bisectIncreasing(f, -PI / 2, PI / 2);
+        double value = f.apply(argument);
+        assertThat(argument, is(0.0));
+        assertThat(value, is(0.0));
+        verify(f, times(0)).apply(-PI / 2);
+        verify(f, times(0)).apply(PI / 2);
+    }
+
+    @Test
+    public void bisectDecreasing_finds_root_without_evaluating_boundaries () {
+        Function<Double, Double> f = spy(new Function<Double, Double>() {
+
+            @Override
+            public Double apply (Double x) {
+                return 1 + 1 / x;
+            }
+
+        });
+        double argument = bisectDecreasing(f, -3, 0);
+        double value = f.apply(argument);
+        assertThat(argument, is(-1.0));
+        assertThat(value, is(0.0));
+        verify(f, times(0)).apply(0.0);
+    }
 }
