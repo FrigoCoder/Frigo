@@ -2,7 +2,6 @@
 package frigo.util;
 
 import static com.google.common.base.Preconditions.checkArgument;
-import static java.lang.Math.abs;
 import static java.lang.Math.signum;
 
 import com.google.common.base.Function;
@@ -10,11 +9,7 @@ import com.google.common.base.Function;
 public class Bisection {
 
     public static double bisect (Function<Double, Double> function, double left, double right) {
-        return bisect(function, left, right, 0);
-    }
-
-    public static double bisect (Function<Double, Double> function, double left, double right, double tolerance) {
-        return new Bisection(function, left, right, tolerance).calculateRoot();
+        return new Bisection(function, left, right).calculateRoot();
     }
 
     private Function<Double, Double> function;
@@ -27,11 +22,8 @@ public class Bisection {
     private double midValue;
     private double rightValue;
 
-    private double tolerance;
-
-    public Bisection (Function<Double, Double> function, double left, double right, double tolerance) {
+    public Bisection (Function<Double, Double> function, double left, double right) {
         this.function = function;
-        this.tolerance = tolerance;
         setLeft(left);
         setRight(right);
         updateMid();
@@ -41,7 +33,7 @@ public class Bisection {
 
     private double calculateRoot () {
         while( precisionStillHolds() ){
-            if( abs(midValue) <= tolerance ){
+            if( midValue == 0 ){
                 return mid;
             }
             if( signum(leftValue) == signum(midValue) ){
