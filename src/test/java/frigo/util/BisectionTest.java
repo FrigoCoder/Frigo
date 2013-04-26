@@ -25,8 +25,7 @@ public class BisectionTest {
                 return 0.0;
             }
         };
-        double arg = bisect(f, -1, 1);
-        assertThat(arg, is(0.0));
+        assertArgumentAndValue(f, -1, 1, 0, 0);
     }
 
     @Test
@@ -39,8 +38,7 @@ public class BisectionTest {
             }
 
         };
-        double arg = bisect(f, -2, +2);
-        assertThat(arg, is(-0.5));
+        assertArgumentAndValue(f, -2, 2, -0.5, 0);
     }
 
     @Test
@@ -53,8 +51,7 @@ public class BisectionTest {
             }
 
         };
-        double arg = bisect(f, 0, 3);
-        assertThat(arg, is(2.0));
+        assertArgumentAndValue(f, 0, 3, 2, 0);
     }
 
     @Test
@@ -67,8 +64,7 @@ public class BisectionTest {
             }
 
         };
-        double arg = bisect(f, 0, 3);
-        assertThat(arg, is(2.0));
+        assertArgumentAndValue(f, 0, 3, 2, 0);
     }
 
     @Test
@@ -77,12 +73,11 @@ public class BisectionTest {
 
             @Override
             public Double apply (Double x) {
-                return x == 0.0 ? 0.0 : 1.0;
+                return x == 0 ? 0.0 : 1.0;
             }
 
         };
-        double arg = bisect(f, 0, 1);
-        assertThat(arg, is(0.0));
+        assertArgumentAndValue(f, 0, 1, 0, 0);
     }
 
     @Test
@@ -95,8 +90,15 @@ public class BisectionTest {
             }
 
         };
-        double arg = bisect(f, 0, 1);
-        assertThat(arg, is(1.0));
+        assertArgumentAndValue(f, 0, 1, 1, 0);
+    }
+
+    private void assertArgumentAndValue (Function<Double, Double> function, double left, double right,
+        double expectedArgument, double expectedValue) {
+        double argument = bisect(function, left, right);
+        double value = function.apply(argument);
+        assertThat(argument, is(expectedArgument));
+        assertThat(value, is(expectedValue));
     }
 
 }
