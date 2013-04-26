@@ -2,6 +2,7 @@
 package frigo.util;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static frigo.math.MathAux.xor;
 
 import com.google.common.base.Function;
 
@@ -47,26 +48,22 @@ public class Bisection {
             if( midValue == 0 ){
                 return mid;
             }
-            if( increasing ){
-                if( midValue < 0 ){
-                    this.left = mid;
-                }else{
-                    this.right = mid;
-                }
+            if( rootIsInRightHalf() ){
+                left = mid;
             }else{
-                if( midValue < 0 ){
-                    this.right = mid;
-                }else{
-                    this.left = mid;
-                }
+                right = mid;
             }
             updateMid();
         }
         return mid;
     }
- 
+
     private boolean precisionStillHolds () {
         return left < mid && mid < right;
+    }
+
+    private boolean rootIsInRightHalf () {
+        return xor(increasing, midValue > 0);
     }
 
     private void updateMid () {
