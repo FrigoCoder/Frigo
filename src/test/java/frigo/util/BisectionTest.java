@@ -25,7 +25,7 @@ public class BisectionTest {
                 return 0.0;
             }
         };
-        double arg = bisect(-1, 1, f);
+        double arg = bisect(f, -1, 1);
         assertThat(arg, is(0.0));
     }
 
@@ -39,7 +39,7 @@ public class BisectionTest {
             }
 
         };
-        double arg = bisect(-2, +2, f);
+        double arg = bisect(f, -2, +2);
         assertThat(arg, is(-0.5));
     }
 
@@ -53,7 +53,7 @@ public class BisectionTest {
             }
 
         };
-        double arg = bisect(0, 3, f);
+        double arg = bisect(f, 0, 3);
         assertThat(arg, is(2.0));
     }
 
@@ -67,7 +67,7 @@ public class BisectionTest {
             }
 
         };
-        double arg = bisect(0, 3, f);
+        double arg = bisect(f, 0, 3);
         assertThat(arg, is(2.0));
     }
 
@@ -81,7 +81,7 @@ public class BisectionTest {
             }
 
         };
-        double arg = bisect(0, 1, f);
+        double arg = bisect(f, 0, 1);
         assertThat(arg, is(0.0));
     }
 
@@ -95,7 +95,7 @@ public class BisectionTest {
             }
 
         };
-        double arg = bisect(0, 1, f);
+        double arg = bisect(f, 0, 1);
         assertThat(arg, is(1.0));
     }
 

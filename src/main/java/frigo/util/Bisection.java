@@ -9,16 +9,15 @@ import com.google.common.base.Function;
 
 public class Bisection {
 
-    public static double bisect (double low, double high, Function<Double, Double> function) {
-        return bisect(low, high, function, 0);
+    public static double bisect (Function<Double, Double> function, double left, double right) {
+        return bisect(function, left, right, 0);
     }
 
-    public static double bisect (double low, double high, Function<Double, Double> function, double tolerance) {
-        return new Bisection(low, high, function, tolerance).calculateRoot();
+    public static double bisect (Function<Double, Double> function, double left, double right, double tolerance) {
+        return new Bisection(function, left, right, tolerance).calculateRoot();
     }
 
     private Function<Double, Double> function;
-    private double tolerance;
 
     private double left;
     private double mid;
@@ -28,7 +27,9 @@ public class Bisection {
     private double midValue;
     private double rightValue;
 
-    public Bisection (double left, double right, Function<Double, Double> function, double tolerance) {
+    private double tolerance;
+
+    public Bisection (Function<Double, Double> function, double left, double right, double tolerance) {
         this.function = function;
         this.tolerance = tolerance;
         setLeft(left);
