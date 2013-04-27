@@ -6,11 +6,13 @@ import static frigo.electronics.Util.angularToOrdinaryFrequency;
 import static frigo.electronics.Util.ordinaryToAngularFrequency;
 import static frigo.electronics.Util.powerRatioToDecibel;
 import static frigo.math.Complex.div;
-import static java.lang.Math.abs;
+import static frigo.util.Bisection.bisectIncreasing;
 import static java.lang.Math.sqrt;
 import static org.apache.commons.lang3.builder.ToStringStyle.SHORT_PREFIX_STYLE;
 
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
+
+import com.google.common.base.Function;
 
 import frigo.math.Complex;
 
@@ -30,22 +32,15 @@ public class ParallelRlcWithLoad {
     }
 
     public double f1 () {
-        double low = 0;
-        double high = f0();
-        double target = gain() + 3;
-        double tolerance = 1E-15;
-        while( true ){
-            double mid = (low + high) / 2;
-            double difference = target - response(mid);
-            if( abs(difference) < tolerance || high - low < tolerance ){
-                return mid;
+        Function<Double, Double> function = new Function<Double, Double>() {
+
+            @Override
+            public Double apply (Double frequency) {
+                double target = gain() + 3;
+                return target - response(frequency);
             }
-            if( difference < 0 ){
-                low = mid;
-            }else{
-                high = mid;
-            }
-        }
+        };
+        return bisectIncreasing(function, 0, f0());
     }
 
     public double f2 () {

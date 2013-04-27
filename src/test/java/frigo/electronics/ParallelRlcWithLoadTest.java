@@ -18,12 +18,12 @@ public class ParallelRlcWithLoadTest {
         ParallelRlcWithLoad rlc = new ParallelRlcWithLoad(R, L, C, Rload);
 
         assertThat(rlc.f0(), is(4983.334570520974));
-        assertThat(rlc.f1(), is(1458.2758992652355));
-        assertThat(rlc.f2(), is(17029.441036680433));
+        assertThat(rlc.f1(), is(1458.2758992652366));
+        assertThat(rlc.f2(), is(17029.44103668042));
 
         assertThat(rlc.response(rlc.f0()), is(-10.48467598730607));
-        assertThat(rlc.response(rlc.f1()), is(-7.484675987306072));
-        assertThat(rlc.response(rlc.f2()), is(-7.484675987306067));
-        assertThat(rlc.q(), is(0.3200360747922942));
+        assertThat(rlc.response(rlc.f1()), is(-7.484675987306075));
+        assertThat(rlc.response(rlc.f2()), is(-7.484675987306075));
+        assertThat(rlc.q(), is(0.3200360747922945));
     }
 }
