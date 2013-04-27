@@ -1,8 +1,8 @@
 
 package frigo.filter;
 
+import static org.hamcrest.Matchers.closeTo;
 import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 
 public class KernelTestBase {
@@ -11,7 +11,7 @@ public class KernelTestBase {
     protected Kernel kernel;
 
     public void checkEvaluate (Kernel kern, double point, double expected) {
-        assertEquals(expected, kern.evaluate(point), epsilon);
+        assertThat(kern.evaluate(point), closeTo(expected, epsilon));
     }
 
     public void checkRadiusAndDomain (Kernel kern, double radius, double left, double right) {

@@ -17,30 +17,26 @@ public class IntegralArrayTest {
 
     @Test
     public void test_getAverageInside () {
-        assertEquals(integral.getAverageInside(box1), 3.0);
-        assertEquals(integral.getAverageInside(box2), 4.5);
+        assertThat(integral.getAverageInside(box1), closeTo(3.0, epsilon));
+        assertThat(integral.getAverageInside(box2), closeTo(4.5, epsilon));
     }
 
     @Test
     public void test_getAverageOutside () {
-        assertEquals(integral.getAverageOutside(box1), 6.0);
-        assertEquals(integral.getAverageOutside(box2), 0.0);
+        assertThat(integral.getAverageOutside(box1), closeTo(6.0, epsilon));
+        assertThat(integral.getAverageOutside(box2), closeTo(0.0, epsilon));
     }
 
     @Test
     public void test_getSumInside () {
-        assertEquals(integral.getSumInside(box1), 15.0);
-        assertEquals(integral.getSumInside(box2), 45.0);
+        assertThat(integral.getSumInside(box1), closeTo(15.0, epsilon));
+        assertThat(integral.getSumInside(box2), closeTo(45.0, epsilon));
     }
 
     @Test
     public void test_getSumOutside () {
-        assertEquals(integral.getSumOutside(box1), 30.0);
-        assertEquals(integral.getSumOutside(box2), 0.0);
-    }
-
-    private void assertEquals (double actual, double expected) {
-        assertThat(actual, closeTo(expected, epsilon));
+        assertThat(integral.getSumOutside(box1), closeTo(30.0, epsilon));
+        assertThat(integral.getSumOutside(box2), closeTo(0.0, epsilon));
     }
 
 }

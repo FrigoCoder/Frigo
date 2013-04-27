@@ -27,10 +27,10 @@ public class ComplexTest {
 
     @Test
     public void test_abs () {
-        assertEquals(complex(1.0, 0.0).abs(), 1.0);
-        assertEquals(complex(0.0, 1.0).abs(), 1.0);
-        assertEquals(complex(1.0, 1.0).abs(), sqrt(2.0));
-        assertEquals(complex(sqrt(2.0), -sqrt(2.0)).abs(), 2.0);
+        assertThat(complex(1.0, 0.0).abs(), closeTo(1.0, EPSILON));
+        assertThat(complex(0.0, 1.0).abs(), closeTo(1.0, EPSILON));
+        assertThat(complex(1.0, 1.0).abs(), closeTo(sqrt(2.0), EPSILON));
+        assertThat(complex(sqrt(2.0), -sqrt(2.0)).abs(), closeTo(2.0, EPSILON));
     }
 
     @Test
@@ -47,9 +47,9 @@ public class ComplexTest {
 
     @Test
     public void test_arg () {
-        assertEquals(cis(0.1).arg(), 0.1);
-        assertEquals(cis(0.1).mul(2.0).arg(), 0.1);
-        assertEquals(cis(-0.2).mul(0.1).arg(), -0.2);
+        assertThat(cis(0.1).arg(), closeTo(0.1, EPSILON));
+        assertThat(cis(0.1).mul(2.0).arg(), closeTo(0.1, EPSILON));
+        assertThat(cis(-0.2).mul(0.1).arg(), closeTo(-0.2, EPSILON));
     }
 
     @Test
@@ -158,8 +158,8 @@ public class ComplexTest {
 
     @Test
     public void test_norm () {
-        assertEquals(cis(0.1).sqrAbs(), 1.0);
-        assertEquals(cis(3.0).sqrAbs(), 1.0);
+        assertThat(cis(0.1).sqrAbs(), closeTo(1.0, EPSILON));
+        assertThat(cis(3.0).sqrAbs(), closeTo(1.0, EPSILON));
     }
 
     @Test
@@ -274,12 +274,8 @@ public class ComplexTest {
     }
 
     private void assertEquals (Complex actual, Complex expected) {
-        assertEquals(actual.re, expected.re);
-        assertEquals(actual.im, expected.im);
-    }
-
-    private void assertEquals (double actual, double expected) {
-        assertThat(actual, closeTo(expected, EPSILON));
+        assertThat(actual.re, closeTo(expected.re, EPSILON));
+        assertThat(actual.im, closeTo(expected.im, EPSILON));
     }
 
 }

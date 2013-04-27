@@ -1,7 +1,9 @@
 
 package frigo.math;
 
-import static org.junit.Assert.assertEquals;
+import static java.lang.Math.sqrt;
+import static org.hamcrest.Matchers.closeTo;
+import static org.junit.Assert.assertThat;
 
 import org.junit.Test;
 
@@ -15,19 +17,19 @@ public class SimpleGaussianFitterTest {
 
     @Test
     public void testGetExpectedValue () {
-        assertEquals(3.5, fitter.getExpectedValue(v), epsilon);
-        assertEquals(4.5, fitter.getExpectedValue(w), epsilon);
+        assertThat(fitter.getExpectedValue(v), closeTo(3.5, epsilon));
+        assertThat(fitter.getExpectedValue(w), closeTo(4.5, epsilon));
     }
 
     @Test
     public void testGetStandardDeviation () {
-        assertEquals(Math.sqrt(17.5 / 6.0), fitter.getStandardDeviation(v), epsilon);
-        assertEquals(Math.sqrt(42.0 / 8.0), fitter.getStandardDeviation(w), epsilon);
+        assertThat(fitter.getStandardDeviation(v), closeTo(sqrt(17.5 / 6.0), epsilon));
+        assertThat(fitter.getStandardDeviation(w), closeTo(sqrt(42.0 / 8.0), epsilon));
     }
 
     @Test
     public void testGetVariance () {
-        assertEquals(17.5 / 6.0, fitter.getVariance(v), epsilon);
-        assertEquals(42.0 / 8.0, fitter.getVariance(w), epsilon);
+        assertThat(fitter.getVariance(v), closeTo(17.5 / 6.0, epsilon));
+        assertThat(fitter.getVariance(w), closeTo(42.0 / 8.0, epsilon));
     }
 }

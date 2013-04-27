@@ -1,7 +1,8 @@
 
 package frigo.math;
 
-import static org.junit.Assert.assertEquals;
+import static org.hamcrest.Matchers.closeTo;
+import static org.junit.Assert.assertThat;
 
 import org.junit.Test;
 
@@ -19,7 +20,7 @@ public class DirichletKernelPolynomialTest {
         for( int degree : degrees ){
             Polynomial dirichlet = DirichletKernelPolynomial.dirichlet(degree);
             for( double point : points ){
-                assertEquals(naiveDirichlet(point, degree), dirichlet.evaluate(Math.cos(point)), epsilon);
+                assertThat(dirichlet.evaluate(Math.cos(point)), closeTo(naiveDirichlet(point, degree), epsilon));
             }
         }
     }
@@ -29,7 +30,7 @@ public class DirichletKernelPolynomialTest {
         for( int degree : degrees ){
             Polynomial fejer = DirichletKernelPolynomial.fejer(degree);
             for( double point : points ){
-                assertEquals(naiveFejer(point, degree), fejer.evaluate(Math.cos(point)), epsilon);
+                assertThat(fejer.evaluate(Math.cos(point)), closeTo(naiveFejer(point, degree), epsilon));
             }
         }
     }
@@ -39,8 +40,7 @@ public class DirichletKernelPolynomialTest {
         for( int degree : degrees ){
             Polynomial modifiedDirichlet = DirichletKernelPolynomial.modifiedDirichlet(degree);
             for( double point : points ){
-                assertEquals(naiveModifiedDirichlet(point, degree), modifiedDirichlet.evaluate(Math.cos(point)),
-                    epsilon);
+                assertThat(modifiedDirichlet.evaluate(Math.cos(point)), closeTo(naiveModifiedDirichlet(point, degree), epsilon));
             }
         }
     }

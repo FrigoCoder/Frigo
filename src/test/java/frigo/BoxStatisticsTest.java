@@ -16,31 +16,27 @@ public class BoxStatisticsTest {
 
     @Test
     public void test_getVarianceInside () {
-        assertEquals(integral.getVarianceInside(box), 1.25);
+        assertThat(integral.getVarianceInside(box), closeTo(1.25, EPSILON));
     }
 
     @Test
     public void test_getVarianceOutside () {
-        assertEquals(integral.getVarianceOutside(box), 9.387755102040813);
+        assertThat(integral.getVarianceOutside(box), closeTo(9.387755102040813, EPSILON));
     }
 
     @Test
     public void test_getWeightedVarianceInside () {
-        assertEquals(integral.getWeightedVarianceInside(box), 5.0);
+        assertThat(integral.getWeightedVarianceInside(box), closeTo(5.0, EPSILON));
     }
 
     @Test
     public void test_getWeightedVarianceOutside () {
-        assertEquals(integral.getWeightedVarianceOutside(box), 65.7142857142857);
+        assertThat(integral.getWeightedVarianceOutside(box), closeTo(65.7142857142857, EPSILON));
     }
 
     @Test
     public void test_getWeightedVarianceSum () {
-        assertEquals(integral.getWeightedVarianceSum(box), 70.7142857142857);
-    }
-
-    private void assertEquals (double actual, double expected) {
-        assertThat(actual, closeTo(expected, EPSILON));
+        assertThat(integral.getWeightedVarianceSum(box), closeTo(70.7142857142857, EPSILON));
     }
 
 }

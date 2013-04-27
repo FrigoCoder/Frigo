@@ -7,48 +7,41 @@ import static frigo.math.MathAux.floor;
 import static frigo.math.MathAux.isPowerOfTwo;
 import static frigo.math.MathAux.sinc;
 import static frigo.math.MathAux.sqr;
+import static org.hamcrest.Matchers.closeTo;
 import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 
-import org.junit.Before;
 import org.junit.Test;
 
 public class MathAuxTest {
 
-    public double epsilon;
-    public float epsilonFloat;
-
-    @Before
-    public void setUp () {
-        epsilon = 1.0e-15;
-        epsilonFloat = (float) epsilon;
-    }
+    private double epsilon = 1.0e-15;
+    private float epsilonFloat = (float) 1.0e-15;
 
     @Test
     public void testSincDouble () {
-        assertEquals(0.0, sinc(-2.0), epsilon);
-        assertEquals(0.0, sinc(-1.0), epsilon);
-        assertEquals(1.0, sinc(0.0), epsilon);
-        assertEquals(0.0, sinc(1.0), epsilon);
-        assertEquals(0.0, sinc(2.0), epsilon);
-        assertEquals(-0.21220659078919378102517835116335, sinc(-1.5), epsilon);
-        assertEquals(0.63661977236758134307553505349004, sinc(-0.5), epsilon);
-        assertEquals(0.63661977236758134307553505349004, sinc(0.5), epsilon);
-        assertEquals(-0.21220659078919378102517835116335, sinc(1.5), epsilon);
+        assertThat(sinc(-2.0), closeTo(0.0, epsilon));
+        assertThat(sinc(-1.0), closeTo(0.0, epsilon));
+        assertThat(sinc(0.0), closeTo(1.0, epsilon));
+        assertThat(sinc(1.0), closeTo(0.0, epsilon));
+        assertThat(sinc(2.0), closeTo(0.0, epsilon));
+        assertThat(sinc(-1.5), closeTo(-0.21220659078919378102517835116335, epsilon));
+        assertThat(sinc(-0.5), closeTo(0.63661977236758134307553505349004, epsilon));
+        assertThat(sinc(0.5), closeTo(0.63661977236758134307553505349004, epsilon));
+        assertThat(sinc(1.5), closeTo(-0.21220659078919378102517835116335, epsilon));
     }
 
     @Test
     public void testSincFloat () {
-        assertEquals(0.0f, sinc(-2.0f), epsilonFloat);
-        assertEquals(0.0f, sinc(-1.0f), epsilonFloat);
-        assertEquals(1.0f, sinc(0.0f), epsilonFloat);
-        assertEquals(0.0f, sinc(1.0f), epsilonFloat);
-        assertEquals(0.0f, sinc(2.0f), epsilonFloat);
-        assertEquals(-0.21220659078919378102517835116335f, sinc(-1.5f), epsilonFloat);
-        assertEquals(0.63661977236758134307553505349004f, sinc(-0.5f), epsilonFloat);
-        assertEquals(0.63661977236758134307553505349004f, sinc(0.5f), epsilonFloat);
-        assertEquals(-0.21220659078919378102517835116335f, sinc(1.5f), epsilonFloat);
+        assertThat((double) sinc(-2.0f), closeTo(0.0f, epsilonFloat));
+        assertThat((double) sinc(-1.0f), closeTo(0.0f, epsilonFloat));
+        assertThat((double) sinc(0.0f), closeTo(1.0f, epsilonFloat));
+        assertThat((double) sinc(1.0f), closeTo(0.0f, epsilonFloat));
+        assertThat((double) sinc(2.0f), closeTo(0.0f, epsilonFloat));
+        assertThat((double) sinc(-1.5f), closeTo(-0.21220659078919378102517835116335f, epsilonFloat));
+        assertThat((double) sinc(-0.5f), closeTo(0.63661977236758134307553505349004f, epsilonFloat));
+        assertThat((double) sinc(0.5f), closeTo(0.63661977236758134307553505349004f, epsilonFloat));
+        assertThat((double) sinc(1.5f), closeTo(-0.21220659078919378102517835116335f, epsilonFloat));
     }
 
     @Test
@@ -58,18 +51,18 @@ public class MathAuxTest {
 
     @Test
     public void testSqrDouble () {
-        assertEquals(1.0, sqr(1.0), epsilon);
-        assertEquals(4.0, sqr(2.0), epsilon);
-        assertEquals(9.0, sqr(3.0), epsilon);
-        assertEquals(20.25, sqr(4.5), epsilon);
+        assertThat(sqr(1.0), closeTo(1.0, epsilon));
+        assertThat(sqr(2.0), closeTo(4.0, epsilon));
+        assertThat(sqr(3.0), closeTo(9.0, epsilon));
+        assertThat(sqr(4.5), closeTo(20.25, epsilon));
     }
 
     @Test
     public void testSqrFloat () {
-        assertEquals(1.0f, sqr(1.0f), epsilonFloat);
-        assertEquals(4.0f, sqr(2.0f), epsilonFloat);
-        assertEquals(9.0f, sqr(3.0f), epsilonFloat);
-        assertEquals(20.25f, sqr(4.5f), epsilonFloat);
+        assertThat((double) sqr(1.0f), closeTo(1.0f, epsilonFloat));
+        assertThat((double) sqr(2.0f), closeTo(4.0f, epsilonFloat));
+        assertThat((double) sqr(3.0f), closeTo(9.0f, epsilonFloat));
+        assertThat((double) sqr(4.5f), closeTo(20.25f, epsilonFloat));
     }
 
     @Test
