@@ -5,8 +5,10 @@ import static com.google.common.base.Preconditions.checkArgument;
 import static frigo.electronics.Util.decibelToAmplitudeRatio;
 import static frigo.electronics.Util.ordinaryToAngularFrequency;
 import static frigo.math.MathAux.sqr;
-import static java.lang.Math.abs;
+import static frigo.util.Bisection.bisect;
 import static java.lang.Math.sqrt;
+
+import com.google.common.base.Function;
 
 public class ParallelRlcWithLoadFinder {
 
@@ -25,23 +27,19 @@ public class ParallelRlcWithLoadFinder {
     }
 
     public ParallelRlcWithLoad getFilter () {
-        double low = q * q / (R * R) / 2;
-        double high = q * q / (R * R) * 2;
-        double target = q;
-        double tolerance = 1E-20;
-        while( true ){
-            double mid = (low + high) / 2;
-            ParallelRlcWithLoad rlc = new ParallelRlcWithLoad(R, sqrt(LC / mid), sqrt(LC * mid), load);
-            double difference = target - rlc.q();
-            if( abs(difference) < tolerance || high - low < tolerance ){
-                return rlc;
+        Function<Double, Double> function = new Function<Double, Double>() {
+
+            @Override
+            public Double apply (Double CperL) {
+                ParallelRlcWithLoad rlc = new ParallelRlcWithLoad(R, sqrt(LC / CperL), sqrt(LC * CperL), load);
+                return q - rlc.q();
             }
-            if( difference < 0 ){
-                high = mid;
-            }else{
-                low = mid;
-            }
-        }
+
+        };
+
+        double estimate = q * q / (R * R);
+        double CperL = bisect(function, estimate / 2, estimate * 2);
+        return new ParallelRlcWithLoad(R, sqrt(LC / CperL), sqrt(LC * CperL), load);
     }
 
     public static void main (String[] args) {
