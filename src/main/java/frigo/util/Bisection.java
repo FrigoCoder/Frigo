@@ -8,7 +8,7 @@ import com.google.common.base.Function;
 public class Bisection {
 
     public static double bisect (Function<Double, Double> function, double left, double right) {
-        return new Bisection(function, left, right).calculateRoot();
+        return new Bisection(function, left, right, null).calculateRoot();
     }
 
     public static double bisectIncreasing (Function<Double, Double> function, double left, double right) {
@@ -20,21 +20,17 @@ public class Bisection {
     }
 
     private Function<Double, Double> function;
-    private boolean increasing;
-
+    private Boolean increasing;
     private double left;
     private double mid;
     private double right;
-
     private double midValue;
 
-    public Bisection (Function<Double, Double> function, double left, double right) {
-        this(function, left, right, function.apply(left) <= 0);
-        checkArgument(function.apply(left) * function.apply(right) <= 0);
-    }
-
-    public Bisection (Function<Double, Double> function, double left, double right, boolean increasing) {
+    private Bisection (Function<Double, Double> function, double left, double right, Boolean increasing) {
         checkArgument(left < right);
+        if( increasing == null ){
+            checkArgument(function.apply(left) * function.apply(right) <= 0);
+        }
         this.function = function;
         this.left = left;
         this.right = right;
@@ -44,9 +40,6 @@ public class Bisection {
 
     private double calculateRoot () {
         while( precisionStillHolds() ){
-            if( midValue == 0 ){
-                return mid;
-            }
             if( rootIsInRightHalf() ){
                 left = mid;
             }else{
@@ -62,6 +55,9 @@ public class Bisection {
     }
 
     private boolean rootIsInRightHalf () {
+        if( increasing == null ){
+            return function.apply(left) * midValue > 0;
+        }
         return increasing ^ midValue > 0;
     }
 

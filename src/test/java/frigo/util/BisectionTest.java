@@ -32,7 +32,9 @@ public class BisectionTest {
                 return 0.0;
             }
         };
-        assertArgumentAndValue(f, -1, 1, 0, 0);
+        double arg = bisect(f, -1, 1);
+        double value = f.apply(arg);
+        assertThat(value, is(0.0));
     }
 
     @Test
@@ -75,7 +77,7 @@ public class BisectionTest {
     }
 
     @Test
-    public void bisect_finds_left_boundary_value () {
+    public void bisect_finds_left_boundary_value_in_increasing_function () {
         Function<Double, Double> f = new Function<Double, Double>() {
 
             @Override
@@ -88,12 +90,38 @@ public class BisectionTest {
     }
 
     @Test
-    public void bisect_finds_right_boundary_value () {
+    public void bisect_finds_left_boundary_value_in_decreasing_function () {
         Function<Double, Double> f = new Function<Double, Double>() {
 
             @Override
             public Double apply (Double x) {
-                return x == 1.0 ? 0.0 : 1.0;
+                return x == 0 ? 0.0 : -1.0;
+            }
+
+        };
+        assertArgumentAndValue(f, 0, 1, 0, 0);
+    }
+
+    @Test
+    public void bisect_finds_right_boundary_value_in_increasing_function () {
+        Function<Double, Double> f = new Function<Double, Double>() {
+
+            @Override
+            public Double apply (Double x) {
+                return x != 1.0 ? -1.0 : 0.0;
+            }
+
+        };
+        assertArgumentAndValue(f, 0, 1, 1, 0);
+    }
+
+    @Test
+    public void bisect_finds_right_boundary_value_in_decreasing_function () {
+        Function<Double, Double> f = new Function<Double, Double>() {
+
+            @Override
+            public Double apply (Double x) {
+                return x != 1.0 ? 1.0 : 0.0;
             }
 
         };
@@ -104,8 +132,8 @@ public class BisectionTest {
         double expectedArgument, double expectedValue) {
         double argument = bisect(function, left, right);
         double value = function.apply(argument);
-        assertThat(argument, is(expectedArgument));
-        assertThat(value, is(expectedValue));
+        assertThat("Argument is different from expected", argument, is(expectedArgument));
+        assertThat("Value is different from expected", value, is(expectedValue));
     }
 
     @Test
