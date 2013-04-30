@@ -20,7 +20,7 @@ public class StringJoinerTest {
 
     @Test
     public void join_returns_empty_string_on_empty_collection () {
-        Collection<String> strings = null;
+        Collection<String> strings = asList();
         assertThat(join(strings, ","), is(""));
     }
 
