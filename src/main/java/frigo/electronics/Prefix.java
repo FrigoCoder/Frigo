@@ -18,7 +18,8 @@ public enum Prefix {
     CENTI("c", 0.01),
     MILLI("m", 0.001),
     MICRO("u", 0.000_001),
-    NANO("n", 0.000_000_001);
+    NANO("n", 0.000_000_001),
+    PICO("p", 0.000_000_000_001);
 
     public static Prefix prefix (String string) {
         List<Prefix> candidates = new LinkedList<>();

@@ -52,7 +52,7 @@ public class IEC60063 {
         double[] result = new double[unit.length * decades.length];
         for( int i = 0; i < unit.length; i++ ){
             for( int j = 0; j < decades.length; j++ ){
-                result[i + j * unit.length] = unit[i] * decades[j];
+                result[i + j * unit.length] = unit[i] * decades[j] / unit[0];
             }
         }
         return result;

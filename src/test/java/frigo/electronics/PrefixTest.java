@@ -10,10 +10,12 @@ import static frigo.electronics.Prefix.MEGA;
 import static frigo.electronics.Prefix.MICRO;
 import static frigo.electronics.Prefix.MILLI;
 import static frigo.electronics.Prefix.NANO;
+import static frigo.electronics.Prefix.PICO;
 import static frigo.electronics.Prefix.TERA;
 import static frigo.electronics.Prefix.UNIT;
 import static frigo.electronics.Prefix.prefix;
 import static frigo.electronics.Prefix.toUnit;
+import static org.hamcrest.Matchers.closeTo;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
@@ -33,7 +35,8 @@ public class PrefixTest {
         assertThat(prefix("8c"), is(CENTI));
         assertThat(prefix("9m"), is(MILLI));
         assertThat(prefix("0u"), is(MICRO));
-        assertThat(prefix("2n"), is(NANO));
+        assertThat(prefix("1n"), is(NANO));
+        assertThat(prefix("2p"), is(PICO));
     }
 
     @Test
@@ -47,7 +50,7 @@ public class PrefixTest {
         assertThat(toUnit("1d"), is(toUnit("10c")));
         assertThat(toUnit("1c"), is(toUnit("10m")));
         assertThat(toUnit("1m"), is(toUnit("1000u")));
-        assertThat(toUnit("1m"), is(toUnit("1000000n")));
-
+        assertThat(toUnit("1u"), closeTo(toUnit("1000n"), 1E-21));
+        assertThat(toUnit("1n"), is(toUnit("1000p")));
     }
 }
