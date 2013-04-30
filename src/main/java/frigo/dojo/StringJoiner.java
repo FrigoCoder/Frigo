@@ -6,7 +6,7 @@ import java.util.Iterator;
 
 public class StringJoiner {
 
-    public static String join (Collection<String> strings, String delimiter) {
+    public static String join (Collection<String> strings, char delimiter) {
         if( strings == null ){
             return "";
         }
