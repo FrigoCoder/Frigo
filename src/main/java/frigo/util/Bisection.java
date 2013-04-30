@@ -8,62 +8,50 @@ import com.google.common.base.Function;
 public class Bisection {
 
     public static double bisect (Function<Double, Double> function, double left, double right) {
-        return new Bisection(function, left, right, null).calculateRoot();
-    }
-
-    public static double bisectIncreasing (Function<Double, Double> function, double left, double right) {
-        return new Bisection(function, left, right, true).calculateRoot();
-    }
-
-    public static double bisectDecreasing (Function<Double, Double> function, double left, double right) {
-        return new Bisection(function, left, right, false).calculateRoot();
+        return new Bisection(function, left, right).calculateRoot();
     }
 
     private Function<Double, Double> function;
-    private Boolean increasing;
     private double left;
-    private double mid;
     private double right;
+    private double mid;
     private double midValue;
 
-    private Bisection (Function<Double, Double> function, double left, double right, Boolean increasing) {
-        checkArgument(left < right);
-        if( increasing == null ){
-            checkArgument(function.apply(left) * function.apply(right) <= 0);
-        }
+    private Bisection (Function<Double, Double> function, double left, double right) {
         this.function = function;
+        setInterval(left, right);
+        checkArgument(left < right);
+        checkArgument(rootIsInInterval(f(left), f(right)));
+    }
+
+    private void setInterval (double left, double right) {
         this.left = left;
         this.right = right;
-        updateMid();
-        this.increasing = increasing;
+        mid = (left + right) / 2;
+        midValue = f(mid);
+    }
+
+    private boolean rootIsInInterval (double leftValue, double rightValue) {
+        return leftValue * rightValue <= 0;
+    }
+
+    private double f (double x) {
+        return function.apply(x);
     }
 
     private double calculateRoot () {
         while( precisionStillHolds() ){
-            if( rootIsInRightHalf() ){
-                left = mid;
+            if( rootIsInInterval(f(left), midValue) ){
+                setInterval(left, mid);
             }else{
-                right = mid;
+                setInterval(mid, right);
             }
-            updateMid();
         }
         return mid;
     }
 
     private boolean precisionStillHolds () {
         return left < mid && mid < right;
-    }
-
-    private boolean rootIsInRightHalf () {
-        if( increasing == null ){
-            return function.apply(left) * midValue > 0;
-        }
-        return increasing ^ midValue > 0;
-    }
-
-    private void updateMid () {
-        mid = (left + right) / 2;
-        midValue = function.apply(mid);
     }
 
 }
