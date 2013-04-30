@@ -11,13 +11,16 @@ public class StringJoiner {
             return "";
         }
         StringBuilder builder = new StringBuilder();
-        for( Iterator<String> iterator = strings.iterator(); iterator.hasNext(); ){
-            String string = iterator.next();
-            builder.append(string);
-            if( iterator.hasNext() ){
-                builder.append(delimiter);
-            }
+        Iterator<String> iterator = strings.iterator();
+        if( iterator.hasNext() ){
+            builder.append(iterator.next());
+        }
+
+        for( ; iterator.hasNext(); ){
+            builder.append(delimiter);
+            builder.append(iterator.next());
         }
         return builder.toString();
     }
+
 }
