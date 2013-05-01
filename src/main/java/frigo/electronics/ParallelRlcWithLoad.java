@@ -1,12 +1,12 @@
 
 package frigo.electronics;
 
-import static frigo.electronics.Prefix.toUnit;
 import static frigo.electronics.Util.amplitudeRatioToDecibel;
 import static frigo.electronics.Util.angularToOrdinaryFrequency;
 import static frigo.electronics.Util.ordinaryToAngularFrequency;
 import static frigo.electronics.Util.powerRatioToDecibel;
 import static frigo.math.Complex.div;
+import static frigo.math.MathAux.sqr;
 import static frigo.util.Bisection.bisect;
 import static java.lang.Math.sqrt;
 import static org.apache.commons.lang3.builder.ToStringStyle.SHORT_PREFIX_STYLE;
@@ -33,19 +33,19 @@ public class ParallelRlcWithLoad {
     }
 
     public double f1 () {
+        return sqr(f0()) / f2();
+    }
+
+    public double f2 () {
         Function<Double, Double> function = new Function<Double, Double>() {
 
             @Override
             public Double apply (Double frequency) {
-                double target = gain() + 3;
+                double target = 3 + gain();
                 return target - response(frequency);
             }
         };
-        return bisect(function, toUnit("1n"), f0());
-    }
-
-    public double f2 () {
-        return f0() * f0() / f1();
+        return bisect(function, f0(), sqr(f0()));
     }
 
     public double gain () {
