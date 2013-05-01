@@ -41,11 +41,11 @@ public class ParallelRlcWithLoad {
 
             @Override
             public Double apply (Double frequency) {
-                double target = 3 + gain();
+                double target = gain() + 3;
                 return target - response(frequency);
             }
         };
-        return bisect(function, f0(), sqr(f0()));
+        return bisect(function, f0(), 2 * sqr(f0()));
     }
 
     public double gain () {
