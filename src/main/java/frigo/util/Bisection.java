@@ -21,7 +21,8 @@ public class Bisection {
         this.function = function;
         setInterval(left, right);
         checkArgument(left < right);
-        checkArgument(rootIsInInterval(f(left), f(right)));
+        checkArgument(rootIsInInterval(f(left), f(right)), "Root can not be in interval, values at boundaries are: "
+            + f(left) + ", " + f(right));
     }
 
     private void setInterval (double left, double right) {
