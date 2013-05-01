@@ -15,7 +15,6 @@ public class StringJoiner {
         if( iterator.hasNext() ){
             builder.append(iterator.next());
         }
-
         for( ; iterator.hasNext(); ){
             builder.append(delimiter);
             builder.append(iterator.next());
