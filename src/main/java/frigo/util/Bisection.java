@@ -15,37 +15,41 @@ public class Bisection {
     private double left;
     private double right;
     private double mid;
+    private double leftValue;
+    private double rightValue;
     private double midValue;
 
     private Bisection (Function<Double, Double> function, double left, double right) {
         this.function = function;
-        setInterval(left, right);
-        checkArgument(left < right);
-        checkArgument(rootIsInInterval(f(left), f(right)), "Root can not be in interval, values at boundaries are: "
-            + f(left) + ", " + f(right));
-    }
-
-    private void setInterval (double left, double right) {
         this.left = left;
         this.right = right;
-        mid = (left + right) / 2;
-        midValue = f(mid);
-    }
-
-    private boolean rootIsInInterval (double leftValue, double rightValue) {
-        return leftValue * rightValue <= 0;
+        leftValue = f(left);
+        rightValue = f(right);
+        updateMid();
+        checkArgument(left < right);
+        checkArgument(rootIsInInterval(leftValue, rightValue),
+            "Root can not be in interval, values at boundaries are: " + leftValue + ", " + rightValue);
     }
 
     private double f (double x) {
         return function.apply(x);
     }
 
+    private void updateMid () {
+        mid = (left + right) / 2;
+        midValue = f(mid);
+    }
+
+    private boolean rootIsInInterval (double startValue, double endValue) {
+        return startValue * endValue <= 0;
+    }
+
     private double calculateRoot () {
         while( precisionStillHolds() ){
-            if( rootIsInInterval(f(left), midValue) ){
-                setInterval(left, mid);
+            if( rootIsInInterval(leftValue, midValue) ){
+                restrictToLeftInterval();
             }else{
-                setInterval(mid, right);
+                restrictToRightInterval();
             }
         }
         return mid;
@@ -53,6 +57,18 @@ public class Bisection {
 
     private boolean precisionStillHolds () {
         return left < mid && mid < right;
+    }
+
+    private void restrictToLeftInterval () {
+        right = mid;
+        rightValue = midValue;
+        updateMid();
+    }
+
+    private void restrictToRightInterval () {
+        left = mid;
+        leftValue = midValue;
+        updateMid();
     }
 
 }
