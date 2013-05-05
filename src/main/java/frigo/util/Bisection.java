@@ -21,11 +21,7 @@ public class Bisection {
 
     private Bisection (Function<Double, Double> function, double left, double right) {
         this.function = function;
-        this.left = left;
-        this.right = right;
-        leftValue = f(left);
-        rightValue = f(right);
-        updateMid();
+        setInterval(left, right, f(left), f(right));
         checkArgument(left < right);
         checkArgument(rootIsInInterval(leftValue, rightValue),
             "Root can not be in interval, values at boundaries are: " + leftValue + ", " + rightValue);
@@ -35,7 +31,11 @@ public class Bisection {
         return function.apply(x);
     }
 
-    private void updateMid () {
+    private void setInterval (double left, double right, double leftValue, double rightValue) {
+        this.left = left;
+        this.leftValue = leftValue;
+        this.right = right;
+        this.rightValue = rightValue;
         mid = (left + right) / 2;
         midValue = f(mid);
     }
@@ -47,9 +47,9 @@ public class Bisection {
     private double calculateRoot () {
         while( precisionStillHolds() ){
             if( rootIsInInterval(leftValue, midValue) ){
-                restrictToLeftInterval();
+                setInterval(left, mid, leftValue, midValue);
             }else{
-                restrictToRightInterval();
+                setInterval(mid, right, midValue, rightValue);
             }
         }
         return mid;
@@ -57,18 +57,6 @@ public class Bisection {
 
     private boolean precisionStillHolds () {
         return left < mid && mid < right;
-    }
-
-    private void restrictToLeftInterval () {
-        right = mid;
-        rightValue = midValue;
-        updateMid();
-    }
-
-    private void restrictToRightInterval () {
-        left = mid;
-        leftValue = midValue;
-        updateMid();
     }
 
 }
