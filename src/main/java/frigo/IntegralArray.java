@@ -1,7 +1,6 @@
 
 package frigo;
 
-
 public class IntegralArray {
 
     private final int n;

@@ -40,7 +40,8 @@ public class DirichletKernelPolynomialTest {
         for( int degree : degrees ){
             Polynomial modifiedDirichlet = DirichletKernelPolynomial.modifiedDirichlet(degree);
             for( double point : points ){
-                assertThat(modifiedDirichlet.evaluate(Math.cos(point)), closeTo(naiveModifiedDirichlet(point, degree), epsilon));
+                assertThat(modifiedDirichlet.evaluate(Math.cos(point)),
+                    closeTo(naiveModifiedDirichlet(point, degree), epsilon));
             }
         }
     }
