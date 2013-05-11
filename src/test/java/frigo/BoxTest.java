@@ -25,11 +25,8 @@ public class BoxTest {
 
     @Test
     public void constructor_throws_on_empty_interval () {
-        try{
-            box = new Box(left, left - 1);
-        }finally{
-            thrown.expect(IllegalArgumentException.class);
-        }
+        thrown.expect(IllegalArgumentException.class);
+        box = new Box(left, left - 1);
     }
 
     @Test

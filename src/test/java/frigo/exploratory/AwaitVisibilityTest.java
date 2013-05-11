@@ -40,10 +40,7 @@ public class AwaitVisibilityTest {
 
     @Test
     public void await_can_not_wait_for_private_method () {
-        try{
-            waitAtMost(10, TimeUnit.SECONDS).untilCall(to(this).privateMethod(), is(true));
-        }finally{
-            thrown.expect(IllegalStateException.class);
-        }
+        thrown.expect(IllegalStateException.class);
+        waitAtMost(10, TimeUnit.SECONDS).untilCall(to(this).privateMethod(), is(true));
     }
 }

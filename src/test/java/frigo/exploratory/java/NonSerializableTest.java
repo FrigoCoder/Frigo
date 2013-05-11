@@ -1,11 +1,12 @@
 
 package frigo.exploratory.java;
 
+import static org.apache.commons.lang3.SerializationUtils.serialize;
+
 import java.io.NotSerializableException;
 import java.io.Serializable;
 
 import org.apache.commons.lang3.SerializationException;
-import org.apache.commons.lang3.SerializationUtils;
 import org.hamcrest.Matchers;
 import org.junit.Rule;
 import org.junit.Test;
@@ -30,11 +31,8 @@ public class NonSerializableTest {
     @Test
     public void serializable_class_with_nonserializable_fields_can_not_be_serialized () {
         SerializableClass object = new SerializableClass();
-        try{
-            SerializationUtils.serialize(object);
-        }finally{
-            thrown.expect(SerializationException.class);
-            thrown.expectCause(Matchers.<Throwable> instanceOf(NotSerializableException.class));
-        }
+        thrown.expect(SerializationException.class);
+        thrown.expectCause(Matchers.<Throwable> instanceOf(NotSerializableException.class));
+        serialize(object);
     }
 }

@@ -52,11 +52,8 @@ public class VectorTest {
     @Test
     public void add_different_size () {
         other = new Vector(n - 1);
-        try{
-            vector.add(other);
-        }finally{
-            thrown.expect(IllegalArgumentException.class);
-        }
+        thrown.expect(IllegalArgumentException.class);
+        vector.add(other);
     }
 
     @Test
@@ -91,11 +88,8 @@ public class VectorTest {
     @Test
     public void dot_different_size () {
         other = new Vector(n - 1);
-        try{
-            vector.dot(other);
-        }finally{
-            thrown.expect(IllegalArgumentException.class);
-        }
+        thrown.expect(IllegalArgumentException.class);
+        vector.dot(other);
     }
 
     @Test
@@ -177,11 +171,8 @@ public class VectorTest {
     @Test
     public void sub_different_size () {
         other = new Vector(n - 1);
-        try{
-            vector.sub(other);
-        }finally{
-            thrown.expect(IllegalArgumentException.class);
-        }
+        thrown.expect(IllegalArgumentException.class);
+        vector.sub(other);
     }
 
     @Test

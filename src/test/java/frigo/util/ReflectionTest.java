@@ -45,11 +45,8 @@ public class ReflectionTest {
     public void getEnv_throws_on_missing_environment_variable () throws Exception {
         setEnv("whatever", "who cares");
         removeEnv("whatever");
-        try{
-            getEnv("whatever");
-        }finally{
-            thrown.expect(IllegalArgumentException.class);
-        }
+        thrown.expect(IllegalArgumentException.class);
+        getEnv("whatever");
     }
 
     @Test

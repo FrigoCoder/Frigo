@@ -14,11 +14,8 @@ public class RethrowTest {
 
     @Test
     public void checked_exception_can_be_thrown_without_declaring_it () {
-        try{
-            methodWithUndeclaredCheckedException();
-        }finally{
-            thrown.expect(Exception.class);
-        }
+        thrown.expect(Exception.class);
+        methodWithUndeclaredCheckedException();
     }
 
     private void methodWithUndeclaredCheckedException () {
@@ -27,11 +24,8 @@ public class RethrowTest {
 
     @Test
     public void checked_exception_can_be_rethrown_without_declaring_it () {
-        try{
-            methodThatRethrowsACheckedException();
-        }finally{
-            thrown.expect(Exception.class);
-        }
+        thrown.expect(Exception.class);
+        methodThatRethrowsACheckedException();
     }
 
     private void methodThatRethrowsACheckedException () {

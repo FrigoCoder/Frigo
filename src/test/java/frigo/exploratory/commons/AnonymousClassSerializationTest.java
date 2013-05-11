@@ -14,16 +14,15 @@ public class AnonymousClassSerializationTest {
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
-    private Serializable object = new Serializable() {
-    };
+    private class SerializableClass implements Serializable {
+    }
+
+    private Serializable object = new SerializableClass();
 
     @Test
     public void anonymous_classes_can_not_be_serialized_if_the_containing_class_is_not_serializable () {
-        try{
-            SerializationUtils.serialize(object);
-        }finally{
-            thrown.expect(SerializationException.class);
-        }
+        thrown.expect(SerializationException.class);
+        SerializationUtils.serialize(object);
     }
 
 }
