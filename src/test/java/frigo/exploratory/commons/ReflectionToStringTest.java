@@ -14,19 +14,21 @@ public class ReflectionToStringTest {
 
     @VisibleForTesting
     static class ExampleClass {
+
+        @SuppressWarnings("unused")
         private int integerField;
         String someString;
         protected long aLong;
         public byte aPublicByte;
 
         @Override
-        public String toString() {
+        public String toString () {
             return ReflectionToStringBuilder.toString(this, SHORT_PREFIX_STYLE);
         }
     }
 
     @Test
-    public void toString_returns_all_fields() {
+    public void toString_returns_all_fields () {
         ExampleClass example = new ExampleClass();
         example.integerField = 1;
         example.someString = "Hello World!";
@@ -34,6 +36,6 @@ public class ReflectionToStringTest {
         example.aPublicByte = 3;
 
         assertThat(example.toString(),
-                is("ReflectionToStringTest.ExampleClass[integerField=1,someString=Hello World!,aLong=2,aPublicByte=3]"));
+            is("ReflectionToStringTest.ExampleClass[integerField=1,someString=Hello World!,aLong=2,aPublicByte=3]"));
     }
 }
