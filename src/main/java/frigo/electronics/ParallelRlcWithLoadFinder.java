@@ -43,10 +43,7 @@ public class ParallelRlcWithLoadFinder {
     }
 
     public static void main (String[] args) {
-        findAndDump(4800.0, -10.0, 1.0 / 3.0, 32);
-        findAndDump(4800.0, -10.0, 1.0 / 3.0, 35);
-        findAndDump(4800.0, -10.0, 0.4, 32);
-        findAndDump(4800.0, -10.0, 0.4, 35);
+        findAndDump(4800.0, -9.0, 1.0 / 3.0, 35);
 
     }
 

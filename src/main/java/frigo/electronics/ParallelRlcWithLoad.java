@@ -8,6 +8,7 @@ import static frigo.electronics.Util.powerRatioToDecibel;
 import static frigo.math.Complex.div;
 import static frigo.math.MathAux.sqr;
 import static frigo.util.Bisection.bisect;
+import static java.lang.Math.pow;
 import static java.lang.Math.sqrt;
 import static org.apache.commons.lang3.builder.ToStringStyle.SHORT_PREFIX_STYLE;
 
@@ -45,7 +46,7 @@ public class ParallelRlcWithLoad {
                 return target - response(frequency);
             }
         };
-        return bisect(function, f0(), 2 * sqr(f0()));
+        return bisect(function, f0(), pow(f0(), 4));
     }
 
     public double gain () {

@@ -5,38 +5,44 @@ import static frigo.electronics.IEC60063.E12;
 import static frigo.electronics.IEC60063.applyDecades;
 import static frigo.electronics.Prefix.toUnit;
 import static frigo.electronics.Util.qFactorToOctaveBandwidth;
-import static frigo.math.MathAux.sqr;
-import static java.lang.Math.abs;
-import static java.lang.Math.sqrt;
+import frigo.math.Statistics;
 
 public class BruteForceParallelRlcWithLoadFinder {
 
     public static void main (String[] args) {
-        String fileName = "response.txt";
-        BruteForceParallelRlcWithLoadFinder finder = new BruteForceParallelRlcWithLoadFinder(fileName);
+        String sourceFile = "HD681.txt";
+        String targetFile = "HD681EVO.txt";
+        BruteForceParallelRlcWithLoadFinder finder = new BruteForceParallelRlcWithLoadFinder(sourceFile, targetFile);
 
         ParallelRlcWithLoad rlc = finder.getBestRlc();
-        System.out.println("Best: " + rlc);
-        System.out.println("f0 = " + rlc.f0());
-        System.out.println("gain = " + rlc.gain());
-        System.out.println("q = " + rlc.q());
-        System.out.println("bw = " + qFactorToOctaveBandwidth(rlc.q()));
+        log("Best: " + rlc);
+        log("f0 = " + rlc.f0());
+        log("gain = " + rlc.gain());
+        log("q = " + rlc.q());
+        log("bw = " + qFactorToOctaveBandwidth(rlc.q()));
     }
 
-    private ResponseInterpolator headphone;
+    public static void log (Object message) {
+        System.out.println(message);
+    }
+
+    private ResponseInterpolator source;
+    private ResponseInterpolator target;
     private double load = 35;
-    private double left = 20;
+    private double left = 1000;
     private double right = 16000;
     private int samples = 100;
     private double[] samplingFrequencies = getSamplingFrequencies();
+    private double[] targetSamples;
 
-    private double[] Rs = applyDecades(E12, new double[] {10, 100});
+    private double[] Rs = applyDecades(E12, new double[] {1, 10, 100});
     private double[] Ls = applyDecades(E12, new double[] {toUnit("100u"), toUnit("1m"), toUnit("10m"), toUnit("100m")});
     private double[] Cs = applyDecades(E12, new double[] {toUnit("1n"), toUnit("10n"), toUnit("100n"), toUnit("1m")});
 
-    public BruteForceParallelRlcWithLoadFinder (String fileName) {
-        headphone = new ResponseInterpolator(fileName);
-        E12 = E12;
+    public BruteForceParallelRlcWithLoadFinder (String sourceFile, String targetFile) {
+        source = new ResponseInterpolator(sourceFile);
+        target = new ResponseInterpolator(targetFile);
+        targetSamples = sampleTargetHeadphone();
     }
 
     private double[] getSamplingFrequencies () {
@@ -50,69 +56,48 @@ public class BruteForceParallelRlcWithLoadFinder {
     }
 
     public ParallelRlcWithLoad getBestRlc () {
-        ParallelRlcWithLoad bestRlc = null;
-        double bestVariance = Double.POSITIVE_INFINITY;
+        Minimum<ParallelRlcWithLoad> minimum = new Minimum<>();
         for( double R : Rs ){
             for( double L : Ls ){
                 for( double C : Cs ){
                     ParallelRlcWithLoad rlc = new ParallelRlcWithLoad(R, L, C, load);
-                    System.out.println(rlc);
-                    double variance = evaluate(rlc);
-                    if( bestVariance > variance ){
-                        bestRlc = rlc;
-                        bestVariance = variance;
-                    }
+                    double value = evaluate(rlc);
+                    minimum.add(rlc, value);
                 }
             }
         }
-        System.out.println(bestVariance);
-        return bestRlc;
+        log(minimum.bestObject);
+        log(minimum.bestValue);
+        return minimum.bestObject;
     }
 
     private double evaluate (ParallelRlcWithLoad rlc) {
-        return getSquareRootDifference(rlc, getHeadphoneAverage());
-        // return getDiff(4800, rlc.f0()) + getDiff(-10, rlc.gain()) + getDiff(-7, rlc.response(1683.749))
-        // + getDiff(-7, rlc.response(13683.749));
+        // return Statistics.variance(sampleFilteredHeadphone(rlc));
+        // return Statistics.euclideanDistance(sampleFilteredHeadphone(rlc), targetSamples);
+        return Statistics.absoluteDifference(sampleFilteredHeadphone(rlc), targetSamples);
+        // return d(rlc.f0(), 4800) + d(rlc.gain(), -8) + d(rlc.q(), 0.5);
     }
 
-    private double getDiff (double target, double actual) {
-        return sqr((target - actual) / target);
-    }
+    // private double d (double actual, double expected) {
+    // return abs(expected - actual) / expected;
+    // }
 
-    private double getHeadphoneAverage () {
-        double average = 0.0;
-        for( double frequency : samplingFrequencies ){
-            average += headphone.response(frequency);
+    private double[] sampleFilteredHeadphone (ParallelRlcWithLoad rlc) {
+        double[] sampledValues = new double[samples];
+        for( int i = 0; i < samples; i++ ){
+            double f = samplingFrequencies[i];
+            sampledValues[i] = source.response(f) + rlc.response(f);
         }
-        average /= samplingFrequencies.length;
-        return average;
+        return sampledValues;
     }
 
-    private double getSquareRootDifference (ParallelRlcWithLoad rlc, double average) {
-        double difference = 0.0;
-        for( double frequency : samplingFrequencies ){
-            difference += sqrt(abs(headphone.response(frequency) - average + rlc.response(frequency)));
+    private double[] sampleTargetHeadphone () {
+        double[] sampledValues = new double[samples];
+        for( int i = 0; i < samples; i++ ){
+            double f = samplingFrequencies[i];
+            sampledValues[i] = target.response(f);
         }
-        difference /= samplingFrequencies.length;
-        return difference;
+        return sampledValues;
     }
-    //
-    // private double getAbsoluteDifference (ParallelRlcWithLoad rlc, double average) {
-    // double difference = 0.0;
-    // for( double frequency : samplingFrequencies ){
-    // difference += abs(headphone.response(frequency) - average + rlc.response(frequency));
-    // }
-    // difference /= samplingFrequencies.length;
-    // return difference;
-    // }
-    //
-    // private double getSquareDifference (ParallelRlcWithLoad rlc, double average) {
-    // double difference = 0.0;
-    // for( double frequency : samplingFrequencies ){
-    // difference += sqr(headphone.response(frequency) - average + rlc.response(frequency));
-    // }
-    // difference /= samplingFrequencies.length;
-    // return difference;
-    // }
 
 }
