@@ -74,7 +74,7 @@ public class BruteForceParallelRlcWithLoadFinder {
     private double evaluate (ParallelRlcWithLoad rlc) {
         // return Statistics.variance(sampleFilteredHeadphone(rlc));
         // return Statistics.euclideanDistance(sampleFilteredHeadphone(rlc), targetSamples);
-        return Statistics.absoluteDifference(sampleFilteredHeadphone(rlc), targetSamples);
+        return Statistics.manhattanDistance(sampleFilteredHeadphone(rlc), targetSamples);
         // return d(rlc.f0(), 4800) + d(rlc.gain(), -8) + d(rlc.q(), 0.5);
     }
 
