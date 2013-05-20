@@ -1,7 +1,6 @@
 
 package frigo.electronics;
 
-import static frigo.electronics.Util.amplitudeRatioToDecibel;
 import static frigo.electronics.Util.angularToOrdinaryFrequency;
 import static frigo.electronics.Util.ordinaryToAngularFrequency;
 import static frigo.electronics.Util.powerRatioToDecibel;
@@ -21,31 +20,22 @@ import frigo.math.Complex;
 
 public class ParallelRlcWithLoad {
 
-    private ParallelRlc rlc;
-    private double R;
-    private double L;
-    private double C;
     private double load;
+    private double w0;
+    private ParallelRlc rlc;
 
     public ParallelRlcWithLoad (double R, double L, double C, double load) {
-        rlc = new ParallelRlc(R, L, C);
-        this.R = R;
-        this.L = L;
-        this.C = C;
         this.load = load;
+        w0 = 1.0 / sqrt(L * C);
+        rlc = new ParallelRlc(R, L, C);
     }
 
     public double f0 () {
-        return angularToOrdinaryFrequency(w0());
-    }
-
-    private double w0 () {
-        return 1.0 / sqrt(L * C);
+        return angularToOrdinaryFrequency(w0);
     }
 
     public double gain () {
-        double ratio = load / (R + load);
-        return amplitudeRatioToDecibel(ratio);
+        return response(f0());
     }
 
     public double q () {
