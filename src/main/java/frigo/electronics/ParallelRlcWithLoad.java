@@ -14,13 +14,16 @@ import static org.apache.commons.lang3.builder.ToStringStyle.SHORT_PREFIX_STYLE;
 
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 
+import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Function;
 
 import frigo.math.Complex;
 
 public class ParallelRlcWithLoad {
 
-    private ParallelRlc rlc;
+    @VisibleForTesting
+    ParallelRlc rlc;
+
     private double load;
 
     public ParallelRlcWithLoad (double R, double L, double C, double load) {
@@ -33,11 +36,28 @@ public class ParallelRlcWithLoad {
         return angularToOrdinaryFrequency(w0);
     }
 
-    public double f1 () {
+    public double gain () {
+        double ratio = load / (rlc.R + load);
+        return amplitudeRatioToDecibel(ratio);
+    }
+
+    public double q () {
+        return f0() / (f2() - f1());
+        // double w0 = 1.0 / sqrt(rlc.L * rlc.C);
+        // double XL = w0 * rlc.L;
+        // double XC = 1 / (w0 * rlc.C);
+        // double Rp = load;
+        // return XL / Rp;
+        // return rlc.admittance(w0).re / rlc.admittance(w0).im;
+    }
+
+    @VisibleForTesting
+    double f1 () {
         return sqr(f0()) / f2();
     }
 
-    public double f2 () {
+    @VisibleForTesting
+    double f2 () {
         Function<Double, Double> function = new Function<Double, Double>() {
 
             @Override
@@ -46,16 +66,7 @@ public class ParallelRlcWithLoad {
                 return target - response(frequency);
             }
         };
-        return bisect(function, f0(), pow(f0(), 4));
-    }
-
-    public double gain () {
-        double ratio = load / (rlc.R + load);
-        return amplitudeRatioToDecibel(ratio);
-    }
-
-    public double q () {
-        return f0() / (f2() - f1());
+        return bisect(function, f0(), pow(f0(), 2));
     }
 
     public double response (double f) {

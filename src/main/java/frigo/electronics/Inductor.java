@@ -9,8 +9,10 @@ import static frigo.electronics.IEC60063.E6;
 import static frigo.electronics.IEC60063.E96;
 import static frigo.electronics.IEC60063.applyDecades;
 import static frigo.electronics.Prefix.toUnit;
+import static frigo.math.Complex.complex;
+import frigo.math.Complex;
 
-public class Inductor {
+public class Inductor extends Element {
 
     private static double[] DECADES = {toUnit("1n"), toUnit("10n"), toUnit("100n"), toUnit("1u"), toUnit("10u"),
         toUnit("100u"), toUnit("1m")};
@@ -22,4 +24,14 @@ public class Inductor {
     public static double[] E96_INDUCTORS = applyDecades(E96, DECADES);
     public static double[] E192_INDUCTORS = applyDecades(E192, DECADES);
 
+    public final double L;
+
+    public Inductor (double L) {
+        this.L = L;
+    }
+
+    @Override
+    public Complex impedance (double w) {
+        return complex(0, w * L);
+    }
 }
