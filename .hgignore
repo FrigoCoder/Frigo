@@ -6,4 +6,5 @@ syntax:glob
 .settings
 bin
 build
+log
 reports/cpd-report.txt
