@@ -36,8 +36,11 @@ public class ParallelRlcWithLoad {
     }
 
     public double f0 () {
-        double w0 = 1.0 / sqrt(L * C);
-        return angularToOrdinaryFrequency(w0);
+        return angularToOrdinaryFrequency(w0());
+    }
+
+    private double w0 () {
+        return 1.0 / sqrt(L * C);
     }
 
     public double gain () {
@@ -47,12 +50,6 @@ public class ParallelRlcWithLoad {
 
     public double q () {
         return f0() / (f2() - f1());
-        // double w0 = 1.0 / sqrt(rlc.L * rlc.C);
-        // double XL = w0 * rlc.L;
-        // double XC = 1 / (w0 * rlc.C);
-        // double Rp = load;
-        // return XL / Rp;
-        // return rlc.admittance(w0).re / rlc.admittance(w0).im;
     }
 
     @VisibleForTesting
