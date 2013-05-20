@@ -2,7 +2,6 @@
 package frigo.electronics;
 
 import static org.hamcrest.Matchers.closeTo;
-import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
 import org.junit.Test;
@@ -29,7 +28,7 @@ public class ParallelRlcWithLoadFinderTest {
 
     @Test
     public void generated_RLC_filter_has_proper_gain () {
-        assertThat(rlc.gain(), is(-10.0));
+        assertThat(rlc.gain(), closeTo(-10.0, 1E-14));
     }
 
     @Test
