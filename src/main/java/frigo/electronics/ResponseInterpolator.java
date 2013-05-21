@@ -1,7 +1,7 @@
 
 package frigo.electronics;
 
-import static frigo.util.Rethrow.rethrow;
+import static frigo.util.Rethrow.unchecked;
 import static java.lang.Double.parseDouble;
 
 import java.io.File;
@@ -30,9 +30,8 @@ public class ResponseInterpolator {
             List<String> lines = Files.readLines(file, Charset.forName("UTF-8"));
             return lines.subList(fromIndex, lines.size());
         }catch( IOException e ){
-            rethrow(e);
+            throw unchecked(e);
         }
-        return null;
     }
 
     public ResponseInterpolator (List<String> lines) {

@@ -3,13 +3,13 @@ package frigo.util;
 
 public class Rethrow {
 
-    public static void rethrow (Throwable e) {
-        Rethrow.<RuntimeException> throwUnchecked(e);
+    public static RuntimeException unchecked (Throwable e) {
+        return dirtyGenericTrick(e);
     }
 
     @SuppressWarnings("unchecked")
-    private static <T extends Throwable> void throwUnchecked (Throwable e) throws T {
-        throw (T) e;
+    private static <T extends Throwable> T dirtyGenericTrick (Throwable e) {
+        return (T) e;
     }
 
 }

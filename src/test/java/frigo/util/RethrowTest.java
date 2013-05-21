@@ -1,7 +1,7 @@
 
 package frigo.util;
 
-import static frigo.util.Rethrow.rethrow;
+import static frigo.util.Rethrow.unchecked;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -19,7 +19,7 @@ public class RethrowTest {
     }
 
     private void methodWithUndeclaredCheckedException () {
-        rethrow(new Exception());
+        throw unchecked(new Exception());
     }
 
     @Test
@@ -32,7 +32,7 @@ public class RethrowTest {
         try{
             methodWithDeclaredCheckedException();
         }catch( Exception e ){
-            rethrow(e);
+            throw unchecked(e);
         }
     }
 
