@@ -14,15 +14,15 @@ import frigo.math.Complex;
 
 public class Capacitor extends Element {
 
-    private static double[] DECADES = {toUnit("10p"), toUnit("100p"), toUnit("1n"), toUnit("10n"), toUnit("100n"),
-        toUnit("1u"), toUnit("10u")};
+    private static final double[] DECADES = {toUnit("10p"), toUnit("100p"), toUnit("1n"), toUnit("10n"),
+        toUnit("100n"), toUnit("1u"), toUnit("10u")};
 
-    public static double[] E6_CAPACITORS = applyDecades(E6, DECADES);
-    public static double[] E12_CAPACITORS = applyDecades(E12, DECADES);
-    public static double[] E24_CAPACITORS = applyDecades(E24, DECADES);
-    public static double[] E48_CAPACITORS = applyDecades(E48, DECADES);
-    public static double[] E96_CAPACITORS = applyDecades(E96, DECADES);
-    public static double[] E192_CAPACITORS = applyDecades(E192, DECADES);
+    public static final double[] E6_CAPACITORS = applyDecades(E6, DECADES);
+    public static final double[] E12_CAPACITORS = applyDecades(E12, DECADES);
+    public static final double[] E24_CAPACITORS = applyDecades(E24, DECADES);
+    public static final double[] E48_CAPACITORS = applyDecades(E48, DECADES);
+    public static final double[] E96_CAPACITORS = applyDecades(E96, DECADES);
+    public static final double[] E192_CAPACITORS = applyDecades(E192, DECADES);
 
     public final double C;
 
