@@ -10,6 +10,7 @@ import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 public class MockitoAuxTest {
@@ -265,12 +266,12 @@ public class MockitoAuxTest {
         assertThat(mock.getChar(), is(values[1]));
     }
 
-    // @Test(expected = ImplicitVerificationFailed.class)
-    // public void verifyImplicit_throws_if_stubbed_method_is_called_less_than_expected () {
-    // Originale mock = mock(Originale.class);
-    // doReturn(2).doReturn(3).when(mock).getOne();
-    // mock.getOne();
-    // verifyImplicit(mock);
-    // }
+    @Ignore
+    @Test(expected = ImplicitVerificationFailed.class)
+    public void verifyImplicit_throws_if_stubbed_method_is_called_less_than_expected () {
+        doReturn(2).doReturn(3).when(mock).getInt();
+        mock.getInt();
+        verifyImplicit(mock);
+    }
 
 }
