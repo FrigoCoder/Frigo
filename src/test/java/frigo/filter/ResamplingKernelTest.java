@@ -1,9 +1,11 @@
 
 package frigo.filter;
 
+import static frigo.filter.KernelTestUtil.assertKernelDomainEquals;
+
 import org.junit.Test;
 
-public class ResamplingKernelTest extends KernelTestBase {
+public class ResamplingKernelTest {
 
     private static class ResamplingKernelDummy extends ResamplingKernel {
 
@@ -23,13 +25,11 @@ public class ResamplingKernelTest extends KernelTestBase {
 
     @Test
     public void testResamplingKernelDouble () {
-        kernel = new ResamplingKernelDummy(2.0);
-        checkRadiusAndDomain(kernel, 2.0, -2.0, 2.0);
+        assertKernelDomainEquals(new ResamplingKernelDummy(2.0), 2.0, -2.0, 2.0);
     }
 
     @Test
     public void testResamplingKernelDoubleDouble () {
-        kernel = new ResamplingKernelDummy(-1.0, 3.0);
-        checkRadiusAndDomain(kernel, 3.0, -1.0, 3.0);
+        assertKernelDomainEquals(new ResamplingKernelDummy(-1.0, 3.0), 3.0, -1.0, 3.0);
     }
 }

@@ -1,12 +1,15 @@
 
 package frigo.filter;
 
+import static frigo.filter.KernelTestUtil.assertKernelDomainEquals;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
-public class KernelTest extends KernelTestBase {
+public class KernelTest {
 
     private static class DummyKernel extends Kernel {
 
@@ -24,6 +27,10 @@ public class KernelTest extends KernelTestBase {
         }
     }
 
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
+    private Kernel kernel;
+
     @Test
     public void testIsInDomain () {
         kernel = new DummyKernel(1.5);
@@ -39,29 +46,32 @@ public class KernelTest extends KernelTestBase {
     @Test
     public void testKernelDouble () {
         kernel = new DummyKernel(1.5);
-        checkRadiusAndDomain(kernel, 1.5, -1.5, 1.5);
+        assertKernelDomainEquals(kernel, 1.5, -1.5, 1.5);
     }
 
     @Test
     public void testKernelDoubleDouble () {
         kernel = new DummyKernel(-0.5, 2.0);
-        checkRadiusAndDomain(kernel, 2.0, -0.5, 2.0);
+        assertKernelDomainEquals(kernel, 2.0, -0.5, 2.0);
         kernel = new DummyKernel(-2.0, 0.5);
-        checkRadiusAndDomain(kernel, 2.0, -2.0, 0.5);
+        assertKernelDomainEquals(kernel, 2.0, -2.0, 0.5);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void testKernelDoubleDoubleNegativeRight () {
+        thrown.expect(IllegalArgumentException.class);
         kernel = new DummyKernel(-2.0, -1.0);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void testKernelDoubleDoublePositiveLeft () {
+        thrown.expect(IllegalArgumentException.class);
         kernel = new DummyKernel(1.0, 2.0);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void testKernelDoubleNegativeRadius () {
+        thrown.expect(IllegalArgumentException.class);
         kernel = new DummyKernel(-1.0);
     }
 }

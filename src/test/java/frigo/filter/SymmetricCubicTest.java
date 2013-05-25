@@ -1,15 +1,15 @@
 
 package frigo.filter;
 
+import static frigo.filter.KernelTestUtil.assertKernelEquals;
 import static java.lang.Math.abs;
 
 import org.junit.Before;
 import org.junit.Test;
 
-public class SymmetricCubicTest extends KernelTestBase {
+public class SymmetricCubicTest {
 
     private static class DummySymmetricCubic extends SymmetricCubic {
-        // superclass needs to be abstract
     }
 
     private static class SymmetricCubicNaive extends SymmetricCubic {
@@ -39,53 +39,53 @@ public class SymmetricCubicTest extends KernelTestBase {
     @Test
     public void testInnerX0 () {
         cubic.s = naive.s = 1.0;
-        compareKernels(cubic, naive, 0.25);
+        assertKernelEquals(cubic, naive, 0.25);
     }
 
     @Test
     public void testInnerX1 () {
         cubic.r = naive.r = 1.0;
-        compareKernels(cubic, naive, 0.25);
+        assertKernelEquals(cubic, naive, 0.25);
     }
 
     @Test
     public void testInnerX2 () {
         cubic.q = naive.q = 1.0;
-        compareKernels(cubic, naive, 0.25);
+        assertKernelEquals(cubic, naive, 0.25);
     }
 
     @Test
     public void testInnerX3 () {
         cubic.p = naive.p = 1.0;
-        compareKernels(cubic, naive, 0.25);
+        assertKernelEquals(cubic, naive, 0.25);
     }
 
     @Test
     public void testOuterX0 () {
         cubic.w = naive.w = 1.0;
-        compareKernels(cubic, naive, 0.25);
+        assertKernelEquals(cubic, naive, 0.25);
     }
 
     @Test
     public void testOuterX1 () {
         cubic.v = naive.v = 1.0;
-        compareKernels(cubic, naive, 0.25);
+        assertKernelEquals(cubic, naive, 0.25);
     }
 
     @Test
     public void testOuterX2 () {
         cubic.u = naive.u = 1.0;
-        compareKernels(cubic, naive, 0.25);
+        assertKernelEquals(cubic, naive, 0.25);
     }
 
     @Test
     public void testOuterX3 () {
         cubic.t = naive.t = 1.0;
-        compareKernels(cubic, naive, 0.25);
+        assertKernelEquals(cubic, naive, 0.25);
     }
 
     @Test
     public void testZero () {
-        compareKernels(cubic, naive, 0.25);
+        assertKernelEquals(cubic, naive, 0.25);
     }
 }

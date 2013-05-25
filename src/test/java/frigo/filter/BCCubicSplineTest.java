@@ -1,9 +1,11 @@
 
 package frigo.filter;
 
+import static frigo.filter.KernelTestUtil.assertKernelEquals;
+
 import org.junit.Test;
 
-public class BCCubicSplineTest extends KernelTestBase {
+public class BCCubicSplineTest {
 
     private static class CubicNaive extends SymmetricCubic {
 
@@ -21,16 +23,16 @@ public class BCCubicSplineTest extends KernelTestBase {
 
     @Test
     public void testCatmullRom () {
-        compareKernels(new BCCubicSpline(0, 0.5), new CubicNaive(0, 0.5), 0.25);
+        assertKernelEquals(new BCCubicSpline(0, 0.5), new CubicNaive(0, 0.5), 0.25);
     }
 
     @Test
     public void testCubicBSpline () {
-        compareKernels(new BCCubicSpline(1, 0), new CubicNaive(1, 0), 0.25);
+        assertKernelEquals(new BCCubicSpline(1, 0), new CubicNaive(1, 0), 0.25);
     }
 
     @Test
     public void testMitchell () {
-        compareKernels(new BCCubicSpline(1.0 / 3.0, 1.0 / 3.0), new CubicNaive(1.0 / 3.0, 1.0 / 3.0), 0.25);
+        assertKernelEquals(new BCCubicSpline(1.0 / 3.0, 1.0 / 3.0), new CubicNaive(1.0 / 3.0, 1.0 / 3.0), 0.25);
     }
 }

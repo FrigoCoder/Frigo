@@ -1,11 +1,12 @@
 
 package frigo.filter;
 
+import static frigo.filter.KernelTestUtil.assertKernelEquals;
 import static frigo.math.MathAux.sinc;
 
 import org.junit.Test;
 
-public class SincTest extends KernelTestBase {
+public class SincTest {
 
     private static class SincNaive extends ResamplingKernel {
 
@@ -27,11 +28,11 @@ public class SincTest extends KernelTestBase {
 
     @Test
     public void testDefaultSinc () {
-        compareKernels(new Sinc(), new SincNaive(3), 0.25);
+        assertKernelEquals(new Sinc(), new SincNaive(3), 0.25);
     }
 
     @Test
     public void testSinc () {
-        compareKernels(new Sinc(3), new SincNaive(3), 0.25);
+        assertKernelEquals(new Sinc(3), new SincNaive(3), 0.25);
     }
 }

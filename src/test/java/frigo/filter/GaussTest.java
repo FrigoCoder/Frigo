@@ -1,9 +1,16 @@
 
 package frigo.filter;
 
-import org.junit.Test;
+import static frigo.filter.KernelTestUtil.assertKernelEquals;
 
-public class GaussTest extends KernelTestBase {
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.rules.ExpectedException;
+
+public class GaussTest {
+
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
 
     private static class GaussNaive extends Gauss {
 
@@ -27,26 +34,28 @@ public class GaussTest extends KernelTestBase {
 
     @Test
     public void testGauss () {
-        compareKernels(new Gauss(), new GaussNaive(0.5, 2.5), 0.25);
+        assertKernelEquals(new Gauss(), new GaussNaive(0.5, 2.5), 0.25);
     }
 
     @Test
     public void testGauss0_75 () {
-        compareKernels(new Gauss(0.75), new GaussNaive(0.75, 0.75 * 5), 0.25);
+        assertKernelEquals(new Gauss(0.75), new GaussNaive(0.75, 0.75 * 5), 0.25);
     }
 
     @Test
     public void testGauss1_5_100_0 () {
-        compareKernels(new Gauss(1.5, 100), new GaussNaive(1.5, 100), 0.25);
+        assertKernelEquals(new Gauss(1.5, 100), new GaussNaive(1.5, 100), 0.25);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void testGaussNegativeSigma () {
-        kernel = new Gauss(-1, 0);
+        thrown.expect(IllegalArgumentException.class);
+        new Gauss(-1, 0);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void testGaussZeroSigma () {
-        kernel = new Gauss(0);
+        thrown.expect(IllegalArgumentException.class);
+        new Gauss(0);
     }
 }

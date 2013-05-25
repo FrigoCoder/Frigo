@@ -1,9 +1,11 @@
 
 package frigo.filter;
 
+import static frigo.filter.KernelTestUtil.assertKernelEquals;
+
 import org.junit.Test;
 
-public class HermiteTest extends KernelTestBase {
+public class HermiteTest {
 
     private static class HermiteNaive extends ResamplingKernel {
 
@@ -23,6 +25,6 @@ public class HermiteTest extends KernelTestBase {
 
     @Test
     public void testHermite () {
-        compareKernels(new Hermite(), new HermiteNaive(), 0.25);
+        assertKernelEquals(new Hermite(), new HermiteNaive(), 0.25);
     }
 }
