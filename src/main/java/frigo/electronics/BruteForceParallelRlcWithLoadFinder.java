@@ -30,9 +30,8 @@ public class BruteForceParallelRlcWithLoadFinder {
 
     private static void dump (int f0, int gain, double q, int load, double[] tolerance) {
         ParallelRlcWithLoad rlc = new BruteForceParallelRlcWithLoadFinder(f0, gain, q, load, tolerance).getBestRlc();
-        logger.info("f0 = " + rlc.f0 + " Hz, gain = " + rlc.gain + " dB, Q = " + rlc.q() + ", R = " + rlc.R
-            + " ohm , L = " + rlc.L * 1_000 + " mH, C = " + rlc.C * 1_000_000_000 + " nF");
-
+        logger.info("f0 = " + rlc.f0 + " Hz, gain = " + rlc.gain + " dB, Q = " + rlc.q() + ", OBW = " + rlc.obw
+            + ", R = " + rlc.R + " ohm , L = " + rlc.L * 1_000 + " mH, C = " + rlc.C * 1_000_000_000 + " nF");
     }
 
     public BruteForceParallelRlcWithLoadFinder (double f0, double gain, double q, double load, double[] tolerance) {

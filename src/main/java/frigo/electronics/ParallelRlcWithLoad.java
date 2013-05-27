@@ -30,7 +30,7 @@ public class ParallelRlcWithLoad {
     public final double gain;
     private Double q;
     @VisibleForTesting
-    private Double obw;
+    Double obw;
     private ParallelRlc rlc;
 
     public ParallelRlcWithLoad (double R, double L, double C, double load) {
