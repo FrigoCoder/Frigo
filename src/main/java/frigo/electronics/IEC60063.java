@@ -1,33 +1,39 @@
 
 package frigo.electronics;
 
+import static java.lang.Math.floor;
+import static java.lang.Math.log10;
+import static java.lang.Math.pow;
+
+import java.util.NoSuchElementException;
+
 public class IEC60063 {
 
     /**
-     * E6: 20% tolerance
+     * 20% tolerance
      */
     public static final double[] E6 = {10, 15, 22, 33, 47, 68};
 
     /**
-     * E12: 10% tolerance
+     * 10% tolerance
      */
     public static final double[] E12 = {10, 12, 15, 18, 22, 27, 33, 39, 47, 56, 68, 82};
 
     /**
-     * E24: 5% tolerance
+     * 5% tolerance
      */
     public static final double[] E24 = {10, 11, 12, 13, 15, 16, 18, 20, 22, 24, 27, 30, 33, 36, 39, 43, 47, 51, 56, 62,
         68, 75, 82, 91};
 
     /**
-     * E48: 2% tolerance
+     * 2% tolerance
      */
     public static final double[] E48 = {100, 105, 110, 115, 121, 127, 133, 140, 147, 154, 162, 169, 178, 187, 196, 205,
         215, 226, 237, 249, 261, 274, 287, 301, 316, 332, 348, 365, 383, 402, 422, 442, 464, 487, 511, 536, 562, 590,
         619, 649, 681, 715, 750, 787, 825, 866, 909, 953};
 
     /**
-     * E96: 1% tolerance
+     * 1% tolerance
      */
     public static final double[] E96 = {100, 102, 105, 107, 110, 113, 115, 118, 121, 124, 127, 130, 133, 137, 140, 143,
         147, 150, 154, 158, 162, 165, 169, 174, 178, 182, 187, 191, 196, 200, 205, 210, 215, 221, 226, 232, 237, 243,
@@ -36,7 +42,7 @@ public class IEC60063 {
         715, 732, 750, 768, 787, 806, 825, 845, 866, 887, 909, 931, 953, 976};
 
     /**
-     * E192: 0.5% tolerance
+     * 0.5% tolerance
      */
     public static final double[] E192 = {100, 101, 102, 104, 105, 106, 107, 109, 110, 111, 113, 114, 115, 117, 118,
         120, 121, 123, 124, 126, 127, 129, 130, 132, 133, 135, 137, 138, 140, 142, 143, 145, 147, 149, 150, 152, 154,
@@ -49,14 +55,36 @@ public class IEC60063 {
         759, 768, 777, 787, 796, 806, 816, 825, 835, 845, 856, 866, 876, 887, 898, 909, 920, 931, 942, 953, 965, 976,
         988};
 
-    public static double[] applyDecades (double[] unit, double[] decades) {
-        double[] result = new double[unit.length * decades.length];
-        for( int i = 0; i < unit.length; i++ ){
+    public static double[] applyDecades (double[] series, double[] decades) {
+        double[] result = new double[series.length * decades.length];
+        for( int i = 0; i < series.length; i++ ){
             for( int j = 0; j < decades.length; j++ ){
-                result[i + j * unit.length] = unit[i] * decades[j] / unit[0];
+                result[i + j * series.length] = series[i] * decades[j] / series[0];
             }
         }
         return result;
+    }
+
+    public static double lower (double value, double[] series) {
+        double tenPower = pow(10, floor(log10(value)));
+        for( int i = series.length - 1; i >= 0; i-- ){
+            double quantized = series[i] / series[0] * tenPower;
+            if( quantized <= value ){
+                return quantized;
+            }
+        }
+        throw new NoSuchElementException();
+    }
+
+    public static double higher (double value, double[] series) {
+        double tenPower = pow(10, floor(log10(value)));
+        for( int i = 0; i < series.length; i++ ){
+            double quantized = series[i] / series[0] * tenPower;
+            if( quantized >= value ){
+                return quantized;
+            }
+        }
+        return series[0] / series[0] * tenPower * 10;
     }
 
 }
