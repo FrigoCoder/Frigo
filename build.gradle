@@ -11,7 +11,14 @@ repositories {
 
 dependencies {
     compile group: 'com.google.guava', name: 'guava', version: 'latest.release'
+
     compile group: 'org.apache.commons', name: 'commons-lang3', version: 'latest.release'
+    compile group: 'org.apache.commons', name: 'commons-math3', version: 'latest.release'
+
+    compile group: 'org.slf4j', name: 'slf4j-api', version: 'latest.release'
+    compile group: 'org.slf4j', name: 'slf4j-log4j12', version: 'latest.release'
+    compile group: 'log4j', name: 'log4j', version: 'latest.release'
+    compile group: 'log4j', name: 'apache-log4j-extras', version: 'latest.release'
 
     compile group: 'org.codehaus.jremoting', name: 'jremoting-api', version: 'latest.release'
     compile group: 'org.codehaus.jremoting', name: 'jremoting-client', version: 'latest.release'
