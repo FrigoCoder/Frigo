@@ -19,23 +19,30 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 import frigo.math.Complex;
 
 public class ArraysAuxTest {
 
-    @Test(expected = IllegalArgumentException.class)
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
+
+    @Test
     public void arraysOfDifferentDimensionsDoNotHaveComplexSquaredEuclideanDistance () {
         Complex[] v = {complex(1.0, 2.0)};
         Complex[] w = {complex(2.0, 3.0), complex(3.0, 4.0)};
+        thrown.expect(IllegalArgumentException.class);
         squaredEuclideanDistance(v, w);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void arraysOfDifferentDimensionsDoNotHaveDoubleSquaredEuclideanDistance () {
         double[] v = {1};
         double[] w = {1, 2};
+        thrown.expect(IllegalArgumentException.class);
         squaredEuclideanDistance(v, w);
     }
 
