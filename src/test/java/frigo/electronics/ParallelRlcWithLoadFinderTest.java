@@ -13,7 +13,7 @@ public class ParallelRlcWithLoadFinderTest {
 
     @Test
     public void generated_RLC_filter_has_proper_f0 () {
-        assertThat(rlc.f0(), closeTo(4800.0, 1E-12));
+        assertThat(rlc.f0, closeTo(4800.0, 1E-12));
     }
 
     @Test
@@ -28,7 +28,7 @@ public class ParallelRlcWithLoadFinderTest {
 
     @Test
     public void generated_RLC_filter_has_proper_gain () {
-        assertThat(rlc.gain(), closeTo(-10.0, 1E-14));
+        assertThat(rlc.gain, closeTo(-10.0, 1E-14));
     }
 
     @Test
@@ -38,7 +38,7 @@ public class ParallelRlcWithLoadFinderTest {
 
     @Test
     public void generated_RLC_filter_has_proper_response_at_f0 () {
-        assertThat(rlc.response(rlc.f0()), closeTo(-10.0, 1E-14));
+        assertThat(rlc.response(rlc.f0), closeTo(-10.0, 1E-14));
     }
 
     @Test

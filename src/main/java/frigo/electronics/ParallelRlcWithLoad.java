@@ -4,6 +4,7 @@ package frigo.electronics;
 import static frigo.electronics.Util.angularToOrdinaryFrequency;
 import static frigo.electronics.Util.ordinaryToAngularFrequency;
 import static frigo.electronics.Util.powerRatioToDecibel;
+import static frigo.electronics.Util.qFactorToOctaveBandwidth;
 import static frigo.math.Complex.div;
 import static frigo.math.MathAux.sqr;
 import static frigo.util.Bisection.bisect;
@@ -20,15 +21,15 @@ import frigo.math.Complex;
 
 public class ParallelRlcWithLoad {
 
-    @VisibleForTesting
-    double R;
-    @VisibleForTesting
-    double L;
-    @VisibleForTesting
-    double C;
-    private double load;
+    public final double R;
+    public final double L;
+    public final double C;
+    public final double load;
 
-    private double w0;
+    public final double f0;
+    public final double gain;
+    private Double q;
+    private Double obw;
     private ParallelRlc rlc;
 
     public ParallelRlcWithLoad (double R, double L, double C, double load) {
@@ -36,25 +37,28 @@ public class ParallelRlcWithLoad {
         this.L = L;
         this.C = C;
         this.load = load;
-        w0 = 1.0 / sqrt(L * C);
         rlc = new ParallelRlc(R, L, C);
-    }
-
-    public double f0 () {
-        return angularToOrdinaryFrequency(w0);
-    }
-
-    public double gain () {
-        return response(f0());
+        f0 = angularToOrdinaryFrequency(1.0 / sqrt(L * C));
+        gain = response(f0);
     }
 
     public double q () {
-        return f0() / (f2() - f1());
+        if( q == null ){
+            q = f0 / (f2() - f1());
+        }
+        return q;
+    }
+
+    public double obw () {
+        if( obw == null ){
+            obw = qFactorToOctaveBandwidth(q());
+        }
+        return obw;
     }
 
     @VisibleForTesting
     double f1 () {
-        return sqr(f0()) / f2();
+        return sqr(f0) / f2();
     }
 
     @VisibleForTesting
@@ -63,11 +67,11 @@ public class ParallelRlcWithLoad {
 
             @Override
             public Double apply (Double frequency) {
-                double target = gain() + 3;
+                double target = gain + 3;
                 return target - response(frequency);
             }
         };
-        return bisect(function, f0(), pow(f0(), 2));
+        return bisect(function, f0, pow(f0, 2));
     }
 
     public double response (double f) {

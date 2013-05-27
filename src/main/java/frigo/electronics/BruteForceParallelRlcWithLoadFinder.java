@@ -1,10 +1,14 @@
 
 package frigo.electronics;
 
-import static frigo.electronics.Util.qFactorToOctaveBandwidth;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import frigo.math.MathAux;
 
 public class BruteForceParallelRlcWithLoadFinder {
+
+    private static Logger logger = LoggerFactory.getLogger(BruteForceParallelRlcWithLoadFinder.class);
 
     private double f0;
     private double gain;
@@ -12,18 +16,7 @@ public class BruteForceParallelRlcWithLoadFinder {
     private double load;
 
     public static void main (String[] args) {
-        BruteForceParallelRlcWithLoadFinder finder = new BruteForceParallelRlcWithLoadFinder(4800, -8, 0.5, 35);
-
-        ParallelRlcWithLoad rlc = finder.getBestRlc();
-        log("Best: " + rlc);
-        log("f0 = " + rlc.f0());
-        log("gain = " + rlc.gain());
-        log("q = " + rlc.q());
-        log("bw = " + qFactorToOctaveBandwidth(rlc.q()));
-    }
-
-    public static void log (Object message) {
-        System.out.println(message);
+        new BruteForceParallelRlcWithLoadFinder(4800, -8, 0.5, 35).getBestRlc();
     }
 
     public BruteForceParallelRlcWithLoadFinder (double f0, double gain, double q, double load) {
@@ -48,18 +41,17 @@ public class BruteForceParallelRlcWithLoadFinder {
                     ParallelRlcWithLoad rlc = new ParallelRlcWithLoad(R, L, C, load);
                     double score = evaluate(rlc);
                     minimum.add(rlc, score);
-                    log("Candidate: " + rlc);
-                    log("Score: " + score);
-                    log("");
+                    logger.info("Candidate: " + rlc + ", Score: " + score);
                 }
             }
         }
+        logger.info("Best: " + minimum.bestObject);
         return minimum.bestObject;
     }
 
     private double evaluate (ParallelRlcWithLoad rlc) {
         try{
-            return d(rlc.f0(), f0) + d(rlc.gain(), gain) + d(rlc.q(), q);
+            return d(rlc.f0, f0) + d(rlc.gain, gain) + d(rlc.q(), q);
         }catch( IllegalArgumentException e ){
             System.out.println("Gain should be < -3.0");
             return Double.POSITIVE_INFINITY;
