@@ -1,7 +1,6 @@
 
 package frigo.electronics;
 
-import static frigo.electronics.IEC60063.E6;
 import static frigo.electronics.IEC60063.higher;
 import static frigo.electronics.IEC60063.lower;
 
@@ -21,19 +20,19 @@ public class BruteForceParallelRlcWithLoadFinder {
     private double[] tolerance;
 
     public static void main (String[] args) {
-        dump(4800, -8, 0.5, 35, 32, E6);
-        dump(4800, -8, 0.4, 35, 32, E6);
+        dump(4800, -8, 0.5, 35, IEC60063.E6);
+        dump(4800, -8, 0.5, 35, IEC60063.E12);
+        dump(4800, -8, 0.5, 35, IEC60063.E24);
+        dump(4800, -8, 0.5, 35, IEC60063.E48);
+        dump(4800, -8, 0.5, 35, IEC60063.E96);
+        dump(4800, -8, 0.5, 35, IEC60063.E192);
     }
 
-    private static void dump (int f0, int gain, double q, int load, int otherLoad, double[] tolerance) {
+    private static void dump (int f0, int gain, double q, int load, double[] tolerance) {
         ParallelRlcWithLoad rlc = new BruteForceParallelRlcWithLoadFinder(f0, gain, q, load, tolerance).getBestRlc();
-        logger.info("Best: " + rlc);
+        logger.info("f0 = " + rlc.f0 + " Hz, gain = " + rlc.gain + " dB, Q = " + rlc.q() + ", R = " + rlc.R
+            + " ohm , L = " + rlc.L * 1_000 + " mH, C = " + rlc.C * 1_000_000_000 + " nF");
 
-        ParallelRlcWithLoad modified = new ParallelRlcWithLoad(rlc.R, rlc.L, rlc.C, otherLoad);
-        modified.q();
-        logger.info("Modified: " + modified);
-
-        logger.info("R = " + rlc.R + " ohm , L = " + rlc.L * 1_000 + " mH, C = " + rlc.C * 1_000_000_000 + " nF");
     }
 
     public BruteForceParallelRlcWithLoadFinder (double f0, double gain, double q, double load, double[] tolerance) {
