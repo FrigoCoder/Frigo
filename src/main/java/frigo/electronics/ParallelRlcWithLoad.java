@@ -29,6 +29,7 @@ public class ParallelRlcWithLoad {
     public final double f0;
     public final double gain;
     private Double q;
+    @VisibleForTesting
     private Double obw;
     private ParallelRlc rlc;
 
@@ -45,15 +46,9 @@ public class ParallelRlcWithLoad {
     public double q () {
         if( q == null ){
             q = f0 / (f2() - f1());
-        }
-        return q;
-    }
-
-    public double obw () {
-        if( obw == null ){
             obw = qFactorToOctaveBandwidth(q());
         }
-        return obw;
+        return q;
     }
 
     @VisibleForTesting
