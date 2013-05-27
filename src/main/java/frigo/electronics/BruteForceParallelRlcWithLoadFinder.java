@@ -1,9 +1,6 @@
 
 package frigo.electronics;
 
-import static frigo.electronics.IEC60063.E192;
-import static frigo.electronics.IEC60063.applyDecades;
-import static frigo.electronics.Prefix.toUnit;
 import static frigo.electronics.Util.qFactorToOctaveBandwidth;
 import frigo.math.MathAux;
 
@@ -36,24 +33,27 @@ public class BruteForceParallelRlcWithLoadFinder {
         this.load = load;
     }
 
-    private double[] Rs = applyDecades(E192, new double[] {10});
-    private double[] Ls =
-        applyDecades(E192, new double[] {toUnit("100u"), toUnit("1m"), toUnit("10m"), toUnit("100m")});
-    private double[] Cs = applyDecades(E192, new double[] {toUnit("1n"), toUnit("10n"), toUnit("100n"), toUnit("1m")});
-
     public ParallelRlcWithLoad getBestRlc () {
+        ParallelRlcWithLoadFinder finder = new ParallelRlcWithLoadFinder(f0, gain, q, load);
+        ParallelRlcWithLoad ideal = finder.getFilter();
+
+        double[] Rs = {IEC60063.lower(ideal.R, IEC60063.E48), IEC60063.higher(ideal.R, IEC60063.E48)};
+        double[] Ls = {IEC60063.lower(ideal.L, IEC60063.E48), IEC60063.higher(ideal.L, IEC60063.E48)};
+        double[] Cs = {IEC60063.lower(ideal.C, IEC60063.E48), IEC60063.higher(ideal.C, IEC60063.E48)};
+
         Minimum<ParallelRlcWithLoad> minimum = new Minimum<>();
         for( double R : Rs ){
             for( double L : Ls ){
                 for( double C : Cs ){
                     ParallelRlcWithLoad rlc = new ParallelRlcWithLoad(R, L, C, load);
-                    double value = evaluate(rlc);
-                    minimum.add(rlc, value);
+                    double score = evaluate(rlc);
+                    minimum.add(rlc, score);
+                    log("Candidate: " + rlc);
+                    log("Score: " + score);
+                    log("");
                 }
             }
         }
-        log(minimum.bestObject);
-        log(minimum.bestValue);
         return minimum.bestObject;
     }
 
@@ -61,7 +61,7 @@ public class BruteForceParallelRlcWithLoadFinder {
         try{
             return d(rlc.f0(), f0) + d(rlc.gain(), gain) + d(rlc.q(), q);
         }catch( IllegalArgumentException e ){
-            System.out.println("Encountered too small RLC");
+            System.out.println("Gain should be < -3.0");
             return Double.POSITIVE_INFINITY;
         }
     }

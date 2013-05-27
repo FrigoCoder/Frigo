@@ -36,21 +36,22 @@ public class ParallelRlcWithLoadFinder {
             }
 
         };
-
         double estimate = q * q / (R * R);
         double CperL = bisect(function, estimate / 2, estimate * 2);
         return new ParallelRlcWithLoad(R, sqrt(LC / CperL), sqrt(LC * CperL), load);
     }
 
     public static void main (String[] args) {
-        findAndDump(4800.0, -9.0, 1.0 / 3.0, 35);
-
+        findAndDump(4800.0, -8.0, 0.5, 35);
     }
 
     private static void findAndDump (double f0, double gain, double q, double load) {
-        ParallelRlcWithLoadFinder finder = new ParallelRlcWithLoadFinder(f0, gain, q, load);
-        ParallelRlcWithLoad rlc = finder.getFilter();
+        ParallelRlcWithLoad rlc = findAndReturn(f0, gain, q, load);
         System.out.println(rlc);
+    }
+
+    private static ParallelRlcWithLoad findAndReturn (double f0, double gain, double q, double load) {
+        return new ParallelRlcWithLoadFinder(f0, gain, q, load).getFilter();
     }
 
 }

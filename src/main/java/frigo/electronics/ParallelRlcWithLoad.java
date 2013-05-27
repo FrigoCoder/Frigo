@@ -20,11 +20,21 @@ import frigo.math.Complex;
 
 public class ParallelRlcWithLoad {
 
+    @VisibleForTesting
+    double R;
+    @VisibleForTesting
+    double L;
+    @VisibleForTesting
+    double C;
     private double load;
+
     private double w0;
     private ParallelRlc rlc;
 
     public ParallelRlcWithLoad (double R, double L, double C, double load) {
+        this.R = R;
+        this.L = L;
+        this.C = C;
         this.load = load;
         w0 = 1.0 / sqrt(L * C);
         rlc = new ParallelRlc(R, L, C);
