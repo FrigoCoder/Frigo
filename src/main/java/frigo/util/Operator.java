@@ -9,6 +9,7 @@ public enum Operator {
             return left + right;
         }
     },
+
     DIV("/") {
 
         @Override
@@ -16,6 +17,7 @@ public enum Operator {
             return left / right;
         }
     },
+
     MUL("*") {
 
         @Override
@@ -23,6 +25,7 @@ public enum Operator {
             return left * right;
         }
     },
+
     SUB("-") {
 
         @Override
