@@ -268,8 +268,16 @@ public class MockitoAuxTest {
 
     @Ignore
     @Test(expected = ImplicitVerificationFailed.class)
-    public void verifyImplicit_throws_if_stubbed_method_is_called_less_than_expected () {
+    public void verifyImplicit_throws_if_stubbed_method_is_called_one_less_than_expected () {
         doReturn(2).doReturn(3).when(mock).getInt();
+        mock.getInt();
+        verifyImplicit(mock);
+    }
+
+    @Ignore
+    @Test(expected = ImplicitVerificationFailed.class)
+    public void verifyImplicit_throws_if_stubbed_method_is_called_two_less_than_expected () {
+        doReturn(1).doReturn(2).doReturn(3).when(mock).getInt();
         mock.getInt();
         verifyImplicit(mock);
     }
