@@ -2,11 +2,13 @@
 package frigo.util;
 
 import static frigo.util.ArraysAux.toObjectArray;
+import static frigo.util.Rethrow.unchecked;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.internal.util.StringJoiner.join;
 
 import java.util.List;
+import java.util.Queue;
 
 import org.mockito.internal.stubbing.InvocationContainer;
 import org.mockito.internal.stubbing.StubbedInvocationMatcher;
@@ -42,10 +44,23 @@ public class MockitoAux {
         List<StubbedInvocationMatcher> matchers = invocationContainer.getStubbedInvocations();
 
         for( StubbedInvocationMatcher matcher : matchers ){
-            if( !matcher.wasUsed() ){
+
+            if( !wasAlmostFullyUsed(matcher) ){
                 String message = join("Implicitly wanted but not invoked:", matcher, matcher.getLocation(), "");
                 throw new ImplicitVerificationFailed(message);
             }
+        }
+    }
+
+    private static boolean wasAlmostFullyUsed (StubbedInvocationMatcher matcher) {
+        if( !matcher.wasUsed() ){
+            return false;
+        }
+        try{
+            Queue<Answer<?>> answers = Reflection.getField(matcher, "answers");
+            return answers.size() <= 1;
+        }catch( Exception e ){
+            throw unchecked(e);
         }
     }
 
