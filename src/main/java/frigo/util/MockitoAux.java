@@ -8,12 +8,10 @@ import static org.mockito.internal.util.StringJoiner.join;
 
 import java.util.List;
 
-import org.mockito.internal.invocation.StubInfoImpl;
 import org.mockito.internal.stubbing.InvocationContainer;
 import org.mockito.internal.stubbing.StubbedInvocationMatcher;
 import org.mockito.internal.util.MockUtil;
 import org.mockito.invocation.DescribedInvocation;
-import org.mockito.invocation.Invocation;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 import org.mockito.stubbing.Stubber;
@@ -41,21 +39,10 @@ public class MockitoAux {
 
     public static <T> void verifyImplicit (T mock) {
         InvocationContainer invocationContainer = new MockUtil().getMockHandler(mock).getInvocationContainer();
-
         List<StubbedInvocationMatcher> matchers = invocationContainer.getStubbedInvocations();
-        List<Invocation> invocations = invocationContainer.getInvocations();
 
         for( StubbedInvocationMatcher matcher : matchers ){
-            boolean foundMatchingInvocation = false;
-            for( Invocation invocation : invocations ){
-                if( matcher.matches(invocation) ){
-                    foundMatchingInvocation = true;
-                    matcher.markStubUsed(invocation);
-                    invocation.markStubbed(new StubInfoImpl(matcher));
-                    break;
-                }
-            }
-            if( !foundMatchingInvocation ){
+            if( !matcher.wasUsed() ){
                 String message = join("Implicitly wanted but not invoked:", matcher, matcher.getLocation(), "");
                 throw new ImplicitVerificationFailed(message);
             }
