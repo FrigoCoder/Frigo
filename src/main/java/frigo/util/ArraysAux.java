@@ -149,4 +149,16 @@ public class ArraysAux {
         return result;
     }
 
+    public static byte[] encodeInByteArray (double[] v) {
+        byte[] result = new byte[v.length * 8];
+        for( int i = 0; i < v.length; i++ ){
+            long bits = Double.doubleToLongBits(v[i]);
+            for( int j = 0; j < 8; j++ ){
+                result[8 * i + j] = (byte) (bits & 0xff);
+                bits >>>= 8;
+            }
+        }
+        return result;
+    }
+
 }
