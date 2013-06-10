@@ -65,4 +65,13 @@ public class ResponseInterpolator {
         double ratio = (frequency - floor.getKey()) / (ceil.getKey() - floor.getKey());
         return (1.0 - ratio) * floor.getValue() + ratio * ceil.getValue();
     }
+
+    public double[] sample (double sampleRate, int samples) {
+        double[] result = new double[samples];
+        for( int i = 0; i < samples; i++ ){
+            double f = sampleRate / 2 * i / (samples - 1);
+            result[i] = response(f);
+        }
+        return result;
+    }
 }
