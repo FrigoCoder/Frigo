@@ -1,10 +1,8 @@
 syntax:glob
-.classpath
-.gradle
-.pmd
-.project
-.settings
+*.iml
+.*
 bin
 build
 log
-reports/cpd-report.txt
+out
+reports
