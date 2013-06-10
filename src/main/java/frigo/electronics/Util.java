@@ -33,6 +33,14 @@ public class Util {
         return pow(10, decibel / 20);
     }
 
+    public static double[] decibelsToAmplitudeRatios (double[] decibels) {
+        double[] result = new double[decibels.length];
+        for( int i = 0; i < result.length; i++ ){
+            result[i] = decibelToPowerRatio(decibels[i]);
+        }
+        return result;
+    }
+
     public static double octaveBandwidthToQFactor (double N) {
         double _2_N = pow(2, N);
         return sqrt(_2_N) / (_2_N - 1);
