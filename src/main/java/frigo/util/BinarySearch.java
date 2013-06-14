@@ -6,35 +6,15 @@ import java.util.NoSuchElementException;
 public class BinarySearch {
 
     public static int findExact (double[] array, double value) {
-        int found = new BinarySearch(array, value).find();
-        if( array[found] == value ){
-            return found;
-        }
-        throw new NoSuchElementException();
+        return new BinarySearch(array, value).findExact();
     }
 
     public static int findLower (double[] array, double value) {
-        int found = new BinarySearch(array, value).find();
-        if( array[found] <= value ){
-            return found;
-        }
-        found--;
-        if( found < 0 ){
-            throw new NoSuchElementException();
-        }
-        return found;
+        return new BinarySearch(array, value).findLower();
     }
 
     public static int findHigher (double[] array, double value) {
-        int found = new BinarySearch(array, value).find();
-        if( array[found] >= value ){
-            return found;
-        }
-        found++;
-        if( found >= array.length ){
-            throw new NoSuchElementException();
-        }
-        return found;
+        return new BinarySearch(array, value).findHigher();
     }
 
     private double[] array;
@@ -45,7 +25,7 @@ public class BinarySearch {
     private int mid;
 
     private BinarySearch (double[] array, double value) {
-        this.array = array;
+        this.array = array.clone();
         this.value = value;
         setInterval(0, array.length - 1);
     }
@@ -69,6 +49,38 @@ public class BinarySearch {
         this.left = left;
         this.right = right;
         mid = (left + right) / 2;
+    }
+
+    private int findExact () {
+        int found = find();
+        if( array[found] == value ){
+            return found;
+        }
+        throw new NoSuchElementException();
+    }
+
+    private int findLower () {
+        int found = find();
+        if( array[found] <= value ){
+            return found;
+        }
+        found--;
+        if( found < 0 ){
+            throw new NoSuchElementException();
+        }
+        return found;
+    }
+
+    private int findHigher () {
+        int found = find();
+        if( array[found] >= value ){
+            return found;
+        }
+        found++;
+        if( found >= array.length ){
+            throw new NoSuchElementException();
+        }
+        return found;
     }
 
 }
