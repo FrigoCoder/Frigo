@@ -17,7 +17,7 @@ public class HartleyTransformTest extends TransformTestBase {
             T[i] = new Complex(R[i]);
         }
         FFT fft = new FFT();
-        Complex[] F = fft.transform(T);
+        Complex[] F = fft.forward(T);
 
         FHT fht = new FHT();
         double[] H = fht.forward(R);
@@ -33,7 +33,7 @@ public class HartleyTransformTest extends TransformTestBase {
             T[i] = new Complex(R[i]);
         }
         FFT fft = new FFT();
-        Complex[] F = fft.transform(T);
+        Complex[] F = fft.forward(T);
 
         FHT fht = new FHT();
         double[] H = fht.forward(R);

@@ -1,6 +1,8 @@
 
 package frigo.math;
 
+import static java.lang.Math.PI;
+
 import java.util.Random;
 
 public class FourierTransformTestBase extends TransformTestBase {
@@ -16,17 +18,17 @@ public class FourierTransformTestBase extends TransformTestBase {
 
     protected void testForwardAgainstInverse () {
         Complex[] source = getRandomComplexArray(n);
-        checkDifference(source, fourier.inverse(fourier.transform(source)));
+        checkDifference(source, fourier.inverse(fourier.forward(source)));
     }
 
     protected void testForwardAgainstOtherForward () {
         Complex[] timeDomain = getRandomComplexArray(n);
-        checkDifference(other.transform(timeDomain), fourier.transform(timeDomain));
+        checkDifference(other.forward(timeDomain), fourier.forward(timeDomain));
     }
 
     protected void testForwardAgainstOtherInverse () {
         Complex[] source = getRandomComplexArray(n);
-        checkDifference(source, other.inverse(fourier.transform(source)));
+        checkDifference(source, other.inverse(fourier.forward(source)));
     }
 
     protected void testForwardAgainstPureFrequency () {
@@ -36,7 +38,7 @@ public class FourierTransformTestBase extends TransformTestBase {
         for( int i = 0; i < n; i++ ){
             expected[i] = i == frequency ? Complex.ONE : Complex.ZERO;
         }
-        checkDifference(expected, fourier.transform(getFourierFrequency(frequency)));
+        checkDifference(expected, fourier.forward(getFourierFrequency(frequency)));
     }
 
     protected void testInverseAgainstOtherInverse () {
@@ -47,7 +49,7 @@ public class FourierTransformTestBase extends TransformTestBase {
     private Complex[] getFourierFrequency (int frequency) {
         Complex[] timeDomain = new Complex[n];
         for( int i = 0; i < n; i++ ){
-            timeDomain[i] = Complex.cis(2.0 * Math.PI * frequency * i / n);
+            timeDomain[i] = Complex.cis(2.0 * PI * frequency * i / n);
         }
         return timeDomain;
     }

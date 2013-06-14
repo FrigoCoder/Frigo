@@ -36,6 +36,6 @@ public class FFTTest extends FourierTransformTestBase {
 
     @Test(expected = IllegalArgumentException.class)
     public void testNonPowerOfTwoArray () {
-        fourier.transform(new Complex[n - 1]);
+        fourier.forward(new Complex[n - 1]);
     }
 }

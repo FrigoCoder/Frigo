@@ -3,11 +3,20 @@ package frigo.math;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static frigo.math.MathAux.isPowerOfTwo;
+import static java.lang.Math.PI;
 
 /**
  * Radix-2 Decimation In Frequency Fast Fourier Transform. Implemented based on the ideas of the Fast Hartley Transform.
  */
 public class FFT implements FourierTransform {
+
+    @Override
+    public Complex[] forward (Complex[] T) {
+        Complex[] F = T.clone();
+        core(F, -1.0);
+        normalize(F);
+        return F;
+    }
 
     @Override
     public Complex[] inverse (Complex[] F) {
@@ -16,32 +25,10 @@ public class FFT implements FourierTransform {
         return T;
     }
 
-    @Override
-    public Complex[] transform (Complex[] T) {
-        Complex[] F = T.clone();
-        core(F, -1.0);
-        normalize(F);
-        return F;
-    }
-
-    private void bitReverse (Complex[] v) {
-        int p = Integer.numberOfLeadingZeros(v.length - 1);
-        for( int i = 0; i < v.length; i++ ){
-            int j = Integer.reverse(i) >>> p;
-            if( i < j ){
-                swap(v, i, j);
-            }
-        }
-    }
-
-    private void checkPowerOfTwo (Complex[] v) {
-        checkArgument(isPowerOfTwo(v.length), "Array length must be power of two");
-    }
-
     private void core (Complex[] v, double sign) {
-        checkPowerOfTwo(v);
+        checkArgument(isPowerOfTwo(v.length), "Array length must be power of two");
         for( int blockSize = v.length; blockSize > 1; blockSize /= 2 ){
-            Complex root = Complex.cis(sign * 2.0 * Math.PI / blockSize);
+            Complex root = Complex.cis(sign * 2.0 * PI / blockSize);
             Complex twiddle = new Complex(1.0, 0.0);
             for( int i = 0; i < blockSize / 2; i++ ){
                 for( int x1 = i; x1 < v.length; x1 += blockSize ){
@@ -57,9 +44,13 @@ public class FFT implements FourierTransform {
         bitReverse(v);
     }
 
-    private void normalize (Complex[] F) {
-        for( int f = 0; f < F.length; f++ ){
-            F[f] = F[f].div(F.length);
+    private void bitReverse (Complex[] v) {
+        int p = Integer.numberOfLeadingZeros(v.length - 1);
+        for( int i = 0; i < v.length; i++ ){
+            int j = Integer.reverse(i) >>> p;
+            if( i < j ){
+                swap(v, i, j);
+            }
         }
     }
 
@@ -67,6 +58,12 @@ public class FFT implements FourierTransform {
         Complex t = v[i];
         v[i] = v[j];
         v[j] = t;
+    }
+
+    private void normalize (Complex[] F) {
+        for( int f = 0; f < F.length; f++ ){
+            F[f] = F[f].div(F.length);
+        }
     }
 
 }

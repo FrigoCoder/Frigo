@@ -12,11 +12,11 @@ public abstract class HartleyTransform {
     public static double[] fromFourier (Complex[] F) {
         int n = F.length;
         double[] H = new double[n];
-        for( int i = 0; i <= n / 2; i++ ){
-            H[i] = F[i].re - F[i].im;
+        for( int f = 0; f <= n / 2; f++ ){
+            H[f] = F[f].re - F[f].im;
         }
-        for( int i = 1; i <= n / 2; i++ ){
-            H[n - i] = F[i].re + F[i].im;
+        for( int f = 1; f <= n / 2; f++ ){
+            H[n - f] = F[f].re + F[f].im;
         }
         return H;
     }
@@ -30,8 +30,8 @@ public abstract class HartleyTransform {
         int n = H.length;
         Complex[] F = new Complex[n];
         F[0] = new Complex(H[0], 0.0);
-        for( int i = 1; i < n; i++ ){
-            F[i] = new Complex(H[i] + H[n - i], H[n - i] - H[i]).mul(0.5);
+        for( int f = 1; f < n; f++ ){
+            F[f] = new Complex(H[f] + H[n - f], H[n - f] - H[f]).mul(0.5);
         }
         return F;
     }
