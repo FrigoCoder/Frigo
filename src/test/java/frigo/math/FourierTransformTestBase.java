@@ -1,8 +1,6 @@
 
 package frigo.math;
 
-import static frigo.util.ArraysAux.getRandomComplexArray;
-
 import java.util.Random;
 
 public class FourierTransformTestBase extends TransformTestBase {

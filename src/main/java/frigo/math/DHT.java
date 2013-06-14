@@ -1,46 +1,22 @@
 
 package frigo.math;
 
-/**
- * Trivial implementation of the Discrete Hartley Transform mainly used for testing purposes
- * @author Frigo
- */
-public class DHT implements HartleyTransform {
+import static java.lang.Math.PI;
+import static java.lang.Math.cos;
+import static java.lang.Math.sin;
+
+public class DHT extends HartleyTransform {
 
     @Override
-    public double[] fromFourier (Complex[] F) {
-        FFT fft = new FFT();
-        Complex[] T = fft.inverse(F);
-        double[] R = new double[T.length];
-        for( int i = 0; i < T.length; i++ ){
-            R[i] = T[i].re;
-        }
-        return transform(R);
+    public double[] forward (double[] T) {
+        double[] H = core(T);
+        normalize(H);
+        return H;
     }
 
     @Override
     public double[] inverse (double[] H) {
         return core(H);
-    }
-
-    @Override
-    public Complex[] toFourier (double[] H) {
-        double[] R = inverse(H);
-        Complex[] T = new Complex[R.length];
-        for( int i = 0; i < T.length; i++ ){
-            T[i] = new Complex(R[i]);
-        }
-        FFT fft = new FFT();
-        return fft.transform(T);
-    }
-
-    @Override
-    public double[] transform (double[] T) {
-        double[] F = core(T);
-        for( int i = 0; i < F.length; i++ ){
-            F[i] /= F.length;
-        }
-        return F;
     }
 
     protected double[] core (double[] T) {
@@ -49,10 +25,17 @@ public class DHT implements HartleyTransform {
         for( int f = 0; f < n; f++ ){
             double sum = 0.0;
             for( int t = 0; t < n; t++ ){
-                sum += T[t] * (Math.cos(2.0 * Math.PI * f * t / n) + Math.sin(2.0 * Math.PI * f * t / n));
+                sum += T[t] * (cos(2.0 * PI * f * t / n) + sin(2.0 * PI * f * t / n));
             }
             F[f] = sum;
         }
         return F;
     }
+
+    private void normalize (double[] H) {
+        for( int i = 0; i < H.length; i++ ){
+            H[i] /= H.length;
+        }
+    }
+
 }

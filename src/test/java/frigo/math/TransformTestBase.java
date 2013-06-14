@@ -5,6 +5,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.Matchers.lessThan;
 import static org.junit.Assert.assertThat;
 
+import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -38,4 +39,29 @@ public class TransformTestBase {
     protected void log (String message) {
         logger.log(Level.INFO, message);
     }
+
+    public static double[] getRandomDoubleArray (int length) {
+        return TransformTestBase.getRandomDoubleArray(length, new Random());
+    }
+
+    public static double[] getRandomDoubleArray (int length, Random random) {
+        double[] array = new double[length];
+        for( int i = 0; i < array.length; i++ ){
+            array[i] = random.nextDouble();
+        }
+        return array;
+    }
+
+    public static Complex[] getRandomComplexArray (int length) {
+        return getRandomComplexArray(length, new Random());
+    }
+
+    public static Complex[] getRandomComplexArray (int length, Random random) {
+        Complex[] array = new Complex[length];
+        for( int i = 0; i < array.length; i++ ){
+            array[i] = new Complex(random.nextDouble(), random.nextDouble());
+        }
+        return array;
+    }
+
 }

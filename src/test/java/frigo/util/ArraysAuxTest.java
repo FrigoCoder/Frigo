@@ -5,19 +5,15 @@ import static frigo.math.Complex.complex;
 import static frigo.math.MathAux.sqr;
 import static frigo.util.ArraysAux.asArrayList;
 import static frigo.util.ArraysAux.asVector;
-import static frigo.util.ArraysAux.getRandomDoubleArray;
 import static frigo.util.ArraysAux.squaredEuclideanDistance;
 import static frigo.util.ArraysAux.toList;
 import static frigo.util.ArraysAux.toObjectArray;
-import static frigo.util.MockitoAux.doReturnElements;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.Matchers.sameInstance;
 import static org.junit.Assert.assertThat;
-import static org.mockito.Mockito.mock;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -80,15 +76,6 @@ public class ArraysAuxTest {
         List<Integer> expected = new ArrayList<>();
         expected.add(1);
         expected.add(2);
-        assertThat(actual, is(expected));
-    }
-
-    @Test
-    public void testGetRandomRealArray () {
-        double[] expected = {1, 2, 3, 4, 5, 6};
-        Random random = mock(Random.class);
-        doReturnElements(expected).when(random).nextDouble();
-        double[] actual = getRandomDoubleArray(expected.length, random);
         assertThat(actual, is(expected));
     }
 

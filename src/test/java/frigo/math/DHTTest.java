@@ -29,20 +29,9 @@ public class DHTTest extends HartleyTransformTestBase {
         testForwardAgainstPureFrequency();
     }
 
-    @Override
-    @Test
-    public void testFromFourier () {
-        super.testFromFourier();
-    }
-
     @Test
     public void testIDHTAgainstIFHT () {
         testInverseAgainstOtherInverse();
     }
 
-    @Override
-    @Test
-    public void testToFourier () {
-        super.testToFourier();
-    }
 }

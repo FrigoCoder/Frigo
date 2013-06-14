@@ -6,7 +6,6 @@ import static frigo.math.MathAux.sqr;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 import java.util.Vector;
 
 import frigo.math.Complex;
@@ -29,30 +28,6 @@ public class ArraysAux {
             result.add(element);
         }
         return result;
-    }
-
-    public static Complex[] getRandomComplexArray (int length) {
-        return getRandomComplexArray(length, new Random());
-    }
-
-    public static Complex[] getRandomComplexArray (int length, Random random) {
-        Complex[] array = new Complex[length];
-        for( int i = 0; i < array.length; i++ ){
-            array[i] = new Complex(random.nextDouble(), random.nextDouble());
-        }
-        return array;
-    }
-
-    public static double[] getRandomDoubleArray (int length) {
-        return getRandomDoubleArray(length, new Random());
-    }
-
-    public static double[] getRandomDoubleArray (int length, Random random) {
-        double[] array = new double[length];
-        for( int i = 0; i < array.length; i++ ){
-            array[i] = random.nextDouble();
-        }
-        return array;
     }
 
     public static double squaredEuclideanDistance (Complex[] v, Complex[] w) {
