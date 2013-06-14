@@ -35,7 +35,7 @@ public class DirectedGraph<T> {
         Set<T> candidates = newHashSet(nodes);
         Set<T> reachable = newHashSet();
         List<Set<T>> topology = newLinkedList();
-        while( candidates.size() != 0 ){
+        while( !candidates.isEmpty() ){
             Set<T> newlyReachable = getNewlyReachable(candidates, reachable);
             candidates.removeAll(newlyReachable);
             reachable.addAll(newlyReachable);
@@ -51,7 +51,7 @@ public class DirectedGraph<T> {
                 newlyReachable.add(candidate);
             }
         }
-        if( newlyReachable.size() == 0 ){
+        if( newlyReachable.isEmpty() ){
             throw new IllegalStateException("Cycle detected");
         }
         return newlyReachable;

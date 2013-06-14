@@ -50,7 +50,7 @@ public class WeakObservable {
     }
 
     protected boolean isObserverPresent (WeakObserver observer) {
-        return getReferencesToObserver(observer).size() != 0;
+        return !getReferencesToObserver(observer).isEmpty();
     }
 
     protected void removeDeadReferences () {

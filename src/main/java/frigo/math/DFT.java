@@ -11,8 +11,7 @@ public class DFT implements FourierTransform {
 
     @Override
     public Complex[] inverse (Complex[] F) {
-        Complex[] T = core(F, 1.0);
-        return T;
+        return core(F, 1.0);
     }
 
     @Override
