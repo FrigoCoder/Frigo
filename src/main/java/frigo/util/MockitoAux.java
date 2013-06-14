@@ -13,30 +13,15 @@ import java.util.Queue;
 import org.mockito.internal.stubbing.InvocationContainer;
 import org.mockito.internal.stubbing.StubbedInvocationMatcher;
 import org.mockito.internal.util.MockUtil;
-import org.mockito.invocation.DescribedInvocation;
-import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 import org.mockito.stubbing.Stubber;
 
 public class MockitoAux {
 
-    public static final UnwantedAnswer<?> UNWANTED = new UnwantedAnswer<>();
+    private static final UnwantedAnswer<?> UNWANTED = new UnwantedAnswer<>();
 
     public static <T> T strictMock (Class<T> clazz) {
         return mock(clazz, UNWANTED);
-    }
-
-    private static class UnwantedAnswer<T> implements Answer<T> {
-
-        @Override
-        public T answer (InvocationOnMock invocation) {
-            // InvocationImpl is the only class implementing both of these interfaces. Might change in the future.
-            DescribedInvocation invoked = (DescribedInvocation) invocation;
-
-            String message =
-                join("Unstubbed invocation:", invoked, "Never wanted but invoked here: ", invoked.getLocation(), "");
-            throw new UnstubbedInvocationInvoked(message);
-        }
     }
 
     public static <T> void verifyImplicit (T mock) {
@@ -44,7 +29,6 @@ public class MockitoAux {
         List<StubbedInvocationMatcher> matchers = invocationContainer.getStubbedInvocations();
 
         for( StubbedInvocationMatcher matcher : matchers ){
-
             if( !wasAlmostFullyUsed(matcher) ){
                 String message = join("Implicitly wanted but not invoked:", matcher, matcher.getLocation(), "");
                 throw new ImplicitVerificationFailed(message);

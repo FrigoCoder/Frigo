@@ -30,6 +30,12 @@ public class BinarySearch {
         setInterval(0, array.length - 1);
     }
 
+    private void setInterval (int left, int right) {
+        this.left = left;
+        this.right = right;
+        mid = (left + right) / 2;
+    }
+
     private int find () {
         while( left < right ){
             if( valueIsInLeftInterval() ){
@@ -43,12 +49,6 @@ public class BinarySearch {
 
     private boolean valueIsInLeftInterval () {
         return value <= array[mid];
-    }
-
-    private void setInterval (int left, int right) {
-        this.left = left;
-        this.right = right;
-        mid = (left + right) / 2;
     }
 
     private int findExact () {

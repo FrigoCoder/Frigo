@@ -258,7 +258,8 @@ public final class Polynomial {
      * Returns a string representation of the polynomial, with a custom variable name
      **/
     public String toString (String variable) {
-        String result = "";
+        StringBuilder result = new StringBuilder();
+
         for( int i = getDegree(); i >= 0; i-- ){
             double coeff = getCoeff(i);
             // do not output zero terms at all, except if the polynomial is a constant zero
@@ -268,28 +269,28 @@ public final class Polynomial {
             // output + and - if needed, take abs value of coefficient
             if( coeff > 0.0 ){
                 if( i != getDegree() ){
-                    result += "+";
+                    result.append("+");
                 }
             }else if( coeff < 0.0 ){
-                result += "-";
+                result.append("-");
                 coeff = -coeff;
             }
             // output coefficient if it is not +-1, or if it is a constant
             if( coeff != 1.0 || i == 0 ){
-                result += Double.toString(coeff);
+                result.append(coeff);
             }
             // output power of term
             switch( i ){
                 case 0:
                     break;
                 case 1:
-                    result += variable;
+                    result.append(variable);
                     break;
                 default:
-                    result += variable + "^" + Integer.toString(i);
+                    result.append(variable).append("^").append(i);
             }
         }
-        return result;
+        return result.toString();
     }
 
     /**
