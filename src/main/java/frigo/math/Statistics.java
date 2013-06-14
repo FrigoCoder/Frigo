@@ -9,12 +9,15 @@ import static java.lang.Math.pow;
 public class Statistics {
 
     public static double average (double[] values) {
-        double average = 0.0;
+        return sum(values) / values.length;
+    }
+
+    public static double sum (double[] values) {
+        double sum = 0.0;
         for( double value : values ){
-            average += value;
+            sum += value;
         }
-        average /= values.length;
-        return average;
+        return sum;
     }
 
     public static double variance (double[] values) {
@@ -36,12 +39,11 @@ public class Statistics {
     }
 
     public static double norm (double[] v, double p) {
-        double result = 0.0;
-        for( int i = 0; i < v.length; i++ ){
-            result += pow(abs(v[i]), p);
+        double sum = 0.0;
+        for( double x : v ){
+            sum += pow(abs(x), p);
         }
-        result = pow(result, 1.0 / p);
-        return result;
+        return pow(sum, 1.0 / p);
     }
 
     private static double[] minus (double[] v, double[] w) {
@@ -51,6 +53,38 @@ public class Statistics {
             result[i] = v[i] - w[i];
         }
         return result;
+    }
+
+    public static double max (double[] v) {
+        double max = Double.NEGATIVE_INFINITY;
+        for( double value : v ){
+            max = Math.max(max, value);
+        }
+        return max;
+    }
+
+    public static double maxAbs (double[] v) {
+        double max = Double.NEGATIVE_INFINITY;
+        for( double value : v ){
+            max = Math.max(max, abs(value));
+        }
+        return max;
+    }
+
+    public static double min (double[] v) {
+        double min = Double.POSITIVE_INFINITY;
+        for( double value : v ){
+            min = Math.min(min, value);
+        }
+        return min;
+    }
+
+    public static double minAbs (double[] v) {
+        double min = Double.POSITIVE_INFINITY;
+        for( double value : v ){
+            min = Math.min(min, abs(value));
+        }
+        return min;
     }
 
 }

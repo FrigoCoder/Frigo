@@ -4,7 +4,12 @@ package frigo.math;
 import static frigo.math.Statistics.average;
 import static frigo.math.Statistics.euclideanDistance;
 import static frigo.math.Statistics.manhattanDistance;
+import static frigo.math.Statistics.max;
+import static frigo.math.Statistics.maxAbs;
+import static frigo.math.Statistics.min;
+import static frigo.math.Statistics.minAbs;
 import static frigo.math.Statistics.norm;
+import static frigo.math.Statistics.sum;
 import static frigo.math.Statistics.variance;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
@@ -23,23 +28,20 @@ public class StatisticsTest {
     private double[] other = {1, 3, 5, 7, 9, 11};
 
     @Test
-    public void average_of_linear_array () {
+    public void test_average () {
         assertThat(average(linear), is(21.0 / 6));
-    }
-
-    @Test
-    public void average_of_quadratic_array () {
         assertThat(average(quadratic), is(140.0 / 7));
     }
 
     @Test
-    public void variance_of_linear_array () {
-        assertThat(variance(linear), is(17.5 / 6));
-
+    public void test_sum () {
+        assertThat(sum(linear), is(21.0));
+        assertThat(sum(quadratic), is(140.0));
     }
 
     @Test
-    public void variance_of_quadratic_array () {
+    public void test_variance () {
+        assertThat(variance(linear), is(17.5 / 6));
         assertThat(variance(quadratic), is(1_876.0 / 7));
     }
 
@@ -78,6 +80,34 @@ public class StatisticsTest {
     @Test
     public void norm_euclidean_norm () {
         assertThat(norm(linear, 2), is(9.5393920141694564915262158602323));
+    }
+
+    @Test
+    public void test_max () {
+        assertThat(max(linear), is(6.0));
+        assertThat(max(quadratic), is(49.0));
+    }
+
+    @Test
+    public void test_maxAbs () {
+        assertThat(maxAbs(linear), is(6.0));
+        assertThat(maxAbs(quadratic), is(49.0));
+        double[] arrayWithNegativeMaxAbs = {-10, 1};
+        assertThat(maxAbs(arrayWithNegativeMaxAbs), is(10.0));
+    }
+
+    @Test
+    public void test_min () {
+        assertThat(min(linear), is(1.0));
+        assertThat(min(quadratic), is(1.0));
+    }
+
+    @Test
+    public void test_minAbs () {
+        assertThat(minAbs(linear), is(1.0));
+        assertThat(minAbs(quadratic), is(1.0));
+        double[] arrayWithNegativeMinAbs = {-1, 10};
+        assertThat(minAbs(arrayWithNegativeMinAbs), is(1.0));
     }
 
 }

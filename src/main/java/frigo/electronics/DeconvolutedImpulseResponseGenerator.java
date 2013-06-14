@@ -4,6 +4,7 @@ package frigo.electronics;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
+import frigo.math.Statistics;
 import frigo.util.ArraysAux;
 
 public class DeconvolutedImpulseResponseGenerator {
@@ -40,10 +41,7 @@ public class DeconvolutedImpulseResponseGenerator {
     }
 
     private double[] normalize (double[] v) {
-        double max = 0.0;
-        for( double value : v ){
-            max = Math.max(max, value);
-        }
+        double max = Statistics.maxAbs(v);
         double[] result = new double[v.length];
         for( int i = 0; i < result.length; i++ ){
             result[i] = v[i] / max;
