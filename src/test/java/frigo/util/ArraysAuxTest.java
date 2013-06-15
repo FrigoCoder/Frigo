@@ -3,8 +3,6 @@ package frigo.util;
 
 import static frigo.math.Complex.complex;
 import static frigo.math.MathAux.sqr;
-import static frigo.util.ArraysAux.asArrayList;
-import static frigo.util.ArraysAux.asVector;
 import static frigo.util.ArraysAux.squaredEuclideanDistance;
 import static frigo.util.ArraysAux.toList;
 import static frigo.util.ArraysAux.toObjectArray;
@@ -58,24 +56,6 @@ public class ArraysAuxTest {
         double[] w = {2, 4, 8, 16};
         double actual = squaredEuclideanDistance(v, w);
         double expected = sqr(v[0] - w[0]) + sqr(v[1] - w[1]) + sqr(v[2] - w[2]) + sqr(v[3] - w[3]);
-        assertThat(actual, is(expected));
-    }
-
-    @Test
-    public void testAsArrayList () {
-        List<Integer> actual = asArrayList(1, 2);
-        List<Integer> expected = new ArrayList<>();
-        expected.add(1);
-        expected.add(2);
-        assertThat(actual, is(expected));
-    }
-
-    @Test
-    public void testAsVector () {
-        List<Integer> actual = asVector(1, 2);
-        List<Integer> expected = new ArrayList<>();
-        expected.add(1);
-        expected.add(2);
         assertThat(actual, is(expected));
     }
 
