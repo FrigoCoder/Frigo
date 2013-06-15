@@ -6,29 +6,10 @@ import static frigo.math.MathAux.sqr;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Vector;
 
 import frigo.math.Complex;
 
 public class ArraysAux {
-
-    @SafeVarargs
-    public static <T> ArrayList<T> asArrayList (T... elements) {
-        ArrayList<T> result = new ArrayList<>();
-        for( T element : elements ){
-            result.add(element);
-        }
-        return result;
-    }
-
-    @SafeVarargs
-    public static <T> Vector<T> asVector (T... elements) {
-        Vector<T> result = new Vector<>();
-        for( T element : elements ){
-            result.add(element);
-        }
-        return result;
-    }
 
     public static double squaredEuclideanDistance (Complex[] v, Complex[] w) {
         checkArgument(v.length == w.length);
