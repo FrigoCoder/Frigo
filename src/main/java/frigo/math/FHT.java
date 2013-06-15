@@ -8,7 +8,7 @@ import static java.lang.Math.PI;
 
 /**
  * Fast Hartley Transform with Decimation In Frequency based on <a
- * href=http://vault.embedded.com/2000/0009/0009feat3.htm>Doing Hartley Smartly</a>
+ * href=http://vault.embedded.com/2000/0009/0009feat3.htm>Doing Hartley Smartly</a>.
  **/
 public class FHT extends HartleyTransform {
 

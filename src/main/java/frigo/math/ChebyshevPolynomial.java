@@ -22,7 +22,7 @@ public class ChebyshevPolynomial {
      * Generates a Chebyshev polynomial based on <a
      * href=http://en.wikipedia.org/wiki/Chebyshev_polynomial#Definition>the recurrence relation from the Wikipedia
      * page</a>. Equivalent to the polynomial representation of cos(nx) in terms of cos(x). For example, cos(2x) =
-     * 2cos^2(x) - 1 =: 2c^2 - 1
+     * 2cos^2(x) - 1 =: 2c^2 - 1.
      */
     public Polynomial chebyshev (int degree) {
         List<Polynomial> c = cosines;
@@ -31,7 +31,7 @@ public class ChebyshevPolynomial {
     }
 
     /**
-     * Generates a Chebyshev polynomial divided by its highest coefficient
+     * Generates a Chebyshev polynomial divided by its highest coefficient.
      */
     public Polynomial chebyshevNormalized (int degree) {
         return degree == 0 ? chebyshev(0) : chebyshev(degree).div(pow(2, degree - 1));
@@ -40,7 +40,7 @@ public class ChebyshevPolynomial {
     /**
      * Generates a variation of the Chebyshev polynomial of the second kind. The index is shifted by one, so it is
      * equivalent to the polynomial representation of sin(nx)/sin(x) in terms of cos(x). For example sin(2x) / sin(x) =
-     * 2cos(x) =: 2c
+     * 2cos(x) =: 2c.
      */
     public Polynomial secondKind (int degree) {
         List<Polynomial> s = sines;
@@ -49,7 +49,7 @@ public class ChebyshevPolynomial {
     }
 
     /**
-     * Generates a Chebyshev polynomial of the second kind divided by its highest coefficient
+     * Generates a Chebyshev polynomial of the second kind divided by its highest coefficient.
      */
     public Polynomial secondKindNormalized (int degree) {
         return degree == 0 ? secondKind(0) : secondKind(degree).div(pow(2, degree - 1));

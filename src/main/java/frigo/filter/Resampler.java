@@ -4,7 +4,7 @@ package frigo.filter;
 /**
  * A simple resampler class operating with arrays and continuous kernels based on the ideas of <a
  * href=http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.116.7898>Filters For Common Resampling Tasks</a> and <a
- * href=http://www.virtualdub.org/blog/pivot/entry.php?id=86>How To Make A Resampler That Doesn't Suck</a>
+ * href=http://www.virtualdub.org/blog/pivot/entry.php?id=86>How To Make A Resampler That Doesn't Suck</a>.
  */
 public class Resampler {
 

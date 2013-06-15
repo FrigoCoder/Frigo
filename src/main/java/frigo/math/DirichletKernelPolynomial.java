@@ -8,7 +8,7 @@ public class DirichletKernelPolynomial {
     /**
      * Returns the analytical Dirichlet kernel based on the definition at <a
      * href=http://en.wikipedia.org/wiki/Dirichlet_kernel>Wikipedia</a>, using trigonometric linearization of cosine
-     * terms to arrive at a polynomial in terms of cos(x)
+     * terms to arrive at a polynomial in terms of cos(x).
      **/
     public static Polynomial dirichlet (int n) {
         Polynomial dirichlet = chebyshev.chebyshev(0);
@@ -34,7 +34,7 @@ public class DirichletKernelPolynomial {
     /**
      * Returns the <a href=http://frigocoder.dyndns.org/wiki/Modified_Dirichlet_Kernel>modified Dirichlet kernel</a>, as
      * a polynomial in terms of cos(x), without the domain restriction. Apart from that, it differs from the analytical
-     * kernel in the n-th term and scaling
+     * kernel in the n-th term and scaling.
      **/
     public static Polynomial modifiedDirichlet (int n) {
         Polynomial dirichlet = chebyshev.chebyshev(0).add(chebyshev.chebyshev(n)).mul(0.5);

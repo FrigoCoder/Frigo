@@ -79,7 +79,7 @@ public final class Complex {
 
     /**
      * Returns the argument of the complex number based on <a
-     * href=http://en.wikipedia.org/wiki/Complex_number#Absolute_value_and_argument>the Wikipedia page</a>
+     * href=http://en.wikipedia.org/wiki/Complex_number#Absolute_value_and_argument>the Wikipedia page</a>.
      **/
     public double arg () {
         return Math.atan2(im, re);
@@ -97,7 +97,7 @@ public final class Complex {
 
     /**
      * Complex cosine function based on <a href=http://en.wikipedia.org/wiki/Trigonometric_functions#
-     * Relationship_to_exponential_function_and_complex_numbers>a Wikipedia page</a>
+     * Relationship_to_exponential_function_and_complex_numbers>a Wikipedia page</a>.
      **/
     public Complex cos () {
         Complex eiz = cis(re).mul(Math.exp(-im));
@@ -107,7 +107,7 @@ public final class Complex {
 
     /**
      * Complex cosine hyperbolic function based on <a href=http://en.wikipedia.org/wiki/Trigonometric_functions#
-     * Relationship_to_exponential_function_and_complex_numbers>a Wikipedia page</a>
+     * Relationship_to_exponential_function_and_complex_numbers>a Wikipedia page</a>.
      **/
     public Complex cosh () {
         Complex ez = cis(im).mul(Math.exp(re));
@@ -152,7 +152,7 @@ public final class Complex {
     }
 
     /**
-     * Returns the principal value of the logarithm of the Complex number
+     * Returns the principal value of the logarithm of the Complex number.
      **/
     public Complex log () {
         return new Complex(0.5 * Math.log(sqrAbs()), arg());
@@ -189,7 +189,7 @@ public final class Complex {
 
     /**
      * Complex sine function based on <a href=http://en.wikipedia.org/wiki/Trigonometric_functions#
-     * Relationship_to_exponential_function_and_complex_numbers>a Wikipedia page</a>
+     * Relationship_to_exponential_function_and_complex_numbers>a Wikipedia page</a>.
      **/
     public Complex sin () {
         Complex eiz = cis(re).mul(Math.exp(-im));
@@ -199,7 +199,7 @@ public final class Complex {
 
     /**
      * Complex sine hyperbolic function based on <a href=http://en.wikipedia.org/wiki/Trigonometric_functions#
-     * Relationship_to_exponential_function_and_complex_numbers>a Wikipedia page</a>
+     * Relationship_to_exponential_function_and_complex_numbers>a Wikipedia page</a>.
      **/
     public Complex sinh () {
         Complex ez = cis(im).mul(Math.exp(re));
@@ -216,7 +216,7 @@ public final class Complex {
     }
 
     /**
-     * Returns the principal value of the square roots of the Complex number
+     * Returns the principal value of the square roots of the Complex number.
      **/
     public Complex sqrt () {
         return pow(0.5);

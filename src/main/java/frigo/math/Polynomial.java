@@ -65,7 +65,7 @@ public final class Polynomial {
 
     /**
      * Calculates the derivative of the polynomal, based on <a
-     * href=http://en.wikipedia.org/wiki/Polynomial#Polynomials_and_calculus>the Wikipedia page</a>
+     * href=http://en.wikipedia.org/wiki/Polynomial#Polynomials_and_calculus>the Wikipedia page</a>.
      **/
 
     public Polynomial derivate () {

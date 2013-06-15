@@ -3,7 +3,7 @@ package frigo.filter;
 
 /**
  * Implemented according to <a href="http://www.cg.tuwien.ac.at/~theussl/DA/node33.html">Sampling and Reconstruction in
- * Volume Visualization</a>
+ * Volume Visualization</a>.
  */
 public class BCCubicSpline extends SymmetricCubic {
 
