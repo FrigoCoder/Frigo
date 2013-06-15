@@ -8,6 +8,8 @@ import java.util.Map;
 
 public class Reflection {
 
+    private static final String JAVA_LANG_PROCESS_ENVIRONMENT = "java.lang.ProcessEnvironment";
+
     public static boolean isEnv (String key) {
         return System.getenv().containsKey(key);
     }
@@ -19,26 +21,33 @@ public class Reflection {
 
     public static void setEnv (String key, String value) throws Exception {
         try{
-            Map<String, String> env = getStaticField("java.lang.ProcessEnvironment", "theEnvironment");
-            env.put(key, value);
-            Map<String, String> cienv = getStaticField("java.lang.ProcessEnvironment", "theCaseInsensitiveEnvironment");
-            cienv.put(key, value);
+            getTheEnvironment().put(key, value);
+            getTheCaseInsensitiveEnvironment().put(key, value);
         }catch( NoSuchFieldException e ){
-            Map<String, String> map = getField(System.getenv(), "m");
-            map.put(key, value);
+            getEnvM().put(key, value);
         }
     }
 
     public static void removeEnv (String key) throws Exception {
         try{
-            Map<String, String> env = getStaticField("java.lang.ProcessEnvironment", "theEnvironment");
-            env.remove(key);
-            Map<String, String> cienv = getStaticField("java.lang.ProcessEnvironment", "theCaseInsensitiveEnvironment");
-            cienv.remove(key);
+            getTheEnvironment().remove(key);
+            getTheCaseInsensitiveEnvironment().remove(key);
         }catch( NoSuchFieldException e ){
-            Map<String, String> map = getField(System.getenv(), "m");
+            Map<String, String> map = getEnvM();
             map.remove(key);
         }
+    }
+
+    private static Map<String, String> getEnvM () throws Exception {
+        return getField(System.getenv(), "m");
+    }
+
+    private static Map<String, String> getTheCaseInsensitiveEnvironment () throws Exception {
+        return getStaticField(JAVA_LANG_PROCESS_ENVIRONMENT, "theCaseInsensitiveEnvironment");
+    }
+
+    private static Map<String, String> getTheEnvironment () throws Exception {
+        return getStaticField(JAVA_LANG_PROCESS_ENVIRONMENT, "theEnvironment");
     }
 
     public static <T> T getField (Object object, String fieldName) throws Exception {
