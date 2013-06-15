@@ -11,16 +11,10 @@ public final class Polynomial {
     public static final Polynomial X2 = new Polynomial(1.0, 0.0, 0.0);
     public static final Polynomial X3 = new Polynomial(1.0, 0.0, 0.0, 0.0);
 
-    /**
-     * Shortcut for new Polynomial(...)
-     **/
     public static Polynomial poly (double... coeffs) {
         return new Polynomial(coeffs);
     }
 
-    /**
-     * Array of double holding the coefficients of the polynomial
-     **/
     private double[] v;
 
     /**
@@ -28,6 +22,7 @@ public final class Polynomial {
      * example (2.0, 1.0, 0.0) is equivalent to 2x^2+x. An empty parameter list corresponds to the constant zero
      * polynomial.
      **/
+
     public Polynomial (double... coeffs) {
         this(coeffs.length - 1);
         int degree = getDegree();
@@ -38,17 +33,10 @@ public final class Polynomial {
         normalize();
     }
 
-    /**
-     * Creates a new polynomial of a particular degree with all of its coefficient initialized to zero. The resulting
-     * polynomial is at least zeroth degree, having at least one coefficient. For internal use only
-     **/
     private Polynomial (int degree) {
         v = new double[Math.max(degree + 1, 1)];
     }
 
-    /**
-     * Returns the sum of the polynomial and a real number
-     **/
     public Polynomial add (double scalar) {
         Polynomial result = new Polynomial(getDegree());
         result.setCoeff(0, getCoeff(0) + scalar);
@@ -58,9 +46,6 @@ public final class Polynomial {
         return result;
     }
 
-    /**
-     * Returns the sum of two polynomials
-     **/
     public Polynomial add (Polynomial obj) {
         int max = Math.max(getDegree(), obj.getDegree());
         int min = Math.min(getDegree(), obj.getDegree());
@@ -79,9 +64,10 @@ public final class Polynomial {
     }
 
     /**
-     * Calculates the derivative of the polynomal, based on the <a
-     * href=http://en.wikipedia.org/wiki/Polynomial#Polynomials_and_calculus>Wikipedia page</a>
+     * Calculates the derivative of the polynomal, based on <a
+     * href=http://en.wikipedia.org/wiki/Polynomial#Polynomials_and_calculus>the Wikipedia page</a>
      **/
+
     public Polynomial derivate () {
         Polynomial result = new Polynomial(getDegree() - 1);
         for( int i = 1; i <= getDegree(); i++ ){
@@ -90,9 +76,6 @@ public final class Polynomial {
         return result;
     }
 
-    /**
-     * Returns the division of the polynomial by a real number
-     **/
     public Polynomial div (double scalar) {
         Polynomial result = new Polynomial(getDegree());
         for( int i = 0; i <= getDegree(); i++ ){
@@ -102,9 +85,6 @@ public final class Polynomial {
         return result;
     }
 
-    /**
-     * Compares two polynomials by their coefficients
-     **/
     @Override
     public boolean equals (Object obj) {
         if( !(obj instanceof Polynomial) ){
@@ -122,9 +102,6 @@ public final class Polynomial {
         return true;
     }
 
-    /**
-     * Evaluates the polynomial at an x real argument
-     **/
     public double evaluate (double scalar) {
         double s = getCoeff(0);
         double z = scalar;
@@ -135,17 +112,14 @@ public final class Polynomial {
         return s;
     }
 
-    /**
-     * Returns the coefficient of a particular degree
-     **/
     public double getCoeff (int degree) {
         return v[degree];
     }
 
-    /**
-     * Returns the degree of the polynomial, which is the degree of the highest term. For example, for quadratic
-     * polynomials, it returns 2.
-     **/
+    private void setCoeff (int degree, double coefficient) {
+        v[degree] = coefficient;
+    }
+
     public int getDegree () {
         return v.length - 1;
     }
@@ -156,10 +130,11 @@ public final class Polynomial {
     }
 
     /**
-     * Calculates the indefinite integral or primitive function of the polynomial, based on the <a
-     * href=http://en.wikipedia.org/wiki/Polynomial#Polynomials_and_calculus>Wikipedia page</a>. The integral of a zero
-     * polynomial is zero (+ constant, which is not addressed here).
+     * Calculates the indefinite integral or primitive function of the polynomial, based on <a
+     * href=http://en.wikipedia.org/wiki/Polynomial#Polynomials_and_calculus>the Wikipedia page</a>. The integral of a
+     * zero polynomial is zero (+ constant, which is not addressed here).
      **/
+
     public Polynomial integrate () {
         Polynomial result = new Polynomial(getDegree() + 1);
         for( int i = 0; i <= getDegree(); i++ ){
@@ -169,17 +144,11 @@ public final class Polynomial {
         return result;
     }
 
-    /**
-     * Calculates the definite integral of the polynomial defined between two arguments
-     **/
     public double integrate (double a, double b) {
         Polynomial F = integrate();
         return F.evaluate(b) - F.evaluate(a);
     }
 
-    /**
-     * Returns the product of the polynomial and a real number
-     **/
     public Polynomial mul (double scalar) {
         Polynomial result = new Polynomial(getDegree());
         for( int i = 0; i <= getDegree(); i++ ){
@@ -189,9 +158,6 @@ public final class Polynomial {
         return result;
     }
 
-    /**
-     * Returns the product of two polynomials
-     **/
     public Polynomial mul (Polynomial obj) {
         Polynomial result = new Polynomial(getDegree() + obj.getDegree());
         for( int i = 0; i <= getDegree(); i++ ){
@@ -203,9 +169,6 @@ public final class Polynomial {
         return result;
     }
 
-    /**
-     * Returns the negative of the polynomial
-     **/
     public Polynomial negate () {
         Polynomial result = new Polynomial(getDegree());
         for( int i = 0; i <= getDegree(); i++ ){
@@ -214,9 +177,6 @@ public final class Polynomial {
         return result;
     }
 
-    /**
-     * Returns the polynomial minus a real number
-     **/
     public Polynomial sub (double scalar) {
         Polynomial result = new Polynomial(getDegree());
         result.setCoeff(0, getCoeff(0) - scalar);
@@ -226,9 +186,6 @@ public final class Polynomial {
         return result;
     }
 
-    /**
-     * Returns the polynomial minus another polynomial
-     **/
     public Polynomial sub (Polynomial obj) {
         int max = Math.max(getDegree(), obj.getDegree());
         int min = Math.min(getDegree(), obj.getDegree());
@@ -246,57 +203,49 @@ public final class Polynomial {
         return result;
     }
 
-    /**
-     * Returns a string representation of the polynomial
-     **/
     @Override
     public String toString () {
         return toString("x");
     }
 
-    /**
-     * Returns a string representation of the polynomial, with a custom variable name
-     **/
     public String toString (String variable) {
-        StringBuilder result = new StringBuilder();
-
-        for( int i = getDegree(); i >= 0; i-- ){
-            double coeff = getCoeff(i);
-            // do not output zero terms at all, except if the polynomial is a constant zero
-            if( coeff == 0.0 && getDegree() != 0 ){
-                continue;
-            }
-            // output + and - if needed, take abs value of coefficient
-            if( coeff > 0.0 ){
-                if( i != getDegree() ){
-                    result.append("+");
-                }
-            }else if( coeff < 0.0 ){
-                result.append("-");
-                coeff = -coeff;
-            }
-            // output coefficient if it is not +-1, or if it is a constant
-            if( coeff != 1.0 || i == 0 ){
-                result.append(coeff);
-            }
-            // output power of term
-            switch( i ){
-                case 0:
-                    break;
-                case 1:
-                    result.append(variable);
-                    break;
-                default:
-                    result.append(variable).append("^").append(i);
-            }
+        if( getDegree() == 0 ){
+            return Double.toString(getCoeff(getDegree()));
         }
-        return result.toString();
+        StringBuilder builder = new StringBuilder();
+        builder.append(getTerm(variable, false, getDegree()));
+        for( int degree = getDegree() - 1; degree >= 0; degree-- ){
+            builder.append(getTerm(variable, true, degree));
+        }
+        return builder.toString();
     }
 
-    /**
-     * Normalizes the polynomial by cutting off the highest degree zero coefficients, so the invariant of the data
-     * structure holds. For internal use only
-     **/
+    private String getTerm (String variable, boolean sign, int degree) {
+        double coeff = getCoeff(degree);
+        return coeff == 0 ? "" : getValue(sign, degree, coeff) + getPower(variable, degree);
+    }
+
+    private String getValue (boolean sign, int degree, double coeff) {
+        if( coeff == -1 && degree != 0 ){
+            return "-";
+        }
+        if( coeff == 1 && degree != 0 ){
+            return sign ? "+" : "";
+        }
+        return sign && coeff >= 0.0 ? "+" + coeff : Double.toString(coeff);
+    }
+
+    private String getPower (String variable, int degree) {
+        switch( degree ){
+            case 0:
+                return "";
+            case 1:
+                return variable;
+            default:
+                return variable + "^" + degree;
+        }
+    }
+
     private void normalize () {
         int degree = getDegree();
         while( degree > 0 && getCoeff(degree) == 0.0 ){
@@ -311,11 +260,4 @@ public final class Polynomial {
         }
     }
 
-    /**
-     * Sets the coefficient of a particular degree to a particular value. Used by the basic arithmetic operations like
-     * addition or multipliciation. For internal use only
-     **/
-    private void setCoeff (int degree, double coefficient) {
-        v[degree] = coefficient;
-    }
 }

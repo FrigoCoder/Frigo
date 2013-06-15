@@ -236,6 +236,8 @@ public class PolynomialTest {
         assertThat(poly().toString(), is("0.0"));
         assertThat(poly(1.0).toString(), is("1.0"));
         assertThat(poly(-1.0).toString(), is("-1.0"));
+        assertThat(poly(1.0, 0.0).toString(), is("x"));
+        assertThat(poly(-1.0, 0.0).toString(), is("-x"));
         assertThat(poly(2.0, 1.0).toString(), is("2.0x+1.0"));
         assertThat(poly(-3.0, -2.0, 1.0).toString("c"), is("-3.0c^2-2.0c+1.0"));
     }
