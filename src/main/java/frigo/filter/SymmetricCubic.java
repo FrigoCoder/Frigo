@@ -5,8 +5,15 @@ import static java.lang.Math.abs;
 
 public abstract class SymmetricCubic extends ResamplingKernel {
 
-    protected double p, q, r, s;
-    protected double t, u, v, w;
+    protected double p;
+    protected double q;
+    protected double r;
+    protected double s;
+
+    protected double t;
+    protected double u;
+    protected double v;
+    protected double w;
 
     public SymmetricCubic () {
         super(2.0);

@@ -11,7 +11,7 @@ import frigo.math.MathAux;
 
 public class BruteForceParallelRlcWithLoadFinder {
 
-    private static Logger logger = LoggerFactory.getLogger(BruteForceParallelRlcWithLoadFinder.class);
+    private static final Logger logger = LoggerFactory.getLogger(BruteForceParallelRlcWithLoadFinder.class);
 
     private double f0;
     private double gain;

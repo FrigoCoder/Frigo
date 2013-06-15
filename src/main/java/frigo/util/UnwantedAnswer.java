@@ -1,3 +1,4 @@
+
 package frigo.util;
 
 import static org.mockito.internal.util.StringJoiner.join;

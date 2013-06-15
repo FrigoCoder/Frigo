@@ -63,7 +63,7 @@ public final class Complex {
 
     /**
      * Returns the absolute value of the Complex number based on <a
-     * href=http://en.wikipedia.org/wiki/Complex_number#Absolute_value_and_argument>the Wikipedia page</a>
+     * href=http://en.wikipedia.org/wiki/Complex_number#Absolute_value_and_argument>the Wikipedia page</a>.
      **/
     public double abs () {
         return Math.sqrt(sqrAbs());
@@ -174,7 +174,7 @@ public final class Complex {
     /**
      * Returns the Complex number raised to the power of another Complex number. Based on <a
      * href=http://en.wikipedia.org/wiki/Exponentiation#Computing_complex_powers>this page</a> and <a
-     * href=http://www.cplusplus.com/reference/std/complex/pow/>this one</a>.
+     * href=http://www.cplusplus.com/reference/std/complex/pow>this one</a>.
      **/
     public Complex pow (Complex c) {
         return log().mul(c).exp();

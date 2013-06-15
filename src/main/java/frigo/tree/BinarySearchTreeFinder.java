@@ -9,7 +9,6 @@ public class BinarySearchTreeFinder<Key extends Comparable<Key>, T extends TreeN
     public Key key;
 
     public BinarySearchTreeFinder (T root, Key key) {
-        this.current = null;
         this.down = root;
         this.key = key;
     }
