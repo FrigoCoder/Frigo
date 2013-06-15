@@ -6,7 +6,7 @@ import static frigo.math.MathAux.floor;
 
 public class Sampler {
 
-    private static final double sourceSampleCenter = 0.5;
+    private static final double SOURCE_SAMPLE_CENTER = 0.5;
 
     private Kernel kernel;
 
@@ -34,15 +34,15 @@ public class Sampler {
     }
 
     private int getSourceIndexOfKernelRight (double center, double scale) {
-        return floor(mapKernelToSource(center, scale, kernel.right) - sourceSampleCenter);
+        return floor(mapKernelToSource(center, scale, kernel.right) - SOURCE_SAMPLE_CENTER);
     }
 
     private int getSourceIndexOfKernelLeft (double center, double scale) {
-        return ceil(mapKernelToSource(center, scale, kernel.left) - sourceSampleCenter);
+        return ceil(mapKernelToSource(center, scale, kernel.left) - SOURCE_SAMPLE_CENTER);
     }
 
     private double mapSourceIndexToKernel (double center, double scale, int index) {
-        return (index + sourceSampleCenter - center) / scale;
+        return (index + SOURCE_SAMPLE_CENTER - center) / scale;
     }
 
     private double mapKernelToSource (double center, double scale, double location) {

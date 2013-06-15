@@ -8,7 +8,7 @@ package frigo.filter;
  */
 public class Resampler {
 
-    private static final double destinationSampleCenter = 0.5;
+    private static final double DESTINATION_SAMPLE_CENTER = 0.5;
 
     private final Sampler sampler;
 
@@ -33,7 +33,7 @@ public class Resampler {
     }
 
     private double mapDestinationIndexToSource (int destinationLength, int sourceLength, int index) {
-        return (index + destinationSampleCenter) / destinationLength * sourceLength;
+        return (index + DESTINATION_SAMPLE_CENTER) / destinationLength * sourceLength;
     }
 
 }

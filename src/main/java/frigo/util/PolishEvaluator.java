@@ -20,6 +20,6 @@ public class PolishEvaluator {
             double right = evaluateInner();
             return operator.evaluate(left, right);
         }
-        return Double.valueOf(token);
+        return Double.parseDouble(token);
     }
 }
