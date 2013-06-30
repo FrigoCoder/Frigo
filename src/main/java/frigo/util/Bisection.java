@@ -21,14 +21,14 @@ public class Bisection {
 
     private Bisection (Function<Double, Double> function, double left, double right) {
         this.function = function;
-        setInterval(left, right, f(left), f(right));
+        setInterval(left, f(left), right, f(right));
     }
 
     private double f (double x) {
         return function.apply(x);
     }
 
-    private void setInterval (double left, double right, double leftValue, double rightValue) {
+    private void setInterval (double left, double leftValue, double right, double rightValue) {
         checkArgument(left < right);
         checkArgument(rootIsInInterval(leftValue, rightValue), "Root can not be in interval, f(" + left + ") = "
             + leftValue + ", f(" + right + ") = " + rightValue);
@@ -47,9 +47,9 @@ public class Bisection {
     private double calculateRoot () {
         while( precisionStillHolds() ){
             if( rootIsInInterval(leftValue, midValue) ){
-                setInterval(left, mid, leftValue, midValue);
+                setInterval(left, leftValue, mid, midValue);
             }else{
-                setInterval(mid, right, midValue, rightValue);
+                setInterval(mid, midValue, right, rightValue);
             }
         }
         return mid;
