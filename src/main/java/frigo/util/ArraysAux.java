@@ -11,6 +11,8 @@ import frigo.math.Complex;
 
 public class ArraysAux {
 
+    private static char[] hexArray = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
+
     public static double squaredEuclideanDistance (Complex[] v, Complex[] w) {
         checkArgument(v.length == w.length);
         double distance = 0.0;
@@ -115,6 +117,24 @@ public class ArraysAux {
             }
         }
         return result;
+    }
+
+    public static byte[] bytes (int... array) {
+        byte[] result = new byte[array.length];
+        for( int i = 0; i < result.length; i++ ){
+            result[i] = (byte) array[i];
+        }
+        return result;
+    }
+
+    public static String toHexString (byte[] bytes) {
+        char[] result = new char[bytes.length * 2];
+        int position = 0;
+        for( byte b : bytes ){
+            result[position++] = hexArray[b >> 4 & 0xf];
+            result[position++] = hexArray[b & 0xf];
+        }
+        return new String(result);
     }
 
 }

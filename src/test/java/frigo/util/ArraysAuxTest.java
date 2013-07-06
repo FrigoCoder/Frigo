@@ -3,6 +3,7 @@ package frigo.util;
 
 import static frigo.math.Complex.complex;
 import static frigo.math.MathAux.sqr;
+import static frigo.util.ArraysAux.bytes;
 import static frigo.util.ArraysAux.squaredEuclideanDistance;
 import static frigo.util.ArraysAux.toList;
 import static frigo.util.ArraysAux.toObjectArray;
@@ -131,4 +132,23 @@ public class ArraysAuxTest {
         assertThat(toObjectArray(array), is(expected));
     }
 
+    @Test
+    public void bytes_works_for_positive_values () {
+        int[] array = {0x12, 0x24, 0x48};
+        byte[] expected = {0x12, 0x24, 0x48};
+        assertThat(bytes(array), is(expected));
+    }
+
+    @Test
+    public void bytes_works_for_negative_values () {
+        int[] array = {0x80, 0x84, 0xff};
+        byte[] expected = {(byte) 0x80, (byte) 0x84, (byte) 0xff};
+        assertThat(bytes(array), is(expected));
+    }
+
+    @Test
+    public void toHexString_works_correctly () {
+        byte[] bytes = bytes(0x01, 0x23, 0x45, 0x67, 0x89, 0xab, 0xcd, 0xef);
+        assertThat(ArraysAux.toHexString(bytes), is("0123456789ABCDEF"));
+    }
 }
