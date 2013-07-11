@@ -9,8 +9,10 @@ import static frigo.math.Statistics.maxAbs;
 import static frigo.math.Statistics.min;
 import static frigo.math.Statistics.minAbs;
 import static frigo.math.Statistics.norm;
+import static frigo.math.Statistics.standardDeviation;
 import static frigo.math.Statistics.sum;
 import static frigo.math.Statistics.variance;
+import static java.lang.Math.sqrt;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
@@ -43,6 +45,12 @@ public class StatisticsTest {
     public void test_variance () {
         assertThat(variance(linear), is(17.5 / 6));
         assertThat(variance(quadratic), is(1_876.0 / 7));
+    }
+
+    @Test
+    public void test_standard_deviation () {
+        assertThat(standardDeviation(linear), is(sqrt(17.5 / 6)));
+        assertThat(standardDeviation(quadratic), is(sqrt(1_876.0 / 7)));
     }
 
     @Test

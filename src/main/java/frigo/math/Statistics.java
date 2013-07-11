@@ -5,6 +5,7 @@ import static com.google.common.base.Preconditions.checkArgument;
 import static frigo.math.MathAux.sqr;
 import static java.lang.Math.abs;
 import static java.lang.Math.pow;
+import static java.lang.Math.sqrt;
 
 public class Statistics {
 
@@ -28,6 +29,10 @@ public class Statistics {
         }
         variance /= values.length;
         return variance;
+    }
+
+    public static double standardDeviation (double[] values) {
+        return sqrt(variance(values));
     }
 
     public static double manhattanDistance (double[] v, double[] w) {
