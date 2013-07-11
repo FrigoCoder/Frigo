@@ -1,7 +1,11 @@
 
-package frigo.math;
+package frigo.math.fourier;
 
 import org.junit.Test;
+
+import frigo.math.Complex;
+import frigo.math.fourier.DFT;
+import frigo.math.fourier.FFT;
 
 public class FFTTest extends FourierTransformTestBase {
 

@@ -1,9 +1,10 @@
 
-package frigo.math;
+package frigo.math.fourier;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static frigo.math.MathAux.isPowerOfTwo;
 import static java.lang.Math.PI;
+import frigo.math.Complex;
 
 /**
  * Radix-2 Decimation In Frequency Fast Fourier Transform. Implemented based on the ideas of the Fast Hartley Transform.

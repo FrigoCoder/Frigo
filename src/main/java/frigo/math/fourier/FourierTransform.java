@@ -1,5 +1,7 @@
 
-package frigo.math;
+package frigo.math.fourier;
+
+import frigo.math.Complex;
 
 public interface FourierTransform {
 

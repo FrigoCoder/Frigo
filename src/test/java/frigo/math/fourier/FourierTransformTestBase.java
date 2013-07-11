@@ -1,9 +1,13 @@
 
-package frigo.math;
+package frigo.math.fourier;
 
 import static java.lang.Math.PI;
 
 import java.util.Random;
+
+import frigo.math.Complex;
+import frigo.math.TransformTestBase;
+import frigo.math.fourier.FourierTransform;
 
 public class FourierTransformTestBase extends TransformTestBase {
 

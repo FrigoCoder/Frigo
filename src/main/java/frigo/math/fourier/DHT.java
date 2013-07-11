@@ -1,5 +1,5 @@
 
-package frigo.math;
+package frigo.math.fourier;
 
 import static java.lang.Math.PI;
 import static java.lang.Math.cos;

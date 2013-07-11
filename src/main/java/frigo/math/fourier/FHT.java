@@ -1,10 +1,11 @@
 
-package frigo.math;
+package frigo.math.fourier;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static frigo.math.MathAux.isPowerOfTwo;
 import static java.lang.Integer.numberOfLeadingZeros;
 import static java.lang.Math.PI;
+import frigo.math.Complex;
 
 /**
  * Fast Hartley Transform with Decimation In Frequency based on <a
