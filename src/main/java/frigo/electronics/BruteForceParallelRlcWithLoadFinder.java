@@ -3,21 +3,15 @@ package frigo.electronics;
 
 import static frigo.electronics.IEC60063.higher;
 import static frigo.electronics.IEC60063.lower;
+import static java.lang.Math.abs;
+import static java.lang.Math.max;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import java.util.LinkedList;
+import java.util.List;
 
-import frigo.math.MathAux;
+import com.google.common.base.Function;
 
 public class BruteForceParallelRlcWithLoadFinder {
-
-    private static final Logger logger = LoggerFactory.getLogger(BruteForceParallelRlcWithLoadFinder.class);
-
-    private double f0;
-    private double gain;
-    private double q;
-    private double load;
-    private double[] tolerance;
 
     public static void main (String[] args) {
         dump(4800, -8, 0.5, 35, IEC60063.E6);
@@ -29,51 +23,78 @@ public class BruteForceParallelRlcWithLoadFinder {
     }
 
     private static void dump (int f0, int gain, double q, int load, double[] tolerance) {
-        ParallelRlcWithLoad rlc = new BruteForceParallelRlcWithLoadFinder(f0, gain, q, load, tolerance).getBestRlc();
-        logger.info("f0 = " + rlc.f0 + " Hz, gain = " + rlc.gain + " dB, Q = " + rlc.q() + ", OBW = " + rlc.obw
-            + ", R = " + rlc.R + " ohm , L = " + rlc.L * 1_000 + " mH, C = " + rlc.C * 1_000_000_000 + " nF");
+        new BruteForceParallelRlcWithLoadFinder(f0, gain, q, load, tolerance).run();
     }
 
-    public BruteForceParallelRlcWithLoadFinder (double f0, double gain, double q, double load, double[] tolerance) {
-        this.f0 = f0;
-        this.gain = gain;
-        this.q = q;
-        this.load = load;
-        this.tolerance = tolerance;
+    private ParallelRlcWithLoad ideal;
+    private List<ParallelRlcWithLoad> candidates;
+
+    private BruteForceParallelRlcWithLoadFinder (double f0, double gain, double q, double load, double[] tolerance) {
+        ideal = new ParallelRlcWithLoadFinder(f0, gain, q, load).getFilter();
+        candidates = candidates(load, tolerance);
     }
 
-    public ParallelRlcWithLoad getBestRlc () {
-        ParallelRlcWithLoadFinder finder = new ParallelRlcWithLoadFinder(f0, gain, q, load);
-        ParallelRlcWithLoad ideal = finder.getFilter();
-
+    private List<ParallelRlcWithLoad> candidates (double load, double[] tolerance) {
+        List<ParallelRlcWithLoad> result = new LinkedList<>();
         double[] Rs = {lower(ideal.R, tolerance), higher(ideal.R, tolerance)};
         double[] Ls = {lower(ideal.L, tolerance), higher(ideal.L, tolerance)};
         double[] Cs = {lower(ideal.C, tolerance), higher(ideal.C, tolerance)};
-
-        Minimum<ParallelRlcWithLoad> minimum = new Minimum<>();
         for( double R : Rs ){
             for( double L : Ls ){
                 for( double C : Cs ){
                     ParallelRlcWithLoad rlc = new ParallelRlcWithLoad(R, L, C, load);
-                    double score = evaluate(rlc);
-                    minimum.add(rlc, score);
+                    result.add(rlc);
                 }
             }
+        }
+        return result;
+    }
+
+    private void run () {
+        log("----");
+        log("Ideal: " + ideal);
+        for( ParallelRlcWithLoad rlc : candidates ){
+            log("Candidate: " + rlc);
+        }
+        log("Abs best: " + getBest(evaluateAbs));
+        log("Max best: " + getBest(evaluateMax));
+    }
+
+    private void log (String message) {
+        System.out.println(message);
+    }
+
+    private ParallelRlcWithLoad getBest (Function<ParallelRlcWithLoad, Double> evaluator) {
+        Minimum<ParallelRlcWithLoad> minimum = new Minimum<>();
+        for( ParallelRlcWithLoad rlc : candidates ){
+            double score = evaluator.apply(rlc);
+            minimum.add(rlc, score);
         }
         return minimum.bestObject;
     }
 
-    private double evaluate (ParallelRlcWithLoad rlc) {
-        try{
-            return d(rlc.f0, f0) + d(rlc.gain, gain) + d(rlc.q(), q);
-        }catch( IllegalArgumentException e ){
-            System.out.println("Gain should be < -3.0");
-            return Double.POSITIVE_INFINITY;
-        }
-    }
+    private Function<ParallelRlcWithLoad, Double> evaluateAbs = new Function<ParallelRlcWithLoad, Double>() {
 
-    private double d (double actual, double expected) {
-        return MathAux.sqr((expected - actual) / expected);
-    }
+        @Override
+        public Double apply (ParallelRlcWithLoad rlc) {
+            double distortion = 0.0;
+            for( double f = 1.0; f < 22100.0; f += 1.0 ){
+                distortion += abs(ideal.response(f) - rlc.response(f));
+            }
+            return distortion;
+        }
+    };
+
+    private Function<ParallelRlcWithLoad, Double> evaluateMax = new Function<ParallelRlcWithLoad, Double>() {
+
+        @Override
+        public Double apply (ParallelRlcWithLoad rlc) {
+            double distortion = 0.0;
+            for( double f = 1.0; f < 22100.0; f += 1.0 ){
+                distortion = max(distortion, ideal.response(f) - rlc.response(f));
+            }
+            return distortion;
+        }
+    };
 
 }
