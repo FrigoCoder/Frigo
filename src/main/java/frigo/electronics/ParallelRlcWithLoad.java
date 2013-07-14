@@ -12,9 +12,8 @@ import static java.lang.Math.pow;
 import static java.lang.Math.sqrt;
 import static org.apache.commons.lang3.builder.ToStringStyle.SHORT_PREFIX_STYLE;
 
-import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 
-import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Function;
 
 import frigo.math.Complex;
@@ -28,9 +27,9 @@ public class ParallelRlcWithLoad {
 
     public final double f0;
     public final double gain;
-    private Double q;
-    @VisibleForTesting
-    Double obw;
+    public final double q;
+    public final double obw;
+
     private ParallelRlc rlc;
 
     public ParallelRlcWithLoad (double R, double L, double C, double load) {
@@ -41,23 +40,15 @@ public class ParallelRlcWithLoad {
         rlc = new ParallelRlc(R, L, C);
         f0 = angularToOrdinaryFrequency(1.0 / sqrt(L * C));
         gain = response(f0);
+        q = f0 / (f2() - f1());
+        obw = qFactorToOctaveBandwidth(q);
     }
 
-    public double q () {
-        if( q == null ){
-            q = f0 / (f2() - f1());
-            obw = qFactorToOctaveBandwidth(q());
-        }
-        return q;
-    }
-
-    @VisibleForTesting
-    double f1 () {
+    private double f1 () {
         return sqr(f0) / f2();
     }
 
-    @VisibleForTesting
-    double f2 () {
+    private double f2 () {
         Function<Double, Double> function = new Function<Double, Double>() {
 
             @Override
@@ -80,7 +71,16 @@ public class ParallelRlcWithLoad {
 
     @Override
     public String toString () {
-        return ReflectionToStringBuilder.toString(this, SHORT_PREFIX_STYLE);
+        ToStringBuilder builder = new ToStringBuilder(this, SHORT_PREFIX_STYLE);
+        builder.append("R", R + "Ω");
+        builder.append("L", L * 1_000 + "mH");
+        builder.append("C", C * 1_000_000_000 + "nF");
+        builder.append("load", load + "Ω");
+        builder.append("f0", f0 + "Hz");
+        builder.append("gain", gain + "dB");
+        builder.append("Q", q);
+        builder.append("BW", obw + " octave");
+        return builder.toString();
     }
 
 }

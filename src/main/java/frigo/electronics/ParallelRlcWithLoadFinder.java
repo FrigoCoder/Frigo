@@ -32,7 +32,7 @@ public class ParallelRlcWithLoadFinder {
             @Override
             public Double apply (Double CperL) {
                 ParallelRlcWithLoad rlc = new ParallelRlcWithLoad(R, sqrt(LC / CperL), sqrt(LC * CperL), load);
-                return q - rlc.q();
+                return q - rlc.q;
             }
 
         };
