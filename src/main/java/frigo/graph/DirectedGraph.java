@@ -21,6 +21,7 @@ public class DirectedGraph<T> {
         inEdges.put(node, Sets.<T> newHashSet());
     }
 
+    @SuppressWarnings("unchecked")
     public void addNodes (T... nodesToAdd) {
         for( T node : nodesToAdd ){
             addNode(node);

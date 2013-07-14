@@ -90,6 +90,7 @@ public class DirectedGraphTest {
         assertThat(topology.get(2), is(asSet("C")));
     }
 
+    @SuppressWarnings("unchecked")
     private <T> Set<T> asSet (T... objects) {
         return newHashSet(objects);
     }
