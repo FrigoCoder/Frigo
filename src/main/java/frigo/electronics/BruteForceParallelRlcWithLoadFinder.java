@@ -12,12 +12,9 @@ import java.util.List;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
-import com.google.common.base.Function;
-
 public class BruteForceParallelRlcWithLoadFinder {
 
     public static void main (String[] args) {
-        dump(4800, -8, 0.5, 35, IEC60063.E6);
         dump(4800, -8, 0.5, 35, IEC60063.E12);
         dump(4800, -8, 0.5, 35, IEC60063.E24);
         dump(4800, -8, 0.5, 35, IEC60063.E48);
@@ -53,11 +50,7 @@ public class BruteForceParallelRlcWithLoadFinder {
         log("----");
         log("Ideal: " + ideal);
         log("Parts: " + getPartsString());
-        // for( ParallelRlcWithLoad rlc : candidates ){
-        // log("Candidate: " + rlc);
-        // }
-        log("Abs best: " + getBest(evaluateAbs));
-        log("Max best: " + getBest(evaluateMax));
+        log("Best: " + getBest());
     }
 
     private void log (String message) {
@@ -78,37 +71,21 @@ public class BruteForceParallelRlcWithLoadFinder {
         return builder.toString();
     }
 
-    private ParallelRlcWithLoad getBest (Function<ParallelRlcWithLoad, Double> evaluator) {
+    private ParallelRlcWithLoad getBest () {
         Minimum<ParallelRlcWithLoad> minimum = new Minimum<>();
         for( ParallelRlcWithLoad rlc : candidates ){
-            double score = evaluator.apply(rlc);
+            double score = evaluate(rlc);
             minimum.add(rlc, score);
         }
         return minimum.bestObject;
     }
 
-    private Function<ParallelRlcWithLoad, Double> evaluateAbs = new Function<ParallelRlcWithLoad, Double>() {
-
-        @Override
-        public Double apply (ParallelRlcWithLoad rlc) {
-            double distortion = 0.0;
-            for( double f = 1.0; f < 22100.0; f += 1.0 ){
-                distortion += abs(ideal.response(f) - rlc.response(f));
-            }
-            return distortion;
+    private double evaluate (ParallelRlcWithLoad rlc) {
+        double distortion = 0.0;
+        for( double f = 1.0; f < 22100.0; f += 1 ){
+            distortion = max(distortion, abs(ideal.response(f) - rlc.response(f)));
         }
-    };
-
-    private Function<ParallelRlcWithLoad, Double> evaluateMax = new Function<ParallelRlcWithLoad, Double>() {
-
-        @Override
-        public Double apply (ParallelRlcWithLoad rlc) {
-            double distortion = 0.0;
-            for( double f = 1.0; f < 22100.0; f += 1.0 ){
-                distortion = max(distortion, abs(ideal.response(f) - rlc.response(f)));
-            }
-            return distortion;
-        }
-    };
+        return distortion;
+    }
 
 }
