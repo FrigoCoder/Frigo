@@ -5,9 +5,12 @@ import static frigo.electronics.IEC60063.higher;
 import static frigo.electronics.IEC60063.lower;
 import static java.lang.Math.abs;
 import static java.lang.Math.max;
+import static org.apache.commons.lang3.builder.ToStringStyle.SHORT_PREFIX_STYLE;
 
 import java.util.LinkedList;
 import java.util.List;
+
+import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import com.google.common.base.Function;
 
@@ -27,41 +30,52 @@ public class BruteForceParallelRlcWithLoadFinder {
     }
 
     private ParallelRlcWithLoad ideal;
-    private List<ParallelRlcWithLoad> candidates;
+    private double[] Rs;
+    private double[] Ls;
+    private double[] Cs;
+    private List<ParallelRlcWithLoad> candidates = new LinkedList<>();
 
     private BruteForceParallelRlcWithLoadFinder (double f0, double gain, double q, double load, double[] tolerance) {
         ideal = new ParallelRlcWithLoadFinder(f0, gain, q, load).getFilter();
-        candidates = candidates(load, tolerance);
-    }
-
-    private List<ParallelRlcWithLoad> candidates (double load, double[] tolerance) {
-        List<ParallelRlcWithLoad> result = new LinkedList<>();
-        double[] Rs = {lower(ideal.R, tolerance), higher(ideal.R, tolerance)};
-        double[] Ls = {lower(ideal.L, tolerance), higher(ideal.L, tolerance)};
-        double[] Cs = {lower(ideal.C, tolerance), higher(ideal.C, tolerance)};
+        Rs = new double[] {lower(ideal.R, tolerance), higher(ideal.R, tolerance)};
+        Ls = new double[] {lower(ideal.L, tolerance), higher(ideal.L, tolerance)};
+        Cs = new double[] {lower(ideal.C, tolerance), higher(ideal.C, tolerance)};
         for( double R : Rs ){
             for( double L : Ls ){
                 for( double C : Cs ){
-                    ParallelRlcWithLoad rlc = new ParallelRlcWithLoad(R, L, C, load);
-                    result.add(rlc);
+                    candidates.add(new ParallelRlcWithLoad(R, L, C, load));
                 }
             }
         }
-        return result;
     }
 
     private void run () {
         log("----");
         log("Ideal: " + ideal);
-        for( ParallelRlcWithLoad rlc : candidates ){
-            log("Candidate: " + rlc);
-        }
+        log("Parts: " + getPartsString());
+        // for( ParallelRlcWithLoad rlc : candidates ){
+        // log("Candidate: " + rlc);
+        // }
         log("Abs best: " + getBest(evaluateAbs));
         log("Max best: " + getBest(evaluateMax));
     }
 
     private void log (String message) {
         System.out.println(message);
+    }
+
+    private String getPartsString () {
+        ToStringBuilder builder = new ToStringBuilder(this, SHORT_PREFIX_STYLE);
+        for( double R : Rs ){
+            builder.append("R", R + "Ω");
+        }
+        for( double L : Ls ){
+            builder.append("L", L * 1_000 + "mH");
+        }
+        for( double C : Cs ){
+            builder.append("C", C * 1_000_000_000 + "nF");
+        }
+        return builder.toString();
     }
 
     private ParallelRlcWithLoad getBest (Function<ParallelRlcWithLoad, Double> evaluator) {
@@ -91,7 +105,7 @@ public class BruteForceParallelRlcWithLoadFinder {
         public Double apply (ParallelRlcWithLoad rlc) {
             double distortion = 0.0;
             for( double f = 1.0; f < 22100.0; f += 1.0 ){
-                distortion = max(distortion, ideal.response(f) - rlc.response(f));
+                distortion = max(distortion, abs(ideal.response(f) - rlc.response(f)));
             }
             return distortion;
         }
