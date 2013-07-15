@@ -72,15 +72,19 @@ public class ParallelRlcWithLoad {
     @Override
     public String toString () {
         ToStringBuilder builder = new ToStringBuilder(this, SHORT_PREFIX_STYLE);
-        builder.append("R", R + "Ω");
-        builder.append("L", L * 1_000 + "mH");
-        builder.append("C", C * 1_000_000_000 + "nF");
-        builder.append("load", load + "Ω");
-        builder.append("f0", f0 + "Hz");
-        builder.append("gain", gain + "dB");
-        builder.append("Q", q);
-        builder.append("BW", obw + " octave");
+        builder.append("R", format(R) + "Ω");
+        builder.append("L", format(L * 1_000) + "mH");
+        builder.append("C", format(C * 1_000_000_000) + "nF");
+        builder.append("load", format(load) + "Ω");
+        builder.append("f0", format(f0) + "Hz");
+        builder.append("gain", format(gain) + "dB");
+        builder.append("Q", format(q));
+        builder.append("BW", format(obw) + " octave");
         return builder.toString();
+    }
+
+    private String format (double value) {
+        return Double.toString(value);
     }
 
 }

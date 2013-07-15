@@ -5,12 +5,9 @@ import static frigo.electronics.component.IEC60063.higher;
 import static frigo.electronics.component.IEC60063.lower;
 import static java.lang.Math.abs;
 import static java.lang.Math.max;
-import static org.apache.commons.lang3.builder.ToStringStyle.SHORT_PREFIX_STYLE;
 
 import java.util.LinkedList;
 import java.util.List;
-
-import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import frigo.electronics.component.IEC60063;
 import frigo.util.Minimum;
@@ -18,11 +15,9 @@ import frigo.util.Minimum;
 public class BruteForceParallelRlcWithLoadFinder {
 
     public static void main (String[] args) {
-        dump(4800, -8, 0.5, 35, IEC60063.E12);
-        dump(4800, -8, 0.5, 35, IEC60063.E24);
-        dump(4800, -8, 0.5, 35, IEC60063.E48);
-        dump(4800, -8, 0.5, 35, IEC60063.E96);
-        dump(4800, -8, 0.5, 35, IEC60063.E192);
+        dump(4800, -8, 0.44, 35, IEC60063.E24);
+        dump(4800, -8, 0.47, 35, IEC60063.E24);
+        dump(4800, -8, 0.44, 35, IEC60063.E12);
     }
 
     private static void dump (int f0, int gain, double q, int load, double[] tolerance) {
@@ -52,26 +47,11 @@ public class BruteForceParallelRlcWithLoadFinder {
     private void run () {
         log("----");
         log("Ideal: " + ideal);
-        log("Parts: " + getPartsString());
         log("Best: " + getBest());
     }
 
     private void log (String message) {
         System.out.println(message);
-    }
-
-    private String getPartsString () {
-        ToStringBuilder builder = new ToStringBuilder(this, SHORT_PREFIX_STYLE);
-        for( double R : Rs ){
-            builder.append("R", R + "Ω");
-        }
-        for( double L : Ls ){
-            builder.append("L", L * 1_000 + "mH");
-        }
-        for( double C : Cs ){
-            builder.append("C", C * 1_000_000_000 + "nF");
-        }
-        return builder.toString();
     }
 
     private ParallelRlcWithLoad getBest () {
