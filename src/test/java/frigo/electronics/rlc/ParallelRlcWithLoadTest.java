@@ -1,5 +1,5 @@
 
-package frigo.electronics;
+package frigo.electronics.rlc;
 
 import static frigo.electronics.Prefix.toUnit;
 import static org.hamcrest.Matchers.closeTo;
@@ -7,6 +7,8 @@ import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
 import org.junit.Test;
+
+import frigo.electronics.rlc.ParallelRlcWithLoad;
 
 public class ParallelRlcWithLoadTest {
 

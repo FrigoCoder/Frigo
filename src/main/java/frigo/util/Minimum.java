@@ -1,5 +1,5 @@
 
-package frigo.electronics;
+package frigo.util;
 
 public class Minimum<T> {
 

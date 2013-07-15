@@ -1,5 +1,5 @@
 
-package frigo;
+package frigo.box;
 
 import static frigo.math.MathAux.sqr;
 

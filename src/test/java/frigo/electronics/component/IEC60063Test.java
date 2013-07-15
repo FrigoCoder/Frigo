@@ -1,9 +1,9 @@
 
-package frigo.electronics;
+package frigo.electronics.component;
 
-import static frigo.electronics.IEC60063.E48;
-import static frigo.electronics.IEC60063.higher;
-import static frigo.electronics.IEC60063.lower;
+import static frigo.electronics.component.IEC60063.E48;
+import static frigo.electronics.component.IEC60063.higher;
+import static frigo.electronics.component.IEC60063.lower;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 

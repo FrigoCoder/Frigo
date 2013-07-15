@@ -1,5 +1,5 @@
 
-package frigo.electronics;
+package frigo.electronics.component;
 
 import frigo.math.Complex;
 

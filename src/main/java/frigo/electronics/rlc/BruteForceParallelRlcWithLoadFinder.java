@@ -1,8 +1,8 @@
 
-package frigo.electronics;
+package frigo.electronics.rlc;
 
-import static frigo.electronics.IEC60063.higher;
-import static frigo.electronics.IEC60063.lower;
+import static frigo.electronics.component.IEC60063.higher;
+import static frigo.electronics.component.IEC60063.lower;
 import static java.lang.Math.abs;
 import static java.lang.Math.max;
 import static org.apache.commons.lang3.builder.ToStringStyle.SHORT_PREFIX_STYLE;
@@ -11,6 +11,9 @@ import java.util.LinkedList;
 import java.util.List;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
+
+import frigo.electronics.component.IEC60063;
+import frigo.util.Minimum;
 
 public class BruteForceParallelRlcWithLoadFinder {
 

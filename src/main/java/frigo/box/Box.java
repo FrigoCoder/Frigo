@@ -1,5 +1,5 @@
 
-package frigo;
+package frigo.box;
 
 import static com.google.common.base.Preconditions.checkArgument;
 

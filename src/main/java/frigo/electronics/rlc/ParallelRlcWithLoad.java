@@ -1,5 +1,5 @@
 
-package frigo.electronics;
+package frigo.electronics.rlc;
 
 import static frigo.electronics.Util.angularToOrdinaryFrequency;
 import static frigo.electronics.Util.ordinaryToAngularFrequency;

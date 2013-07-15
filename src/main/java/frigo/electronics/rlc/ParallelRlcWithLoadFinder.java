@@ -1,5 +1,5 @@
 
-package frigo.electronics;
+package frigo.electronics.rlc;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static frigo.electronics.Util.decibelToAmplitudeRatio;

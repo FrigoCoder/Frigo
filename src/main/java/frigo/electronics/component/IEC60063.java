@@ -1,5 +1,5 @@
 
-package frigo.electronics;
+package frigo.electronics.component;
 
 import static java.lang.Math.floor;
 import static java.lang.Math.log10;

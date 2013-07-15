@@ -1,5 +1,5 @@
 
-package frigo;
+package frigo.box;
 
 public class BoxFinder {
 

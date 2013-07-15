@@ -1,5 +1,5 @@
 
-package frigo.electronics;
+package frigo.electronics.component;
 
 import static org.apache.commons.lang3.builder.ToStringStyle.SHORT_PREFIX_STYLE;
 

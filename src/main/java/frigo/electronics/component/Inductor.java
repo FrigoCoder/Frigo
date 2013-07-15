@@ -1,14 +1,14 @@
 
-package frigo.electronics;
+package frigo.electronics.component;
 
-import static frigo.electronics.IEC60063.E12;
-import static frigo.electronics.IEC60063.E192;
-import static frigo.electronics.IEC60063.E24;
-import static frigo.electronics.IEC60063.E48;
-import static frigo.electronics.IEC60063.E6;
-import static frigo.electronics.IEC60063.E96;
-import static frigo.electronics.IEC60063.applyDecades;
 import static frigo.electronics.Prefix.toUnit;
+import static frigo.electronics.component.IEC60063.E12;
+import static frigo.electronics.component.IEC60063.E192;
+import static frigo.electronics.component.IEC60063.E24;
+import static frigo.electronics.component.IEC60063.E48;
+import static frigo.electronics.component.IEC60063.E6;
+import static frigo.electronics.component.IEC60063.E96;
+import static frigo.electronics.component.IEC60063.applyDecades;
 import static frigo.math.Complex.complex;
 import frigo.math.Complex;
 

@@ -1,5 +1,5 @@
 
-package frigo;
+package frigo.box;
 
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
@@ -7,6 +7,8 @@ import static org.junit.Assert.assertThat;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
+
+import frigo.box.Box;
 
 public class BoxTest {
 
