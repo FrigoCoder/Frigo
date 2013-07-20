@@ -1,53 +1,18 @@
 
 package frigo.util;
 
-import static frigo.util.Reflection.getEnv;
-import static frigo.util.Reflection.isEnv;
-import static frigo.util.Reflection.removeEnv;
-import static frigo.util.Reflection.setEnv;
 import static frigo.util.Reflection.setField;
 import static frigo.util.Reflection.setStaticField;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 
 public class ReflectionTest {
 
     private int privateField;
 
     private static int privateStaticField;
-
-    @Rule
-    public ExpectedException thrown = ExpectedException.none();
-
-    @Test
-    public void isEnv_returns_true_on_existing_environment_variable () throws Exception {
-        setEnv("whatever", "who cares");
-        assertThat(isEnv("whatever"), is(true));
-    }
-
-    @Test
-    public void isEnv_returns_false_on_missing_environment_variable () throws Exception {
-        removeEnv("whatever");
-        assertThat(isEnv("whatever"), is(false));
-    }
-
-    @Test
-    public void getEnv_returns_existing_environment_variable () throws Exception {
-        setEnv("whatever", "who cares");
-        assertThat(getEnv("whatever"), is("who cares"));
-    }
-
-    @Test
-    public void getEnv_throws_on_missing_environment_variable () throws Exception {
-        setEnv("whatever", "who cares");
-        removeEnv("whatever");
-        thrown.expect(IllegalArgumentException.class);
-        getEnv("whatever");
-    }
 
     @Test
     public void getField_returns_value_of_private_field () throws Exception {

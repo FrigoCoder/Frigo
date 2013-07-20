@@ -6,3 +6,9 @@ build
 log
 out
 reports
+syntax: glob
+output.wav
+output.snd
+3.wav
+2.wav
+1.wav
