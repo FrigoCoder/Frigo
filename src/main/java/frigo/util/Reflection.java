@@ -6,18 +6,28 @@ import java.lang.reflect.Field;
 public class Reflection {
 
     public static <T> T getField (Object object, String fieldName) throws Exception {
-        return getField(object.getClass(), object, fieldName);
-    }
-
-    public static <T> T getStaticField (Class<?> clazz, String fieldName) throws Exception {
-        return getField(clazz, null, fieldName);
+        return getFieldInSuperclasses(object.getClass(), object, fieldName);
     }
 
     public static <T> T getStaticField (String className, String fieldName) throws Exception {
         return getStaticField(Class.forName(className), fieldName);
     }
 
-    private static <T> T getField (Class<?> clazz, Object object, String fieldName) throws Exception {
+    public static <T> T getStaticField (Class<?> clazz, String fieldName) throws Exception {
+        return getFieldInSuperclasses(clazz, null, fieldName);
+    }
+
+    private static <T> T getFieldInSuperclasses (Class<?> clazz, Object object, String fieldName) throws Exception {
+        for( Class<?> actual = clazz; actual != null; actual = actual.getSuperclass() ){
+            try{
+                return getFieldInConcreteClass(actual, object, fieldName);
+            }catch( NoSuchFieldException e ){
+            }
+        }
+        throw new NoSuchFieldException();
+    }
+
+    private static <T> T getFieldInConcreteClass (Class<?> clazz, Object object, String fieldName) throws Exception {
         Field field = clazz.getDeclaredField(fieldName);
         boolean accessible = field.isAccessible();
         try{
@@ -29,18 +39,31 @@ public class Reflection {
     }
 
     public static <T> void setField (Object object, String fieldName, T value) throws Exception {
-        setField(object.getClass(), object, fieldName, value);
-    }
-
-    public static <T> void setStaticField (Class<?> clazz, String fieldName, T value) throws Exception {
-        setField(clazz, null, fieldName, value);
+        setFieldInSuperclasses(object.getClass(), object, fieldName, value);
     }
 
     public static <T> void setStaticField (String className, String fieldName, T value) throws Exception {
         setStaticField(Class.forName(className), fieldName, value);
     }
 
-    private static <T> void setField (Class<?> clazz, Object object, String fieldName, T value) throws Exception {
+    public static <T> void setStaticField (Class<?> clazz, String fieldName, T value) throws Exception {
+        setFieldInSuperclasses(clazz, null, fieldName, value);
+    }
+
+    private static <T> void setFieldInSuperclasses (Class<?> clazz, Object object, String fieldName, T value)
+        throws Exception {
+        for( Class<?> actual = clazz; actual != null; actual = actual.getSuperclass() ){
+            try{
+                setFieldInConcreteClass(actual, object, fieldName, value);
+                return;
+            }catch( NoSuchFieldException e ){
+            }
+        }
+        throw new NoSuchFieldException();
+    }
+
+    private static <T> void setFieldInConcreteClass (Class<?> clazz, Object object, String fieldName, T value)
+        throws Exception {
         Field field = clazz.getDeclaredField(fieldName);
         boolean accessible = field.isAccessible();
         try{
