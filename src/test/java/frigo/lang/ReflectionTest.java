@@ -1,14 +1,16 @@
 
-package frigo.util;
+package frigo.lang;
 
-import static frigo.util.Reflection.setField;
-import static frigo.util.Reflection.setStaticField;
+import static frigo.lang.Reflection.setField;
+import static frigo.lang.Reflection.setStaticField;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
+
+import frigo.lang.Reflection;
 
 public class ReflectionTest {
 

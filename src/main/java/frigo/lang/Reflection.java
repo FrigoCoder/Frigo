@@ -1,5 +1,5 @@
 
-package frigo.util;
+package frigo.lang;
 
 import java.lang.reflect.Field;
 

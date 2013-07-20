@@ -1,10 +1,10 @@
 
-package frigo.util;
+package frigo.lang;
 
-import static frigo.util.Environment.get;
-import static frigo.util.Environment.has;
-import static frigo.util.Environment.remove;
-import static frigo.util.Environment.set;
+import static frigo.lang.Environment.get;
+import static frigo.lang.Environment.has;
+import static frigo.lang.Environment.remove;
+import static frigo.lang.Environment.set;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 

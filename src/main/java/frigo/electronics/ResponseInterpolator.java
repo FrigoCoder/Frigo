@@ -1,7 +1,7 @@
 
 package frigo.electronics;
 
-import static frigo.util.Rethrow.unchecked;
+import static frigo.lang.Rethrow.unchecked;
 import static java.lang.Double.parseDouble;
 
 import java.io.File;

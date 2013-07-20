@@ -1,7 +1,7 @@
 
-package frigo.util;
+package frigo.lang;
 
-import static frigo.util.Rethrow.unchecked;
+import static frigo.lang.Rethrow.unchecked;
 
 import org.junit.Rule;
 import org.junit.Test;

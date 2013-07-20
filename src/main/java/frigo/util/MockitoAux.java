@@ -1,8 +1,8 @@
 
 package frigo.util;
 
+import static frigo.lang.Rethrow.unchecked;
 import static frigo.util.ArraysAux.toObjectArray;
-import static frigo.util.Rethrow.unchecked;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.internal.util.StringJoiner.join;
@@ -15,6 +15,8 @@ import org.mockito.internal.stubbing.StubbedInvocationMatcher;
 import org.mockito.internal.util.MockUtil;
 import org.mockito.stubbing.Answer;
 import org.mockito.stubbing.Stubber;
+
+import frigo.lang.Reflection;
 
 public class MockitoAux {
 

@@ -1,5 +1,5 @@
 
-package frigo.util;
+package frigo.lang;
 
 public class Rethrow {
 
