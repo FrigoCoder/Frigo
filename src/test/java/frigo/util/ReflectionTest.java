@@ -6,7 +6,9 @@ import static frigo.util.Reflection.setStaticField;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 public class ReflectionTest {
 
@@ -23,6 +25,9 @@ public class ReflectionTest {
         private static int anotherPrivateStaticField;
 
     }
+
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
 
     private Base base = new Sub();
     private Sub sub = new Sub();
@@ -81,6 +86,42 @@ public class ReflectionTest {
         assertThat(Sub.anotherPrivateStaticField, is(115));
         setStaticField(sub.getClass(), "anotherPrivateStaticField", 116);
         assertThat(Sub.anotherPrivateStaticField, is(116));
+    }
+
+    @Test
+    public void getField_throws_exception_on_unknown_field () throws Exception {
+        thrown.expect(NoSuchFieldException.class);
+        Reflection.<Integer> getField(base, "doesNotExist");
+    }
+
+    @Test
+    public void getStaticField_throws_exception_on_unknown_field () throws Exception {
+        thrown.expect(NoSuchFieldException.class);
+        Reflection.<Integer> getStaticField(base.getClass(), "doesNotExist");
+    }
+
+    @Test
+    public void getStaticField_throws_exception_on_unknown_field_by_class_name () throws Exception {
+        thrown.expect(NoSuchFieldException.class);
+        Reflection.<Integer> getStaticField(base.getClass().getName(), "doesNotExist");
+    }
+
+    @Test
+    public void setField_throws_exception_on_unknown_field () throws Exception {
+        thrown.expect(NoSuchFieldException.class);
+        Reflection.<Integer> setField(base, "doesNotExist", 1);
+    }
+
+    @Test
+    public void setStaticField_throws_exception_on_unknown_field () throws Exception {
+        thrown.expect(NoSuchFieldException.class);
+        Reflection.<Integer> setStaticField(base.getClass(), "doesNotExist", 2);
+    }
+
+    @Test
+    public void setStaticField_throws_exception_on_unknown_field_by_class_name () throws Exception {
+        thrown.expect(NoSuchFieldException.class);
+        Reflection.<Integer> setStaticField(base.getClass().getName(), "doesNotExist", 3);
     }
 
 }
