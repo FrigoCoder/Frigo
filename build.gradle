@@ -23,7 +23,7 @@ dependencies {
     compile group: 'org.codehaus.jremoting', name: 'jremoting-api', version: 'latest.release'
     compile group: 'org.codehaus.jremoting', name: 'jremoting-client', version: 'latest.release'
     compile group: 'org.codehaus.jremoting', name: 'jremoting-server', version: 'latest.release'
-
+ 
     compile group: 'org.mockito', name: 'mockito-core', version: 'latest.release'
 
     testCompile group: 'com.jayway.awaitility', name: 'awaitility', version: 'latest.release'
