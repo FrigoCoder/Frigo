@@ -4,129 +4,64 @@ package frigo.math;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
-import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 public class MatrixTest {
 
-    private int m;
-    private Matrix matrix;
-    private int n;
-    private int x;
-    private int y;
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
+
+    private int n = 2;
+    private int m = 3;
+    private Matrix matrix = new Matrix(n, m);
 
     @Test
-    public void getAfterConstructor () {
-        assertThat(matrix.get(x, y), is(0.0));
-    }
-
-    @Test
-    public void getAfterSet () {
-        matrix.set(x, y, 1.0);
-        assertThat(matrix.get(x, y), is(1.0));
-    }
-
-    @Test(expected = IndexOutOfBoundsException.class)
-    public void getLargeI () {
-        matrix.get(n, y);
-    }
-
-    @Test(expected = IndexOutOfBoundsException.class)
-    public void getLargeJ () {
-        matrix.get(x, m);
-    }
-
-    @Test(expected = IndexOutOfBoundsException.class)
-    public void getSmallI () {
-        matrix.get(-1, y);
-    }
-
-    @Test(expected = IndexOutOfBoundsException.class)
-    public void getSmallJ () {
-        matrix.get(x, -1);
+    public void dimensions_are_correct() {
+        assertThat(matrix.n, is(n));
+        assertThat(matrix.m, is(m));
     }
 
     @Test
-    public void getVectorReturnsColumnVector () {
-        matrix.set(x, y, 1.0);
-        Vector vector = matrix.getVector(y);
-        assertThat(vector.get(x), is(1.0));
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void mulIncorrectSize () {
-        matrix.mul(new Vector(n - 1));
-    }
-
-    @Test
-    public void mulLeftOnesMatrixByVector () {
-        for( int i = 0; i < matrix.n(); i++ ){
-            matrix.set(i, 0, 1.0);
-        }
-        Vector vector = getLinearVector();
-        Vector result = matrix.mul(vector);
-        for( int i = 0; i < result.size(); i++ ){
-            assertThat(result.get(i), is(vector.get(0)));
-        }
-    }
-
-    @Test
-    public void mulTopOnesMatrixByVector () {
-        for( int j = 0; j < matrix.m(); j++ ){
-            matrix.set(0, j, 1.0);
-        }
-        Vector vector = getLinearVector();
-        Vector result = matrix.mul(vector);
-        assertThat(result.get(0), is(getSum(vector)));
-        for( int i = 1; i < result.size(); i++ ){
-            assertThat(result.get(i), is(0.0));
-        }
-    }
-
-    @Test
-    public void newMatrixIntIntHasCorrectDimensions () {
-        assertThat(matrix.n(), is(n));
-        assertThat(matrix.m(), is(m));
-    }
-
-    @Test
-    public void newMatrixIntIntIsFullOfZeros () {
-        for( int i = 0; i < matrix.n(); i++ ){
-            for( int j = 0; j < matrix.m(); j++ ){
+    public void coefficients_are_zero_by_default() {
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
                 assertThat(matrix.get(i, j), is(0.0));
             }
         }
     }
 
     @Test
-    public void newMatrixIsOneByOne () {
-        matrix = new Matrix();
-        assertThat(matrix.n(), is(1));
-        assertThat(matrix.m(), is(1));
+    public void sets_value_properly() {
+        int i = 1;
+        int j = 2;
+        matrix.set(i, j, 1);
+        assertThat(matrix.get(i, j), is(1.0));
     }
 
-    @Before
-    public void setUp () {
-        n = 10;
-        m = 13;
-        x = 3;
-        y = 5;
-        matrix = new Matrix(n, m);
+    @Test
+    public void column_vector_is_returned() {
+        int i = 1;
+        int j = 2;
+        matrix.set(i, j, 1);
+        assertThat(matrix.vector(j).get(i), is(1.0));
     }
 
-    Vector getLinearVector () {
-        Vector vector = new Vector(m);
-        for( int i = 0; i < vector.size(); i++ ){
-            vector.set(i, i);
-        }
-        return vector;
+    @Test
+    public void setRow_works_properly() {
+        matrix.setRow(0, 1, 2, 3);
+        matrix.setRow(1, 4, 5, 6);
+        assertThat(matrix.vector(0), is(Vector.from(1, 4)));
+        assertThat(matrix.vector(1), is(Vector.from(2, 5)));
+        assertThat(matrix.vector(2), is(Vector.from(3, 6)));
     }
 
-    private double getSum (Vector vector) {
-        double expected = 0.0;
-        for( int i = 0; i < vector.size(); i++ ){
-            expected += vector.get(i);
-        }
-        return expected;
+    @Test
+    public void multiplication_works_properly() {
+        matrix.setRow(0, 1, 2, 3);
+        matrix.setRow(1, 4, 5, 6);
+        assertThat(matrix.mul(Vector.from(1, 2, 3)), is(Vector.from(14, 32)));
     }
+
 }
