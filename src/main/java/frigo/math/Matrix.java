@@ -14,7 +14,7 @@ public class Matrix {
         m = columns;
         vectors = new Vector[columns];
         for (int j = 0; j < columns; j++) {
-            vectors[j] = new Vector(rows);
+            vectors[j] = Vector.create(rows);
         }
     }
 
@@ -39,7 +39,7 @@ public class Matrix {
 
     public Vector mul(Vector x) {
         Preconditions.checkArgument(m == x.n);
-        Vector result = new Vector(n);
+        Vector result = Vector.create(n);
         for (int j = 0; j < m; j++) {
             result = result.add(vector(j).mul(x.get(j)));
         }
