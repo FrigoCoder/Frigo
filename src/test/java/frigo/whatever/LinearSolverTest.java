@@ -11,15 +11,15 @@ import frigo.math.Vector;
 
 public class LinearSolverTest {
 
-    private LinearSolver solver = new LinearSolver();
-
     @Test
     public void can_solve_1_by_1_problem() {
         Matrix A = new Matrix(1, 1);
         A.setRow(0, 1);
 
         Vector b = Vector.from(1);
-        assertThat(solver.solve(A, b), is(Vector.from(1)));
+
+        LinearSolver solver = new LinearSolver(A, b);
+        assertThat(solver.solve(), is(Vector.from(1)));
     }
 
     @Test
@@ -29,9 +29,12 @@ public class LinearSolverTest {
         A.setRow(1, 2, 3);
 
         Vector b1 = Vector.from(1, 0);
+        LinearSolver solver1 = new LinearSolver(A, b1);
+        assertThat(solver1.solve(), is(Vector.from(-3, 2)));
+
         Vector b2 = Vector.from(0, 1);
-        assertThat(solver.solve(A, b1), is(Vector.from(-3, 2)));
-        assertThat(solver.solve(A, b2), is(Vector.from(-2, -1)));
+        LinearSolver solver2 = new LinearSolver(A, b2);
+        assertThat(solver2.solve(), is(Vector.from(2, -1)));
     }
 
 }

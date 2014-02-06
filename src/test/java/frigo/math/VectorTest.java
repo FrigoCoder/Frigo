@@ -70,4 +70,22 @@ public class VectorTest {
         Vector vector2 = Vector.from(1, 2, 3, 4, 5);
         assertThat(vector1.dot(vector2), is(110.0));
     }
+
+    @Test
+    public void norm_of_vector_works_correctly() {
+        Vector vector = Vector.from(1, 2, 3, 4, 5);
+        assertThat(vector.norm(), is(7.4161984870956629487113974408007));
+    }
+
+    @Test
+    public void normalized_vector_is_returned() {
+        Vector vector = Vector.from(3, 4);
+        assertThat(vector.normalize(), is(Vector.from(0.6, 0.8)));
+    }
+
+    @Test
+    public void normalized_zero_vector_is_zero_vector() {
+        Vector zero = Vector.from(0, 0);
+        assertThat(zero.normalize(), is(zero));
+    }
 }

@@ -74,4 +74,13 @@ public class Vector extends Value {
         return result;
     }
 
+    public double norm() {
+        return Math.sqrt(dot(this));
+    }
+
+    public Vector normalize() {
+        double norm = norm();
+        return norm == 0 ? (Vector) clone() : div(norm);
+    }
+
 }
