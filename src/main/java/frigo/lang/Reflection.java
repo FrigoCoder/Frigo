@@ -9,10 +9,6 @@ public class Reflection {
         return getFieldInSuperclasses(object.getClass(), object, fieldName);
     }
 
-    public static <T> T getStaticField (String className, String fieldName) throws Exception {
-        return getStaticField(Class.forName(className), fieldName);
-    }
-
     public static <T> T getStaticField (Class<?> clazz, String fieldName) throws Exception {
         return getFieldInSuperclasses(clazz, null, fieldName);
     }
@@ -40,10 +36,6 @@ public class Reflection {
 
     public static <T> void setField (Object object, String fieldName, T value) throws Exception {
         setFieldInSuperclasses(object.getClass(), object, fieldName, value);
-    }
-
-    public static <T> void setStaticField (String className, String fieldName, T value) throws Exception {
-        setStaticField(Class.forName(className), fieldName, value);
     }
 
     public static <T> void setStaticField (Class<?> clazz, String fieldName, T value) throws Exception {

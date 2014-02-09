@@ -10,8 +10,6 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import frigo.lang.Reflection;
-
 public class ReflectionTest {
 
     private static class Base {
@@ -48,16 +46,12 @@ public class ReflectionTest {
 
     @Test
     public void getStaticField_returns_value_of_private_static_field () throws Exception {
-        Base.privateStaticField = 13;
-        assertThat(Reflection.<Integer> getStaticField(base.getClass().getName(), "privateStaticField"), is(13));
         Base.privateStaticField = 14;
         assertThat(Reflection.<Integer> getStaticField(base.getClass(), "privateStaticField"), is(14));
     }
 
     @Test
     public void setStaticField_sets_value_of_private_static_field () throws Exception {
-        setStaticField(base.getClass().getName(), "privateStaticField", 5);
-        assertThat(Base.privateStaticField, is(5));
         setStaticField(base.getClass(), "privateStaticField", 6);
         assertThat(Base.privateStaticField, is(6));
     }
@@ -76,16 +70,12 @@ public class ReflectionTest {
 
     @Test
     public void getStaticField_returns_value_of_private_static_field_of_subclass () throws Exception {
-        Sub.anotherPrivateStaticField = 15;
-        assertThat(Reflection.<Integer> getStaticField(sub.getClass().getName(), "anotherPrivateStaticField"), is(15));
         Sub.anotherPrivateStaticField = 16;
         assertThat(Reflection.<Integer> getStaticField(sub.getClass(), "anotherPrivateStaticField"), is(16));
     }
 
     @Test
     public void setStaticField_sets_value_of_private_static_field_of_subclass () throws Exception {
-        setStaticField(sub.getClass().getName(), "anotherPrivateStaticField", 115);
-        assertThat(Sub.anotherPrivateStaticField, is(115));
         setStaticField(sub.getClass(), "anotherPrivateStaticField", 116);
         assertThat(Sub.anotherPrivateStaticField, is(116));
     }
@@ -103,12 +93,6 @@ public class ReflectionTest {
     }
 
     @Test
-    public void getStaticField_throws_exception_on_unknown_field_by_class_name () throws Exception {
-        thrown.expect(NoSuchFieldException.class);
-        Reflection.<Integer> getStaticField(base.getClass().getName(), "doesNotExist");
-    }
-
-    @Test
     public void setField_throws_exception_on_unknown_field () throws Exception {
         thrown.expect(NoSuchFieldException.class);
         Reflection.<Integer> setField(base, "doesNotExist", 1);
@@ -118,12 +102,6 @@ public class ReflectionTest {
     public void setStaticField_throws_exception_on_unknown_field () throws Exception {
         thrown.expect(NoSuchFieldException.class);
         Reflection.<Integer> setStaticField(base.getClass(), "doesNotExist", 2);
-    }
-
-    @Test
-    public void setStaticField_throws_exception_on_unknown_field_by_class_name () throws Exception {
-        thrown.expect(NoSuchFieldException.class);
-        Reflection.<Integer> setStaticField(base.getClass().getName(), "doesNotExist", 3);
     }
 
 }

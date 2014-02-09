@@ -7,14 +7,12 @@ import java.util.Map;
 
 public class Environment {
 
-    private static final String JAVA_LANG_PROCESS_ENVIRONMENT = "java.lang.ProcessEnvironment";
-
     public static boolean has (String key) {
         return System.getenv().containsKey(key);
     }
 
     public static String get (String key) {
-        checkArgument(has(key), "Is not an environment variable");
+        checkArgument(has(key), "Environment variable not found: %s", key);
         return System.getenv().get(key);
     }
 
@@ -32,8 +30,7 @@ public class Environment {
             getTheEnvironment().remove(key);
             getTheCaseInsensitiveEnvironment().remove(key);
         }catch( NoSuchFieldException e ){
-            Map<String, String> map = getEnvM();
-            map.remove(key);
+            getEnvM().remove(key);
         }
     }
 
@@ -42,11 +39,12 @@ public class Environment {
     }
 
     private static Map<String, String> getTheCaseInsensitiveEnvironment () throws Exception {
-        return Reflection.getStaticField(JAVA_LANG_PROCESS_ENVIRONMENT, "theCaseInsensitiveEnvironment");
+        return Reflection
+            .getStaticField(Class.forName("java.lang.ProcessEnvironment"), "theCaseInsensitiveEnvironment");
     }
 
     private static Map<String, String> getTheEnvironment () throws Exception {
-        return Reflection.getStaticField(JAVA_LANG_PROCESS_ENVIRONMENT, "theEnvironment");
+        return Reflection.getStaticField(Class.forName("java.lang.ProcessEnvironment"), "theEnvironment");
     }
 
 }
