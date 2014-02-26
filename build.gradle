@@ -6,4 +6,6 @@ dependencies {
     compile group: 'org.codehaus.jremoting', name: 'jremoting-server', version: 'latest.release'
  
     compile group: 'org.mockito', name: 'mockito-core', version: 'latest.release'
+
+    compile group: 'org.multiverse', name: 'multiverse-core', version: 'latest.release'
 }
