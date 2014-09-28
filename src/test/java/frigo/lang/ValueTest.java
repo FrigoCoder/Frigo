@@ -8,8 +8,6 @@ import static org.junit.Assert.assertThat;
 
 import org.junit.Test;
 
-import frigo.lang.Value;
-
 public class ValueTest {
 
     private static class EmptyValue extends Value {

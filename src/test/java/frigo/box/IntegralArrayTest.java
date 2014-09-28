@@ -6,9 +6,6 @@ import static org.junit.Assert.assertThat;
 
 import org.junit.Test;
 
-import frigo.box.Box;
-import frigo.box.IntegralArray;
-
 public class IntegralArrayTest {
 
     private static final double epsilon = 1.0e-20;

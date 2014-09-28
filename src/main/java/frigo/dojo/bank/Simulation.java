@@ -13,7 +13,7 @@ public class Simulation {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(Simulation.class);
 
-    public static void main(String[] args) {
+    public static void main (String[] args) {
         Simulation simulation = new Simulation(10);
         simulation.run();
     }
@@ -21,56 +21,56 @@ public class Simulation {
     private List<Account> accounts;
     private List<AccountOwner> owners;
 
-    public Simulation(int n) {
+    public Simulation (int n) {
         createAccounts(n);
         createOwners();
     }
 
-    private void createAccounts(int n) {
+    private void createAccounts (int n) {
         accounts = new ArrayList<>(n);
-        for (int i = 0; i < n; i++) {
+        for( int i = 0; i < n; i++ ){
             accounts.add(new AccountLoggerDecorator(createAccount("" + i)));
         }
     }
 
-    private Account createAccount(String name) {
+    private Account createAccount (String name) {
         // return new TransactionAccount(name);
         return new LockingAccount(name);
     }
 
-    private void createOwners() {
+    private void createOwners () {
         owners = new LinkedList<>();
-        for (Account account : accounts) {
+        for( Account account : accounts ){
             owners.add(new AccountOwner(account, accounts));
         }
     }
 
-    public void run() {
+    public void run () {
         startOwners();
         waitUntilDeadlocks();
         LOGGER.error("Deadlocks detected. Can't stop monitor deadlocks. Have a nice day.");
     }
 
-    private void startOwners() {
-        for (AccountOwner owner : owners) {
+    private void startOwners () {
+        for( AccountOwner owner : owners ){
             owner.start();
         }
     }
 
-    private void waitUntilDeadlocks() {
-        while (!areThereAnyDeadlocks()) {
+    private void waitUntilDeadlocks () {
+        while( !areThereAnyDeadlocks() ){
             sleep();
         }
     }
 
-    private boolean areThereAnyDeadlocks() {
+    private boolean areThereAnyDeadlocks () {
         return ManagementFactory.getThreadMXBean().findDeadlockedThreads() != null;
     }
 
-    private void sleep() {
-        try {
+    private void sleep () {
+        try{
             Thread.sleep(1000);
-        } catch (InterruptedException e) {
+        }catch( InterruptedException e ){
             throw new RuntimeException(e);
         }
     }

@@ -6,9 +6,6 @@ import static org.junit.Assert.assertThat;
 
 import org.junit.Test;
 
-import frigo.box.Box;
-import frigo.box.BoxFinder;
-
 public class BoxFinderTest {
 
     @Test

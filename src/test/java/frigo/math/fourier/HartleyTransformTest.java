@@ -5,9 +5,6 @@ import org.junit.Test;
 
 import frigo.math.Complex;
 import frigo.math.TransformTestBase;
-import frigo.math.fourier.FFT;
-import frigo.math.fourier.FHT;
-import frigo.math.fourier.HartleyTransform;
 
 public class HartleyTransformTest extends TransformTestBase {
 

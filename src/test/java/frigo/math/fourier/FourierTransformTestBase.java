@@ -7,7 +7,6 @@ import java.util.Random;
 
 import frigo.math.Complex;
 import frigo.math.TransformTestBase;
-import frigo.math.fourier.FourierTransform;
 
 public class FourierTransformTestBase extends TransformTestBase {
 

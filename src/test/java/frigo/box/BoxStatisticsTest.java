@@ -6,9 +6,6 @@ import static org.junit.Assert.assertThat;
 
 import org.junit.Test;
 
-import frigo.box.Box;
-import frigo.box.BoxStatistics;
-
 public class BoxStatisticsTest {
 
     private static final double EPSILON = 1e-13;

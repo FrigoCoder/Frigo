@@ -10,7 +10,7 @@ public class AccountOwner extends Thread {
     private List<Account> accounts;
     private Random random;
 
-    public AccountOwner(Account account, List<Account> accounts) {
+    public AccountOwner (Account account, List<Account> accounts) {
         super("Account owner " + account.getName());
         this.account = account;
         this.accounts = accounts;
@@ -18,14 +18,14 @@ public class AccountOwner extends Thread {
     }
 
     @Override
-    public void run() {
-        while (true) {
+    public void run () {
+        while( true ){
             step();
         }
     }
 
-    private void step() {
-        switch (random.nextInt(3)) {
+    private void step () {
+        switch( random.nextInt(3) ){
             case 0:
                 account.deposit(random.nextInt(100));
                 break;
@@ -40,10 +40,10 @@ public class AccountOwner extends Thread {
         }
     }
 
-    private Account getRandomDestinationAccount() {
-        while (true) {
+    private Account getRandomDestinationAccount () {
+        while( true ){
             int index = random.nextInt(accounts.size());
-            if (accounts.get(index) != account) {
+            if( accounts.get(index) != account ){
                 return accounts.get(index);
             }
         }

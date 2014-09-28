@@ -3,9 +3,6 @@ package frigo.math.fourier;
 
 import org.junit.Test;
 
-import frigo.math.fourier.DHT;
-import frigo.math.fourier.FHT;
-
 public class FHTTest extends HartleyTransformTestBase {
 
     public FHTTest () {

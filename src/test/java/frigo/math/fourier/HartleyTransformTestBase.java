@@ -4,7 +4,6 @@ package frigo.math.fourier;
 import java.util.Random;
 
 import frigo.math.TransformTestBase;
-import frigo.math.fourier.HartleyTransform;
 
 public class HartleyTransformTestBase extends TransformTestBase {
 

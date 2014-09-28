@@ -3,14 +3,14 @@ package frigo.dojo.bank;
 
 public interface Account {
 
-    String getName();
+    String getName ();
 
-    int getBalance();
+    int getBalance ();
 
-    void deposit(int amount);
+    void deposit (int amount);
 
-    void withdraw(int amount);
+    void withdraw (int amount);
 
-    void transferTo(Account destination, int amount);
+    void transferTo (Account destination, int amount);
 
 }

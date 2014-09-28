@@ -13,51 +13,55 @@ public class TransactionAccount implements Account {
     private final String name;
     private final TxnInteger balance;
 
-    public TransactionAccount(String name) {
+    public TransactionAccount (String name) {
         this.name = name;
         balance = StmUtils.newTxnInteger(0);
     }
 
     @Override
-    public String getName() {
+    public String getName () {
         return name;
     }
 
     @Override
-    public int getBalance() {
+    public int getBalance () {
         return atomic(new Callable<Integer>() {
+
             @Override
-            public Integer call() throws Exception {
+            public Integer call () throws Exception {
                 return balance.get();
             }
         });
     }
 
     @Override
-    public void deposit(final int amount) {
+    public void deposit (final int amount) {
         atomic(new Runnable() {
+
             @Override
-            public void run() {
+            public void run () {
                 balance.increment(amount);
             }
         });
     }
 
     @Override
-    public void withdraw(final int amount) {
+    public void withdraw (final int amount) {
         atomic(new Runnable() {
+
             @Override
-            public void run() {
+            public void run () {
                 balance.decrement(amount);
             }
         });
     }
 
     @Override
-    public void transferTo(final Account destination, final int amount) {
+    public void transferTo (final Account destination, final int amount) {
         atomic(new Runnable() {
+
             @Override
-            public void run() {
+            public void run () {
                 withdraw(amount);
                 destination.deposit(amount);
             }

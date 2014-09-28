@@ -12,8 +12,8 @@ import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 public class Value implements Serializable, Cloneable {
 
     @Override
-    public boolean equals(Object that) {
-        if (that == null || this.getClass() != that.getClass()) {
+    public boolean equals (Object that) {
+        if( that == null || this.getClass() != that.getClass() ){
             return false;
         }
         Value thatSerializable = (Value) that;
@@ -21,25 +21,25 @@ public class Value implements Serializable, Cloneable {
     }
 
     @Override
-    public int hashCode() {
+    public int hashCode () {
         return getClass().hashCode() * 31 + ArrayUtils.hashCode(serialize());
     }
 
     @Override
-    public String toString() {
+    public String toString () {
         return ReflectionToStringBuilder.toString(this, SHORT_PREFIX_STYLE);
     }
 
     @Override
-    public Value clone() {
+    public Value clone () {
         return SerializationUtils.clone(this);
     }
 
-    public byte[] serialize() {
+    public byte[] serialize () {
         return SerializationUtils.serialize(this);
     }
 
-    public static <T extends Value> T deserialize(byte[] data) {
+    public static <T extends Value> T deserialize (byte[] data) {
         return (T) SerializationUtils.deserialize(data);
     }
 

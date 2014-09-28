@@ -3,9 +3,6 @@ package frigo.math.fourier;
 
 import org.junit.Test;
 
-import frigo.math.fourier.DFT;
-import frigo.math.fourier.FFT;
-
 public class DFTTest extends FourierTransformTestBase {
 
     public DFTTest () {

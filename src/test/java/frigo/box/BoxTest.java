@@ -8,8 +8,6 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import frigo.box.Box;
-
 public class BoxTest {
 
     @Rule
