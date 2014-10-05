@@ -1,6 +1,7 @@
 
 package frigo.graph;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -10,11 +11,11 @@ public class Graph<T, W> {
     private List<Edge<T, W>> edges = new LinkedList<>();
 
     public List<T> getNodes () {
-        return nodes;
+        return new ArrayList<>(nodes);
     }
 
     public List<Edge<T, W>> getEdges () {
-        return edges;
+        return new ArrayList<>(edges);
     }
 
     public void addNode (T node) {
