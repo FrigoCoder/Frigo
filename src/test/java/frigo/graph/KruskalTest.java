@@ -1,11 +1,9 @@
 
 package frigo.graph;
 
+import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.hamcrest.Matchers.empty;
-import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
-
-import java.util.Arrays;
 
 import org.junit.Test;
 
@@ -26,7 +24,7 @@ public class KruskalTest {
         Edge<String, Double> ab = new Edge<>("A", "B", 1.0);
         graph.addEdge(ab);
 
-        assertThat(kruskal.run(), is(Arrays.asList(ab)));
+        assertThat(kruskal.run(), containsInAnyOrder(new Edge[] {ab}));
     }
 
     @Test
@@ -37,7 +35,7 @@ public class KruskalTest {
         Edge<String, Double> bc = new Edge<>("B", "C", 1.0);
         graph.addEdges(ab, bc);
 
-        assertThat(kruskal.run(), is(Arrays.asList(ab, bc)));
+        assertThat(kruskal.run(), containsInAnyOrder(new Edge[] {ab, bc}));
     }
 
     @Test
@@ -49,7 +47,7 @@ public class KruskalTest {
         Edge<String, Double> ca = new Edge<>("C", "A", 3.0);
         graph.addEdges(ab, bc, ca);
 
-        assertThat(kruskal.run(), is(Arrays.asList(ab, bc)));
+        assertThat(kruskal.run(), containsInAnyOrder(new Edge[] {ab, bc}));
     }
 
     @Test
@@ -60,7 +58,7 @@ public class KruskalTest {
         Edge<String, Double> ab2 = new Edge<>("A", "B", 2.0);
         graph.addEdges(ab1, ab2);
 
-        assertThat(kruskal.run(), is(Arrays.asList(ab1)));
+        assertThat(kruskal.run(), containsInAnyOrder(new Edge[] {ab1}));
     }
 
     @Test
@@ -79,8 +77,7 @@ public class KruskalTest {
         Edge<String, Double> eg = new Edge<>("E", "G", 9.0);
         Edge<String, Double> fg = new Edge<>("E", "G", 11.0);
         graph.addEdges(ab, ad, bc, bd, be, ce, de, df, ef, eg, fg);
-
-        assertThat(kruskal.run(), is(Arrays.asList(ab, ad, be, ce, df, eg)));
+        assertThat(kruskal.run(), containsInAnyOrder(new Edge[] {ab, ad, be, ce, df, eg}));
     }
 
 }

@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-public class Graph<T, W> {
+public class Graph<T, W extends Comparable<W>> {
 
     private List<T> nodes = new LinkedList<>();
     private List<Edge<T, W>> edges = new LinkedList<>();
