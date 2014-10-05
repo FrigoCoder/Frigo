@@ -23,44 +23,44 @@ public class KruskalTest {
     public void one_edge () {
         graph.addNodes("A", "B");
 
-        Edge<String, Double> e = new Edge<>("A", "B", 1.0);
-        graph.addEdge(e);
+        Edge<String, Double> ab = new Edge<>("A", "B", 1.0);
+        graph.addEdge(ab);
 
-        assertThat(kruskal.run(), is(Arrays.asList(e)));
+        assertThat(kruskal.run(), is(Arrays.asList(ab)));
     }
 
     @Test
     public void two_edges () {
         graph.addNodes("A", "B", "C");
 
-        Edge<String, Double> e = new Edge<>("A", "B", 1.0);
-        Edge<String, Double> f = new Edge<>("B", "C", 1.0);
-        graph.addEdges(e, f);
+        Edge<String, Double> ab = new Edge<>("A", "B", 1.0);
+        Edge<String, Double> bc = new Edge<>("B", "C", 1.0);
+        graph.addEdges(ab, bc);
 
-        assertThat(kruskal.run(), is(Arrays.asList(e, f)));
+        assertThat(kruskal.run(), is(Arrays.asList(ab, bc)));
     }
 
     @Test
     public void three_edges_in_triangle () {
         graph.addNodes("A", "B", "C");
 
-        Edge<String, Double> e = new Edge<>("A", "B", 1.0);
-        Edge<String, Double> f = new Edge<>("B", "C", 2.0);
-        Edge<String, Double> g = new Edge<>("C", "A", 3.0);
-        graph.addEdges(e, f, g);
+        Edge<String, Double> ab = new Edge<>("A", "B", 1.0);
+        Edge<String, Double> bc = new Edge<>("B", "C", 2.0);
+        Edge<String, Double> ca = new Edge<>("C", "A", 3.0);
+        graph.addEdges(ab, bc, ca);
 
-        assertThat(kruskal.run(), is(Arrays.asList(e, f)));
+        assertThat(kruskal.run(), is(Arrays.asList(ab, bc)));
     }
 
     @Test
     public void parallel_edges () {
         graph.addNodes("A", "B");
 
-        Edge<String, Double> e = new Edge<>("A", "B", 1.0);
-        Edge<String, Double> f = new Edge<>("A", "B", 2.0);
-        graph.addEdges(e, f);
+        Edge<String, Double> ab1 = new Edge<>("A", "B", 1.0);
+        Edge<String, Double> ab2 = new Edge<>("A", "B", 2.0);
+        graph.addEdges(ab1, ab2);
 
-        assertThat(kruskal.run(), is(Arrays.asList(e)));
+        assertThat(kruskal.run(), is(Arrays.asList(ab1)));
     }
 
     @Test
