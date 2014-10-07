@@ -28,7 +28,7 @@ public class TransactionAccount implements Account {
         return atomic(new Callable<Integer>() {
 
             @Override
-            public Integer call () throws Exception {
+            public Integer call () {
                 return balance.get();
             }
         });
