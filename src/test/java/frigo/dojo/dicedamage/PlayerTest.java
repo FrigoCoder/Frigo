@@ -1,7 +1,7 @@
 
-package frigo.dojo;
+package frigo.dojo.dicedamage;
 
-import static frigo.dojo.Player.INITIAL_HEALTH;
+import static frigo.dojo.dicedamage.Player.INITIAL_HEALTH;
 import static frigo.util.MockitoAux.doReturnValues;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
@@ -11,6 +11,9 @@ import static org.mockito.Mockito.verify;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import frigo.dojo.dicedamage.Dice;
+import frigo.dojo.dicedamage.Player;
 
 public class PlayerTest {
 

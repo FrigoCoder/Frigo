@@ -1,5 +1,5 @@
 
-package frigo.dojo;
+package frigo.dojo.dicedamage;
 
 import com.google.common.annotations.VisibleForTesting;
 

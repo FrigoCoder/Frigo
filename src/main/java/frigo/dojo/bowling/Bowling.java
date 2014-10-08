@@ -1,5 +1,5 @@
 
-package frigo.dojo;
+package frigo.dojo.bowling;
 
 public class Bowling {
 

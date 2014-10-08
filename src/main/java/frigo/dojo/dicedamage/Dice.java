@@ -1,5 +1,5 @@
 
-package frigo.dojo;
+package frigo.dojo.dicedamage;
 
 import java.util.Random;
 

@@ -1,5 +1,5 @@
 
-package frigo.dojo;
+package frigo.dojo.bowling;
 
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;

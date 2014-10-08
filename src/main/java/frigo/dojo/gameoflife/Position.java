@@ -1,5 +1,5 @@
 
-package frigo.dojo;
+package frigo.dojo.gameoflife;
 
 public class Position {
 

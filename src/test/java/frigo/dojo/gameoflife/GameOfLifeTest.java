@@ -1,10 +1,12 @@
 
-package frigo.dojo;
+package frigo.dojo.gameoflife;
 
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
 import org.junit.Test;
+
+import frigo.dojo.gameoflife.GameOfLife;
 
 public class GameOfLifeTest {
 

@@ -1,13 +1,15 @@
 
-package frigo.dojo;
+package frigo.dojo.dicedamage;
 
-import static frigo.dojo.Dice.NUMBER_OF_VALUES;
+import static frigo.dojo.dicedamage.Dice.NUMBER_OF_VALUES;
 import static org.hamcrest.Matchers.greaterThan;
 import static org.hamcrest.Matchers.greaterThanOrEqualTo;
 import static org.hamcrest.Matchers.lessThanOrEqualTo;
 import static org.junit.Assert.assertThat;
 
 import org.junit.Test;
+
+import frigo.dojo.dicedamage.Dice;
 
 public class DiceTest {
 

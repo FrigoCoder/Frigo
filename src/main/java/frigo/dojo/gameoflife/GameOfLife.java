@@ -1,5 +1,5 @@
 
-package frigo.dojo;
+package frigo.dojo.gameoflife;
 
 import java.util.HashSet;
 import java.util.Set;
