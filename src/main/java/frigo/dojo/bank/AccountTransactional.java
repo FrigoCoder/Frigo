@@ -8,12 +8,12 @@ import java.util.concurrent.Callable;
 import org.multiverse.api.StmUtils;
 import org.multiverse.api.references.TxnInteger;
 
-public class TransactionAccount implements Account {
+public class AccountTransactional implements Account {
 
     private final String name;
     private final TxnInteger balance;
 
-    public TransactionAccount (String name) {
+    public AccountTransactional (String name) {
         this.name = name;
         balance = StmUtils.newTxnInteger(0);
     }

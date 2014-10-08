@@ -1,12 +1,12 @@
 
 package frigo.dojo.bank;
 
-public class LockingAccount implements Account {
+public class AccountLocking implements Account {
 
     private final String name;
     private int balance;
 
-    public LockingAccount (String name) {
+    public AccountLocking (String name) {
         this.name = name;
     }
 
