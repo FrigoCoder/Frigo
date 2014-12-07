@@ -58,4 +58,15 @@ public class MathAux {
         return r;
     }
 
+    public static long isqrt (long n) {
+        if( n == 0 ){
+            return 0;
+        }
+        long r = isqrt(n >> 2) << 1;
+        if( r * r <= n - (r << 1) - 1 ){
+            return r + 1;
+        }
+        return r;
+    }
+
 }

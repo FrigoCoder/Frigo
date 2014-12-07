@@ -123,4 +123,24 @@ public class MathAuxTest {
         assertThat(isqrt(2_147_395_600), is(46_340));
         assertThat(isqrt(2_147_483_647), is(46_340));
     }
+
+    @Test
+    public void test_isqrt_for_long () {
+        assertThat(isqrt(0L), is(0L));
+        assertThat(isqrt(1L), is(1L));
+        assertThat(isqrt(3L), is(1L));
+        assertThat(isqrt(4L), is(2L));
+        assertThat(isqrt(8L), is(2L));
+        assertThat(isqrt(9L), is(3L));
+        assertThat(isqrt(15L), is(3L));
+        assertThat(isqrt(16L), is(4L));
+        assertThat(isqrt(1_073_741_823L), is(32_767L));
+        assertThat(isqrt(1_073_741_824L), is(32_768L));
+        assertThat(isqrt(2_147_395_599L), is(46_339L));
+        assertThat(isqrt(2_147_395_600L), is(46_340L));
+        assertThat(isqrt(2_147_483_647L), is(46_340L));
+        assertThat(isqrt(9_223_372_030_926_249_000L), is(3_037_000_498L));
+        assertThat(isqrt(9_223_372_030_926_249_001L), is(3_037_000_499L));
+        assertThat(isqrt(9_223_372_036_854_775_807L), is(3_037_000_499L));
+    }
 }
