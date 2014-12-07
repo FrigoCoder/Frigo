@@ -47,4 +47,15 @@ public class MathAux {
         return (x & x - 1) == 0 && x > 0;
     }
 
+    public static int isqrt (int n) {
+        if( n == 0 ){
+            return 0;
+        }
+        int r = isqrt(n >> 2) << 1;
+        if( r * r <= n - r - r - 1 ){
+            return r + 1;
+        }
+        return r;
+    }
+
 }

@@ -5,6 +5,7 @@ import static frigo.math.Complex.complex;
 import static frigo.math.MathAux.ceil;
 import static frigo.math.MathAux.floor;
 import static frigo.math.MathAux.isPowerOfTwo;
+import static frigo.math.MathAux.isqrt;
 import static frigo.math.MathAux.sinc;
 import static frigo.math.MathAux.sqr;
 import static org.hamcrest.Matchers.closeTo;
@@ -106,4 +107,20 @@ public class MathAuxTest {
         }
     }
 
+    @Test
+    public void test_isqrt () {
+        assertThat(isqrt(0), is(0));
+        assertThat(isqrt(1), is(1));
+        assertThat(isqrt(3), is(1));
+        assertThat(isqrt(4), is(2));
+        assertThat(isqrt(8), is(2));
+        assertThat(isqrt(9), is(3));
+        assertThat(isqrt(15), is(3));
+        assertThat(isqrt(16), is(4));
+        assertThat(isqrt(1_073_741_823), is(32_767));
+        assertThat(isqrt(1_073_741_824), is(32_768));
+        assertThat(isqrt(2_147_395_599), is(46_339));
+        assertThat(isqrt(2_147_395_600), is(46_340));
+        assertThat(isqrt(2_147_483_647), is(46_340));
+    }
 }
