@@ -4,12 +4,10 @@ package frigo.math;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.google.common.collect.Lists;
-
 public class SqrtApproximation {
 
     public static void main (String[] args) {
-        int limit = 100_000;
+        int limit = 20_000;
         FactorizerSieve sieve = new FactorizerSieve(limit);
 
         double max = 0;
@@ -33,47 +31,28 @@ public class SqrtApproximation {
     private long n;
     private long x;
     private long y;
-    private List<Long> A;
-    private List<Long> B;
+
+    private GeneralizedContinuedFractionUnderN fraction;
 
     public SqrtApproximation (long n) {
         this.n = n;
         x = 2 * MathAux.isqrt(n);
-        y = n - x * x / 4;
-        // System.out.println("n=" + n + " = " + x / 2 + "*" + x / 2 + "+" + y);
-        A = Lists.newArrayList(1L, x / 2);
-        B = Lists.newArrayList(0L, 1L);
-        print(0);
-        print(1);
-    }
-
-    private void print (int i) {
-        long a = A.get(i);
-        long a2 = a * a % n;
-        long b = B.get(i);
-        long b2 = b * b % n;
-        // System.out.println("i=" + i + ", A=" + a + ", B=" + b + ", A2=" + a2 + ", B2=" + b2);
-    }
-
-    private long current (List<Long> list) {
-        return list.get(list.size() - 1);
-    }
-
-    private long previous (List<Long> list) {
-        return list.get(list.size() - 2);
+        y = n - MathAux.isqrt(n) * MathAux.isqrt(n);
+        fraction = new GeneralizedContinuedFractionUnderN(MathAux.isqrt(n), n);
     }
 
     public int run () {
+        int steps = 2;
         while( !isDone() ){
-            recurse();
-            print(A.size() - 1);
+            fraction.recurse(x, y);
+            steps++;
         }
-        return A.size();
+        return steps;
     }
 
     private boolean isDone () {
-        long a = current(A);
-        long b = current(B);
+        long a = fraction.getA();
+        long b = fraction.getB();
         List<Long> gcds = new ArrayList<>();
         gcds.add(gcd(n, a + 1));
         gcds.add(gcd(n, a - 1));
@@ -84,16 +63,10 @@ public class SqrtApproximation {
         for( int i = 0; i < gcds.size(); i++ ){
             long gcd = gcds.get(i);
             if( gcd != 1 && gcd != n ){
-                // System.out.println("gcd[" + i + "]=" + gcd);
                 return true;
             }
         }
         return false;
-    }
-
-    private void recurse () {
-        A.add((x * current(A) + y * previous(A)) % n);
-        B.add((x * current(B) + y * previous(B)) % n);
     }
 
     private static long gcd (long u, long v) {
