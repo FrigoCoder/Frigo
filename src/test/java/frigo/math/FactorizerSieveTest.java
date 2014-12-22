@@ -17,7 +17,7 @@ public class FactorizerSieveTest {
     private FactorizerSieve sieve = new FactorizerSieve(LIMIT);
 
     @Test
-    public void test_factor () {
+    public void test_factor() {
         assertFactors(0);
         assertFactors(1);
         assertFactors(2, 2);
@@ -39,8 +39,36 @@ public class FactorizerSieveTest {
         assertFactors(999_999, 3, 3, 3, 7, 11, 13, 37);
     }
 
-    private void assertFactors (int n, int... factors) {
+    private void assertFactors(int n, int... factors) {
         List<Integer> factorList = Ints.asList(factors);
         assertThat(sieve.factor(n), is(factorList));
     }
+
+    @Test
+    public void test_primes() {
+        assertPrime(0, false);
+        assertPrime(1, false);
+        assertPrime(2, true);
+        assertPrime(3, true);
+        assertPrime(4, false);
+        assertPrime(5, true);
+        assertPrime(6, false);
+        assertPrime(7, true);
+        assertPrime(8, false);
+        assertPrime(9, false);
+        assertPrime(10, false);
+        assertPrime(11, true);
+        assertPrime(12, false);
+        assertPrime(13, true);
+        assertPrime(14, false);
+        assertPrime(15, false);
+        assertPrime(143, false);
+        assertPrime(187, false);
+        assertPrime(999_999, false);
+    }
+
+    private void assertPrime(int n, boolean prime) {
+        assertThat(sieve.prime(n), is(prime));
+    }
+
 }
