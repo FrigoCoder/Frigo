@@ -9,7 +9,7 @@ public class FactorizerSieve {
     private int[] table;
 
     public FactorizerSieve(int limit) {
-        table = new int[limit];
+        table = new int[limit + 1];
         fill();
     }
 

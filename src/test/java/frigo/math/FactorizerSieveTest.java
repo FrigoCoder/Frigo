@@ -37,6 +37,7 @@ public class FactorizerSieveTest {
         assertFactors(143, 11, 13);
         assertFactors(187, 11, 17);
         assertFactors(999_999, 3, 3, 3, 7, 11, 13, 37);
+        assertFactors(1_000_000, 2, 2, 2, 2, 2, 2, 5, 5, 5, 5, 5, 5);
     }
 
     private void assertFactors(int n, int... factors) {
@@ -65,6 +66,7 @@ public class FactorizerSieveTest {
         assertPrime(143, false);
         assertPrime(187, false);
         assertPrime(999_999, false);
+        assertPrime(1_000_000, false);
     }
 
     private void assertPrime(int n, boolean prime) {
