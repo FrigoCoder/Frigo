@@ -7,20 +7,20 @@ package frigo.math.numbertheory;
 
 public class JacobiSymbol {
 
-    public static int jacobi (int m, int n) {
+    public static long jacobi (long m, long n) {
         if( m == 0 || m == 1 ){
             return m;
         }
         if( m >= n ){
             return jacobi(m % n, n);
         }
-        switch( m % 4 ){
+        switch( (int) (m % 4) ){
             case 0:
                 return jacobi(m / 4, n);
             case 1:
                 return jacobi(n % m, m);
             case 2:
-                switch( n % 8 ){
+                switch( (int) (n % 8) ){
                     case 1:
                     case 7:
                         return jacobi(m / 2, n);
@@ -31,7 +31,7 @@ public class JacobiSymbol {
                         throw new IllegalArgumentException();
                 }
             case 3:
-                switch( n % 4 ){
+                switch( (int) (n % 4) ){
                     case 1:
                         return jacobi(n % m, m);
                     case 3:

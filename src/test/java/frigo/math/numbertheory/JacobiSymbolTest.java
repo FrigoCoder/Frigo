@@ -96,7 +96,7 @@ public class JacobiSymbolTest {
         assertJacobi(68, 187, 0);
     }
 
-    private void assertJacobi (int m, int n, int j) {
+    private void assertJacobi (long m, long n, long j) {
         assertThat("Jacobi Symbol (" + m + "/" + n + ") should be " + j, JacobiSymbol.jacobi(m, n), is(j));
     }
 
