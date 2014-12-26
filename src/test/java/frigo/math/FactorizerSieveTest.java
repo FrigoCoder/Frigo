@@ -17,7 +17,7 @@ public class FactorizerSieveTest {
     private FactorizerSieve sieve = new FactorizerSieve(LIMIT);
 
     @Test
-    public void test_factor() {
+    public void test_factor () {
         assertFactors(0);
         assertFactors(1);
         assertFactors(2, 2);
@@ -40,13 +40,13 @@ public class FactorizerSieveTest {
         assertFactors(1_000_000, 2, 2, 2, 2, 2, 2, 5, 5, 5, 5, 5, 5);
     }
 
-    private void assertFactors(int n, int... factors) {
+    private void assertFactors (int n, int... factors) {
         List<Integer> factorList = Ints.asList(factors);
         assertThat(sieve.factor(n), is(factorList));
     }
 
     @Test
-    public void test_primes() {
+    public void test_primes () {
         assertPrime(0, false);
         assertPrime(1, false);
         assertPrime(2, true);
@@ -69,8 +69,36 @@ public class FactorizerSieveTest {
         assertPrime(1_000_000, false);
     }
 
-    private void assertPrime(int n, boolean prime) {
-        assertThat(sieve.prime(n), is(prime));
+    private void assertPrime (int n, boolean prime) {
+        assertThat(n + " should " + (prime ? "" : "not ") + "be prime", sieve.prime(n), is(prime));
+    }
+
+    @Test
+    public void test_biprimes () {
+        assertBiprime(0, false);
+        assertBiprime(1, false);
+        assertBiprime(2, false);
+        assertBiprime(3, false);
+        assertBiprime(4, false);
+        assertBiprime(5, false);
+        assertBiprime(6, true);
+        assertBiprime(7, false);
+        assertBiprime(8, false);
+        assertBiprime(9, false);
+        assertBiprime(10, true);
+        assertBiprime(11, false);
+        assertBiprime(12, false);
+        assertBiprime(13, false);
+        assertBiprime(14, true);
+        assertBiprime(15, true);
+        assertBiprime(143, true);
+        assertBiprime(187, true);
+        assertBiprime(999_999, false);
+        assertBiprime(1_000_000, false);
+    }
+
+    private void assertBiprime (int n, boolean biprime) {
+        assertThat(n + " should " + (biprime ? "" : "not ") + "be biprime", sieve.biprime(n), is(biprime));
     }
 
 }

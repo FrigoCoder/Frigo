@@ -14,6 +14,8 @@ public class FactorizerSieve {
     }
 
     private void fill () {
+        table[0] = -1;
+        table[1] = -1;
         for( int i = 2; i < table.length; i++ ){
             if( table[i] == 0 ){
                 mark(i);
@@ -43,10 +45,13 @@ public class FactorizerSieve {
     }
 
     public boolean prime (int x) {
-        if( x == 0 ){
-            return false;
-        }
-        return table[x] == x;
+        return x > 1 && table[x] == x;
+    }
+
+    public boolean biprime (int n) {
+        int p = table[n];
+        int q = n / p;
+        return p != q && prime(q);
     }
 
 }
