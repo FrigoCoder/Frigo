@@ -84,7 +84,7 @@ public class MathAux {
         return log2;
     }
 
-    public static long log2 (long x) {
+    public static int log2 (long x) {
         if( x == 0 ){
             throw new IllegalArgumentException();
         }

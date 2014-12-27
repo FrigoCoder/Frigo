@@ -183,7 +183,6 @@ public class MathAuxTest {
     public void test_log2_unsigned () {
         assertLog2((int) 2_147_483_648L, 31);
         assertLog2((int) 4_294_967_295L, 31);
-
     }
 
     @Test
@@ -198,7 +197,7 @@ public class MathAuxTest {
 
     @Test
     public void test_log2_long () {
-        for( long i = 1; i < 62; i++ ){
+        for( int i = 1; i < 62; i++ ){
             assertLog2(1L << i, i);
             assertLog2((1L << i) + 1, i);
             assertLog2((1L << i) - 1, i - 1);
@@ -218,7 +217,7 @@ public class MathAuxTest {
         MathAux.log2(0L);
     }
 
-    private void assertLog2 (long x, long log2) {
+    private void assertLog2 (long x, int log2) {
         assertThat("log2 of " + x, MathAux.log2(x), is(log2));
     }
 
