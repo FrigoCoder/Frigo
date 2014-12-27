@@ -48,25 +48,29 @@ public class MathAux {
     }
 
     public static int isqrt (int n) {
-        if( n == 0 ){
-            return 0;
+        int root = 0;
+        int remainder = n;
+        for( int bit = 15; bit >= 0; bit-- ){
+            int trial = (root << 1) + (1 << bit) << bit;
+            if( remainder >= trial || remainder < 0 ){
+                remainder -= trial;
+                root |= 1 << bit;
+            }
         }
-        int r = isqrt(n >>> 2) << 1;
-        if( r * r <= n - r - r - 1 ){
-            return r + 1;
-        }
-        return r;
+        return root;
     }
 
     public static long isqrt (long n) {
-        if( n == 0 ){
-            return 0;
+        long root = 0;
+        long remainder = n;
+        for( long bit = 31; bit >= 0; bit-- ){
+            long trial = (root << 1) + (1L << bit) << bit;
+            if( remainder >= trial || remainder < 0 ){
+                remainder -= trial;
+                root |= 1L << bit;
+            }
         }
-        long r = isqrt(n >>> 2) << 1;
-        if( r * r <= n - (r << 1) - 1 ){
-            return r + 1;
-        }
-        return r;
+        return root;
     }
 
 }
