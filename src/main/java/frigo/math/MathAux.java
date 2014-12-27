@@ -51,7 +51,7 @@ public class MathAux {
         if( n == 0 ){
             return 0;
         }
-        int r = isqrt(n >> 2) << 1;
+        int r = isqrt(n >>> 2) << 1;
         if( r * r <= n - r - r - 1 ){
             return r + 1;
         }
@@ -62,7 +62,7 @@ public class MathAux {
         if( n == 0 ){
             return 0;
         }
-        long r = isqrt(n >> 2) << 1;
+        long r = isqrt(n >>> 2) << 1;
         if( r * r <= n - (r << 1) - 1 ){
             return r + 1;
         }

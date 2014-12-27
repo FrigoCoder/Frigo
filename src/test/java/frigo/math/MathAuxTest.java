@@ -109,38 +109,59 @@ public class MathAuxTest {
 
     @Test
     public void test_isqrt () {
-        assertThat(isqrt(0), is(0));
-        assertThat(isqrt(1), is(1));
-        assertThat(isqrt(3), is(1));
-        assertThat(isqrt(4), is(2));
-        assertThat(isqrt(8), is(2));
-        assertThat(isqrt(9), is(3));
-        assertThat(isqrt(15), is(3));
-        assertThat(isqrt(16), is(4));
-        assertThat(isqrt(1_073_741_823), is(32_767));
-        assertThat(isqrt(1_073_741_824), is(32_768));
-        assertThat(isqrt(2_147_395_599), is(46_339));
-        assertThat(isqrt(2_147_395_600), is(46_340));
-        assertThat(isqrt(2_147_483_647), is(46_340));
+        assertIsqrt(0, 0);
+        assertIsqrt(1, 1);
+        assertIsqrt(3, 1);
+        assertIsqrt(4, 2);
+        assertIsqrt(8, 2);
+        assertIsqrt(9, 3);
+        assertIsqrt(15, 3);
+        assertIsqrt(16, 4);
+        assertIsqrt(1_073_741_823, 32_767);
+        assertIsqrt(1_073_741_824, 32_768);
+        assertIsqrt(2_147_395_599, 46_339);
+        assertIsqrt(2_147_395_600, 46_340);
+        assertIsqrt(2_147_483_647, 46_340);
+    }
+
+    @Test
+    public void test_isqrt_unsigned () {
+        assertIsqrt((int) 2_147_483_648L, 46_340);
+        assertIsqrt((int) 4_294_967_295L, 65_535);
+    }
+
+    private static void assertIsqrt (int x, int sqrt) {
+        assertThat("Square root of " + x, isqrt(x), is(sqrt));
     }
 
     @Test
     public void test_isqrt_for_long () {
-        assertThat(isqrt(0L), is(0L));
-        assertThat(isqrt(1L), is(1L));
-        assertThat(isqrt(3L), is(1L));
-        assertThat(isqrt(4L), is(2L));
-        assertThat(isqrt(8L), is(2L));
-        assertThat(isqrt(9L), is(3L));
-        assertThat(isqrt(15L), is(3L));
-        assertThat(isqrt(16L), is(4L));
-        assertThat(isqrt(1_073_741_823L), is(32_767L));
-        assertThat(isqrt(1_073_741_824L), is(32_768L));
-        assertThat(isqrt(2_147_395_599L), is(46_339L));
-        assertThat(isqrt(2_147_395_600L), is(46_340L));
-        assertThat(isqrt(2_147_483_647L), is(46_340L));
-        assertThat(isqrt(9_223_372_030_926_249_000L), is(3_037_000_498L));
-        assertThat(isqrt(9_223_372_030_926_249_001L), is(3_037_000_499L));
-        assertThat(isqrt(9_223_372_036_854_775_807L), is(3_037_000_499L));
+        assertIsqrt(0L, 0L);
+        assertIsqrt(1L, 1L);
+        assertIsqrt(3L, 1L);
+        assertIsqrt(4L, 2L);
+        assertIsqrt(8L, 2L);
+        assertIsqrt(9L, 3L);
+        assertIsqrt(15L, 3L);
+        assertIsqrt(16L, 4L);
+        assertIsqrt(1_073_741_823L, 32_767L);
+        assertIsqrt(1_073_741_824L, 32_768L);
+        assertIsqrt(2_147_395_599L, 46_339L);
+        assertIsqrt(2_147_395_600L, 46_340L);
+        assertIsqrt(2_147_483_647L, 46_340L);
+        assertIsqrt(9_223_372_030_926_249_000L, 3_037_000_498L);
+        assertIsqrt(9_223_372_030_926_249_001L, 3_037_000_499L);
+        assertIsqrt(9_223_372_036_854_775_807L, 3_037_000_499L);
     }
+
+    @Test
+    public void test_isqrt_for_long_unsigned () {
+        assertIsqrt(-9223372036854775808L, 3_037_000_499L);
+        assertIsqrt(-1, 4_294_967_295L);
+    }
+
+    private static void assertIsqrt (long x, long sqrt) {
+        assertThat("Square root of " + x, isqrt(x), is(sqrt));
+    }
+
 }
