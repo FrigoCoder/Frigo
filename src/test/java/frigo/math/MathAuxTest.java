@@ -12,9 +12,14 @@ import static org.hamcrest.Matchers.closeTo;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 public class MathAuxTest {
+
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
 
     private double epsilon = 1.0e-15;
     private float epsilonFloat = (float) 1.0e-15;
@@ -157,11 +162,64 @@ public class MathAuxTest {
     @Test
     public void test_isqrt_for_long_unsigned () {
         assertIsqrt(-9223372036854775808L, 3_037_000_499L);
-        assertIsqrt(-1, 4_294_967_295L);
+        assertIsqrt(-1L, 4_294_967_295L);
     }
 
     private static void assertIsqrt (long x, long sqrt) {
         assertThat("Square root of " + x, isqrt(x), is(sqrt));
+    }
+
+    @Test
+    public void test_log2 () {
+        for( int i = 1; i < 30; i++ ){
+            assertLog2(1 << i, i);
+            assertLog2((1 << i) + 1, i);
+            assertLog2((1 << i) - 1, i - 1);
+        }
+        assertLog2(2_147_483_647, 30);
+    }
+
+    @Test
+    public void test_log2_unsigned () {
+        assertLog2((int) 2_147_483_648L, 31);
+        assertLog2((int) 4_294_967_295L, 31);
+
+    }
+
+    @Test
+    public void test_log2_0 () {
+        thrown.expect(IllegalArgumentException.class);
+        MathAux.log2(0);
+    }
+
+    private void assertLog2 (int x, int log2) {
+        assertThat("log2 of " + x, MathAux.log2(x), is(log2));
+    }
+
+    @Test
+    public void test_log2_long () {
+        for( long i = 1; i < 62; i++ ){
+            assertLog2(1L << i, i);
+            assertLog2((1L << i) + 1, i);
+            assertLog2((1L << i) - 1, i - 1);
+        }
+        assertLog2(9_223_372_036_854_775_807L, 62);
+    }
+
+    @Test
+    public void test_log2_long_unsigned () {
+        assertLog2(-9223372036854775808L, 63);
+        assertLog2(-1L, 63);
+    }
+
+    @Test
+    public void test_log2_long_0 () {
+        thrown.expect(IllegalArgumentException.class);
+        MathAux.log2(0L);
+    }
+
+    private void assertLog2 (long x, long log2) {
+        assertThat("log2 of " + x, MathAux.log2(x), is(log2));
     }
 
 }

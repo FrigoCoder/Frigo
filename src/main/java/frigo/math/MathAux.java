@@ -73,4 +73,26 @@ public class MathAux {
         return root;
     }
 
+    public static int log2 (int x) {
+        if( x == 0 ){
+            throw new IllegalArgumentException();
+        }
+        int log2 = -1;
+        for( int r = x; r != 0; r >>>= 1 ){
+            log2++;
+        }
+        return log2;
+    }
+
+    public static long log2 (long x) {
+        if( x == 0 ){
+            throw new IllegalArgumentException();
+        }
+        int log2 = -1;
+        for( long r = x; r != 0; r >>>= 1 ){
+            log2++;
+        }
+        return log2;
+    }
+
 }
