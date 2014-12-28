@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import frigo.math.MathAux;
+import frigo.math.integer.MathAux;
 
 public class IncrementalPrimeGeneratorOfFrigo implements IncrementalPrimeGenerator {
 

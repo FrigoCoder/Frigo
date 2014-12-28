@@ -1,8 +1,8 @@
 
 package frigo.filter;
 
-import static frigo.math.MathAux.ceil;
-import static frigo.math.MathAux.floor;
+import static frigo.math.integer.MathAux.ceil;
+import static frigo.math.integer.MathAux.floor;
 
 public class Sampler {
 

@@ -1,31 +1,51 @@
 
-package frigo.math;
+package frigo.math.integer;
 
 import java.util.NoSuchElementException;
 import java.util.Set;
 import java.util.TreeSet;
 
-import frigo.math.numbertheory.Gcd;
-
 public class Whatever2 {
 
     public static void main (String[] args) {
-        long n = 23 * 103;
-        // long n = 11 * 17;
-        // long n = 13 * 103;
-        // long n = 10142789312725007L;
-        long x = getSquareRootOf1(n);
-        long k = (x * x - 1) / n;
-        System.out.println("n=" + n + ", x=" + x + ", k=" + k);
-
-        int m = 1;
-        for( int p = 2; m <= n; p++ ){
-            m *= p;
-            if( Gcd.gcd(m, n) != 1 ){
-                continue;
-            }
-            printSol(n, k, m);
+        // for( long x = 0; x < 16; x++ ){
+        // System.out.println((x * 12 + 12) % 16);
+        // }
+        // long n = 23 * 103;
+        // // long n = 11 * 17;
+        // // long n = 13 * 103;
+        // // long n = 10142789312725007L;
+        // long x = getSquareRootOf1(n);
+        // long k = (x * x - 1) / n;
+        // System.out.println("n=" + n + ", x=" + x + ", k=" + k);
+        //
+        // long m = 1;
+        // for( long p = 2; m <= n; p++ ){
+        // m *= p;
+        // if( Gcd.gcd(m, n) != 1 ){
+        // continue;
+        // }
+        // printSol(n, k, m);
+        // }
+        long limit = 500_000;
+        FactorizerSieve sieve = new FactorizerSieve((int) limit);
+        long p = findPrimeUnder(sieve, limit);
+        long q = findPrimeUnder(sieve, limit / 2);
+        long n = p * q;
+        System.out.println("p=" + p + ", q=" + q + ", n=" + n);
+        for( int i = 0; i < Math.log(n / 4); i++ ){
+            long twopow = (long) Math.pow(2, i);
+            System.out.print(twopow * n + ", ");
         }
+
+    }
+
+    private static long findPrimeUnder (FactorizerSieve sieve, long n) {
+        long p = n;
+        while( !sieve.prime((int) p) ){
+            p--;
+        }
+        return p;
     }
 
     private static void printSol (long n, long k, long m) {

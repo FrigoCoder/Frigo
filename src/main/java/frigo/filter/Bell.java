@@ -1,7 +1,7 @@
 
 package frigo.filter;
 
-import static frigo.math.MathAux.sqr;
+import static frigo.math.integer.MathAux.sqr;
 
 public class Bell extends ResamplingKernel {
 

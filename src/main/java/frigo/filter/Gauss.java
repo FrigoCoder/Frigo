@@ -2,7 +2,7 @@
 package frigo.filter;
 
 import static com.google.common.base.Preconditions.checkArgument;
-import static frigo.math.MathAux.sqr;
+import static frigo.math.integer.MathAux.sqr;
 
 /**
  * Gauss kernel implemented according to the probability density function of the normal distribution. See <a

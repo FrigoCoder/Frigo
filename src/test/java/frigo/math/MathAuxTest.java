@@ -2,12 +2,12 @@
 package frigo.math;
 
 import static frigo.math.Complex.complex;
-import static frigo.math.MathAux.ceil;
-import static frigo.math.MathAux.floor;
-import static frigo.math.MathAux.isPowerOfTwo;
-import static frigo.math.MathAux.isqrt;
-import static frigo.math.MathAux.sinc;
-import static frigo.math.MathAux.sqr;
+import static frigo.math.integer.MathAux.ceil;
+import static frigo.math.integer.MathAux.floor;
+import static frigo.math.integer.MathAux.isPowerOfTwo;
+import static frigo.math.integer.MathAux.isqrt;
+import static frigo.math.integer.MathAux.sinc;
+import static frigo.math.integer.MathAux.sqr;
 import static org.hamcrest.Matchers.closeTo;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
@@ -15,6 +15,8 @@ import static org.junit.Assert.assertThat;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
+
+import frigo.math.integer.MathAux;
 
 public class MathAuxTest {
 

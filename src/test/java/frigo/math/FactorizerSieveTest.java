@@ -10,6 +10,8 @@ import org.junit.Test;
 
 import com.google.common.primitives.Ints;
 
+import frigo.math.integer.FactorizerSieve;
+
 public class FactorizerSieveTest {
 
     private static final int LIMIT = 1_000_000;

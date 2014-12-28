@@ -1,7 +1,7 @@
 
 package frigo.math;
 
-import static frigo.math.MathAux.sqr;
+import static frigo.math.integer.MathAux.sqr;
 
 /**
  * Estimation of the parameters of the normal distribution based on <a

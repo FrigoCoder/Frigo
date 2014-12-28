@@ -2,7 +2,7 @@
 package frigo.util;
 
 import static frigo.math.Complex.complex;
-import static frigo.math.MathAux.sqr;
+import static frigo.math.integer.MathAux.sqr;
 import static frigo.util.ArraysAux.bytes;
 import static frigo.util.ArraysAux.squaredEuclideanDistance;
 import static frigo.util.ArraysAux.toList;

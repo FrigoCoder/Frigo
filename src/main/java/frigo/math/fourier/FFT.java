@@ -2,7 +2,7 @@
 package frigo.math.fourier;
 
 import static com.google.common.base.Preconditions.checkArgument;
-import static frigo.math.MathAux.isPowerOfTwo;
+import static frigo.math.integer.MathAux.isPowerOfTwo;
 import static java.lang.Math.PI;
 import frigo.math.Complex;
 

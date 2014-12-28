@@ -2,7 +2,7 @@
 package frigo.math;
 
 import static com.google.common.base.Preconditions.checkArgument;
-import static frigo.math.MathAux.sqr;
+import static frigo.math.integer.MathAux.sqr;
 import static java.lang.Math.abs;
 import static java.lang.Math.pow;
 import static java.lang.Math.sqrt;

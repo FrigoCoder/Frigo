@@ -2,7 +2,7 @@
 package frigo.filter;
 
 import static frigo.filter.KernelTestUtil.assertKernelEquals;
-import static frigo.math.MathAux.sinc;
+import static frigo.math.integer.MathAux.sinc;
 
 import org.junit.Test;
 

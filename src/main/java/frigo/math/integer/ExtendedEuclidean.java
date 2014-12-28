@@ -1,5 +1,5 @@
 
-package frigo.math;
+package frigo.math.integer;
 
 import java.util.ArrayList;
 import java.util.List;
