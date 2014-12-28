@@ -1,5 +1,5 @@
 
-package frigo.math;
+package frigo.math.integer;
 
 import static frigo.math.Complex.complex;
 import static frigo.math.integer.MathAux.ceil;
