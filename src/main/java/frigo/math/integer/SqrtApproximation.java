@@ -4,28 +4,24 @@ package frigo.math.integer;
 import java.util.ArrayList;
 import java.util.List;
 
+import frigo.math.numbertheory.Gcd;
+
 public class SqrtApproximation {
 
     public static void main (String[] args) {
-        int limit = 20_000;
+        int limit = 2_000_000;
         FactorizerSieve sieve = new FactorizerSieve(limit);
 
-        double max = 0;
-        double sum = 0;
-        int count = 0;
-        for( long n = 6; n < limit; n++ ){
+        RuntimeCalculator calculator = new RuntimeCalculator();
+        for( long n = 1_000_000; n < limit; n++ ){
             List<Integer> factors = sieve.factor((int) n);
             if( factors.size() == 2 && factors.get(0) != factors.get(1) ){
                 SqrtApproximation approx = new SqrtApproximation(n);
                 int steps = approx.run();
-                System.out.println("n=" + n + ", steps=" + steps);
-                max = Math.max(max, (double) steps / n);
-                sum += (double) steps / n;
-                count++;
+                calculator.feed(n, steps);
             }
         }
-        System.out.println("Largest=" + max);
-        System.out.println("Average=" + sum / count);
+        calculator.print();
     }
 
     private long n;
@@ -36,9 +32,12 @@ public class SqrtApproximation {
 
     public SqrtApproximation (long n) {
         this.n = n;
-        x = 2 * MathAux.isqrt(n);
-        y = n - MathAux.isqrt(n) * MathAux.isqrt(n);
-        fraction = new GeneralizedContinuedFractionUnderN(MathAux.isqrt(n), n);
+        // long ceil = MathAux.isqrt(n) + 1;
+        long ceil = n / 2;
+        // long ceil = MathAux.isqrt(n);
+        x = 2 * ceil;
+        y = n - ceil * ceil;
+        fraction = new GeneralizedContinuedFractionUnderN(ceil, n);
     }
 
     public int run () {
@@ -54,42 +53,19 @@ public class SqrtApproximation {
         long a = fraction.getA();
         long b = fraction.getB();
         List<Long> gcds = new ArrayList<>();
-        gcds.add(gcd(n, a + 1));
-        gcds.add(gcd(n, a - 1));
-        gcds.add(gcd(n, b + 1));
-        gcds.add(gcd(n, b - 1));
-        gcds.add(gcd(n, a + b));
-        gcds.add(gcd(n, Math.abs(a - b)));
+        gcds.add(Gcd.gcd(n, a + 1));
+        gcds.add(Gcd.gcd(n, a - 1));
+        gcds.add(Gcd.gcd(n, b + 1));
+        gcds.add(Gcd.gcd(n, b - 1));
+        gcds.add(Gcd.gcd(n, a + b));
+        gcds.add(Gcd.gcd(n, Math.abs(a - b)));
         for( int i = 0; i < gcds.size(); i++ ){
             long gcd = gcds.get(i);
-            if( gcd != 1 && gcd != n ){
+            if( gcd != 1 && gcd != n && gcd != -1 && gcd != -n ){
                 return true;
             }
         }
         return false;
-    }
-
-    private static long gcd (long u, long v) {
-        if( u < 0 || v < 0 ){
-            return gcd(Math.abs(u), Math.abs(v));
-        }
-        if( u == 0 || u == v ){
-            return v;
-        }
-        if( v == 0 ){
-            return u;
-        }
-        if( even(u) ){
-            return even(v) ? gcd(u >> 1, v >> 1) : gcd(u >> 1, v);
-        }
-        if( even(v) ){
-            return gcd(u, v >> 1);
-        }
-        return u > v ? gcd(u - v >> 1, v) : gcd(u, v - u >> 1);
-    }
-
-    private static boolean even (long u) {
-        return (u & 1) == 0;
     }
 
 }
