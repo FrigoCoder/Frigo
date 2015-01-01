@@ -26,8 +26,12 @@ public class GeneralizedContinuedFractionUnderN {
     }
 
     public void recurse (long b, long a) {
-        A.add((b * current(A) + a * previous(A)) % n);
-        B.add((b * current(B) + a * previous(B)) % n);
+        A.add(mod(b * current(A) + a * previous(A)));
+        B.add(mod(b * current(B) + a * previous(B)));
+    }
+
+    private long mod (long x) {
+        return x >= 0 ? x % n : x % n + n;
     }
 
     private long current (List<Long> list) {
