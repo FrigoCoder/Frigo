@@ -8,37 +8,44 @@ import frigo.math.numbertheory.Gcd;
 
 public class Factorizer {
 
+    public static void main (String[] args) {
+        // long n = 7 * 17;
+        long n = 11 * 17;
+        // long n = 23 * 103;
+        // long n = 124989250231L;
+        // long n = 103 * 499979L;
+
+        Factorizer factorizer = new Factorizer(n);
+        factorizer.factor();
+    }
+
     private long n;
-    private long[] u;
+    private FactorialNumberSystem radix;
     private Set<Long> set = new TreeSet<>();
 
     public Factorizer (long n) {
         this.n = n;
-        u = new long[MathAux.log2(n / 4) + 1];
-        for( int i = 0; i < u.length; i++ ){
-            u[i] = n * (1L << i);
-        }
-        set.add(1L);
+        radix = new FactorialNumberSystem(n / 4);
+        set.add(0L);
     }
 
     public void factor () {
-        for( int i = 0; i < u.length; i++ ){
-            long p = 1L << i;
+        for( int j = 0; j < radix.size() - 1; j++ ){
+            long p = radix.placeValue(j + 1);
             Set<Long> qr = quadraticResidues(p);
 
             Set<Long> next = new TreeSet<>();
-            for( long mul = 0; mul < 2; mul++ ){
-                for( long sum : set ){
-                    long x = sum + u[i] * mul;
-                    if( qr.contains(x % p) ){
-                        next.add(x);
+            for( long digit = 0; digit <= radix.highestDigit(j); digit++ ){
+                for( long k0 : set ){
+                    long k = k0 + digit * radix.placeValue(j);
+                    if( qr.contains((k * n + 1) % p) ){
+                        next.add(k);
                     }
                 }
             }
             set = next;
             System.out.println("p=" + p + ", |S|=" + set.size() + ", S=" + set);
-
-            checkFactors(set);
+            // checkFactors();
         }
     }
 
@@ -50,18 +57,18 @@ public class Factorizer {
         return residues;
     }
 
-    private void checkFactors (Set<Long> set) {
-        for( long x2 : set ){
-            long x = MathAux.isqrt(x2);
-            checkFactor(x2, x + 1);
-            checkFactor(x2, x - 1);
+    private void checkFactors () {
+        for( long k : set ){
+            long x = MathAux.isqrt(k * n + 1);
+            checkFactor(x + 1, k);
+            checkFactor(x - 1, k);
         }
     }
 
-    private void checkFactor (long x2, long m) {
-        long p = Gcd.gcd(m, n);
+    private void checkFactor (long xpm1, long k) {
+        long p = Gcd.gcd(xpm1, n);
         if( p != 1 && p != n ){
-            System.out.println("Found factor " + p + ", sum is " + x2);
+            System.out.println("Found factor " + p + ", k is " + k);
         }
     }
 
