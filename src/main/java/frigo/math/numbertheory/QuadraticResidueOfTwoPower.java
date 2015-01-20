@@ -1,18 +1,16 @@
 
 package frigo.math.numbertheory;
 
+import frigo.math.integer.MathInt;
+
 public class QuadraticResidueOfTwoPower {
 
     public static boolean isQuadraticResidue (long x, long p) {
-        if( !isPowerOfTwo(p) ){
+        if( !MathInt.isPowerOfTwo(p) ){
             throw new IllegalArgumentException();
         }
         long odd = stripPowersOf4(x, p);
         return odd == 0 || odd % 8 == 1;
-    }
-
-    private static boolean isPowerOfTwo (long p) {
-        return (p & p - 1) == 0;
     }
 
     private static long stripPowersOf4 (long x, long p) {
