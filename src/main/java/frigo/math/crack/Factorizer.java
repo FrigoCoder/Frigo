@@ -5,7 +5,6 @@ import java.util.Set;
 import java.util.TreeSet;
 
 import frigo.math.integer.MathInt;
-import frigo.math.numbertheory.Gcd;
 import frigo.math.numbertheory.JacobiSymbol;
 
 public class Factorizer {
@@ -66,7 +65,7 @@ public class Factorizer {
     }
 
     private void checkFactor (long xpm1, long k) {
-        long p = Gcd.gcd(xpm1, n);
+        long p = MathInt.gcd(xpm1, n);
         if( p != 1 && p != n ){
             System.out.println("Found factor " + p + ", k is " + k);
         }

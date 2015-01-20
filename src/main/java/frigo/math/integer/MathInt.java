@@ -3,6 +3,14 @@ package frigo.math.integer;
 
 public class MathInt {
 
+    public static int gcd (int u, int v) {
+        return v == 0 ? u : gcd(v, u % v);
+    }
+
+    public static long gcd (long u, long v) {
+        return v == 0 ? u : gcd(v, u % v);
+    }
+
     public static boolean isPowerOfTwo (int x) {
         return (x & x - 1) == 0 && x > 0;
     }

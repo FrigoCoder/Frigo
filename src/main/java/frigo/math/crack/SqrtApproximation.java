@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import frigo.math.integer.FactorizerSieve;
-import frigo.math.numbertheory.Gcd;
+import frigo.math.integer.MathInt;
 
 public class SqrtApproximation {
 
@@ -54,12 +54,12 @@ public class SqrtApproximation {
         long a = fraction.getA();
         long b = fraction.getB();
         List<Long> gcds = new ArrayList<>();
-        gcds.add(Gcd.gcd(n, a + 1));
-        gcds.add(Gcd.gcd(n, a - 1));
-        gcds.add(Gcd.gcd(n, b + 1));
-        gcds.add(Gcd.gcd(n, b - 1));
-        gcds.add(Gcd.gcd(n, a + b));
-        gcds.add(Gcd.gcd(n, Math.abs(a - b)));
+        gcds.add(MathInt.gcd(n, a + 1));
+        gcds.add(MathInt.gcd(n, a - 1));
+        gcds.add(MathInt.gcd(n, b + 1));
+        gcds.add(MathInt.gcd(n, b - 1));
+        gcds.add(MathInt.gcd(n, a + b));
+        gcds.add(MathInt.gcd(n, Math.abs(a - b)));
         for( int i = 0; i < gcds.size(); i++ ){
             long gcd = gcds.get(i);
             if( gcd != 1 && gcd != n && gcd != -1 && gcd != -n ){

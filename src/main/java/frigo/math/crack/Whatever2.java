@@ -6,7 +6,7 @@ import java.util.Set;
 import java.util.TreeSet;
 
 import frigo.math.integer.FactorizerSieve;
-import frigo.math.numbertheory.Gcd;
+import frigo.math.integer.MathInt;
 
 public class Whatever2 {
 
@@ -25,7 +25,7 @@ public class Whatever2 {
         long m = 1;
         for( long p = 2; m <= n; p++ ){
             m *= p;
-            if( Gcd.gcd(m, n) != 1 ){
+            if( MathInt.gcd(m, n) != 1 ){
                 continue;
             }
             printSol(n, k, m);

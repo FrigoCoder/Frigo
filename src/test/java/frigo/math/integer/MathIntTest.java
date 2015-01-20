@@ -18,6 +18,42 @@ public class MathIntTest {
     public ExpectedException thrown = ExpectedException.none();
 
     @Test
+    public void testGcdInt () {
+        assertGcd(0, 0, 0);
+        assertGcd(0, 1, 1);
+        assertGcd(1, 0, 1);
+        assertGcd(1, 1, 1);
+        assertGcd(2, 1, 1);
+        assertGcd(2, 3, 1);
+        assertGcd(2, 4, 2);
+        assertGcd(2, 6, 2);
+        assertGcd(3, 6, 3);
+        assertGcd(2 * 3 * 5 * 7, 2 * 3 * 7 * 11, 2 * 3 * 7);
+    }
+
+    private void assertGcd (int a, int b, int gcd) {
+        assertThat(MathInt.gcd(a, b), is(gcd));
+    }
+
+    @Test
+    public void testGcdLong () {
+        assertGcd(0, 0, 0L);
+        assertGcd(0, 1, 1L);
+        assertGcd(1, 0, 1L);
+        assertGcd(1, 1, 1L);
+        assertGcd(2, 1, 1L);
+        assertGcd(2, 3, 1L);
+        assertGcd(2, 4, 2L);
+        assertGcd(2, 6, 2L);
+        assertGcd(3, 6, 3L);
+        assertGcd(2 * 3 * 5 * 7, 2 * 3 * 7 * 11, 2 * 3 * 7L);
+    }
+
+    private void assertGcd (long a, long b, long gcd) {
+        assertThat(MathInt.gcd(a, b), is(gcd));
+    }
+
+    @Test
     public void test_isPowerOfTwo () {
         for( int i = 0; i <= 30; i++ ){
             assertPowerOfTwo(1 << i, true);
