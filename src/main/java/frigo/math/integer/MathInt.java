@@ -3,6 +3,28 @@ package frigo.math.integer;
 
 public class MathInt {
 
+    public static int factorial (int n) {
+        if( n > 12 ){
+            throw new IllegalArgumentException();
+        }
+        int factorial = 1;
+        for( int i = 2; i <= n; i++ ){
+            factorial *= i;
+        }
+        return factorial;
+    }
+
+    public static long factorial (long n) {
+        if( n > 20 ){
+            throw new IllegalArgumentException();
+        }
+        long factorial = 1;
+        for( int i = 2; i <= n; i++ ){
+            factorial *= i;
+        }
+        return factorial;
+    }
+
     public static int gcd (int u, int v) {
         return v == 0 ? u : gcd(v, u % v);
     }

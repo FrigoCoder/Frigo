@@ -1,6 +1,8 @@
 
 package frigo.math.integer;
 
+import static frigo.math.integer.MathInt.factorial;
+import static frigo.math.integer.MathInt.gcd;
 import static frigo.math.integer.MathInt.isPowerOfTwo;
 import static frigo.math.integer.MathInt.log2;
 import static frigo.math.integer.MathInt.sqr;
@@ -18,7 +20,69 @@ public class MathIntTest {
     public ExpectedException thrown = ExpectedException.none();
 
     @Test
-    public void testGcdInt () {
+    public void test_factorial () {
+        assertFactorial(0, 1);
+        assertFactorial(1, 1);
+        assertFactorial(2, 2);
+        assertFactorial(3, 6);
+        assertFactorial(4, 24);
+        assertFactorial(5, 120);
+        assertFactorial(6, 720);
+        assertFactorial(7, 5_040);
+        assertFactorial(8, 40_320);
+        assertFactorial(9, 362_880);
+        assertFactorial(10, 3_628_800);
+        assertFactorial(11, 39_916_800);
+        assertFactorial(12, 479_001_600);
+    }
+
+    private void assertFactorial (int n, int factorial) {
+        assertThat(factorial(n), is(factorial));
+    }
+
+    @Test
+    public void test_factorial_overflow () {
+        thrown.expect(IllegalArgumentException.class);
+        factorial(13);
+    }
+
+    @Test
+    public void test_factorial_long () {
+        assertFactorial(0, 1L);
+        assertFactorial(1, 1L);
+        assertFactorial(2, 2L);
+        assertFactorial(3, 6L);
+        assertFactorial(4, 24L);
+        assertFactorial(5, 120L);
+        assertFactorial(6, 720L);
+        assertFactorial(7, 5_040L);
+        assertFactorial(8, 40_320L);
+        assertFactorial(9, 362_880L);
+        assertFactorial(10, 3_628_800L);
+        assertFactorial(11, 39_916_800L);
+        assertFactorial(12, 479_001_600L);
+        assertFactorial(13, 6_227_020_800L);
+        assertFactorial(14, 87_178_291_200L);
+        assertFactorial(15, 1_307_674_368_000L);
+        assertFactorial(16, 20_922_789_888_000L);
+        assertFactorial(17, 355_687_428_096_000L);
+        assertFactorial(18, 6_402_373_705_728_000L);
+        assertFactorial(19, 121_645_100_408_832_000L);
+        assertFactorial(20, 2_432_902_008_176_640_000L);
+    }
+
+    private void assertFactorial (long n, long factorial) {
+        assertThat(factorial(n), is(factorial));
+    }
+
+    @Test
+    public void test_factorial_long_overflow () {
+        thrown.expect(IllegalArgumentException.class);
+        factorial(21L);
+    }
+
+    @Test
+    public void test_gcd () {
         assertGcd(0, 0, 0);
         assertGcd(0, 1, 1);
         assertGcd(1, 0, 1);
@@ -32,11 +96,11 @@ public class MathIntTest {
     }
 
     private void assertGcd (int a, int b, int gcd) {
-        assertThat(MathInt.gcd(a, b), is(gcd));
+        assertThat(gcd(a, b), is(gcd));
     }
 
     @Test
-    public void testGcdLong () {
+    public void test_gcd_long () {
         assertGcd(0, 0, 0L);
         assertGcd(0, 1, 1L);
         assertGcd(1, 0, 1L);
@@ -50,7 +114,7 @@ public class MathIntTest {
     }
 
     private void assertGcd (long a, long b, long gcd) {
-        assertThat(MathInt.gcd(a, b), is(gcd));
+        assertThat(gcd(a, b), is(gcd));
     }
 
     @Test
