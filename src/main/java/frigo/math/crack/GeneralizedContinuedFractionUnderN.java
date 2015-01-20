@@ -1,5 +1,5 @@
 
-package frigo.math.integer;
+package frigo.math.crack;
 
 import java.util.List;
 

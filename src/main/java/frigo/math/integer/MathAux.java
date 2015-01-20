@@ -37,6 +37,10 @@ public class MathAux {
         return (long) x * x;
     }
 
+    public static long sqr (long x) {
+        return x * x;
+    }
+
     public static int ceil (double x) {
         return (int) Math.round(Math.ceil(x));
     }

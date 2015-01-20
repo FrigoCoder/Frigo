@@ -1,11 +1,13 @@
 
-package frigo.math.integer;
+package frigo.math.crack;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
+
+import frigo.math.integer.FactorizerSieve;
 
 public class FindFewestQuadraticResidues {
 

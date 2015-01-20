@@ -1,9 +1,10 @@
 
-package frigo.math.integer;
+package frigo.math.crack;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import frigo.math.integer.FactorizerSieve;
 import frigo.math.numbertheory.Gcd;
 
 public class SqrtApproximation {

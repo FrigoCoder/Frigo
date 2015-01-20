@@ -1,10 +1,12 @@
 
-package frigo.math.integer;
+package frigo.math.crack;
 
 import java.util.Set;
 import java.util.TreeSet;
 
+import frigo.math.integer.MathAux;
 import frigo.math.numbertheory.Gcd;
+import frigo.math.numbertheory.JacobiSymbol;
 
 public class Factorizer {
 
@@ -32,37 +34,35 @@ public class Factorizer {
     public void factor () {
         for( int j = 0; j < radix.size() - 1; j++ ){
             long p = radix.placeValue(j + 1);
-            Set<Long> qr = quadraticResidues(p);
 
             Set<Long> next = new TreeSet<>();
             for( long digit = 0; digit <= radix.highestDigit(j); digit++ ){
                 for( long k0 : set ){
                     long k = k0 + digit * radix.placeValue(j);
-                    if( qr.contains((k * n + 1) % p) ){
+                    long x2 = k * n + 1;
+                    // if( isQuadraticResidue(x2, p) && isQuadraticResidue(x2, p * n) ){
+                    if( isQuadraticResidue(x2, p) && isQuadraticResidue(x2, p * n) ){
                         next.add(k);
                     }
                 }
             }
             set = next;
             System.out.println("p=" + p + ", |S|=" + set.size() + ", S=" + set);
-            // checkFactors();
+            checkFactors();
         }
-    }
-
-    private Set<Long> quadraticResidues (long p) {
-        Set<Long> residues = new TreeSet<>();
-        for( long x = 0; x < p; x++ ){
-            residues.add(x * x % p);
-        }
-        return residues;
     }
 
     private void checkFactors () {
         for( long k : set ){
-            long x = MathAux.isqrt(k * n + 1);
+            long x = ceilSqrt(k * n + 1);
             checkFactor(x + 1, k);
             checkFactor(x - 1, k);
         }
+    }
+
+    private long ceilSqrt (long x2) {
+        long x = MathAux.isqrt(x2);
+        return x * x == x2 ? x : x + 1;
     }
 
     private void checkFactor (long xpm1, long k) {
@@ -70,6 +70,14 @@ public class Factorizer {
         if( p != 1 && p != n ){
             System.out.println("Found factor " + p + ", k is " + k);
         }
+    }
+
+    private boolean isQuadraticResidue (long x, long p) {
+        long odd = p;
+        while( odd % 2 == 0 ){
+            odd /= 2;
+        }
+        return JacobiSymbol.jacobi(x, odd) == 1;
     }
 
 }

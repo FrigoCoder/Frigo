@@ -1,5 +1,5 @@
 
-package frigo.math.integer;
+package frigo.math.crack;
 
 public class RuntimeCalculator {
 
@@ -18,7 +18,7 @@ public class RuntimeCalculator {
     }
 
     private double calc (long n, long steps) {
-        return steps / Math.sqrt(n);
+        return steps / Math.pow(n, 1.0 / 2);
     }
 
     public void print () {

@@ -1,5 +1,5 @@
 
-package frigo.math.integer;
+package frigo.math.crack;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,8 +17,8 @@ public class FactorialNumberSystem {
             placeValues.add(factorial(i));
             highestDigits.add((long) i);
         }
-        // placeValues.add(factorial(i));
-        // highestDigits.add((long) i);
+        placeValues.add(factorial(i));
+        highestDigits.add((long) i);
     }
 
     private long highest () {

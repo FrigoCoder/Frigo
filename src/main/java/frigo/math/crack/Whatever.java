@@ -1,5 +1,5 @@
 
-package frigo.math.integer;
+package frigo.math.crack;
 
 import java.util.NoSuchElementException;
 
@@ -8,7 +8,8 @@ import frigo.math.numbertheory.JacobiSymbol;
 public class Whatever {
 
     public static void main (String[] args) {
-        long n = 11 * 17;
+        // long n = 11 * 17;
+        long n = 7 * 11;
         Whatever whatever = new Whatever(n);
         whatever.run();
     }
@@ -19,7 +20,7 @@ public class Whatever {
     public Whatever (long n) {
         this.n = n;
         sqrt1 = findSquareRootOf1();
-        System.out.println("n=" + n + ", sqrt1=" + sqrt1);
+        System.out.println("n=" + n + ", sqrt1=" + sqrt1 + ", k=" + (sqrt1 * sqrt1 - 1) / n);
     }
 
     private long findSquareRootOf1 () {
@@ -49,10 +50,7 @@ public class Whatever {
     }
 
     private String scream (long signum) {
-        if( signum == 0 ){
-            return "ZERO";
-        }
-        return signum > 0 ? "POSITIVE" : "NEGATIVE";
+        return signum == 0 ? "ZERO" : signum > 0 ? "MORE" : "LESS";
     }
 
 }
