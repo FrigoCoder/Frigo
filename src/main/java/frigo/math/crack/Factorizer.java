@@ -61,7 +61,7 @@ public class Factorizer {
     }
 
     private long ceilSqrt (long x2) {
-        long x = MathAux.isqrt(x2);
+        long x = MathAux.sqrt(x2);
         return x * x == x2 ? x : x + 1;
     }
 
