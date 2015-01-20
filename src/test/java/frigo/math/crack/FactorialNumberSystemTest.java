@@ -1,5 +1,5 @@
 
-package frigo.math.integer;
+package frigo.math.crack;
 
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;

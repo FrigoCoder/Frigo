@@ -3,8 +3,6 @@ package frigo.math.crack;
 
 import java.util.NoSuchElementException;
 
-import frigo.math.numbertheory.JacobiSymbol;
-
 public class Whatever {
 
     public static void main (String[] args) {
@@ -40,7 +38,7 @@ public class Whatever {
                 continue;
             }
             System.out.println("x=" + x + ", xinv=" + euclid.binv() + ", evaluateQ=" + scream(evaluate(euclid))
-                + ", jacobi=" + scream(JacobiSymbol.jacobi(x, n)) + ", q=" + euclid.qshort());
+                + ", q=" + euclid.qshort());
         }
     }
 
