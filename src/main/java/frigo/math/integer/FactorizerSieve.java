@@ -45,7 +45,7 @@ public class FactorizerSieve {
     }
 
     public boolean prime (int x) {
-        return x > 1 && table[x] == x;
+        return table[x] == x;
     }
 
     public boolean biprime (int n) {
