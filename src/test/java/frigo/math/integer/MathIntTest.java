@@ -6,6 +6,7 @@ import static frigo.math.integer.MathInt.gcd;
 import static frigo.math.integer.MathInt.isPowerOfTwo;
 import static frigo.math.integer.MathInt.log2;
 import static frigo.math.integer.MathInt.pow;
+import static frigo.math.integer.MathInt.powmod;
 import static frigo.math.integer.MathInt.sqr;
 import static frigo.math.integer.MathInt.sqrt;
 import static org.hamcrest.Matchers.is;
@@ -221,7 +222,7 @@ public class MathIntTest {
     }
 
     @Test
-    public void test_pow_negative_power () {
+    public void test_pow_negative_exponent () {
         thrown.expect(IllegalArgumentException.class);
         pow(2, -1);
     }
@@ -244,9 +245,51 @@ public class MathIntTest {
     }
 
     @Test
-    public void test_pow_long_negative () {
+    public void test_pow_long_negative_exponent () {
         thrown.expect(IllegalArgumentException.class);
         pow(2L, -1);
+    }
+
+    @Test
+    public void test_powmod () {
+        assertPowMod(2, 2, 187, 4);
+        assertPowMod(2, 5, 187, 32);
+        assertPowMod(2, 30, 187, 166);
+        assertPowMod(2, 32, 187, 103);
+        assertPowMod(2, 62, 187, 81);
+        assertPowMod(3, 2, 187, 9);
+        assertPowMod(3, 3, 187, 27);
+        assertPowMod(46_340, 2, 187, 174);
+        assertPowMod(67, 2, 187, 1);
+        assertPowMod(65_536, 2, 187, 103);
+    }
+
+    private void assertPowMod (int base, int exponent, int modulus, int expected) {
+        assertThat(powmod(base, exponent, modulus), is(expected));
+    }
+
+    @Test
+    public void test_powmod_negative_base () {
+        thrown.expect(IllegalArgumentException.class);
+        powmod(-1, 2, 187);
+    }
+
+    @Test
+    public void test_powmod_negative_exponent () {
+        thrown.expect(IllegalArgumentException.class);
+        powmod(2, -1, 187);
+    }
+
+    @Test
+    public void test_powmod_zero_modulus () {
+        thrown.expect(IllegalArgumentException.class);
+        powmod(2, 2, 0);
+    }
+
+    @Test
+    public void test_powmod_negative_modulus () {
+        thrown.expect(IllegalArgumentException.class);
+        powmod(2, 2, -1);
     }
 
     @Test

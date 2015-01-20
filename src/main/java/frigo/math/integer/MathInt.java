@@ -60,8 +60,8 @@ public class MathInt {
             throw new IllegalArgumentException();
         }
         int result = 1;
-        for( int actual = base, power = exponent; power != 0; power /= 2 ){
-            if( power % 2 == 1 ){
+        for( int actual = base, bits = exponent; bits != 0; bits >>= 1 ){
+            if( (bits & 1) == 1 ){
                 result *= actual;
             }
             actual *= actual;
@@ -74,11 +74,42 @@ public class MathInt {
             throw new IllegalArgumentException();
         }
         long result = 1;
-        for( long actual = base, power = exponent; power != 0; power /= 2 ){
-            if( power % 2 == 1 ){
+        for( long actual = base, bits = exponent; bits != 0; bits >>= 1 ){
+            if( (bits & 1) == 1 ){
                 result *= actual;
             }
             actual *= actual;
+        }
+        return result;
+    }
+
+    public static int powmod (int base, int exponent, int modulus) {
+        if( base < 0 || exponent < 0 || modulus <= 0 ){
+            throw new IllegalArgumentException();
+        }
+        int result = 1;
+        for( int actual = base, bits = exponent; bits != 0; bits >>= 1 ){
+            if( (bits & 1) == 1 ){
+                result = mulmod(result, actual, modulus);
+            }
+            actual = mulmod(actual, actual, modulus);
+        }
+        return result;
+    }
+
+    private static int mulmod (int multiplicand, int multiplier, int modulus) {
+        int result = 0;
+        for( int actual = multiplicand % modulus, bits = multiplier; bits != 0; bits >>= 1 ){
+            if( (bits & 1) == 1 ){
+                result += actual;
+                if( result >= modulus ){
+                    result -= modulus;
+                }
+            }
+            actual += actual;
+            if( actual >= modulus ){
+                actual -= modulus;
+            }
         }
         return result;
     }
