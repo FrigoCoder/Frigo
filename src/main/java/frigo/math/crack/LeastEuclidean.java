@@ -1,6 +1,7 @@
 
 package frigo.math.crack;
 
+import static frigo.math.integer.MathInt.sgn;
 import static java.lang.Math.abs;
 
 import java.util.List;
@@ -39,10 +40,6 @@ public class LeastEuclidean {
             return q1;
         }
         return q2;
-    }
-
-    private static long sgn (long x) {
-        return x == 0 ? 0 : x > 0 ? 1 : -1;
     }
 
     public List<Long> q () {

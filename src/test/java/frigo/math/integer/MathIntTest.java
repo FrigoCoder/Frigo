@@ -206,6 +206,36 @@ public class MathIntTest {
     }
 
     @Test
+    public void test_sgn () {
+        assertSgn(Integer.MIN_VALUE, -1);
+        assertSgn(-1, -1);
+        assertSgn(0, 0);
+        assertSgn(1, 1);
+        assertSgn(Integer.MAX_VALUE, 1);
+    }
+
+    private void assertSgn (int x, int sgn) {
+        assertThat(MathInt.sgn(x), is(sgn));
+    }
+
+    @Test
+    public void test_sgn_long () {
+        assertSgn(Long.MIN_VALUE, -1);
+        assertSgn((long) Integer.MIN_VALUE - 1, -1);
+        assertSgn((long) Integer.MIN_VALUE, -1);
+        assertSgn(-1L, -1);
+        assertSgn(0L, 0);
+        assertSgn(1L, 1);
+        assertSgn((long) Integer.MAX_VALUE, 1);
+        assertSgn((long) Integer.MAX_VALUE + 1, 1);
+        assertSgn(Long.MAX_VALUE, 1);
+    }
+
+    private void assertSgn (long x, long sgn) {
+        assertThat(MathInt.sgn(x), is(sgn));
+    }
+
+    @Test
     public void test_sqr_int () {
         assertSqr(-2_147_483_648, 4_611_686_018_427_387_904L);
         assertSqr(-3, 9L);

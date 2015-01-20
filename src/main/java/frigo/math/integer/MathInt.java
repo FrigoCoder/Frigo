@@ -55,6 +55,14 @@ public class MathInt {
         return 63 - Long.numberOfLeadingZeros(x);
     }
 
+    public static int sgn (int x) {
+        return x == 0 ? 0 : x > 0 ? 1 : -1;
+    }
+
+    public static long sgn (long x) {
+        return x == 0 ? 0 : x > 0 ? 1 : -1;
+    }
+
     public static long sqr (int x) {
         return (long) x * x;
     }
