@@ -49,4 +49,8 @@ public class LeastEuclidean {
         return q;
     }
 
+    public long gcd () {
+        return Math.abs(r.get(r.size() - 2));
+    }
+
 }

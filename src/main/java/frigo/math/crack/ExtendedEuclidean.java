@@ -13,28 +13,6 @@ import com.google.common.collect.Lists;
 
 public class ExtendedEuclidean {
 
-    public static long nFromQCompact (List<Long> q) {
-        long r0 = 0;
-        long r1 = 1;
-        for( int i = 0; i < q.size(); i++ ){
-            long r2 = r0 + r1 * q.get(i);
-            r0 = r1;
-            r1 = r2;
-        }
-        return r1;
-    }
-
-    public static long kFromQCompact (List<Long> q) {
-        long r0 = 0;
-        long r1 = 1;
-        for( int i = 0; i < q.size(); i++ ){
-            long r2 = r0 + r1 * q.get(i);
-            r0 = r1;
-            r1 = r2;
-        }
-        return r0;
-    }
-
     public List<Long> q;
     public List<Long> r;
     public List<Long> s;
@@ -69,16 +47,8 @@ public class ExtendedEuclidean {
         return r.get(r.size() - 2);
     }
 
-    public long binvSigned () {
-        return t.get(t.size() - 2);
-    }
-
     public long binv () {
         return (t.get(t.size() - 2) + a()) % a();
-    }
-
-    public long k () {
-        return s.get(s.size() - 2);
     }
 
     public List<Long> qshort () {
