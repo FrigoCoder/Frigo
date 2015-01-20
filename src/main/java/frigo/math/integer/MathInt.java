@@ -55,6 +55,34 @@ public class MathInt {
         return 63 - Long.numberOfLeadingZeros(x);
     }
 
+    public static int pow (int base, int exponent) {
+        if( exponent < 0 ){
+            throw new IllegalArgumentException();
+        }
+        int result = 1;
+        for( int actual = base, power = exponent; power != 0; power /= 2 ){
+            if( power % 2 == 1 ){
+                result *= actual;
+            }
+            actual *= actual;
+        }
+        return result;
+    }
+
+    public static long pow (long base, long exponent) {
+        if( exponent < 0 ){
+            throw new IllegalArgumentException();
+        }
+        long result = 1;
+        for( long actual = base, power = exponent; power != 0; power /= 2 ){
+            if( power % 2 == 1 ){
+                result *= actual;
+            }
+            actual *= actual;
+        }
+        return result;
+    }
+
     public static int sgn (int x) {
         return x == 0 ? 0 : x > 0 ? 1 : -1;
     }

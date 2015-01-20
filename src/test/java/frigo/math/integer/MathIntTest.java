@@ -5,6 +5,7 @@ import static frigo.math.integer.MathInt.factorial;
 import static frigo.math.integer.MathInt.gcd;
 import static frigo.math.integer.MathInt.isPowerOfTwo;
 import static frigo.math.integer.MathInt.log2;
+import static frigo.math.integer.MathInt.pow;
 import static frigo.math.integer.MathInt.sqr;
 import static frigo.math.integer.MathInt.sqrt;
 import static org.hamcrest.Matchers.is;
@@ -203,6 +204,49 @@ public class MathIntTest {
     public void test_log2_long_negative () {
         thrown.expect(IllegalArgumentException.class);
         log2(-1L);
+    }
+
+    @Test
+    public void test_pow () {
+        assertPow(2, 2, 4);
+        assertPow(2, 5, 32);
+        assertPow(2, 30, 1_073_741_824);
+        assertPow(3, 2, 9);
+        assertPow(3, 3, 27);
+        assertPow(46_340, 2, 2_147_395_600);
+    }
+
+    private void assertPow (int base, int exponent, int expected) {
+        assertThat(pow(base, exponent), is(expected));
+    }
+
+    @Test
+    public void test_pow_negative_power () {
+        thrown.expect(IllegalArgumentException.class);
+        pow(2, -1);
+    }
+
+    @Test
+    public void test_pow_long () {
+        assertPow(2, 2, 4L);
+        assertPow(2, 5, 32L);
+        assertPow(2, 30, 1_073_741_824L);
+        assertPow(2, 32, 4_294_967_296L);
+        assertPow(2, 62, 4_611_686_018_427_387_904L);
+        assertPow(3, 2, 9L);
+        assertPow(3, 3, 27L);
+        assertPow(46_340, 2, 2_147_395_600L);
+        assertPow(3_037_000_499L, 2, 9_223_372_030_926_249_001L);
+    }
+
+    private void assertPow (long base, long exponent, long expected) {
+        assertThat(pow(base, exponent), is(expected));
+    }
+
+    @Test
+    public void test_pow_long_negative () {
+        thrown.expect(IllegalArgumentException.class);
+        pow(2L, -1);
     }
 
     @Test
