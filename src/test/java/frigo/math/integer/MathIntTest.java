@@ -293,6 +293,27 @@ public class MathIntTest {
     }
 
     @Test
+    public void test_powmod_long () {
+        assertPowMod(2, 2, 187, 4L);
+        assertPowMod(2, 5, 187, 32L);
+        assertPowMod(2, 30, 187, 166L);
+        assertPowMod(2, 32, 187, 103L);
+        assertPowMod(2, 62, 187, 81L);
+        assertPowMod(2, 64, 187, 137L);
+        assertPowMod(3, 2, 187, 9L);
+        assertPowMod(3, 3, 187, 27L);
+        assertPowMod(46_340, 2, 187, 174L);
+        assertPowMod(67, 2, 187, 1L);
+        assertPowMod(65_536, 2, 187, 103L);
+        assertPowMod(65_536, 4, 187, 137L);
+        assertPowMod(4_294_967_296L, 2, 187, 137L);
+    }
+
+    private void assertPowMod (long base, long exponent, long modulus, long expected) {
+        assertThat(powmod(base, exponent, modulus), is(expected));
+    }
+
+    @Test
     public void test_sgn () {
         assertSgn(Integer.MIN_VALUE, -1);
         assertSgn(-1, -1);

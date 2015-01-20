@@ -114,6 +114,38 @@ public class MathInt {
         return result;
     }
 
+    public static long powmod (long base, long exponent, long modulus) {
+        if( base < 0 || exponent < 0 || modulus <= 0 ){
+            throw new IllegalArgumentException();
+        }
+        long result = 1;
+        for( long actual = base, bits = exponent; bits != 0; bits >>= 1 ){
+            if( (bits & 1) == 1 ){
+                result = mulmod(result, actual, modulus);
+            }
+            actual = mulmod(actual, actual, modulus);
+        }
+        return result;
+
+    }
+
+    private static long mulmod (long multiplicand, long multiplier, long modulus) {
+        long result = 0;
+        for( long actual = multiplicand % modulus, bits = multiplier; bits != 0; bits >>= 1 ){
+            if( (bits & 1) == 1 ){
+                result += actual;
+                if( result >= modulus ){
+                    result -= modulus;
+                }
+            }
+            actual += actual;
+            if( actual >= modulus ){
+                actual -= modulus;
+            }
+        }
+        return result;
+    }
+
     public static int sgn (int x) {
         return x == 0 ? 0 : x > 0 ? 1 : -1;
     }
