@@ -2,10 +2,10 @@
 package frigo.math.fourier;
 
 import static com.google.common.base.Preconditions.checkArgument;
-import static frigo.math.integer.MathAux.isPowerOfTwo;
 import static java.lang.Integer.numberOfLeadingZeros;
 import static java.lang.Math.PI;
 import frigo.math.Complex;
+import frigo.math.integer.MathInt;
 
 /**
  * Fast Hartley Transform with Decimation In Frequency based on <a
@@ -29,7 +29,7 @@ public class FHT extends HartleyTransform {
     }
 
     private void core (double[] v) {
-        checkArgument(isPowerOfTwo(v.length), "Array length must be power of two");
+        checkArgument(MathInt.isPowerOfTwo(v.length), "Array length must be power of two");
         for( int blockSize = v.length; blockSize >= 8; blockSize /= 2 ){
             coreBig(v, blockSize);
         }

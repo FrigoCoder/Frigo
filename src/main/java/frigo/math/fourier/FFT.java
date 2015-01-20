@@ -2,9 +2,9 @@
 package frigo.math.fourier;
 
 import static com.google.common.base.Preconditions.checkArgument;
-import static frigo.math.integer.MathAux.isPowerOfTwo;
 import static java.lang.Math.PI;
 import frigo.math.Complex;
+import frigo.math.integer.MathInt;
 
 /**
  * Radix-2 Decimation In Frequency Fast Fourier Transform. Implemented based on the ideas of the Fast Hartley Transform.
@@ -27,7 +27,7 @@ public class FFT implements FourierTransform {
     }
 
     private void core (Complex[] v, double sign) {
-        checkArgument(isPowerOfTwo(v.length), "Array length must be power of two");
+        checkArgument(MathInt.isPowerOfTwo(v.length), "Array length must be power of two");
         for( int blockSize = v.length; blockSize > 1; blockSize /= 2 ){
             Complex root = Complex.cis(sign * 2.0 * PI / blockSize);
             Complex twiddle = new Complex(1.0, 0.0);
@@ -49,9 +49,9 @@ public class FFT implements FourierTransform {
         int p = Integer.numberOfLeadingZeros(v.length - 1);
         for( int i = 0; i < v.length; i++ ){
             int j = Integer.reverse(i) >>> p;
-            if( i < j ){
-                swap(v, i, j);
-            }
+                if( i < j ){
+                    swap(v, i, j);
+                }
         }
     }
 

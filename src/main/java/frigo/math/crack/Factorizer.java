@@ -4,7 +4,7 @@ package frigo.math.crack;
 import java.util.Set;
 import java.util.TreeSet;
 
-import frigo.math.integer.MathAux;
+import frigo.math.integer.MathInt;
 import frigo.math.numbertheory.Gcd;
 import frigo.math.numbertheory.JacobiSymbol;
 
@@ -61,7 +61,7 @@ public class Factorizer {
     }
 
     private long ceilSqrt (long x2) {
-        long x = MathAux.sqrt(x2);
+        long x = MathInt.sqrt(x2);
         return x * x == x2 ? x : x + 1;
     }
 
