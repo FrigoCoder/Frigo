@@ -3,19 +3,19 @@ package frigo.math.crack;
 
 import java.util.NoSuchElementException;
 
-public class Whatever {
+public class Evaluator {
 
     public static void main (String[] args) {
         // long n = 11 * 17;
         long n = 7 * 11;
-        Whatever whatever = new Whatever(n);
+        Evaluator whatever = new Evaluator(n);
         whatever.run();
     }
 
     private long n;
     private long sqrt1;
 
-    public Whatever (long n) {
+    public Evaluator (long n) {
         this.n = n;
         sqrt1 = findSquareRootOf1();
         System.out.println("n=" + n + ", sqrt1=" + sqrt1 + ", k=" + (sqrt1 * sqrt1 - 1) / n);

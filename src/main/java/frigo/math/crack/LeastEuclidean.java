@@ -12,6 +12,17 @@ import com.google.common.collect.Lists;
 
 public class LeastEuclidean {
 
+    public static long evaluate (List<Long> q) {
+        long prev = 0;
+        long actual = 1;
+        for( long quotient : q ){
+            long next = prev - actual * quotient;
+            prev = actual;
+            actual = next;
+        }
+        return actual;
+    }
+
     private List<Long> r;
     private List<Long> q;
 
@@ -48,6 +59,26 @@ public class LeastEuclidean {
 
     public long gcd () {
         return Math.abs(r.get(r.size() - 2));
+    }
+
+    public long n () {
+        return r.get(0);
+    }
+
+    public long x () {
+        return r.get(1);
+    }
+
+    public long invAbs () {
+        return Math.abs(invSigned());
+    }
+
+    public long invSigned () {
+        return evaluate(q.subList(0, q.size() - 1));
+    }
+
+    public long invUnsigned () {
+        return (invSigned() + n()) % n();
     }
 
 }

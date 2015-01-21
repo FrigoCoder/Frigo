@@ -64,4 +64,57 @@ public class LeastEuclideanTest {
         assertThat(euclidean.gcd(), is(gcd));
     }
 
+    @Test
+    public void test_evaluate () {
+        assertEvaluate(-10, 1, 2, 3);
+        assertEvaluate(7, 2, 3);
+        assertEvaluate(3, 1, 2);
+        assertEvaluate(187, 3, -5, 5, -3);
+        assertEvaluate(67, 3, -5, 5);
+        assertEvaluate(-67, -5, 5, -3);
+    }
+
+    private void assertEvaluate (long expected, long... q) {
+        assertThat(LeastEuclidean.evaluate(Longs.asList(q)), is(expected));
+    }
+
+    @Test
+    public void test_invAbs () {
+        assertInvAbs(10, 7, 3);
+        assertInvAbs(187, 67, 67);
+        assertInvAbs(187, 25, 15);
+        assertInvAbs(187, 2, 93);
+    }
+
+    private void assertInvAbs (long n, long x, long xinv) {
+        LeastEuclidean euclidean = new LeastEuclidean(n, x);
+        assertThat(euclidean.invAbs(), is(xinv));
+    }
+
+    @Test
+    public void test_invSigned () {
+        assertInvSigned(10, 7, 3);
+        assertInvSigned(187, 67, 67);
+        assertInvSigned(187, 25, 15);
+        assertInvSigned(187, 2, -93);
+    }
+
+    private void assertInvSigned (long n, long x, long xinv) {
+        LeastEuclidean euclidean = new LeastEuclidean(n, x);
+        assertThat(euclidean.invSigned(), is(xinv));
+    }
+
+    @Test
+    public void test_invUnsigned () {
+        assertInvUnsigned(10, 7, 3);
+        assertInvUnsigned(187, 67, 67);
+        assertInvUnsigned(187, 25, 15);
+        assertInvUnsigned(187, 2, 94);
+    }
+
+    private void assertInvUnsigned (long n, long x, long xinv) {
+        LeastEuclidean euclidean = new LeastEuclidean(n, x);
+        assertThat(euclidean.invUnsigned(), is(xinv));
+    }
+
 }
