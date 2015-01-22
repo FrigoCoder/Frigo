@@ -11,6 +11,8 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import com.google.common.primitives.Longs;
+
 public class QuadraticResidueOfTwoPowerTest {
 
     @Rule
@@ -56,6 +58,65 @@ public class QuadraticResidueOfTwoPowerTest {
             expected.add(residue);
         }
         return expected;
+    }
+
+    @Test
+    public void test_sqrt () {
+        assertSqrt(2, 0, 0);
+        assertSqrt(2, 1, 1);
+
+        assertSqrt(4, 0, 0, 2);
+        assertSqrt(4, 1, 1, 3);
+        assertSqrt(4, 2);
+        assertSqrt(4, 3);
+
+        assertSqrt(8, 0, 0, 4);
+        assertSqrt(8, 1, 1, 3, 5, 7);
+        assertSqrt(8, 4, 2, 6);
+        assertSqrt(8, 2);
+        assertSqrt(8, 3);
+        assertSqrt(8, 5);
+        assertSqrt(8, 6);
+        assertSqrt(8, 7);
+
+        assertSqrt(16, 0, 0, 4, 8, 12);
+        assertSqrt(16, 1, 1, 7, 9, 15);
+        assertSqrt(16, 4, 2, 6, 10, 14);
+        assertSqrt(16, 9, 3, 5, 11, 13);
+        assertSqrt(16, 2);
+        assertSqrt(16, 3);
+        assertSqrt(16, 5);
+        assertSqrt(16, 6);
+        assertSqrt(16, 7);
+        assertSqrt(16, 8);
+        assertSqrt(16, 10);
+        assertSqrt(16, 11);
+        assertSqrt(16, 12);
+        assertSqrt(16, 13);
+        assertSqrt(16, 14);
+        assertSqrt(16, 15);
+    }
+
+    private void assertSqrt (long n, long x2, long... x) {
+        assertThat(QuadraticResidueOfTwoPower.sqrt(x2, n), is(Longs.asList(x)));
+    }
+
+    @Test
+    public void test_sqrt_negative () {
+        thrown.expect(IllegalArgumentException.class);
+        QuadraticResidueOfTwoPower.sqrt(-1, 16);
+    }
+
+    @Test
+    public void test_sqrt_large () {
+        thrown.expect(IllegalArgumentException.class);
+        QuadraticResidueOfTwoPower.sqrt(16, 16);
+    }
+
+    @Test
+    public void test_sqrt_non_power_of_two_modulus () {
+        thrown.expect(IllegalArgumentException.class);
+        QuadraticResidueOfTwoPower.sqrt(16, 17);
     }
 
 }
