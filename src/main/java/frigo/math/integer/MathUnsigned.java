@@ -1,6 +1,8 @@
 
 package frigo.math.integer;
 
+import static com.google.common.base.Preconditions.checkArgument;
+
 public class MathUnsigned {
 
     public static boolean isPowerOfTwoUnsigned (int x) {
@@ -12,16 +14,12 @@ public class MathUnsigned {
     }
 
     public static int log2Unsigned (int x) {
-        if( x == 0 ){
-            throw new IllegalArgumentException();
-        }
+        checkArgument(x != 0);
         return 31 - Integer.numberOfLeadingZeros(x);
     }
 
     public static int log2Unsigned (long x) {
-        if( x == 0 ){
-            throw new IllegalArgumentException();
-        }
+        checkArgument(x != 0);
         return 63 - Long.numberOfLeadingZeros(x);
     }
 

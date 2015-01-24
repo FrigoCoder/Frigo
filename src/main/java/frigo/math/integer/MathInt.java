@@ -1,12 +1,12 @@
 
 package frigo.math.integer;
 
+import static com.google.common.base.Preconditions.checkArgument;
+
 public class MathInt {
 
     public static int factorial (int n) {
-        if( n > 12 ){
-            throw new IllegalArgumentException();
-        }
+        checkArgument(n <= 12);
         int factorial = 1;
         for( int i = 2; i <= n; i++ ){
             factorial *= i;
@@ -15,9 +15,7 @@ public class MathInt {
     }
 
     public static long factorial (long n) {
-        if( n > 20 ){
-            throw new IllegalArgumentException();
-        }
+        checkArgument(n <= 20);
         long factorial = 1;
         for( int i = 2; i <= n; i++ ){
             factorial *= i;
@@ -42,23 +40,17 @@ public class MathInt {
     }
 
     public static int log2 (int x) {
-        if( x <= 0 ){
-            throw new IllegalArgumentException();
-        }
+        checkArgument(x > 0);
         return 31 - Integer.numberOfLeadingZeros(x);
     }
 
     public static int log2 (long x) {
-        if( x <= 0 ){
-            throw new IllegalArgumentException();
-        }
+        checkArgument(x > 0);
         return 63 - Long.numberOfLeadingZeros(x);
     }
 
     public static int pow (int base, int exponent) {
-        if( exponent < 0 ){
-            throw new IllegalArgumentException();
-        }
+        checkArgument(exponent >= 0);
         int result = 1;
         for( int actual = base, bits = exponent; bits != 0; bits >>= 1 ){
             if( (bits & 1) == 1 ){
@@ -70,9 +62,7 @@ public class MathInt {
     }
 
     public static long pow (long base, long exponent) {
-        if( exponent < 0 ){
-            throw new IllegalArgumentException();
-        }
+        checkArgument(exponent >= 0);
         long result = 1;
         for( long actual = base, bits = exponent; bits != 0; bits >>= 1 ){
             if( (bits & 1) == 1 ){
@@ -84,9 +74,7 @@ public class MathInt {
     }
 
     public static int powmod (int base, int exponent, int modulus) {
-        if( base < 0 || exponent < 0 || modulus <= 0 ){
-            throw new IllegalArgumentException();
-        }
+        checkArgument(base >= 0 && exponent >= 0 && modulus > 0);
         int result = 1;
         for( int actual = base, bits = exponent; bits != 0; bits >>= 1 ){
             if( (bits & 1) == 1 ){
@@ -115,9 +103,7 @@ public class MathInt {
     }
 
     public static long powmod (long base, long exponent, long modulus) {
-        if( base < 0 || exponent < 0 || modulus <= 0 ){
-            throw new IllegalArgumentException();
-        }
+        checkArgument(base >= 0 && exponent >= 0 && modulus > 0);
         long result = 1;
         for( long actual = base, bits = exponent; bits != 0; bits >>= 1 ){
             if( (bits & 1) == 1 ){
@@ -163,9 +149,7 @@ public class MathInt {
     }
 
     public static int sqrt (int n) {
-        if( n < 0 ){
-            throw new IllegalArgumentException();
-        }
+        checkArgument(n >= 0);
         int root = 0;
         int remainder = n;
         for( int bit = 15; bit >= 0; bit-- ){
@@ -179,9 +163,7 @@ public class MathInt {
     }
 
     public static long sqrt (long n) {
-        if( n < 0 ){
-            throw new IllegalArgumentException();
-        }
+        checkArgument(n >= 0);
         long root = 0;
         long remainder = n;
         for( long bit = 31; bit >= 0; bit-- ){
