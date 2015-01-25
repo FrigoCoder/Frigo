@@ -1,10 +1,12 @@
 
-package frigo.math.numbertheory;
+package frigo.math.integer;
 
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
 import org.junit.Test;
+
+import frigo.math.integer.JacobiSymbol;
 
 public class JacobiSymbolTest {
 

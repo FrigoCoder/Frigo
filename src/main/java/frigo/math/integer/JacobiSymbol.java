@@ -1,5 +1,5 @@
 
-package frigo.math.numbertheory;
+package frigo.math.integer;
 
 /**
  * Based on http://en.wikipedia.org/wiki/Jacobi_symbol#Calculating_the_Jacobi_symbol

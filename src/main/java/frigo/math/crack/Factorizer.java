@@ -4,8 +4,8 @@ package frigo.math.crack;
 import java.util.Set;
 import java.util.TreeSet;
 
+import frigo.math.integer.JacobiSymbol;
 import frigo.math.integer.MathInt;
-import frigo.math.numbertheory.JacobiSymbol;
 
 public class Factorizer {
 
