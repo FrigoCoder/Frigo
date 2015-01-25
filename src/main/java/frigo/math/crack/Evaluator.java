@@ -3,6 +3,8 @@ package frigo.math.crack;
 
 import java.util.NoSuchElementException;
 
+import frigo.math.integer.ExtendedEuclidean;
+
 public class Evaluator {
 
     public static void main (String[] args) {

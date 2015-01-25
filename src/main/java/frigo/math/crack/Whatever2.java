@@ -5,6 +5,7 @@ import java.util.NoSuchElementException;
 import java.util.Set;
 import java.util.TreeSet;
 
+import frigo.math.integer.ExtendedEuclidean;
 import frigo.math.integer.FactorizerSieve;
 import frigo.math.integer.MathInt;
 

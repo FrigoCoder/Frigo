@@ -4,6 +4,8 @@ package frigo.math.crack;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+import frigo.math.integer.LeastEuclidean;
+
 public class EvaluatorLeast {
 
     public static void main (String[] args) {

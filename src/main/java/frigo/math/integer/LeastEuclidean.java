@@ -1,5 +1,8 @@
 
-package frigo.math.crack;
+package frigo.math.integer;
+
+import static frigo.math.integer.MathInt.sgn;
+import static java.lang.Math.abs;
 
 import java.util.List;
 
@@ -7,9 +10,7 @@ import com.google.common.annotations.VisibleForTesting;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
-import frigo.math.integer.MathInt;
-
-public class ExtendedEuclidean {
+public class LeastEuclidean {
 
     public static long evaluate (List<Long> q) {
         long prev = 0;
@@ -25,7 +26,7 @@ public class ExtendedEuclidean {
     private List<Long> q;
     private List<Long> r;
 
-    public ExtendedEuclidean (long n, long x) {
+    public LeastEuclidean (long n, long x) {
         q = Lists.newArrayList();
         r = Lists.newArrayList(n, x);
         run();
@@ -42,7 +43,14 @@ public class ExtendedEuclidean {
 
     @VisibleForTesting
     static long quotient (long x, long y) {
-        return x / y;
+        long q1 = x / y;
+        long q2 = q1 + sgn(x) * sgn(y);
+        long r1 = abs(x - y * q1);
+        long r2 = abs(x - y * q2);
+        if( r1 < r2 || r1 == r2 && sgn(x) >= 0 ){
+            return q1;
+        }
+        return q2;
     }
 
     public List<Long> q () {
@@ -50,7 +58,7 @@ public class ExtendedEuclidean {
     }
 
     public long gcd () {
-        return r.get(r.size() - 2);
+        return Math.abs(r.get(r.size() - 2));
     }
 
     public long n () {
@@ -59,6 +67,11 @@ public class ExtendedEuclidean {
 
     public long x () {
         return r.get(1);
+    }
+
+    public long invPrecise () {
+        long inv = invUnsigned();
+        return x() * inv % n() == 1 ? inv : n() - inv;
     }
 
     public long invAbs () {
