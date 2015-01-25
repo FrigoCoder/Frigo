@@ -39,6 +39,36 @@ public class MathInt {
         return (x & x - 1) == 0 && x > 0;
     }
 
+    public static boolean isPrime (int n) {
+        if( n <= 1 ){
+            return false;
+        }
+        if( n % 2 == 0 ){
+            return n == 2;
+        }
+        for( int divisor = 3; divisor * divisor <= n; divisor += 2 ){
+            if( n % divisor == 0 ){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static boolean isPrime (long n) {
+        if( n <= 1 ){
+            return false;
+        }
+        if( n % 2 == 0 ){
+            return n == 2;
+        }
+        for( long divisor = 3; divisor * divisor <= n; divisor += 2 ){
+            if( n % divisor == 0 ){
+                return false;
+            }
+        }
+        return true;
+    }
+
     public static int log2 (int x) {
         checkArgument(x > 0);
         return 31 - Integer.numberOfLeadingZeros(x);

@@ -10,7 +10,7 @@ import static frigo.math.integer.MathInt.pow;
 import static frigo.math.integer.MathInt.powmod;
 import static frigo.math.integer.MathInt.sqr;
 import static frigo.math.integer.MathInt.sqrt;
-import static org.hamcrest.Matchers.is;
+import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
 import org.junit.Rule;
@@ -154,6 +154,58 @@ public class MathIntTest {
 
     private void assertPowerOfTwo (long x, boolean expected) {
         assertThat(x + " should " + (expected ? "" : "not ") + "be power of two", isPowerOfTwo(x), is(expected));
+    }
+
+    @Test
+    public void test_isPrime () {
+        assertPrime(0, false);
+        assertPrime(1, false);
+        assertPrime(2, true);
+        assertPrime(3, true);
+        assertPrime(4, false);
+        assertPrime(5, true);
+        assertPrime(6, false);
+        assertPrime(7, true);
+        assertPrime(8, false);
+        assertPrime(9, false);
+        assertPrime(10, false);
+        assertPrime(11, true);
+
+        assertPrime(-1, false);
+        assertPrime(-2, false);
+        assertPrime(-3, false);
+        assertPrime(-4, false);
+        assertPrime(-5, false);
+    }
+
+    private void assertPrime (int n, boolean prime) {
+        assertThat(MathInt.isPrime(n), is(prime));
+    }
+
+    @Test
+    public void test_isPrime_long () {
+        assertPrime(0L, false);
+        assertPrime(1L, false);
+        assertPrime(2L, true);
+        assertPrime(3L, true);
+        assertPrime(4L, false);
+        assertPrime(5L, true);
+        assertPrime(6L, false);
+        assertPrime(7L, true);
+        assertPrime(8L, false);
+        assertPrime(9L, false);
+        assertPrime(10L, false);
+        assertPrime(11L, true);
+
+        assertPrime(-1L, false);
+        assertPrime(-2L, false);
+        assertPrime(-3L, false);
+        assertPrime(-4L, false);
+        assertPrime(-5L, false);
+    }
+
+    private void assertPrime (long n, boolean prime) {
+        assertThat(MathInt.isPrime(n), is(prime));
     }
 
     @Test
