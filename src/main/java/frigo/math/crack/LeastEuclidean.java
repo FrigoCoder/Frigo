@@ -10,6 +10,8 @@ import com.google.common.annotations.VisibleForTesting;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
+import frigo.math.integer.MathInt;
+
 public class LeastEuclidean {
 
     public static long evaluate (List<Long> q) {
@@ -23,12 +25,12 @@ public class LeastEuclidean {
         return actual;
     }
 
-    private List<Long> r;
     private List<Long> q;
+    private List<Long> r;
 
-    public LeastEuclidean (long a, long b) {
-        r = Lists.newArrayList(a, b);
+    public LeastEuclidean (long n, long x) {
         q = Lists.newArrayList();
+        r = Lists.newArrayList(n, x);
         run();
     }
 
@@ -69,6 +71,11 @@ public class LeastEuclidean {
         return r.get(1);
     }
 
+    public long invPrecise () {
+        long inv = invUnsigned();
+        return x() * inv % n() == 1 ? inv : n() - inv;
+    }
+
     public long invAbs () {
         return Math.abs(invSigned());
     }
@@ -78,7 +85,7 @@ public class LeastEuclidean {
     }
 
     public long invUnsigned () {
-        return (invSigned() + n()) % n();
+        return MathInt.mod(invSigned(), n());
     }
 
 }

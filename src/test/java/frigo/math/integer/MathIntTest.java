@@ -5,6 +5,7 @@ import static frigo.math.integer.MathInt.factorial;
 import static frigo.math.integer.MathInt.gcd;
 import static frigo.math.integer.MathInt.isPowerOfTwo;
 import static frigo.math.integer.MathInt.log2;
+import static frigo.math.integer.MathInt.mod;
 import static frigo.math.integer.MathInt.pow;
 import static frigo.math.integer.MathInt.powmod;
 import static frigo.math.integer.MathInt.sqr;
@@ -205,6 +206,98 @@ public class MathIntTest {
     public void test_log2_long_negative () {
         thrown.expect(IllegalArgumentException.class);
         log2(-1L);
+    }
+
+    @Test
+    public void test_mod () {
+        assertMod(1, 0, 0);
+        assertMod(2, 0, 0);
+        assertMod(2, 1, 1);
+        assertMod(3, 0, 0);
+        assertMod(3, 1, 1);
+        assertMod(3, 2, 2);
+
+        assertMod(1, 1, 0);
+        assertMod(2, 2, 0);
+        assertMod(3, 3, 0);
+
+        assertMod(1, 2, 0);
+        assertMod(2, 3, 1);
+        assertMod(3, 4, 1);
+
+        assertMod(1, 3, 0);
+        assertMod(2, 5, 1);
+        assertMod(3, 7, 1);
+
+        assertMod(1, -1, 0);
+        assertMod(2, -1, 1);
+        assertMod(3, -1, 2);
+
+        assertMod(1, -2, 0);
+        assertMod(2, -2, 0);
+        assertMod(3, -2, 1);
+    }
+
+    private void assertMod (int n, int x, int xmodn) {
+        assertThat(mod(x, n), is(xmodn));
+    }
+
+    @Test
+    public void test_mod_0 () {
+        thrown.expect(IllegalArgumentException.class);
+        mod(1, 0);
+    }
+
+    @Test
+    public void test_mod_negative () {
+        thrown.expect(IllegalArgumentException.class);
+        mod(1, -1);
+    }
+
+    @Test
+    public void test_mod_long () {
+        assertMod(1, 0, 0L);
+        assertMod(2, 0, 0L);
+        assertMod(2, 1, 1L);
+        assertMod(3, 0, 0L);
+        assertMod(3, 1, 1L);
+        assertMod(3, 2, 2L);
+
+        assertMod(1, 1, 0L);
+        assertMod(2, 2, 0L);
+        assertMod(3, 3, 0L);
+
+        assertMod(1, 2, 0L);
+        assertMod(2, 3, 1L);
+        assertMod(3, 4, 1L);
+
+        assertMod(1, 3, 0L);
+        assertMod(2, 5, 1L);
+        assertMod(3, 7, 1L);
+
+        assertMod(1, -1, 0L);
+        assertMod(2, -1, 1L);
+        assertMod(3, -1, 2L);
+
+        assertMod(1, -2, 0L);
+        assertMod(2, -2, 0L);
+        assertMod(3, -2, 1L);
+    }
+
+    private void assertMod (long n, long x, long xmodn) {
+        assertThat(mod(x, n), is(xmodn));
+    }
+
+    @Test
+    public void test_mod_long_0 () {
+        thrown.expect(IllegalArgumentException.class);
+        mod(1, 0L);
+    }
+
+    @Test
+    public void test_mod_long_negative () {
+        thrown.expect(IllegalArgumentException.class);
+        mod(1, -1L);
     }
 
     @Test

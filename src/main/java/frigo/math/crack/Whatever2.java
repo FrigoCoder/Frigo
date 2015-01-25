@@ -80,8 +80,7 @@ public class Whatever2 {
 
     private static long inv (long n, long p) {
         ExtendedEuclidean euclid = new ExtendedEuclidean(p, n % p);
-        euclid.run();
-        return euclid.binv();
+        return euclid.invUnsigned();
     }
 
     private static long pow (long x, long p, long m) {

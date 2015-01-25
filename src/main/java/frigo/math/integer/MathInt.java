@@ -49,6 +49,18 @@ public class MathInt {
         return 63 - Long.numberOfLeadingZeros(x);
     }
 
+    public static int mod (int x, int n) {
+        checkArgument(n > 0);
+        int xmodn = x % n;
+        return xmodn >= 0 ? xmodn : xmodn + n;
+    }
+
+    public static long mod (long x, long n) {
+        checkArgument(n > 0);
+        long xmodn = x % n;
+        return xmodn >= 0 ? xmodn : xmodn + n;
+    }
+
     public static int pow (int base, int exponent) {
         checkArgument(exponent >= 0);
         int result = 1;

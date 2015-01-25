@@ -1,61 +1,76 @@
 
 package frigo.math.crack;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import com.google.common.annotations.VisibleForTesting;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
-/**
- * Based on http://en.wikipedia.org/wiki/Extended_Euclidean_algorithm#Description_of_the_algorithm
- */
+import frigo.math.integer.MathInt;
 
 public class ExtendedEuclidean {
 
-    public List<Long> q;
-    public List<Long> r;
-    public List<Long> s;
-    public List<Long> t;
-
-    public ExtendedEuclidean (long a, long b) {
-        q = Lists.newArrayList(0L);
-        r = Lists.newArrayList(a, b);
-        s = Lists.newArrayList(1L, 0L);
-        t = Lists.newArrayList(0L, 1L);
-    }
-
-    public void run () {
-        for( int i = 1; Iterables.getLast(r) != 0; i++ ){
-            q.add(r.get(i - 1) / r.get(i));
-            r.add(r.get(i - 1) - r.get(i) * q.get(i));
-            s.add(s.get(i - 1) - s.get(i) * q.get(i));
-            t.add(t.get(i - 1) - t.get(i) * q.get(i));
+    public static long evaluate (List<Long> q) {
+        long prev = 0;
+        long actual = 1;
+        for( long quotient : q ){
+            long next = prev - actual * quotient;
+            prev = actual;
+            actual = next;
         }
-        q.add(0L);
+        return actual;
     }
 
-    public long a () {
-        return r.get(0);
+    private List<Long> q;
+    private List<Long> r;
+
+    public ExtendedEuclidean (long n, long x) {
+        q = Lists.newArrayList();
+        r = Lists.newArrayList(n, x);
+        run();
     }
 
-    public long b () {
-        return r.get(1);
+    private void run () {
+        for( int i = 1; Iterables.getLast(r) != 0; i++ ){
+            long quotient = quotient(r.get(i - 1), r.get(i));
+            long remainder = r.get(i - 1) - r.get(i) * quotient;
+            q.add(quotient);
+            r.add(remainder);
+        }
+    }
+
+    @VisibleForTesting
+    static long quotient (long x, long y) {
+        return x / y;
+    }
+
+    public List<Long> q () {
+        return q;
     }
 
     public long gcd () {
         return r.get(r.size() - 2);
     }
 
-    public long binv () {
-        return (t.get(t.size() - 2) + a()) % a();
+    public long n () {
+        return r.get(0);
     }
 
-    public List<Long> qshort () {
-        List<Long> shortq = new ArrayList<>(q);
-        shortq.remove(0);
-        shortq.remove(shortq.size() - 1);
-        return shortq;
+    public long x () {
+        return r.get(1);
+    }
+
+    public long invAbs () {
+        return Math.abs(invSigned());
+    }
+
+    public long invSigned () {
+        return evaluate(q.subList(0, q.size() - 1));
+    }
+
+    public long invUnsigned () {
+        return MathInt.mod(invSigned(), n());
     }
 
 }

@@ -33,18 +33,17 @@ public class Evaluator {
     private void run () {
         for( long x = 2; x <= n / 2; x++ ){
             ExtendedEuclidean euclid = new ExtendedEuclidean(n, x);
-            euclid.run();
             if( euclid.gcd() != 1 ){
                 continue;
             }
-            System.out.println("x=" + x + ", xinv=" + euclid.binv() + ", evaluateQ=" + scream(evaluate(euclid))
-                + ", q=" + euclid.qshort());
+            System.out.println("x=" + x + ", xinv=" + euclid.invUnsigned() + ", evaluateQ=" + scream(evaluate(euclid))
+                + ", q=" + euclid.q());
         }
     }
 
     private long evaluate (ExtendedEuclidean euclid) {
-        long inv = Math.min(euclid.binv(), euclid.a() - euclid.binv());
-        return (long) Math.signum(euclid.b() - inv);
+        long inv = Math.min(euclid.invUnsigned(), euclid.n() - euclid.invUnsigned());
+        return (long) Math.signum(euclid.x() - inv);
     }
 
     private String scream (long signum) {
