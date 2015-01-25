@@ -4,6 +4,7 @@ package frigo.math.crack;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+import frigo.math.integer.EuclideanBase;
 import frigo.math.integer.LeastEuclidean;
 
 public class EvaluatorLeast {
@@ -41,7 +42,7 @@ public class EvaluatorLeast {
             if( euclid.gcd() != 1 ){
                 continue;
             }
-            long xinv = euclid.invPrecise();
+            long xinv = euclid.invUnsigned();
             xinv = Math.min(xinv, n - xinv);
             long product = x * xinv;
             long quotient = product / n;
@@ -53,10 +54,10 @@ public class EvaluatorLeast {
 
     private long evaluate (LeastEuclidean euclid) {
         List<Long> q = euclid.q();
-        long x = LeastEuclidean.evaluate(q.subList(0, q.size() - 1));
+        long x = EuclideanBase.evaluate(q.subList(0, q.size() - 1));
         x = (x + n) % n;
         x = Math.min(x, n - x);
-        long y = LeastEuclidean.evaluate(q.subList(1, q.size()));
+        long y = EuclideanBase.evaluate(q.subList(1, q.size()));
         y = (y + n) % n;
         y = Math.min(y, n - y);
         return x - y;

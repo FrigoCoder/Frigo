@@ -8,8 +8,6 @@ import org.junit.Test;
 
 import com.google.common.primitives.Longs;
 
-import frigo.math.integer.MathInt;
-
 public class ExtendedEuclideanTest {
 
     @Test
@@ -34,7 +32,8 @@ public class ExtendedEuclideanTest {
     }
 
     private void assertQuotient (long numerator, long denominator, long quotient) {
-        assertThat(ExtendedEuclidean.quotient(numerator, denominator), is(quotient));
+        ExtendedEuclidean euclidean = new ExtendedEuclidean(1, 1);
+        assertThat(euclidean.quotient(numerator, denominator), is(quotient));
     }
 
     @Test
@@ -77,7 +76,7 @@ public class ExtendedEuclideanTest {
     }
 
     private void assertEvaluate (long expected, long... q) {
-        assertThat(ExtendedEuclidean.evaluate(Longs.asList(q)), is(expected));
+        assertThat(EuclideanBase.evaluate(Longs.asList(q)), is(expected));
     }
 
     @Test
@@ -86,6 +85,7 @@ public class ExtendedEuclideanTest {
         assertInvAbs(187, 67, 67);
         assertInvAbs(187, 25, 15);
         assertInvAbs(187, 2, 93);
+        assertInvAbs(3, -100, 1);
     }
 
     private void assertInvAbs (long n, long x, long xinv) {
@@ -99,6 +99,7 @@ public class ExtendedEuclideanTest {
         assertInvSigned(187, 67, 67);
         assertInvSigned(187, 25, 15);
         assertInvSigned(187, 2, -93);
+        assertInvSigned(3, -4, -1);
     }
 
     private void assertInvSigned (long n, long x, long xinv) {
@@ -112,26 +113,12 @@ public class ExtendedEuclideanTest {
         assertInvUnsigned(187, 67, 67);
         assertInvUnsigned(187, 25, 15);
         assertInvUnsigned(187, 2, 94);
+        assertInvUnsigned(3, -100, 2);
     }
 
     private void assertInvUnsigned (long n, long x, long xinv) {
         ExtendedEuclidean euclidean = new ExtendedEuclidean(n, x);
         assertThat(euclidean.invUnsigned(), is(xinv));
-    }
-
-    @Test
-    public void whatever () {
-        long limit = 100;
-        for( long x = 2; x <= limit; x++ ){
-            for( long y = -limit; y <= limit; y++ ){
-                ExtendedEuclidean euclidean = new ExtendedEuclidean(x, y);
-                if( euclidean.gcd() != 1 ){
-                    continue;
-                }
-                long yinv = euclidean.invUnsigned();
-                assertThat("x=" + x + ", y=" + y + ", yinv=" + yinv, MathInt.mod(y * yinv, x), is(1L));
-            }
-        }
     }
 
 }

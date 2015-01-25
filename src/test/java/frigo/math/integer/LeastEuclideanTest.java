@@ -32,7 +32,8 @@ public class LeastEuclideanTest {
     }
 
     private void assertQuotient (long numerator, long denominator, long quotient) {
-        assertThat(LeastEuclidean.quotient(numerator, denominator), is(quotient));
+        LeastEuclidean euclidean = new LeastEuclidean(1, 1);
+        assertThat(euclidean.quotient(numerator, denominator), is(quotient));
     }
 
     @Test
@@ -75,7 +76,7 @@ public class LeastEuclideanTest {
     }
 
     private void assertEvaluate (long expected, long... q) {
-        assertThat(LeastEuclidean.evaluate(Longs.asList(q)), is(expected));
+        assertThat(EuclideanBase.evaluate(Longs.asList(q)), is(expected));
     }
 
     @Test
@@ -84,6 +85,7 @@ public class LeastEuclideanTest {
         assertInvAbs(187, 67, 67);
         assertInvAbs(187, 25, 15);
         assertInvAbs(187, 2, 93);
+        assertInvAbs(3, -100, 1);
     }
 
     private void assertInvAbs (long n, long x, long xinv) {
@@ -97,6 +99,7 @@ public class LeastEuclideanTest {
         assertInvSigned(187, 67, 67);
         assertInvSigned(187, 25, 15);
         assertInvSigned(187, 2, -93);
+        assertInvSigned(3, -100, -1);
     }
 
     private void assertInvSigned (long n, long x, long xinv) {
@@ -110,6 +113,7 @@ public class LeastEuclideanTest {
         assertInvUnsigned(187, 67, 67);
         assertInvUnsigned(187, 25, 15);
         assertInvUnsigned(187, 2, 94);
+        assertInvUnsigned(3, -100, 2);
     }
 
     private void assertInvUnsigned (long n, long x, long xinv) {

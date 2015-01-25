@@ -288,6 +288,8 @@ public class MathIntTest {
         assertMod(1, -2, 0);
         assertMod(2, -2, 0);
         assertMod(3, -2, 1);
+
+        assertMod(3, -100, 2);
     }
 
     private void assertMod (int n, int x, int xmodn) {
@@ -334,6 +336,8 @@ public class MathIntTest {
         assertMod(1, -2, 0L);
         assertMod(2, -2, 0L);
         assertMod(3, -2, 1L);
+
+        assertMod(3, -100, 2L);
     }
 
     private void assertMod (long n, long x, long xmodn) {
