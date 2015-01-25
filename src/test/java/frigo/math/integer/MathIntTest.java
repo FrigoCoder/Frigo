@@ -459,6 +459,30 @@ public class MathIntTest {
     }
 
     @Test
+    public void test_powmod_long_negative_base () {
+        thrown.expect(IllegalArgumentException.class);
+        powmod(-1, 2, 187L);
+    }
+
+    @Test
+    public void test_powmod_long_negative_exponent () {
+        thrown.expect(IllegalArgumentException.class);
+        powmod(2, -1, 187L);
+    }
+
+    @Test
+    public void test_powmod_long_zero_modulus () {
+        thrown.expect(IllegalArgumentException.class);
+        powmod(2, 2, 0L);
+    }
+
+    @Test
+    public void test_powmod_long_negative_modulus () {
+        thrown.expect(IllegalArgumentException.class);
+        powmod(2, 2, -1L);
+    }
+
+    @Test
     public void test_sgn () {
         assertSgn(Integer.MIN_VALUE, -1);
         assertSgn(-1, -1);
