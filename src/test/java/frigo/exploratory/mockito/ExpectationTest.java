@@ -1,11 +1,10 @@
 
 package frigo.exploratory.mockito;
 
-import static org.hamcrest.Matchers.greaterThanOrEqualTo;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
+import static org.mockito.AdditionalMatchers.geq;
 import static org.mockito.Matchers.anyInt;
-import static org.mockito.Matchers.intThat;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 
@@ -31,9 +30,9 @@ public class ExpectationTest {
     @Test
     public void the_last_defined_matcher_is_valid_if_matchers_interleave () {
         doReturn(0).when(f).evaluate(anyInt());
-        doReturn(1).when(f).evaluate(intThat(greaterThanOrEqualTo(1)));
-        doReturn(2).when(f).evaluate(intThat(greaterThanOrEqualTo(2)));
-        doReturn(3).when(f).evaluate(intThat(greaterThanOrEqualTo(3)));
+        doReturn(1).when(f).evaluate(geq(1));
+        doReturn(2).when(f).evaluate(geq(2));
+        doReturn(3).when(f).evaluate(geq(3));
         assertThat(f.evaluate(0), is(0));
         assertThat(f.evaluate(1), is(1));
         assertThat(f.evaluate(2), is(2));
