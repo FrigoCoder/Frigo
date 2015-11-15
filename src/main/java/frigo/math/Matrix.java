@@ -9,15 +9,19 @@ public class Matrix {
     public final int m;
     private final Vector[] vectors;
 
+    public static Matrix create (int rows, int columns) {
+        return new Matrix(rows, columns);
+    }
+
     public static Matrix identity (int n) {
-        Matrix matrix = new Matrix(n, n);
+        Matrix matrix = create(n, n);
         for( int i = 0; i < n; i++ ){
             matrix.set(i, i, 1.0);
         }
         return matrix;
     }
 
-    public Matrix (int rows, int columns) {
+    private Matrix (int rows, int columns) {
         n = rows;
         m = columns;
         vectors = new Vector[columns];

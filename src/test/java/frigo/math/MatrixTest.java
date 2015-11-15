@@ -15,7 +15,7 @@ public class MatrixTest {
 
     private int n = 2;
     private int m = 3;
-    private Matrix matrix = new Matrix(n, m);
+    private Matrix matrix = Matrix.create(n, m);
 
     @Test
     public void dimensions_are_correct () {
