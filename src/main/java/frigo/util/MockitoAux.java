@@ -27,7 +27,7 @@ public class MockitoAux {
     }
 
     public static <T> void verifyImplicit (T mock) {
-        InvocationContainer invocationContainer = new MockUtil().getMockHandler(mock).getInvocationContainer();
+        InvocationContainer invocationContainer = MockUtil.getMockHandler(mock).getInvocationContainer();
         List<StubbedInvocationMatcher> matchers = invocationContainer.getStubbedInvocations();
 
         for( StubbedInvocationMatcher matcher : matchers ){
