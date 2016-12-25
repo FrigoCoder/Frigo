@@ -9,8 +9,6 @@ public class Kruskal implements Mst {
 
     @Override
     public List<Edge> run (Graph graph) {
-        List<Edge> result = new LinkedList<>();
-
         List<Edge> edges = graph.getEdges();
         Collections.sort(edges);
 
@@ -20,6 +18,7 @@ public class Kruskal implements Mst {
             set.add(edge.target);
         }
 
+        List<Edge> result = new LinkedList<>();
         for( Edge edge : edges ){
             if( !set.find(edge.source).equals(set.find(edge.target)) ){
                 result.add(edge);
