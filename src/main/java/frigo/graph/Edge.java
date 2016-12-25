@@ -1,13 +1,13 @@
 
 package frigo.graph;
 
-public class Edge<T, W extends Comparable<W>> implements Comparable<Edge<T, W>> {
+public class Edge implements Comparable<Edge> {
 
-    public T source;
-    public T target;
-    public W weight;
+    public Object source;
+    public Object target;
+    public double weight;
 
-    public Edge (T source, T target, W weight) {
+    public Edge (Object source, Object target, double weight) {
         this.source = source;
         this.target = target;
         this.weight = weight;
@@ -19,8 +19,8 @@ public class Edge<T, W extends Comparable<W>> implements Comparable<Edge<T, W>> 
     }
 
     @Override
-    public int compareTo (Edge<T, W> edge) {
-        return weight.compareTo(edge.weight);
+    public int compareTo (Edge that) {
+        return Double.compare(weight, that.weight);
     }
 
 }

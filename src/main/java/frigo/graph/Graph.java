@@ -5,37 +5,37 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-public class Graph<T, W extends Comparable<W>> {
+public class Graph {
 
-    private List<T> nodes = new LinkedList<>();
-    private List<Edge<T, W>> edges = new LinkedList<>();
+    private List<Object> nodes = new LinkedList<>();
+    private List<Edge> edges = new LinkedList<>();
 
-    public List<T> getNodes () {
+    public List<Object> getNodes () {
         return new ArrayList<>(nodes);
     }
 
-    public List<Edge<T, W>> getEdges () {
+    public List<Edge> getEdges () {
         return new ArrayList<>(edges);
     }
 
-    public void addNode (T node) {
+    public void addNode (Object node) {
         nodes.add(node);
     }
 
     @SafeVarargs
-    public final void addNodes (T... nodesToAdd) {
-        for( T node : nodesToAdd ){
+    public final void addNodes (Object... nodesToAdd) {
+        for( Object node : nodesToAdd ){
             addNode(node);
         }
     }
 
-    public void addEdge (Edge<T, W> edge) {
+    public void addEdge (Edge edge) {
         edges.add(edge);
     }
 
     @SafeVarargs
-    public final void addEdges (Edge<T, W>... edgesToAdd) {
-        for( Edge<T, W> edge : edgesToAdd ){
+    public final void addEdges (Edge... edgesToAdd) {
+        for( Edge edge : edgesToAdd ){
             addEdge(edge);
         }
     }
