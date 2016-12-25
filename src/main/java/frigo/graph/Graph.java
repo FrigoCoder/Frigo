@@ -14,10 +14,6 @@ public class Graph {
         return new ArrayList<>(nodes);
     }
 
-    public List<Edge> getEdges () {
-        return new ArrayList<>(edges);
-    }
-
     public void addNode (Object node) {
         nodes.add(node);
     }
@@ -27,6 +23,10 @@ public class Graph {
         for( Object node : nodesToAdd ){
             addNode(node);
         }
+    }
+
+    public List<Edge> getEdges () {
+        return new ArrayList<>(edges);
     }
 
     public void addEdge (Edge edge) {
