@@ -5,9 +5,9 @@ public class Edge implements Comparable<Edge> {
 
     public Object source;
     public Object target;
-    public double weight;
+    public Comparable weight;
 
-    public Edge (Object source, Object target, double weight) {
+    public Edge (Object source, Object target, Comparable weight) {
         this.source = source;
         this.target = target;
         this.weight = weight;
@@ -20,7 +20,7 @@ public class Edge implements Comparable<Edge> {
 
     @Override
     public int compareTo (Edge that) {
-        return Double.compare(weight, that.weight);
+        return weight.compareTo(that.weight);
     }
 
 }
