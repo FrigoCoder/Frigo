@@ -7,7 +7,7 @@ public class Edge implements Comparable<Edge> {
     public Object target;
     public Comparable weight;
 
-    public Edge (Object source, Object target, Comparable weight) {
+    public Edge (Object source, Object target, Comparable<?> weight) {
         this.source = source;
         this.target = target;
         this.weight = weight;
