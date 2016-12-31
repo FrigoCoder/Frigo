@@ -10,7 +10,7 @@ import org.junit.Test;
 @Ignore("Test base")
 public abstract class MstTestBase {
 
-    private Graph graph;
+    private Graph graph = new Graph();
     private Mst mst;
 
     public MstTestBase (Mst mst) {

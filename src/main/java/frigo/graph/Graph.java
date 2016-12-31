@@ -1,59 +1,53 @@
 
 package frigo.graph;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.HashSet;
 
 public class Graph {
 
-    private List<Object> nodes = new LinkedList<>();
-    private List<Edge> edges = new LinkedList<>();
-    private HashMap<Object, List<Edge>> outEdges = new HashMap<>();
+    private HashSet<Object> nodes = new HashSet<>();
+    private HashSet<Edge> edges = new HashSet<>();
+    private HashMap<Object, HashSet<Edge>> outEdges = new HashMap<>();
 
-    public List<Object> getNodes () {
+    public HashSet<Object> getNodes () {
         return clone(nodes);
     }
 
     public void addNode (Object node) {
         nodes.add(node);
-        outEdges.put(node, new LinkedList<>());
+        outEdges.putIfAbsent(node, new HashSet<>());
     }
 
-    public final void addNodes (Object... nodesToAdd) {
+    public void addNodes (Object... nodesToAdd) {
         for( Object node : nodesToAdd ){
             addNode(node);
         }
     }
 
-    public List<Edge> getEdges () {
+    public HashSet<Edge> getEdges () {
         return clone(edges);
     }
 
     public Edge addEdge (Object source, Object target, Comparable<?> weight) {
-        Edge edge = new Edge(source, target, weight);
-        addEdge(edge);
-        return edge;
-    }
+        addNode(source);
+        addNode(target);
 
-    public void addEdge (Edge edge) {
+        Edge edge = new Edge(source, target, weight);
+
         edges.add(edge);
         outEdges.get(edge.source).add(edge);
         outEdges.get(edge.target).add(edge);
+
+        return edge;
     }
 
-    public final void addEdges (Edge... edgesToAdd) {
-        for( Edge edge : edgesToAdd ){
-            addEdge(edge);
-        }
-    }
-
-    public List<Edge> getEdges (Object source) {
+    public HashSet<Edge> getEdges (Object source) {
         return clone(outEdges.get(source));
     }
 
-    private <T> List<T> clone (List<T> list) {
-        return new ArrayList<>(list);
+    private <T> HashSet<T> clone (HashSet<T> set) {
+        return new HashSet<>(set);
     }
+
 }

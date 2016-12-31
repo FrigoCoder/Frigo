@@ -1,6 +1,7 @@
 
 package frigo.graph;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
@@ -9,7 +10,7 @@ public class Kruskal implements Mst {
 
     @Override
     public List<Edge> run (Graph graph) {
-        List<Edge> edges = graph.getEdges();
+        List<Edge> edges = new ArrayList<>(graph.getEdges());
         Collections.sort(edges);
 
         DisjointSet<Object> set = new DisjointSet<>();

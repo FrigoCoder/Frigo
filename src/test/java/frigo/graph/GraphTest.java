@@ -6,7 +6,7 @@ import static org.hamcrest.Matchers.hasItems;
 import static org.hamcrest.Matchers.not;
 import static org.junit.Assert.assertThat;
 
-import java.util.List;
+import java.util.HashSet;
 
 import org.junit.Test;
 
@@ -18,7 +18,7 @@ public class GraphTest {
     public void getNodes_returns_copy_of_nodes () {
         graph.addNodes("A", "B");
 
-        List<Object> nodes = graph.getNodes();
+        HashSet<Object> nodes = graph.getNodes();
 
         graph.addNodes("C");
 
@@ -31,9 +31,8 @@ public class GraphTest {
         graph.addNodes("A", "B", "C");
         Edge ab = graph.addEdge("A", "B", 1.0);
         Edge bc = graph.addEdge("B", "C", 2.0);
-        graph.addEdges(ab, bc);
 
-        List<Edge> edges = graph.getEdges();
+        HashSet<Edge> edges = graph.getEdges();
 
         Edge ca = graph.addEdge("C", "A", 3.0);
 
@@ -48,9 +47,8 @@ public class GraphTest {
         Edge ab = graph.addEdge("A", "B", 1.0);
         Edge bc = graph.addEdge("B", "C", 2.0);
         Edge ca = graph.addEdge("C", "A", 3.0);
-        graph.addEdges(ab, bc, ca);
 
-        List<Edge> edges = graph.getEdges("A");
+        HashSet<Edge> edges = graph.getEdges("A");
         assertThat(edges, hasItem(ab));
         assertThat(edges, not(hasItem(bc)));
         assertThat(edges, hasItem(ca));
