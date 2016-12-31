@@ -29,17 +29,31 @@ public class GraphTest {
     @Test
     public void getEdges_returns_copy_of_edges () {
         graph.addNodes("A", "B", "C");
-        Edge ab = new Edge("A", "B", 1.0);
-        Edge bc = new Edge("B", "C", 2.0);
+        Edge ab = graph.addEdge("A", "B", 1.0);
+        Edge bc = graph.addEdge("B", "C", 2.0);
         graph.addEdges(ab, bc);
 
         List<Edge> edges = graph.getEdges();
 
-        Edge ca = new Edge("C", "A", 3.0);
+        Edge ca = graph.addEdge("C", "A", 3.0);
 
         assertThat(edges, hasItem(ab));
         assertThat(edges, hasItem(bc));
         assertThat(edges, not(hasItem(ca)));
+    }
+
+    @Test
+    public void getEdges_returns_edges_of_a_node () {
+        graph.addNodes("A", "B", "C");
+        Edge ab = graph.addEdge("A", "B", 1.0);
+        Edge bc = graph.addEdge("B", "C", 2.0);
+        Edge ca = graph.addEdge("C", "A", 3.0);
+        graph.addEdges(ab, bc, ca);
+
+        List<Edge> edges = graph.getEdges("A");
+        assertThat(edges, hasItem(ab));
+        assertThat(edges, not(hasItem(bc)));
+        assertThat(edges, hasItem(ca));
     }
 
 }
