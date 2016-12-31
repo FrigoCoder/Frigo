@@ -46,6 +46,10 @@ public class Graph {
         return clone(outEdges.get(source));
     }
 
+    public Object getTarget (Object source, Edge edge) {
+        return source == edge.source ? edge.target : edge.source;
+    }
+
     private <T> HashSet<T> clone (HashSet<T> set) {
         return new HashSet<>(set);
     }
