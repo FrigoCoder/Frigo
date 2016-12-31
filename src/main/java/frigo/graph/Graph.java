@@ -30,15 +30,15 @@ public class Graph {
     }
 
     public Edge addEdge (Object source, Object target, Comparable<?> weight) {
-        addNode(source);
-        addNode(target);
+        return addEdge(new Edge(source, target, weight));
+    }
 
-        Edge edge = new Edge(source, target, weight);
-
+    public Edge addEdge (Edge edge) {
+        addNode(edge.source);
+        addNode(edge.target);
         edges.add(edge);
         outEdges.get(edge.source).add(edge);
         outEdges.get(edge.target).add(edge);
-
         return edge;
     }
 
