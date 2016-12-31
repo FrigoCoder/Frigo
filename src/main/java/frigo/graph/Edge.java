@@ -15,7 +15,7 @@ public class Edge implements Comparable<Edge> {
 
     @Override
     public String toString () {
-        return "Edge{" + source + "->" + target + "@" + weight + "}";
+        return "Edge[" + source + "->" + target + "@" + weight + "]";
     }
 
     @Override
