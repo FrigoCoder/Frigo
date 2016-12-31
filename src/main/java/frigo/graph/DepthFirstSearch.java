@@ -77,7 +77,7 @@ public class DepthFirstSearch {
         for( Edge edge : graph.getEdges(source) ){
             visitor.examineEdge(edge);
 
-            Object target = graph.getTarget(source, edge);
+            Object target = edge.getTarget(source);
             switch( vertexColors.get(target) ){
                 case WHITE:
                     visitor.treeEdge(edge);

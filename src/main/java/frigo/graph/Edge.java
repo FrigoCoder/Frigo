@@ -15,7 +15,7 @@ public class Edge implements Comparable<Edge> {
 
     @Override
     public String toString () {
-        return "Edge[" + source + "->" + target + "@" + weight + "]";
+        return "Edge[" + source + "<->" + target + "@" + weight + "]";
     }
 
     @Override
@@ -23,4 +23,21 @@ public class Edge implements Comparable<Edge> {
         return weight.compareTo(that.weight);
     }
 
+    public Object getTarget (Object from) {
+        return getOtherNode(from);
+    }
+
+    public Object getSource (Object to) {
+        return getOtherNode(to);
+    }
+
+    public Object getOtherNode (Object node) {
+        if( source == node ){
+            return target;
+        }
+        if( target == node ){
+            return source;
+        }
+        throw new IllegalArgumentException();
+    }
 }
