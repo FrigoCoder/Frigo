@@ -79,16 +79,19 @@ public class DepthFirstSearch {
 
             Object target = edge.getTarget(source);
             switch( vertexColors.get(target) ){
+
                 case WHITE:
                     visitor.treeEdge(edge);
                     edgeColors.put(edge, Color.BLACK);
                     dfsVisitRecursive(target);
                     break;
+
                 case GREY:
                     if( edgeColors.get(edge) == Color.WHITE ){
                         visitor.backEdge(edge);
                     }
                     break;
+
                 case BLACK:
                 default:
                     break;
@@ -96,6 +99,7 @@ public class DepthFirstSearch {
 
             visitor.finishEdge(edge);
         }
+
         vertexColors.put(source, Color.BLACK);
         visitor.finishVertex(source);
     }
