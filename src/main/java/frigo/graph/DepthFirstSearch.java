@@ -81,8 +81,8 @@ public class DepthFirstSearch {
             switch( vertexColors.get(target) ){
 
                 case WHITE:
-                    visitor.treeEdge(edge);
                     edgeColors.put(edge, Color.BLACK);
+                    visitor.treeEdge(edge);
                     dfsVisitRecursive(target);
                     break;
 
