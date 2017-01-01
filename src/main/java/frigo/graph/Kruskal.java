@@ -15,15 +15,15 @@ public class Kruskal implements Mst {
 
         DisjointSet<Object> set = new DisjointSet<>();
         for( Edge edge : edges ){
-            set.add(edge.source);
-            set.add(edge.target);
+            set.add(edge.node1);
+            set.add(edge.node2);
         }
 
         List<Edge> result = new LinkedList<>();
         for( Edge edge : edges ){
-            if( !set.find(edge.source).equals(set.find(edge.target)) ){
+            if( !set.find(edge.node1).equals(set.find(edge.node2)) ){
                 result.add(edge);
-                set.union(edge.source, edge.target);
+                set.union(edge.node1, edge.node2);
             }
         }
 

@@ -34,11 +34,11 @@ public class Graph {
     }
 
     public Edge addEdge (Edge edge) {
-        addNode(edge.source);
-        addNode(edge.target);
+        addNode(edge.node1);
+        addNode(edge.node2);
         edges.add(edge);
-        outEdges.get(edge.source).add(edge);
-        outEdges.get(edge.target).add(edge);
+        outEdges.get(edge.node1).add(edge);
+        outEdges.get(edge.node2).add(edge);
         return edge;
     }
 

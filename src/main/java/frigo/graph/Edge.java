@@ -3,19 +3,19 @@ package frigo.graph;
 
 public class Edge implements Comparable<Edge> {
 
-    public Object source;
-    public Object target;
+    public Object node1;
+    public Object node2;
     public Comparable weight;
 
-    public Edge (Object source, Object target, Comparable<?> weight) {
-        this.source = source;
-        this.target = target;
+    public Edge (Object node1, Object node2, Comparable<?> weight) {
+        this.node1 = node1;
+        this.node2 = node2;
         this.weight = weight;
     }
 
     @Override
     public String toString () {
-        return "Edge[" + source + "<->" + target + "@" + weight + "]";
+        return "Edge[" + node1 + "<->" + node2 + "@" + weight + "]";
     }
 
     @Override
@@ -23,20 +23,20 @@ public class Edge implements Comparable<Edge> {
         return weight.compareTo(that.weight);
     }
 
-    public Object getTarget (Object from) {
-        return getOtherNode(from);
+    public Object getTarget (Object source) {
+        return getOtherNode(source);
     }
 
-    public Object getSource (Object to) {
-        return getOtherNode(to);
+    public Object getSource (Object target) {
+        return getOtherNode(target);
     }
 
     public Object getOtherNode (Object node) {
-        if( source == node ){
-            return target;
+        if( node1 == node ){
+            return node2;
         }
-        if( target == node ){
-            return source;
+        if( node2 == node ){
+            return node1;
         }
         throw new IllegalArgumentException();
     }
