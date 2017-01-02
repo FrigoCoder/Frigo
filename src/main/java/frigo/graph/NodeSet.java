@@ -1,8 +1,8 @@
 
 package frigo.graph;
 
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 
-public class NodeSet extends HashSet<Node> {
+public class NodeSet extends LinkedHashSet<Node> {
 
 }

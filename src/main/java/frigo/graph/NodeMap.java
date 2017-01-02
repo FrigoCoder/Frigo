@@ -1,8 +1,8 @@
 
 package frigo.graph;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 
-public class NodeMap<T> extends HashMap<Node, T> {
+public class NodeMap<T> extends LinkedHashMap<Node, T> {
 
 }
