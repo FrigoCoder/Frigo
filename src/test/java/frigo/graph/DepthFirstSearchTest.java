@@ -197,6 +197,7 @@ public class DepthFirstSearchTest {
         Mockito.verify(visitor).treeEdge(bd);
 
         // A-B-F-E-A cycle
+        Mockito.verify(visitor).treeEdge(ab);
         Mockito.verify(visitor).treeEdge(bf);
         Mockito.verify(visitor).treeEdge(ef);
         Mockito.verify(visitor).backEdge(ae);
