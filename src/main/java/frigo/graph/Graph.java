@@ -8,7 +8,7 @@ public class Graph {
     private final NodeMap<EdgeSet> outEdges = new NodeMap<>();
 
     public Node addNode () {
-        Node node = new Node(nodes.size());
+        Node node = new Node();
         nodes.add(node);
         outEdges.putIfAbsent(node, new EdgeSet());
         return node;
