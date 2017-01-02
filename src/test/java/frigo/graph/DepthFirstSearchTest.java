@@ -2,6 +2,7 @@
 package frigo.graph;
 
 import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.verify;
 
 import org.junit.Test;
 import org.mockito.InOrder;
@@ -157,11 +158,11 @@ public class DepthFirstSearchTest {
 
         search.run();
 
-        Mockito.verify(visitor).treeEdge(ab);
-        Mockito.verify(visitor, never()).backEdge(ab);
+        verify(visitor).treeEdge(ab);
+        verify(visitor, never()).backEdge(ab);
 
-        Mockito.verify(visitor).backEdge(ba);
-        Mockito.verify(visitor, never()).treeEdge(ba);
+        verify(visitor).backEdge(ba);
+        verify(visitor, never()).treeEdge(ba);
     }
 
     /**
@@ -189,18 +190,18 @@ public class DepthFirstSearchTest {
         search.run();
 
         // A-C-G path
-        Mockito.verify(visitor).treeEdge(ac);
-        Mockito.verify(visitor).treeEdge(cg);
+        verify(visitor).treeEdge(ac);
+        verify(visitor).treeEdge(cg);
 
         // A-B-D path
-        Mockito.verify(visitor).treeEdge(ab);
-        Mockito.verify(visitor).treeEdge(bd);
+        verify(visitor).treeEdge(ab);
+        verify(visitor).treeEdge(bd);
 
         // A-B-F-E-A cycle
-        Mockito.verify(visitor).treeEdge(ab);
-        Mockito.verify(visitor).treeEdge(bf);
-        Mockito.verify(visitor).treeEdge(ef);
-        Mockito.verify(visitor).backEdge(ae);
+        verify(visitor).treeEdge(ab);
+        verify(visitor).treeEdge(bf);
+        verify(visitor).treeEdge(ef);
+        verify(visitor).backEdge(ae);
     }
 
 }
