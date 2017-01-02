@@ -3,11 +3,11 @@ package frigo.graph;
 
 public class Edge implements Comparable<Edge> {
 
-    public Object node1;
-    public Object node2;
-    public Comparable weight;
+    public final Node node1;
+    public final Node node2;
+    public final Comparable weight;
 
-    public Edge (Object node1, Object node2, Comparable<?> weight) {
+    Edge (Node node1, Node node2, Comparable<?> weight) {
         this.node1 = node1;
         this.node2 = node2;
         this.weight = weight;
@@ -23,15 +23,15 @@ public class Edge implements Comparable<Edge> {
         return weight.compareTo(that.weight);
     }
 
-    public Object getTarget (Object source) {
+    public Node getTarget (Node source) {
         return getOtherNode(source);
     }
 
-    public Object getSource (Object target) {
+    public Node getSource (Node target) {
         return getOtherNode(target);
     }
 
-    public Object getOtherNode (Object node) {
+    public Node getOtherNode (Node node) {
         if( node1 == node ){
             return node2;
         }

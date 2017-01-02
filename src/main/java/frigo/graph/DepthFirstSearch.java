@@ -12,11 +12,11 @@ public class DepthFirstSearch {
     @SuppressWarnings("unused")
     public interface Visitor {
 
-        default void initializeVertex (Object node) {}
+        default void initializeVertex (Node node) {}
 
-        default void startVertex (Object node) {}
+        default void startVertex (Node node) {}
 
-        default void discoverVertex (Object node) {}
+        default void discoverVertex (Node node) {}
 
         default void examineEdge (Edge edge) {}
 
@@ -26,7 +26,7 @@ public class DepthFirstSearch {
 
         default void finishEdge (Edge edge) {}
 
-        default void finishVertex (Object node) {}
+        default void finishVertex (Node node) {}
 
     }
 
@@ -38,7 +38,7 @@ public class DepthFirstSearch {
 
     private Graph graph;
     private Visitor visitor;
-    private HashMap<Object, Color> vertexColors = new HashMap<>();
+    private HashMap<Node, Color> vertexColors = new HashMap<>();
     private HashMap<Edge, Color> edgeColors = new HashMap<>();
 
     public DepthFirstSearch (Graph graph, Visitor visitor) {
@@ -50,8 +50,8 @@ public class DepthFirstSearch {
         run(null);
     }
 
-    public void run (Object root) {
-        for( Object node : graph.getNodes() ){
+    public void run (Node root) {
+        for( Node node : graph.getNodes() ){
             vertexColors.put(node, Color.WHITE);
             visitor.initializeVertex(node);
         }
@@ -62,7 +62,7 @@ public class DepthFirstSearch {
             visitor.startVertex(root);
             dfsVisitRecursive(root);
         }
-        for( Object node : graph.getNodes() ){
+        for( Node node : graph.getNodes() ){
             if( vertexColors.get(node) == Color.WHITE ){
                 visitor.startVertex(node);
                 dfsVisitRecursive(node);
@@ -70,14 +70,14 @@ public class DepthFirstSearch {
         }
     }
 
-    private void dfsVisitRecursive (Object source) {
+    private void dfsVisitRecursive (Node source) {
         vertexColors.put(source, Color.GREY);
         visitor.discoverVertex(source);
 
-        for( Edge edge : graph.getEdges(source) ){
+        for( Edge edge : graph.outEdges(source) ){
             visitor.examineEdge(edge);
 
-            Object target = edge.getTarget(source);
+            Node target = edge.getTarget(source);
             switch( vertexColors.get(target) ){
 
                 case WHITE:

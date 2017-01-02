@@ -24,48 +24,71 @@ public abstract class MstTestBase {
 
     @Test
     public void one_edge () {
-        Edge ab = graph.addEdge("A", "B", 1.0);
+        Node a = graph.addNode();
+        Node b = graph.addNode();
+
+        Edge ab = graph.addEdge(a, b, 1.0);
+
         assertMst(ab);
     }
 
     @Test
     public void two_edges () {
-        Edge ab = graph.addEdge("A", "B", 1.0);
-        Edge bc = graph.addEdge("B", "C", 1.0);
+        Node a = graph.addNode();
+        Node b = graph.addNode();
+        Node c = graph.addNode();
+
+        Edge ab = graph.addEdge(a, b, 1.0);
+        Edge bc = graph.addEdge(b, c, 1.0);
 
         assertMst(ab, bc);
     }
 
     @Test
     public void three_edges_in_triangle () {
-        Edge ab = graph.addEdge("A", "B", 1.0);
-        Edge bc = graph.addEdge("B", "C", 2.0);
-        graph.addEdge("C", "A", 3.0);
+        Node a = graph.addNode();
+        Node b = graph.addNode();
+        Node c = graph.addNode();
+
+        Edge ab = graph.addEdge(a, b, 1.0);
+        Edge bc = graph.addEdge(b, c, 2.0);
+        graph.addEdge(c, a, 3.0);
 
         assertMst(ab, bc);
     }
 
     @Test
     public void parallel_edges () {
-        Edge ab1 = graph.addEdge("A", "B", 1.0);
-        graph.addEdge("A", "B", 2.0);
+        Node a = graph.addNode();
+        Node b = graph.addNode();
+
+        Edge ab1 = graph.addEdge(a, b, 1.0);
+        graph.addEdge(a, b, 2.0);
 
         assertMst(ab1);
     }
 
     @Test
     public void wikipedia_example () {
-        Edge ab = graph.addEdge("A", "B", 7.0);
-        Edge ad = graph.addEdge("A", "D", 5.0);
-        graph.addEdge("B", "C", 8.0);
-        graph.addEdge("B", "D", 9.0);
-        Edge be = graph.addEdge("B", "E", 7.0);
-        Edge ce = graph.addEdge("C", "E", 5.0);
-        graph.addEdge("D", "E", 15.0);
-        Edge df = graph.addEdge("D", "F", 6.0);
-        graph.addEdge("E", "F", 8.0);
-        Edge eg = graph.addEdge("E", "G", 9.0);
-        graph.addEdge("F", "G", 11.0);
+        Node a = graph.addNode();
+        Node b = graph.addNode();
+        Node c = graph.addNode();
+        Node d = graph.addNode();
+        Node e = graph.addNode();
+        Node f = graph.addNode();
+        Node g = graph.addNode();
+
+        Edge ab = graph.addEdge(a, b, 7.0);
+        Edge ad = graph.addEdge(a, d, 5.0);
+        graph.addEdge(b, c, 8.0);
+        graph.addEdge(b, d, 9.0);
+        Edge be = graph.addEdge(b, e, 7.0);
+        Edge ce = graph.addEdge(c, e, 5.0);
+        graph.addEdge(d, e, 15.0);
+        Edge df = graph.addEdge(d, f, 6.0);
+        graph.addEdge(e, f, 8.0);
+        Edge eg = graph.addEdge(e, g, 9.0);
+        graph.addEdge(f, g, 11.0);
 
         assertMst(ab, ad, be, ce, df, eg);
     }

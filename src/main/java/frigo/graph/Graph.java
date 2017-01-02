@@ -1,53 +1,47 @@
 
 package frigo.graph;
 
-import java.util.HashMap;
-import java.util.HashSet;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Graph {
 
-    private HashSet<Object> nodes = new HashSet<>();
-    private HashSet<Edge> edges = new HashSet<>();
-    private HashMap<Object, HashSet<Edge>> outEdges = new HashMap<>();
+    private List<Node> nodes = new ArrayList<>();
+    private List<Edge> edges = new ArrayList<>();
+    private List<List<Edge>> outEdges = new ArrayList<>();
 
-    public HashSet<Object> getNodes () {
+    public List<Node> getNodes () {
         return clone(nodes);
     }
 
-    public void addNode (Object node) {
+    public Node addNode () {
+        Node node = new Node(nodes.size());
         nodes.add(node);
-        outEdges.putIfAbsent(node, new HashSet<>());
+        outEdges.add(new ArrayList<>());
+        return node;
     }
 
-    public void addNodes (Object... nodesToAdd) {
-        for( Object node : nodesToAdd ){
-            addNode(node);
-        }
-    }
-
-    public HashSet<Edge> getEdges () {
+    public List<Edge> getEdges () {
         return clone(edges);
     }
 
-    public Edge addEdge (Object source, Object target, Comparable<?> weight) {
+    public Edge addEdge (Node source, Node target, Comparable<?> weight) {
         return addEdge(new Edge(source, target, weight));
     }
 
     public Edge addEdge (Edge edge) {
-        addNode(edge.node1);
-        addNode(edge.node2);
         edges.add(edge);
-        outEdges.get(edge.node1).add(edge);
-        outEdges.get(edge.node2).add(edge);
+        outEdges.get(edge.node1.index).add(edge);
+        outEdges.get(edge.node2.index).add(edge);
         return edge;
     }
 
-    public HashSet<Edge> getEdges (Object source) {
-        return clone(outEdges.get(source));
+    public List<Edge> outEdges (Node source) {
+        return clone(outEdges.get(source.index));
     }
 
-    private <T> HashSet<T> clone (HashSet<T> set) {
-        return new HashSet<>(set);
+    private <T> List<T> clone (List<T> list) {
+        return new ArrayList<>(list);
     }
 
 }
