@@ -13,7 +13,7 @@ public class Kruskal implements Mst {
         List<Edge> edges = new ArrayList<>(graph.edges());
         Collections.sort(edges);
 
-        DisjointSet<Object> set = new DisjointSet<>();
+        DisjointSet<Node> set = new DisjointSet<>();
         for( Edge edge : edges ){
             set.add(edge.node1);
             set.add(edge.node2);
