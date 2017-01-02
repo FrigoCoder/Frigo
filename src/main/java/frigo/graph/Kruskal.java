@@ -9,9 +9,9 @@ import java.util.List;
 public class Kruskal implements Mst {
 
     @Override
-    public List<Edge> run (Graph graph) {
+    public <T extends Comparable<T>> List<Edge> run (Graph graph, EdgeMap<T> weights) {
         List<Edge> edges = new ArrayList<>(graph.edges());
-        Collections.sort(edges);
+        Collections.sort(edges, (edge1, edge2) -> weights.get(edge1).compareTo(weights.get(edge2)));
 
         DisjointSet<Node> set = new DisjointSet<>();
         for( Edge edge : edges ){
@@ -26,7 +26,6 @@ public class Kruskal implements Mst {
                 set.union(edge.node1, edge.node2);
             }
         }
-
         return result;
     }
 

@@ -1,26 +1,19 @@
 
 package frigo.graph;
 
-public class Edge implements Comparable<Edge> {
+public class Edge {
 
     public final Node node1;
     public final Node node2;
-    public final Comparable weight;
 
-    Edge (Node node1, Node node2, Comparable<?> weight) {
+    Edge (Node node1, Node node2) {
         this.node1 = node1;
         this.node2 = node2;
-        this.weight = weight;
     }
 
     @Override
     public String toString () {
-        return "Edge[" + node1 + "<->" + node2 + "@" + weight + "]";
-    }
-
-    @Override
-    public int compareTo (Edge that) {
-        return weight.compareTo(that.weight);
+        return "Edge[" + node1 + "<->" + node2 + "]";
     }
 
     public Node getTarget (Node source) {

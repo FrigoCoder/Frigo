@@ -5,6 +5,6 @@ import java.util.List;
 
 public interface Mst {
 
-    List<Edge> run (Graph graph);
+    <T extends Comparable<T>> List<Edge> run (Graph graph, EdgeMap<T> weights);
 
 }

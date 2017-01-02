@@ -28,8 +28,8 @@ public class GraphTest {
         Node b = graph.addNode();
         Node c = graph.addNode();
 
-        Edge ab = graph.addEdge(a, b, 1);
-        Edge bc = graph.addEdge(b, c, 2);
+        Edge ab = graph.addEdge(a, b);
+        Edge bc = graph.addEdge(b, c);
 
         assertThat(graph.edges(), hasItems(ab, bc));
     }
@@ -40,9 +40,9 @@ public class GraphTest {
         Node b = graph.addNode();
         Node c = graph.addNode();
 
-        Edge ab = graph.addEdge(a, b, 1);
-        Edge bc = graph.addEdge(b, c, 2);
-        Edge ca = graph.addEdge(c, a, 3);
+        Edge ab = graph.addEdge(a, b);
+        Edge bc = graph.addEdge(b, c);
+        Edge ca = graph.addEdge(c, a);
 
         Collection<Edge> edges = graph.outEdges(a);
         assertThat(edges, hasItems(ab, ca));

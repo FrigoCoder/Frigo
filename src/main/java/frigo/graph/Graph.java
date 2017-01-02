@@ -18,8 +18,8 @@ public class Graph {
         return nodes;
     }
 
-    public Edge addEdge (Node source, Node target, Comparable<?> weight) {
-        return addEdge(new Edge(source, target, weight));
+    public Edge addEdge (Node source, Node target) {
+        return addEdge(new Edge(source, target));
     }
 
     public Edge addEdge (Edge edge) {

@@ -62,7 +62,7 @@ public class DepthFirstSearchTest {
         Node a = graph.addNode();
         Node b = graph.addNode();
 
-        Edge ab = graph.addEdge(a, b, 1);
+        Edge ab = graph.addEdge(a, b);
 
         search.run();
 
@@ -97,9 +97,9 @@ public class DepthFirstSearchTest {
         Node b = graph.addNode();
         Node c = graph.addNode();
 
-        Edge ab = graph.addEdge(a, b, 1);
-        Edge bc = graph.addEdge(b, c, 1);
-        Edge ca = graph.addEdge(c, a, 1);
+        Edge ab = graph.addEdge(a, b);
+        Edge bc = graph.addEdge(b, c);
+        Edge ca = graph.addEdge(c, a);
 
         search.run();
 
@@ -153,8 +153,8 @@ public class DepthFirstSearchTest {
         Node a = graph.addNode();
         Node b = graph.addNode();
 
-        Edge ab = graph.addEdge(a, b, 1);
-        Edge ba = graph.addEdge(b, a, 1);
+        Edge ab = graph.addEdge(a, b);
+        Edge ba = graph.addEdge(b, a);
 
         search.run();
 
@@ -179,13 +179,13 @@ public class DepthFirstSearchTest {
         Node f = graph.addNode();
         Node g = graph.addNode();
 
-        Edge ab = graph.addEdge(a, b, 1);
-        Edge ac = graph.addEdge(a, c, 1);
-        Edge ae = graph.addEdge(a, e, 1);
-        Edge bd = graph.addEdge(b, d, 1);
-        Edge bf = graph.addEdge(b, f, 1);
-        Edge cg = graph.addEdge(c, g, 1);
-        Edge ef = graph.addEdge(e, f, 1);
+        Edge ab = graph.addEdge(a, b);
+        Edge ac = graph.addEdge(a, c);
+        Edge ae = graph.addEdge(a, e);
+        Edge bd = graph.addEdge(b, d);
+        Edge bf = graph.addEdge(b, f);
+        Edge cg = graph.addEdge(c, g);
+        Edge ef = graph.addEdge(e, f);
 
         search.run();
 

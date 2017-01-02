@@ -11,6 +11,7 @@ import org.junit.Test;
 public abstract class MstTestBase {
 
     private Graph graph = new Graph();
+    private EdgeMap<Double> weights = new EdgeMap<>();
     private Mst mst;
 
     public MstTestBase (Mst mst) {
@@ -27,7 +28,9 @@ public abstract class MstTestBase {
         Node a = graph.addNode();
         Node b = graph.addNode();
 
-        Edge ab = graph.addEdge(a, b, 1.0);
+        Edge ab = graph.addEdge(a, b);
+
+        weights.put(ab, 1.0);
 
         assertMst(ab);
     }
@@ -38,8 +41,11 @@ public abstract class MstTestBase {
         Node b = graph.addNode();
         Node c = graph.addNode();
 
-        Edge ab = graph.addEdge(a, b, 1.0);
-        Edge bc = graph.addEdge(b, c, 1.0);
+        Edge ab = graph.addEdge(a, b);
+        Edge bc = graph.addEdge(b, c);
+
+        weights.put(ab, 1.0);
+        weights.put(bc, 1.0);
 
         assertMst(ab, bc);
     }
@@ -50,9 +56,13 @@ public abstract class MstTestBase {
         Node b = graph.addNode();
         Node c = graph.addNode();
 
-        Edge ab = graph.addEdge(a, b, 1.0);
-        Edge bc = graph.addEdge(b, c, 2.0);
-        graph.addEdge(c, a, 3.0);
+        Edge ab = graph.addEdge(a, b);
+        Edge bc = graph.addEdge(b, c);
+        Edge ca = graph.addEdge(c, a);
+
+        weights.put(ab, 1.0);
+        weights.put(bc, 2.0);
+        weights.put(ca, 3.0);
 
         assertMst(ab, bc);
     }
@@ -62,8 +72,11 @@ public abstract class MstTestBase {
         Node a = graph.addNode();
         Node b = graph.addNode();
 
-        Edge ab1 = graph.addEdge(a, b, 1.0);
-        graph.addEdge(a, b, 2.0);
+        Edge ab1 = graph.addEdge(a, b);
+        Edge ab2 = graph.addEdge(a, b);
+
+        weights.put(ab1, 1.0);
+        weights.put(ab2, 2.0);
 
         assertMst(ab1);
     }
@@ -78,23 +91,35 @@ public abstract class MstTestBase {
         Node f = graph.addNode();
         Node g = graph.addNode();
 
-        Edge ab = graph.addEdge(a, b, 7.0);
-        Edge ad = graph.addEdge(a, d, 5.0);
-        graph.addEdge(b, c, 8.0);
-        graph.addEdge(b, d, 9.0);
-        Edge be = graph.addEdge(b, e, 7.0);
-        Edge ce = graph.addEdge(c, e, 5.0);
-        graph.addEdge(d, e, 15.0);
-        Edge df = graph.addEdge(d, f, 6.0);
-        graph.addEdge(e, f, 8.0);
-        Edge eg = graph.addEdge(e, g, 9.0);
-        graph.addEdge(f, g, 11.0);
+        Edge ab = graph.addEdge(a, b);
+        Edge ad = graph.addEdge(a, d);
+        Edge bc = graph.addEdge(b, c);
+        Edge bd = graph.addEdge(b, d);
+        Edge be = graph.addEdge(b, e);
+        Edge ce = graph.addEdge(c, e);
+        Edge de = graph.addEdge(d, e);
+        Edge df = graph.addEdge(d, f);
+        Edge ef = graph.addEdge(e, f);
+        Edge eg = graph.addEdge(e, g);
+        Edge fg = graph.addEdge(f, g);
+
+        weights.put(ab, 7.0);
+        weights.put(ad, 5.0);
+        weights.put(bc, 8.0);
+        weights.put(bd, 9.0);
+        weights.put(be, 7.0);
+        weights.put(ce, 5.0);
+        weights.put(de, 15.0);
+        weights.put(df, 6.0);
+        weights.put(ef, 8.0);
+        weights.put(eg, 9.0);
+        weights.put(fg, 11.0);
 
         assertMst(ab, ad, be, ce, df, eg);
     }
 
     private void assertMst (Edge... expected) {
-        assertThat(mst.run(graph), containsInAnyOrder(expected));
+        assertThat(mst.run(graph, weights), containsInAnyOrder(expected));
     }
 
 }
