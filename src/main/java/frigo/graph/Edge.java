@@ -16,15 +16,15 @@ public class Edge {
         return "Edge[" + node1 + "<->" + node2 + "]";
     }
 
-    public Node getTarget (Node source) {
-        return getOtherNode(source);
+    public Node target (Node source) {
+        return otherNode(source);
     }
 
-    public Node getSource (Node target) {
-        return getOtherNode(target);
+    public Node source (Node target) {
+        return otherNode(target);
     }
 
-    public Node getOtherNode (Node node) {
+    public Node otherNode (Node node) {
         if( node1 == node ){
             return node2;
         }
