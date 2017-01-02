@@ -1,31 +1,25 @@
 
 package frigo.graph;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
-
 public class Graph {
 
-    private Set<Node> nodes = new HashSet<>();
-    private Set<Edge> edges = new HashSet<>();
-    private Map<Node, Set<Edge>> outEdges = new HashMap<>();
+    private NodeSet nodes = new NodeSet();
+    private EdgeSet edges = new EdgeSet();
+    private NodeMap<EdgeSet> outEdges = new NodeMap<>();
 
-    public Collection<Node> getNodes () {
-        return clone(nodes);
+    public NodeSet getNodes () {
+        return nodes.clone();
     }
 
     public Node addNode () {
         Node node = new Node(nodes.size());
         nodes.add(node);
-        outEdges.putIfAbsent(node, new HashSet<>());
+        outEdges.putIfAbsent(node, new EdgeSet());
         return node;
     }
 
-    public Collection<Edge> getEdges () {
-        return clone(edges);
+    public EdgeSet getEdges () {
+        return edges.clone();
     }
 
     public Edge addEdge (Node source, Node target, Comparable<?> weight) {
@@ -39,12 +33,8 @@ public class Graph {
         return edge;
     }
 
-    public Collection<Edge> outEdges (Node source) {
-        return clone(outEdges.get(source));
-    }
-
-    private <T> Set<T> clone (Set<T> set) {
-        return new HashSet<>(set);
+    public EdgeSet outEdges (Node source) {
+        return outEdges.get(source).clone();
     }
 
 }
