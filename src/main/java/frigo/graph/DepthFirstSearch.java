@@ -1,7 +1,6 @@
 
 package frigo.graph;
 
-import java.util.HashMap;
 
 public class DepthFirstSearch {
 
@@ -38,8 +37,8 @@ public class DepthFirstSearch {
 
     private Graph graph;
     private Visitor visitor;
-    private HashMap<Node, Color> vertexColors = new HashMap<>();
-    private HashMap<Edge, Color> edgeColors = new HashMap<>();
+    private NodeMap<Color> vertexColors = new NodeMap<>();
+    private EdgeMap<Color> edgeColors = new EdgeMap<>();
 
     public DepthFirstSearch (Graph graph, Visitor visitor) {
         this.graph = graph;
