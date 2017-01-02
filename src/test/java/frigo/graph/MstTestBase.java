@@ -11,7 +11,7 @@ import org.junit.Test;
 public abstract class MstTestBase {
 
     private Graph graph = new Graph();
-    private EdgeMap<Double> weights = new EdgeMap<>();
+    private EdgeMap<Integer> weights = new EdgeMap<>();
     private Mst mst;
 
     public MstTestBase (Mst mst) {
@@ -30,7 +30,7 @@ public abstract class MstTestBase {
 
         Edge ab = graph.addEdge(a, b);
 
-        weights.put(ab, 1.0);
+        weights.put(ab, 1);
 
         assertMst(ab);
     }
@@ -44,8 +44,8 @@ public abstract class MstTestBase {
         Edge ab = graph.addEdge(a, b);
         Edge bc = graph.addEdge(b, c);
 
-        weights.put(ab, 1.0);
-        weights.put(bc, 1.0);
+        weights.put(ab, 1);
+        weights.put(bc, 1);
 
         assertMst(ab, bc);
     }
@@ -60,9 +60,9 @@ public abstract class MstTestBase {
         Edge bc = graph.addEdge(b, c);
         Edge ca = graph.addEdge(c, a);
 
-        weights.put(ab, 1.0);
-        weights.put(bc, 2.0);
-        weights.put(ca, 3.0);
+        weights.put(ab, 1);
+        weights.put(bc, 2);
+        weights.put(ca, 3);
 
         assertMst(ab, bc);
     }
@@ -75,11 +75,15 @@ public abstract class MstTestBase {
         Edge ab1 = graph.addEdge(a, b);
         Edge ab2 = graph.addEdge(a, b);
 
-        weights.put(ab1, 1.0);
-        weights.put(ab2, 2.0);
+        weights.put(ab1, 1);
+        weights.put(ab2, 2);
 
         assertMst(ab1);
     }
+
+    /**
+     * Based on https://en.wikipedia.org/wiki/Kruskal's_algorithm#Example
+     */
 
     @Test
     public void wikipedia_example () {
@@ -103,17 +107,17 @@ public abstract class MstTestBase {
         Edge eg = graph.addEdge(e, g);
         Edge fg = graph.addEdge(f, g);
 
-        weights.put(ab, 7.0);
-        weights.put(ad, 5.0);
-        weights.put(bc, 8.0);
-        weights.put(bd, 9.0);
-        weights.put(be, 7.0);
-        weights.put(ce, 5.0);
-        weights.put(de, 15.0);
-        weights.put(df, 6.0);
-        weights.put(ef, 8.0);
-        weights.put(eg, 9.0);
-        weights.put(fg, 11.0);
+        weights.put(ab, 7);
+        weights.put(ad, 5);
+        weights.put(bc, 8);
+        weights.put(bd, 9);
+        weights.put(be, 7);
+        weights.put(ce, 5);
+        weights.put(de, 15);
+        weights.put(df, 6);
+        weights.put(ef, 8);
+        weights.put(eg, 9);
+        weights.put(fg, 11);
 
         assertMst(ab, ad, be, ce, df, eg);
     }
