@@ -10,6 +10,11 @@ public class Node {
     }
 
     @Override
+    public int hashCode () {
+        return index;
+    }
+
+    @Override
     public String toString () {
         return "Node[" + index + "]";
     }

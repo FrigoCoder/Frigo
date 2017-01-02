@@ -1,27 +1,30 @@
 
 package frigo.graph;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
 public class Graph {
 
-    private List<Node> nodes = new ArrayList<>();
-    private List<Edge> edges = new ArrayList<>();
-    private List<List<Edge>> outEdges = new ArrayList<>();
+    private Set<Node> nodes = new HashSet<>();
+    private Set<Edge> edges = new HashSet<>();
+    private Map<Node, Set<Edge>> outEdges = new HashMap<>();
 
-    public List<Node> getNodes () {
+    public Collection<Node> getNodes () {
         return clone(nodes);
     }
 
     public Node addNode () {
         Node node = new Node(nodes.size());
         nodes.add(node);
-        outEdges.add(new ArrayList<>());
+        outEdges.putIfAbsent(node, new HashSet<>());
         return node;
     }
 
-    public List<Edge> getEdges () {
+    public Collection<Edge> getEdges () {
         return clone(edges);
     }
 
@@ -31,17 +34,17 @@ public class Graph {
 
     public Edge addEdge (Edge edge) {
         edges.add(edge);
-        outEdges.get(edge.node1.index).add(edge);
-        outEdges.get(edge.node2.index).add(edge);
+        outEdges.get(edge.node1).add(edge);
+        outEdges.get(edge.node2).add(edge);
         return edge;
     }
 
-    public List<Edge> outEdges (Node source) {
-        return clone(outEdges.get(source.index));
+    public Collection<Edge> outEdges (Node source) {
+        return clone(outEdges.get(source));
     }
 
-    private <T> List<T> clone (List<T> list) {
-        return new ArrayList<>(list);
+    private <T> Set<T> clone (Set<T> set) {
+        return new HashSet<>(set);
     }
 
 }
