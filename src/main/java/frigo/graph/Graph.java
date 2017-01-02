@@ -19,10 +19,7 @@ public class Graph {
     }
 
     public Edge addEdge (Node source, Node target) {
-        return addEdge(new Edge(source, target));
-    }
-
-    public Edge addEdge (Edge edge) {
+        Edge edge = new Edge(source, target);
         edges.add(edge);
         outEdges.get(edge.node1).add(edge);
         outEdges.get(edge.node2).add(edge);
