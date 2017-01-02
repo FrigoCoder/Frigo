@@ -1,7 +1,6 @@
 
 package frigo.graph;
 
-
 public class DepthFirstSearch {
 
     /**
