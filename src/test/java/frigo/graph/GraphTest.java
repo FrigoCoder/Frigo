@@ -72,6 +72,7 @@ public class GraphTest {
         for( int i = 0; i < edges.length; i++ ){
             edges[i] = graph.addEdge(a, b);
         }
+
         int i = 0;
         for( Edge edge : graph.edges() ){
             assertThat(edge, sameInstance(edges[i]));
@@ -87,6 +88,7 @@ public class GraphTest {
         for( int i = 0; i < edges.length; i++ ){
             edges[i] = graph.addEdge(a, b);
         }
+
         int i = 0;
         for( Edge edge : graph.outEdges(a) ){
             assertThat(edge, sameInstance(edges[i]));
