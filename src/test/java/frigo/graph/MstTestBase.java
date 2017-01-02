@@ -2,6 +2,7 @@
 package frigo.graph;
 
 import static org.hamcrest.Matchers.containsInAnyOrder;
+import static org.hamcrest.Matchers.not;
 import static org.junit.Assert.assertThat;
 
 import org.junit.Ignore;
@@ -79,6 +80,7 @@ public abstract class MstTestBase {
         weights.put(ab2, 2);
 
         assertMst(ab1);
+        assertNotMst(ab2);
     }
 
     /**
@@ -124,6 +126,10 @@ public abstract class MstTestBase {
 
     private void assertMst (Edge... expected) {
         assertThat(mst.run(graph, weights), containsInAnyOrder(expected));
+    }
+
+    private void assertNotMst (Edge... unexpected) {
+        assertThat(mst.run(graph, weights), not(containsInAnyOrder(unexpected)));
     }
 
 }
