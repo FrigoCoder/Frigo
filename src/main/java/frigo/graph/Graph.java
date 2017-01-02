@@ -3,13 +3,9 @@ package frigo.graph;
 
 public class Graph {
 
-    private NodeSet nodes = new NodeSet();
-    private EdgeSet edges = new EdgeSet();
-    private NodeMap<EdgeSet> outEdges = new NodeMap<>();
-
-    public NodeSet getNodes () {
-        return nodes.clone();
-    }
+    private final NodeSet nodes = new NodeSet();
+    private final EdgeSet edges = new EdgeSet();
+    private final NodeMap<EdgeSet> outEdges = new NodeMap<>();
 
     public Node addNode () {
         Node node = new Node(nodes.size());
@@ -18,8 +14,8 @@ public class Graph {
         return node;
     }
 
-    public EdgeSet getEdges () {
-        return edges.clone();
+    public NodeSet nodes () {
+        return nodes;
     }
 
     public Edge addEdge (Node source, Node target, Comparable<?> weight) {
@@ -33,8 +29,12 @@ public class Graph {
         return edge;
     }
 
+    public EdgeSet edges () {
+        return edges;
+    }
+
     public EdgeSet outEdges (Node source) {
-        return outEdges.get(source).clone();
+        return outEdges.get(source);
     }
 
 }

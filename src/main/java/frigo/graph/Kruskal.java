@@ -10,7 +10,7 @@ public class Kruskal implements Mst {
 
     @Override
     public List<Edge> run (Graph graph) {
-        List<Edge> edges = new ArrayList<>(graph.getEdges());
+        List<Edge> edges = new ArrayList<>(graph.edges());
         Collections.sort(edges);
 
         DisjointSet<Object> set = new DisjointSet<>();

@@ -15,20 +15,15 @@ public class GraphTest {
     private Graph graph = new Graph();
 
     @Test
-    public void getNodes_returns_copy_of_nodes () {
+    public void nodes_contains_added_nodes () {
         Node a = graph.addNode();
         Node b = graph.addNode();
 
-        Collection<Node> nodes = graph.getNodes();
-
-        Node c = graph.addNode();
-
-        assertThat(nodes, hasItems(a, b));
-        assertThat(nodes, not(hasItem(c)));
+        assertThat(graph.nodes(), hasItems(a, b));
     }
 
     @Test
-    public void getEdges_returns_copy_of_edges () {
+    public void edges_contains_added_edges () {
         Node a = graph.addNode();
         Node b = graph.addNode();
         Node c = graph.addNode();
@@ -36,17 +31,11 @@ public class GraphTest {
         Edge ab = graph.addEdge(a, b, 1);
         Edge bc = graph.addEdge(b, c, 2);
 
-        Collection<Edge> edges = graph.getEdges();
-
-        Edge ca = graph.addEdge(c, a, 3);
-
-        assertThat(edges, hasItem(ab));
-        assertThat(edges, hasItem(bc));
-        assertThat(edges, not(hasItem(ca)));
+        assertThat(graph.edges(), hasItems(ab, bc));
     }
 
     @Test
-    public void getEdges_returns_edges_of_a_node () {
+    public void outEdges_returns_edges_of_a_node () {
         Node a = graph.addNode();
         Node b = graph.addNode();
         Node c = graph.addNode();
@@ -56,9 +45,8 @@ public class GraphTest {
         Edge ca = graph.addEdge(c, a, 3);
 
         Collection<Edge> edges = graph.outEdges(a);
-        assertThat(edges, hasItem(ab));
+        assertThat(edges, hasItems(ab, ca));
         assertThat(edges, not(hasItem(bc)));
-        assertThat(edges, hasItem(ca));
     }
 
 }

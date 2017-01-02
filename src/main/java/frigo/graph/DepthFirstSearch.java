@@ -51,18 +51,18 @@ public class DepthFirstSearch {
     }
 
     public void run (Node root) {
-        for( Node node : graph.getNodes() ){
+        for( Node node : graph.nodes() ){
             vertexColors.put(node, Color.WHITE);
             visitor.initializeVertex(node);
         }
-        for( Edge edge : graph.getEdges() ){
+        for( Edge edge : graph.edges() ){
             edgeColors.put(edge, Color.WHITE);
         }
         if( root != null ){
             visitor.startVertex(root);
             dfsVisitRecursive(root);
         }
-        for( Node node : graph.getNodes() ){
+        for( Node node : graph.nodes() ){
             if( vertexColors.get(node) == Color.WHITE ){
                 visitor.startVertex(node);
                 dfsVisitRecursive(node);
