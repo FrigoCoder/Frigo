@@ -1,11 +1,11 @@
 
 package frigo.graph;
 
-public class DepthFirstSearch {
+/**
+ * Based on http://www.boost.org/doc/libs/1_63_0/libs/graph/doc/undirected_dfs.html
+ */
 
-    /**
-     * Based on http://www.boost.org/doc/libs/1_63_0/libs/graph/doc/undirected_dfs.html
-     */
+public class DepthFirstSearch {
 
     @SuppressWarnings("unused")
     public interface Visitor {
