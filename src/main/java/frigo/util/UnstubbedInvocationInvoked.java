@@ -2,7 +2,7 @@
 package frigo.util;
 
 import org.mockito.exceptions.base.MockitoAssertionError;
-import org.mockito.internal.util.RemoveFirstLine;
+import org.mockito.internal.util.StringUtil;
 
 public class UnstubbedInvocationInvoked extends MockitoAssertionError {
 
@@ -14,7 +14,7 @@ public class UnstubbedInvocationInvoked extends MockitoAssertionError {
 
     @Override
     public String toString () {
-        return new RemoveFirstLine().of(super.toString());
+        return StringUtil.removeFirstLine(super.toString());
     }
 
 }

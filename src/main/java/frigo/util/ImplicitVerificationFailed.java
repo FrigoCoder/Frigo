@@ -2,7 +2,7 @@
 package frigo.util;
 
 import org.mockito.exceptions.base.MockitoAssertionError;
-import org.mockito.internal.util.RemoveFirstLine;
+import org.mockito.internal.util.StringUtil;
 
 public class ImplicitVerificationFailed extends MockitoAssertionError {
 
@@ -14,7 +14,7 @@ public class ImplicitVerificationFailed extends MockitoAssertionError {
 
     @Override
     public String toString () {
-        return new RemoveFirstLine().of(super.toString());
+        return StringUtil.removeFirstLine(super.toString());
     }
 
 }

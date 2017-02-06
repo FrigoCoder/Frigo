@@ -5,7 +5,7 @@ import static frigo.lang.Rethrow.unchecked;
 import static frigo.util.ArraysAux.toObjectArray;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
-import static org.mockito.internal.util.StringJoiner.join;
+import static org.mockito.internal.util.StringUtil.join;
 
 import java.util.List;
 import java.util.Queue;
