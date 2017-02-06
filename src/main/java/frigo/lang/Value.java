@@ -4,6 +4,7 @@ package frigo.lang;
 import static org.apache.commons.lang3.builder.ToStringStyle.SHORT_PREFIX_STYLE;
 
 import java.io.Serializable;
+import java.util.Arrays;
 
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.SerializationUtils;
@@ -12,12 +13,12 @@ import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 public class Value implements Serializable, Cloneable {
 
     @Override
-    public boolean equals (Object that) {
-        if( that == null || this.getClass() != that.getClass() ){
+    public boolean equals (Object obj) {
+        if( obj == null || this.getClass() != obj.getClass() ){
             return false;
         }
-        Value thatSerializable = (Value) that;
-        return ArrayUtils.isEquals(serialize(), thatSerializable.serialize());
+        Value that = (Value) obj;
+        return Arrays.equals(serialize(), that.serialize());
     }
 
     @Override
