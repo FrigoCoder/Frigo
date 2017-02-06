@@ -47,12 +47,14 @@ public class GaussTest {
         assertKernelEquals(new Gauss(1.5, 100), new GaussNaive(1.5, 100), 0.25);
     }
 
+    @SuppressWarnings("unused")
     @Test
     public void testGaussNegativeSigma () {
         thrown.expect(IllegalArgumentException.class);
         new Gauss(-1, 0);
     }
 
+    @SuppressWarnings("unused")
     @Test
     public void testGaussZeroSigma () {
         thrown.expect(IllegalArgumentException.class);
