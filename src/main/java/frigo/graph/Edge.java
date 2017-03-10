@@ -33,4 +33,19 @@ public class Edge {
         }
         throw new IllegalArgumentException();
     }
+
+    @Override
+    public boolean equals (Object obj) {
+        if( !(obj instanceof Edge) ){
+            return false;
+        }
+        Edge other = (Edge) obj;
+        return node1 == other.node1 && node2 == other.node2 || node1 == other.node2 && node2 == other.node1;
+    }
+
+    @Override
+    public int hashCode () {
+        return node1.hashCode() + node2.hashCode();
+    }
+
 }
