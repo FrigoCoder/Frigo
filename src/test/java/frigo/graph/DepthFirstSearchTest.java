@@ -152,17 +152,22 @@ public class DepthFirstSearchTest {
     public void undirected_edge_is_treedge_or_backedge_but_noth_both () {
         Node a = graph.addNode();
         Node b = graph.addNode();
+        Node c = graph.addNode();
 
         Edge ab = graph.addEdge(a, b);
-        Edge ba = graph.addEdge(b, a);
+        Edge bc = graph.addEdge(b, c);
+        Edge ca = graph.addEdge(c, a);
 
-        search.run();
+        search.run(a);
 
         verify(visitor).treeEdge(ab);
         verify(visitor, never()).backEdge(ab);
 
-        verify(visitor).backEdge(ba);
-        verify(visitor, never()).treeEdge(ba);
+        verify(visitor).treeEdge(bc);
+        verify(visitor, never()).backEdge(bc);
+
+        verify(visitor, never()).treeEdge(ca);
+        verify(visitor).backEdge(ca);
     }
 
     /**
