@@ -68,21 +68,6 @@ public abstract class MstTestBase {
         assertMst(ab, bc);
     }
 
-    @Test
-    public void parallel_edges () {
-        Node a = graph.addNode();
-        Node b = graph.addNode();
-
-        Edge ab1 = graph.addEdge(a, b);
-        Edge ab2 = graph.addEdge(a, b);
-
-        weights.put(ab1, 1);
-        weights.put(ab2, 2);
-
-        assertMst(ab1);
-        assertNotMst(ab2);
-    }
-
     /**
      * Based on https://en.wikipedia.org/wiki/Kruskal's_algorithm#Example
      */
