@@ -4,7 +4,7 @@ package frigo.lang;
 public class Rethrow {
 
     public static RuntimeException unchecked (Throwable e) {
-        Rethrow.<RuntimeException> throwAny(e);
+        Rethrow.<RuntimeException>throwAny(e);
         return null;
     }
 
@@ -14,7 +14,6 @@ public class Rethrow {
     }
 
     @SuppressWarnings("unused")
-    public static <T extends Throwable> void canThrow (Class<T> clazz) throws T {
-    }
+    public static <T extends Throwable> void canThrow (Class<T> clazz) throws T {}
 
 }

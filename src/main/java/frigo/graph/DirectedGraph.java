@@ -18,7 +18,7 @@ public class DirectedGraph<T> {
 
     public void addNode (T node) {
         nodes.add(node);
-        inEdges.put(node, Sets.<T> newHashSet());
+        inEdges.put(node, Sets.<T>newHashSet());
     }
 
     @SuppressWarnings("unchecked")

@@ -21,8 +21,7 @@ public class NonSerializableTest {
 
     public static class NonSerializableClass {
 
-        public NonSerializableClass () {
-        }
+        public NonSerializableClass () {}
     }
 
     @Rule
@@ -32,7 +31,7 @@ public class NonSerializableTest {
     public void serializable_class_with_nonserializable_fields_can_not_be_serialized () {
         SerializableClass object = new SerializableClass();
         thrown.expect(SerializationException.class);
-        thrown.expectCause(Matchers.<Throwable> instanceOf(NotSerializableException.class));
+        thrown.expectCause(Matchers.<Throwable>instanceOf(NotSerializableException.class));
         serialize(object);
     }
 }
