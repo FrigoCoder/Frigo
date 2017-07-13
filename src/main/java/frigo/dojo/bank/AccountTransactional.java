@@ -3,8 +3,6 @@ package frigo.dojo.bank;
 
 import static org.multiverse.api.StmUtils.atomic;
 
-import java.util.concurrent.Callable;
-
 import org.multiverse.api.StmUtils;
 import org.multiverse.api.references.TxnInteger;
 
@@ -25,46 +23,24 @@ public class AccountTransactional implements Account {
 
     @Override
     public int getBalance () {
-        return atomic(new Callable<Integer>() {
-
-            @Override
-            public Integer call () {
-                return balance.get();
-            }
-        });
+        return atomic( () -> balance.get());
     }
 
     @Override
     public void deposit (final int amount) {
-        atomic(new Runnable() {
-
-            @Override
-            public void run () {
-                balance.increment(amount);
-            }
-        });
+        atomic( () -> balance.increment(amount));
     }
 
     @Override
     public void withdraw (final int amount) {
-        atomic(new Runnable() {
-
-            @Override
-            public void run () {
-                balance.decrement(amount);
-            }
-        });
+        atomic( () -> balance.decrement(amount));
     }
 
     @Override
     public void transferTo (final Account destination, final int amount) {
-        atomic(new Runnable() {
-
-            @Override
-            public void run () {
-                withdraw(amount);
-                destination.deposit(amount);
-            }
+        atomic( () -> {
+            withdraw(amount);
+            destination.deposit(amount);
         });
     }
 
