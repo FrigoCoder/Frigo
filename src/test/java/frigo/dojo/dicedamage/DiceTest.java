@@ -9,8 +9,6 @@ import static org.junit.Assert.assertThat;
 
 import org.junit.Test;
 
-import frigo.dojo.dicedamage.Dice;
-
 public class DiceTest {
 
     private static final int NUMBER_OF_TEST_ROLLS = 1000;

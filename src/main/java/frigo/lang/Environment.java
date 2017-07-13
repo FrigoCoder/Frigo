@@ -39,8 +39,8 @@ public class Environment {
     }
 
     private static Map<String, String> getTheCaseInsensitiveEnvironment () throws Exception {
-        return Reflection
-            .getStaticField(Class.forName("java.lang.ProcessEnvironment"), "theCaseInsensitiveEnvironment");
+        return Reflection.getStaticField(Class.forName("java.lang.ProcessEnvironment"),
+            "theCaseInsensitiveEnvironment");
     }
 
     private static Map<String, String> getTheEnvironment () throws Exception {

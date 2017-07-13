@@ -13,8 +13,8 @@ public class SimpleGaussianFitter implements GaussianFitter {
     @Override
     public double getExpectedValue (double[] v) {
         double expectedValue = 0.0;
-        for( int i = 0; i < v.length; i++ ){
-            expectedValue += v[i];
+        for( double element : v ){
+            expectedValue += element;
         }
         if( v.length != 0 ){
             expectedValue /= v.length;
@@ -37,8 +37,8 @@ public class SimpleGaussianFitter implements GaussianFitter {
 
     private double getExpectedSquare (double[] v) {
         double expectedSquare = 0.0;
-        for( int i = 0; i < v.length; i++ ){
-            expectedSquare += v[i] * v[i];
+        for( double element : v ){
+            expectedSquare += element * element;
         }
         if( v.length != 0 ){
             expectedSquare /= v.length;

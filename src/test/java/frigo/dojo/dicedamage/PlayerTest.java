@@ -12,9 +12,6 @@ import static org.mockito.Mockito.verify;
 import org.junit.Before;
 import org.junit.Test;
 
-import frigo.dojo.dicedamage.Dice;
-import frigo.dojo.dicedamage.Player;
-
 public class PlayerTest {
 
     private Player player = new Player();

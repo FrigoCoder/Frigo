@@ -30,8 +30,8 @@ public class Bisection {
 
     private void setInterval (double left, double leftValue, double right, double rightValue) {
         checkArgument(left < right);
-        checkArgument(rootIsInInterval(leftValue, rightValue), "Root can not be in interval, f(" + left + ") = "
-            + leftValue + ", f(" + right + ") = " + rightValue);
+        checkArgument(rootIsInInterval(leftValue, rightValue),
+            "Root can not be in interval, f(" + left + ") = " + leftValue + ", f(" + right + ") = " + rightValue);
         this.left = left;
         this.leftValue = leftValue;
         this.right = right;

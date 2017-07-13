@@ -3,6 +3,7 @@ package frigo.math.fourier;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static java.lang.Math.PI;
+
 import frigo.math.Complex;
 import frigo.math.integer.MathInt;
 
@@ -49,9 +50,9 @@ public class FFT implements FourierTransform {
         int p = Integer.numberOfLeadingZeros(v.length - 1);
         for( int i = 0; i < v.length; i++ ){
             int j = Integer.reverse(i) >>> p;
-                if( i < j ){
-                    swap(v, i, j);
-                }
+            if( i < j ){
+                swap(v, i, j);
+            }
         }
     }
 

@@ -31,7 +31,8 @@ public class MathUnsignedTest {
     }
 
     private void assertPowerOfTwoUnsigned (int x, boolean expected) {
-        assertThat(x + " should " + (expected ? "" : "not ") + "be power of two", isPowerOfTwoUnsigned(x), is(expected));
+        assertThat(x + " should " + (expected ? "" : "not ") + "be power of two", isPowerOfTwoUnsigned(x),
+            is(expected));
     }
 
     @Test
@@ -49,7 +50,8 @@ public class MathUnsignedTest {
     }
 
     private void assertPowerOfTwoUnsigned (long x, boolean expected) {
-        assertThat(x + " should " + (expected ? "" : "not ") + "be power of two", isPowerOfTwoUnsigned(x), is(expected));
+        assertThat(x + " should " + (expected ? "" : "not ") + "be power of two", isPowerOfTwoUnsigned(x),
+            is(expected));
     }
 
     @Test

@@ -2,6 +2,7 @@
 package frigo.math.fourier;
 
 import static java.lang.Math.PI;
+
 import frigo.math.Complex;
 
 /**
