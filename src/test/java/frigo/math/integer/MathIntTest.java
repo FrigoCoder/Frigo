@@ -609,4 +609,49 @@ public class MathIntTest {
         sqrt(-1L);
     }
 
+    @Test
+    public void highest_bit () {
+        assertHighestBit(0, 0);
+        assertHighestBit(1, 1);
+        assertHighestBit(2, 2);
+        assertHighestBit(3, 2);
+        assertHighestBit(4, 4);
+        assertHighestBit(5, 4);
+        assertHighestBit(6, 4);
+        assertHighestBit(7, 4);
+        assertHighestBit(8, 8);
+        assertHighestBit(8, 8);
+        assertHighestBit(2_147_483_647, 1_073_741_824);
+        assertHighestBit(0xffffffff, 0x80000000);
+        assertHighestBit(0x80000000, 0x80000000);
+    }
+
+    private static void assertHighestBit (int x, int highest) {
+        assertThat(MathInt.highestBit(x), is(highest));
+    }
+
+    @Test
+    public void highest_bit_long () {
+        assertHighestBit(0L, 0L);
+        assertHighestBit(1L, 1L);
+        assertHighestBit(2L, 2L);
+        assertHighestBit(3L, 2L);
+        assertHighestBit(4L, 4L);
+        assertHighestBit(5L, 4L);
+        assertHighestBit(6L, 4L);
+        assertHighestBit(7L, 4L);
+        assertHighestBit(8L, 8L);
+        assertHighestBit(8L, 8L);
+        assertHighestBit(2_147_483_647L, 1_073_741_824L);
+        assertHighestBit(2_147_483_648L, 2_147_483_648L);
+        assertHighestBit(0xffffffffL, 0x80000000L);
+        assertHighestBit(0x80000000L, 0x80000000L);
+        assertHighestBit(0xffffffffffffffffL, 0x8000000000000000L);
+        assertHighestBit(0x8000000000000000L, 0x8000000000000000L);
+    }
+
+    private static void assertHighestBit (long x, long highest) {
+        assertThat(MathInt.highestBit(x), is(highest));
+    }
+
 }

@@ -218,4 +218,64 @@ public class MathInt {
         return root;
     }
 
+    public static int highestBit (int x) {
+        if( x == 0 ){
+            return 0;
+        }
+        int highest = 1;
+        if( x >>> 16 != 0 ){
+            x >>>= 16;
+            highest <<= 16;
+        }
+        if( x >>> 8 != 0 ){
+            x >>>= 8;
+            highest <<= 8;
+        }
+        if( x >>> 4 != 0 ){
+            x >>>= 4;
+            highest <<= 4;
+        }
+        if( x >>> 2 != 0 ){
+            x >>>= 2;
+            highest <<= 2;
+        }
+        if( x >>> 1 != 0 ){
+            x >>>= 1;
+            highest <<= 1;
+        }
+        return highest;
+    }
+
+    public static long highestBit (long x) {
+        if( x == 0 ){
+            return 0;
+        }
+        long highest = 1;
+        if( x >>> 32 != 0 ){
+            x >>>= 32;
+            highest <<= 32;
+        }
+        if( x >>> 16 != 0 ){
+            x >>>= 16;
+            highest <<= 16;
+        }
+        if( x >>> 8 != 0 ){
+            x >>>= 8;
+            highest <<= 8;
+        }
+        if( x >>> 4 != 0 ){
+            x >>>= 4;
+            highest <<= 4;
+        }
+        if( x >>> 2 != 0 ){
+            x >>>= 2;
+            highest <<= 2;
+        }
+        if( x >>> 1 != 0 ){
+            x >>>= 1;
+            highest <<= 1;
+        }
+        return highest;
+    }
+
 }
