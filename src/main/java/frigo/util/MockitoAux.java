@@ -10,11 +10,12 @@ import static org.mockito.internal.util.StringUtil.join;
 import java.util.List;
 import java.util.Queue;
 
-import org.mockito.internal.stubbing.InvocationContainer;
-import org.mockito.internal.stubbing.StubbedInvocationMatcher;
+import org.mockito.internal.stubbing.InvocationContainerImpl;
 import org.mockito.internal.util.MockUtil;
+import org.mockito.invocation.InvocationContainer;
 import org.mockito.stubbing.Answer;
 import org.mockito.stubbing.Stubber;
+import org.mockito.stubbing.Stubbing;
 
 import frigo.lang.Reflection;
 
@@ -28,17 +29,19 @@ public class MockitoAux {
 
     public static <T> void verifyImplicit (T mock) {
         InvocationContainer invocationContainer = MockUtil.getMockHandler(mock).getInvocationContainer();
-        List<StubbedInvocationMatcher> matchers = invocationContainer.getStubbedInvocations();
+        InvocationContainerImpl invocationContainerImpl = (InvocationContainerImpl) invocationContainer;
+        List<Stubbing> matchers = invocationContainerImpl.getStubbedInvocations();
 
-        for( StubbedInvocationMatcher matcher : matchers ){
+        for( Stubbing matcher : matchers ){
             if( !wasAlmostFullyUsed(matcher) ){
-                String message = join("Implicitly wanted but not invoked:", matcher, matcher.getLocation(), "");
+                String message =
+                    join("Implicitly wanted but not invoked:", matcher, matcher.getInvocation().getLocation(), "");
                 throw new ImplicitVerificationFailed(message);
             }
         }
     }
 
-    private static boolean wasAlmostFullyUsed (StubbedInvocationMatcher matcher) {
+    private static boolean wasAlmostFullyUsed (Stubbing matcher) {
         if( !matcher.wasUsed() ){
             return false;
         }
