@@ -34,8 +34,8 @@ public class MockitoAux {
 
         for( Stubbing matcher : matchers ){
             if( !wasAlmostFullyUsed(matcher) ){
-                String message =
-                    join("Implicitly wanted but not invoked:", matcher, matcher.getInvocation().getLocation(), "");
+                String message
+                    = join("Implicitly wanted but not invoked:", matcher, matcher.getInvocation().getLocation(), "");
                 throw new ImplicitVerificationFailed(message);
             }
         }

@@ -14,8 +14,8 @@ class UnwantedAnswer<T> implements Answer<T> {
         // InvocationImpl is the only class implementing both of these interfaces. Might change in the future.
         DescribedInvocation invoked = (DescribedInvocation) invocation;
 
-        String message =
-            join("Unstubbed invocation:", invoked, "Never wanted but invoked here: ", invoked.getLocation(), "");
+        String message
+            = join("Unstubbed invocation:", invoked, "Never wanted but invoked here: ", invoked.getLocation(), "");
         throw new UnstubbedInvocationInvoked(message);
     }
 }

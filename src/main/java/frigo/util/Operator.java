@@ -2,7 +2,7 @@
 package frigo.util;
 
 public enum Operator {
-    ADD("+") {
+    ADD ("+") {
 
         @Override
         public double evaluate (double left, double right) {
@@ -10,7 +10,7 @@ public enum Operator {
         }
     },
 
-    DIV("/") {
+    DIV ("/") {
 
         @Override
         public double evaluate (double left, double right) {
@@ -18,7 +18,7 @@ public enum Operator {
         }
     },
 
-    MUL("*") {
+    MUL ("*") {
 
         @Override
         public double evaluate (double left, double right) {
@@ -26,7 +26,7 @@ public enum Operator {
         }
     },
 
-    SUB("-") {
+    SUB ("-") {
 
         @Override
         public double evaluate (double left, double right) {

@@ -73,8 +73,8 @@ public class ExtendedEuclidean {
         sb.append("r=" + r.get(i) + ", ");
         sb.append("s=" + s.get(i) + ", ");
         sb.append("t=" + t.get(i) + ", ");
-        sb.append(s.get(
-            i) + "*" + r.get(0) + "+" + t.get(i) + "*" + r.get(1) + "=" + (s.get(i) * r.get(0) + t.get(i) * r.get(1)));
+        sb.append(s.get(i) + "*" + r.get(0) + "+" + t.get(i) + "*" + r.get(1) + "="
+            + (s.get(i) * r.get(0) + t.get(i) * r.get(1)));
         System.out.println(sb);
     }
 

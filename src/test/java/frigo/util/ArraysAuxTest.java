@@ -46,8 +46,8 @@ public class ArraysAuxTest {
         Complex[] v = {complex(1.0, 2.0), complex(2.0, 3.0), complex(3.0, 4.0), complex(4.0, 5.0)};
         Complex[] w = {complex(5.0, 6.0), complex(6.0, 7.0), complex(7.0, 8.0), complex(8.0, 9.0)};
         double actual = squaredEuclideanDistance(v, w);
-        double expected =
-            v[0].sub(w[0]).sqrAbs() + v[1].sub(w[1]).sqrAbs() + v[2].sub(w[2]).sqrAbs() + v[3].sub(w[3]).sqrAbs();
+        double expected
+            = v[0].sub(w[0]).sqrAbs() + v[1].sub(w[1]).sqrAbs() + v[2].sub(w[2]).sqrAbs() + v[3].sub(w[3]).sqrAbs();
         assertThat(actual, is(expected));
     }
 
