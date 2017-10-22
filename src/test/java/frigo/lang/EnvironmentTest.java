@@ -18,25 +18,25 @@ public class EnvironmentTest {
     public ExpectedException thrown = ExpectedException.none();
 
     @Test
-    public void isEnv_returns_true_on_existing_environment_variable () throws Exception {
+    public void isEnv_returns_true_on_existing_environment_variable () {
         set("whatever", "who cares");
         assertThat(has("whatever"), is(true));
     }
 
     @Test
-    public void isEnv_returns_false_on_missing_environment_variable () throws Exception {
+    public void isEnv_returns_false_on_missing_environment_variable () {
         remove("whatever");
         assertThat(has("whatever"), is(false));
     }
 
     @Test
-    public void getEnv_returns_existing_environment_variable () throws Exception {
+    public void getEnv_returns_existing_environment_variable () {
         set("whatever", "who cares");
         assertThat(get("whatever"), is("who cares"));
     }
 
     @Test
-    public void getEnv_throws_on_missing_environment_variable () throws Exception {
+    public void getEnv_throws_on_missing_environment_variable () {
         set("whatever", "who cares");
         remove("whatever");
         thrown.expect(IllegalArgumentException.class);
