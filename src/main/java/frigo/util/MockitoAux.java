@@ -1,7 +1,6 @@
 
 package frigo.util;
 
-import static frigo.lang.Rethrow.unchecked;
 import static frigo.util.ArraysAux.toObjectArray;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
@@ -18,6 +17,7 @@ import org.mockito.stubbing.Stubber;
 import org.mockito.stubbing.Stubbing;
 
 import frigo.lang.Reflection;
+import lombok.Lombok;
 
 public class MockitoAux {
 
@@ -49,7 +49,7 @@ public class MockitoAux {
             Queue<Answer<?>> answers = Reflection.getField(matcher, "answers");
             return answers.size() <= 1;
         }catch( Exception e ){
-            throw unchecked(e);
+            throw Lombok.sneakyThrow(e);
         }
     }
 
