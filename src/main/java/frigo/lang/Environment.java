@@ -5,6 +5,8 @@ import static com.google.common.base.Preconditions.checkArgument;
 
 import java.util.Map;
 
+import lombok.SneakyThrows;
+
 public class Environment {
 
     public static boolean has (String key) {
@@ -16,8 +18,8 @@ public class Environment {
         return System.getenv().get(key);
     }
 
-    public static void set (String key, String value) throws Exception {
-        try{
+    public static void set (String key, String value) {
+        try( Rethrow rethrow = Rethrow.canThrow(NoSuchFieldException.class) ){
             getTheEnvironment().put(key, value);
             getTheCaseInsensitiveEnvironment().put(key, value);
         }catch( NoSuchFieldException e ){
@@ -25,8 +27,8 @@ public class Environment {
         }
     }
 
-    public static void remove (String key) throws Exception {
-        try{
+    public static void remove (String key) {
+        try( Rethrow rethrow = Rethrow.canThrow(NoSuchFieldException.class) ){
             getTheEnvironment().remove(key);
             getTheCaseInsensitiveEnvironment().remove(key);
         }catch( NoSuchFieldException e ){
@@ -34,16 +36,18 @@ public class Environment {
         }
     }
 
-    private static Map<String, String> getEnvM () throws Exception {
+    private static Map<String, String> getEnvM () {
         return Reflection.getField(System.getenv(), "m");
     }
 
-    private static Map<String, String> getTheCaseInsensitiveEnvironment () throws Exception {
+    @SneakyThrows
+    private static Map<String, String> getTheCaseInsensitiveEnvironment () {
         return Reflection.getStaticField(Class.forName("java.lang.ProcessEnvironment"),
             "theCaseInsensitiveEnvironment");
     }
 
-    private static Map<String, String> getTheEnvironment () throws Exception {
+    @SneakyThrows
+    private static Map<String, String> getTheEnvironment () {
         return Reflection.getStaticField(Class.forName("java.lang.ProcessEnvironment"), "theEnvironment");
     }
 
