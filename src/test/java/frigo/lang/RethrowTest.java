@@ -4,8 +4,6 @@ package frigo.lang;
 import static frigo.lang.Rethrow.canThrow;
 import static org.junit.Assert.assertThat;
 
-import java.io.FileNotFoundException;
-
 import org.hamcrest.Matchers;
 import org.junit.Test;
 
@@ -23,47 +21,47 @@ public class RethrowTest {
     public void declarations_are_not_suppressed () {
         try{
             loudlyThrows();
-        }catch( FileNotFoundException e ){
+        }catch( Exception e ){
         }
     }
 
     @Test
     public void declare_exceptions () {
         try{
-            canThrow(FileNotFoundException.class);
-        }catch( FileNotFoundException e ){
+            canThrow(Exception.class);
+        }catch( Exception e ){
         }
     }
 
     @Test
     public void return_values () {
         try{
-            assertThat(canThrow(intSneakilyThrows(), FileNotFoundException.class), Matchers.is(1));
-        }catch( FileNotFoundException e ){
+            assertThat(canThrow(intSneakilyThrows(), Exception.class), Matchers.is(1));
+        }catch( Exception e ){
         }
     }
 
     @Test
     public void void_methods () {
         try{
-            canThrow( () -> sneakilyThrows(), FileNotFoundException.class);
-        }catch( FileNotFoundException e ){
+            canThrow( () -> sneakilyThrows(), Exception.class);
+        }catch( Exception e ){
         }
     }
 
     @Test
     public void try_catch_constructor () {
-        try( Rethrow canThrow = new Rethrow(FileNotFoundException.class) ){
+        try( Rethrow canThrow = new Rethrow(Exception.class) ){
             sneakilyThrows();
-        }catch( FileNotFoundException e ){
+        }catch( Exception e ){
         }
     }
 
     @Test
     public void try_catch_method () {
-        try( Rethrow canThrow = Rethrow.canThrow(FileNotFoundException.class) ){
+        try( Rethrow canThrow = Rethrow.canThrow(Exception.class) ){
             sneakilyThrows();
-        }catch( FileNotFoundException e ){
+        }catch( Exception e ){
         }
     }
 
@@ -72,7 +70,7 @@ public class RethrowTest {
         try{
             return;
         }catch( Exception e ){
-            throw new FileNotFoundException();
+            throw new Exception();
         }
     }
 
@@ -81,13 +79,13 @@ public class RethrowTest {
         try{
             return 1;
         }catch( Exception e ){
-            throw new FileNotFoundException();
+            throw new Exception();
         }
     }
 
     @SneakyThrows
-    private void loudlyThrows () throws FileNotFoundException {
-        throw new FileNotFoundException();
+    private void loudlyThrows () throws Exception {
+        throw new Exception();
     }
 
 }
