@@ -6,6 +6,8 @@ import java.lang.management.ManagementFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import lombok.SneakyThrows;
+
 public class Bank {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(Bank.class);
@@ -34,22 +36,15 @@ public class Bank {
         LOGGER.error("Deadlocks detected. Can't stop monitor deadlocks. Have a nice day.");
     }
 
+    @SneakyThrows
     private static void waitUntilDeadlocks () {
         while( !areThereAnyDeadlocks() ){
-            sleep();
+            Thread.sleep(1000);
         }
     }
 
     private static boolean areThereAnyDeadlocks () {
         return ManagementFactory.getThreadMXBean().findDeadlockedThreads() != null;
-    }
-
-    private static void sleep () {
-        try{
-            Thread.sleep(1000);
-        }catch( InterruptedException e ){
-            throw new RuntimeException(e);
-        }
     }
 
 }

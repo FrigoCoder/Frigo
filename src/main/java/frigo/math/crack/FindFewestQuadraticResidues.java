@@ -3,15 +3,16 @@ package frigo.math.crack;
 
 import java.io.File;
 import java.io.FileWriter;
-import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
 
 import frigo.math.integer.FactorizerSieve;
+import lombok.SneakyThrows;
 
 public class FindFewestQuadraticResidues {
 
-    public static void main (String[] args) throws IOException {
+    @SneakyThrows
+    public static void main (String[] args) {
         try( FileWriter writer = new FileWriter(new File("c:/temp/whatever.txt")) ){
             long limit = 100_000;
             double smallest = Double.MAX_VALUE;

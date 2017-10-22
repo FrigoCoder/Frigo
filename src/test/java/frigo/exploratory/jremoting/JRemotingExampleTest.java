@@ -6,8 +6,6 @@ import static org.junit.Assert.assertThat;
 
 import java.net.InetSocketAddress;
 
-import org.codehaus.jremoting.ConnectionException;
-import org.codehaus.jremoting.RedirectedException;
 import org.codehaus.jremoting.client.SocketDetails;
 import org.codehaus.jremoting.client.monitors.ConsoleClientMonitor;
 import org.codehaus.jremoting.client.resolver.ServiceResolver;
@@ -16,10 +14,12 @@ import org.codehaus.jremoting.server.monitors.ConsoleServerMonitor;
 import org.codehaus.jremoting.server.transports.RmiServer;
 import org.junit.Test;
 
+import lombok.SneakyThrows;
+
 public class JRemotingExampleTest {
 
     @Test
-    public void adderService_is_published_and_accessible () throws Exception {
+    public void adderService_is_published_and_accessible () {
         RmiServer server = createServer(10333);
         server.publish(new AdderImpl(), "AdderService", Adder.class);
         try{
@@ -36,7 +36,8 @@ public class JRemotingExampleTest {
         return server;
     }
 
-    private <T> T resolve (String host, int port, String serviceName) throws ConnectionException, RedirectedException {
+    @SneakyThrows
+    private <T> T resolve (String host, int port, String serviceName) {
         RmiTransport transport = new RmiTransport(new ConsoleClientMonitor(), new SocketDetails(host, port));
         ServiceResolver resolver = new ServiceResolver(transport);
         T remoteAdder = resolver.resolveService(serviceName);

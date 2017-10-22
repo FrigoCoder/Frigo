@@ -17,7 +17,6 @@ import org.mockito.stubbing.Stubber;
 import org.mockito.stubbing.Stubbing;
 
 import frigo.lang.Reflection;
-import lombok.Lombok;
 
 public class MockitoAux {
 
@@ -45,12 +44,8 @@ public class MockitoAux {
         if( !matcher.wasUsed() ){
             return false;
         }
-        try{
-            Queue<Answer<?>> answers = Reflection.getField(matcher, "answers");
-            return answers.size() <= 1;
-        }catch( Exception e ){
-            throw Lombok.sneakyThrow(e);
-        }
+        Queue<Answer<?>> answers = Reflection.getField(matcher, "answers");
+        return answers.size() <= 1;
     }
 
     public static Stubber doReturnValues (Object firstValue, Object secondValue, Object... otherValues) {
