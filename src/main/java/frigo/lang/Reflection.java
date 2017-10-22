@@ -23,6 +23,7 @@ public class Reflection {
         throw new NoSuchFieldException();
     }
 
+    @SuppressWarnings("unchecked")
     private static <T> T getFieldInConcreteClass (Class<?> clazz, Object object, String fieldName) throws Exception {
         Field field = clazz.getDeclaredField(fieldName);
         boolean accessible = field.isAccessible();
