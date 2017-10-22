@@ -3,19 +3,22 @@ package frigo.lang;
 
 import java.lang.reflect.Field;
 
+import lombok.SneakyThrows;
+
 public class Reflection {
 
-    public static <T> T getField (Object object, String fieldName) throws Exception {
+    public static <T> T getField (Object object, String fieldName) {
         return getFieldInSuperclasses(object.getClass(), object, fieldName);
     }
 
-    public static <T> T getStaticField (Class<?> clazz, String fieldName) throws Exception {
+    public static <T> T getStaticField (Class<?> clazz, String fieldName) {
         return getFieldInSuperclasses(clazz, null, fieldName);
     }
 
-    private static <T> T getFieldInSuperclasses (Class<?> clazz, Object object, String fieldName) throws Exception {
+    @SneakyThrows
+    private static <T> T getFieldInSuperclasses (Class<?> clazz, Object object, String fieldName) {
         for( Class<?> actual = clazz; actual != null; actual = actual.getSuperclass() ){
-            try{
+            try( Rethrow rethrow = Rethrow.canThrow(NoSuchFieldException.class) ){
                 return getFieldInConcreteClass(actual, object, fieldName);
             }catch( NoSuchFieldException e ){
             }
@@ -23,8 +26,9 @@ public class Reflection {
         throw new NoSuchFieldException();
     }
 
+    @SneakyThrows
     @SuppressWarnings("unchecked")
-    private static <T> T getFieldInConcreteClass (Class<?> clazz, Object object, String fieldName) throws Exception {
+    private static <T> T getFieldInConcreteClass (Class<?> clazz, Object object, String fieldName) {
         Field field = clazz.getDeclaredField(fieldName);
         boolean accessible = field.isAccessible();
         try{
@@ -35,18 +39,18 @@ public class Reflection {
         }
     }
 
-    public static <T> void setField (Object object, String fieldName, T value) throws Exception {
+    public static <T> void setField (Object object, String fieldName, T value) {
         setFieldInSuperclasses(object.getClass(), object, fieldName, value);
     }
 
-    public static <T> void setStaticField (Class<?> clazz, String fieldName, T value) throws Exception {
+    public static <T> void setStaticField (Class<?> clazz, String fieldName, T value) {
         setFieldInSuperclasses(clazz, null, fieldName, value);
     }
 
-    private static <T> void setFieldInSuperclasses (Class<?> clazz, Object object, String fieldName, T value)
-        throws Exception {
+    @SneakyThrows
+    private static <T> void setFieldInSuperclasses (Class<?> clazz, Object object, String fieldName, T value) {
         for( Class<?> actual = clazz; actual != null; actual = actual.getSuperclass() ){
-            try{
+            try( Rethrow rethrow = Rethrow.canThrow(NoSuchFieldException.class) ){
                 setFieldInConcreteClass(actual, object, fieldName, value);
                 return;
             }catch( NoSuchFieldException e ){
@@ -55,8 +59,8 @@ public class Reflection {
         throw new NoSuchFieldException();
     }
 
-    private static <T> void setFieldInConcreteClass (Class<?> clazz, Object object, String fieldName, T value)
-        throws Exception {
+    @SneakyThrows
+    private static <T> void setFieldInConcreteClass (Class<?> clazz, Object object, String fieldName, T value) {
         Field field = clazz.getDeclaredField(fieldName);
         boolean accessible = field.isAccessible();
         try{
