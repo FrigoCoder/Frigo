@@ -6,12 +6,10 @@ import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.internal.util.StringUtil.join;
 
-import java.util.List;
+import java.util.Collection;
 import java.util.Queue;
 
-import org.mockito.internal.stubbing.InvocationContainerImpl;
-import org.mockito.internal.util.MockUtil;
-import org.mockito.invocation.InvocationContainer;
+import org.mockito.Mockito;
 import org.mockito.stubbing.Answer;
 import org.mockito.stubbing.Stubber;
 import org.mockito.stubbing.Stubbing;
@@ -27,14 +25,11 @@ public class MockitoAux {
     }
 
     public static <T> void verifyImplicit (T mock) {
-        InvocationContainer invocationContainer = MockUtil.getMockHandler(mock).getInvocationContainer();
-        InvocationContainerImpl invocationContainerImpl = (InvocationContainerImpl) invocationContainer;
-        List<Stubbing> matchers = invocationContainerImpl.getStubbedInvocations();
-
+        Collection<Stubbing> matchers = Mockito.mockingDetails(mock).getStubbings();
         for( Stubbing matcher : matchers ){
             if( !wasAlmostFullyUsed(matcher) ){
-                String message
-                    = join("Implicitly wanted but not invoked:", matcher, matcher.getInvocation().getLocation(), "");
+                String message =
+                    join("Implicitly wanted but not invoked:", matcher, matcher.getInvocation().getLocation(), "");
                 throw new ImplicitVerificationFailed(message);
             }
         }
